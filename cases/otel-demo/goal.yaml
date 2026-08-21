@@ -3,11 +3,11 @@ contract:
   version: 0.1.0
 scope:
   namespaces: [default]
-  services: [frontend, checkout]
+  services: [frontend, checkout, cart, payment, shipping]
 operation:
   id: otel-demo-checkout
   entry_service: frontend
   method: POST
   path: /api/checkout
-  mandatory_targets: [checkout]
+  mandatory_targets: [checkout, cart, payment, shipping]
   scenario_ref: checkout.tracetest.yaml

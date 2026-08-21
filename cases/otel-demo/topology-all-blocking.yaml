@@ -1,6 +1,6 @@
 source:
   type: topology_api
-  ref: archive://otel-demo/trace-graph/async-paper
+  ref: archive://otel-demo/trace-graph/all-blocking-paper
 services:
   - {id: accounting, replicas: 1}
   - {id: ad, replicas: 1}
@@ -24,7 +24,7 @@ edges:
   - {from: checkout, to: cart, kind: sync, blocking: true}
   - {from: checkout, to: currency, kind: sync, blocking: true}
   - {from: checkout, to: email, kind: sync, blocking: true}
-  - {from: checkout, to: kafka, kind: async, blocking: false}
+  - {from: checkout, to: kafka, kind: sync, blocking: true}
   - {from: checkout, to: payment, kind: sync, blocking: true}
   - {from: checkout, to: product-catalog, kind: sync, blocking: true}
   - {from: checkout, to: shipping, kind: sync, blocking: true}
@@ -35,8 +35,8 @@ edges:
   - {from: frontend, to: product-catalog, kind: sync, blocking: true}
   - {from: frontend, to: product-reviews, kind: sync, blocking: true}
   - {from: frontend, to: recommendation, kind: sync, blocking: true}
-  - {from: kafka, to: accounting, kind: async, blocking: false}
-  - {from: kafka, to: fraud-detection, kind: async, blocking: false}
+  - {from: kafka, to: accounting, kind: sync, blocking: true}
+  - {from: kafka, to: fraud-detection, kind: sync, blocking: true}
   - {from: payment, to: flagd, kind: sync, blocking: true}
   - {from: product-reviews, to: flagd, kind: sync, blocking: true}
   - {from: recommendation, to: flagd, kind: sync, blocking: true}

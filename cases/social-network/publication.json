@@ -27,12 +27,8 @@
       {"mode": "repl", "failure_fraction": 0.9, "model_mean": 0.0000, "model_sd": 0.0000, "live_mean": 0.0000, "live_sd": 0.0000}
     ]
   },
-  "comparison": {
-    "profile": "archived-p30",
-    "metric": "weighted_overall_availability",
-    "published_value": 0.3054,
-    "published_standard_deviation": 0.0007,
-    "absolute_tolerance": 0.015,
-    "source": "Table 1, replicated deployment, failure fraction 0.3"
+  "reproduction_scope": {
+    "comparison_status": "direct_protocol_replay",
+    "note": "The workflow evaluates both published replica modes and all five failure fractions using the archived graph, endpoint predicates, workload weights, and fixed-size replica-slot failure protocol; it does not rerun live chaos rounds."
   }
 }

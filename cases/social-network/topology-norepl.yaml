@@ -1,19 +1,19 @@
 source:
   type: topology_api
-  ref: archive://deathstarbench-social-network/jaeger-dependencies/2023-09-28/repl
+  ref: archive://deathstarbench-social-network/jaeger-dependencies/2023-09-28/norepl
 services:
-  - {id: compose-post-service, replicas: 3}
-  - {id: home-timeline-service, replicas: 3}
-  - {id: media-service, replicas: 3}
+  - {id: compose-post-service, replicas: 1}
+  - {id: home-timeline-service, replicas: 1}
+  - {id: media-service, replicas: 1}
   - {id: nginx-web-server, replicas: 1}
   - {id: post-storage-service, replicas: 1}
   - {id: social-graph-service, replicas: 1}
-  - {id: text-service, replicas: 3}
+  - {id: text-service, replicas: 1}
   - {id: unique-id-service, replicas: 1}
   - {id: url-shorten-service, replicas: 1}
   - {id: user-mention-service, replicas: 1}
   - {id: user-service, replicas: 1}
-  - {id: user-timeline-service, replicas: 3}
+  - {id: user-timeline-service, replicas: 1}
 edges:
   - {from: compose-post-service, to: home-timeline-service, kind: sync, blocking: true}
   - {from: compose-post-service, to: media-service, kind: sync, blocking: true}

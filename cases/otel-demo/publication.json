@@ -24,7 +24,7 @@
     ]
   },
   "reproduction_scope": {
-    "comparison_status": "not_direct",
-    "reason": "The current toolchain case evaluates the checkout endpoint only, while the published Table 2 reports a probe-weighted aggregate across four endpoints."
+    "comparison_status": "full_table_comparison",
+    "note": "The workflow evaluates all four published endpoint predicates with a uniform mix and the published fixed-size kill counts on the archived representative 16-service graph. Table 2 aggregates the paper's archived graph runs, so row deltas are reported rather than treated as an exact byte-for-byte reproduction. Live chaos windows are not rerun."
   }
 }

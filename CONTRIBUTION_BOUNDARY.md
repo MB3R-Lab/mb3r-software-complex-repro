@@ -5,7 +5,7 @@
 - the architecture and versioned contracts of Procrustes, Bering, and Sheaft;
 - conservative preflight analysis and the Procrustes-to-Bering handoff;
 - end-to-end provenance, deterministic execution, and reference-output verification;
-- application of the released toolchain to archived OpenTelemetry Demo and Social Network evidence;
+- application of the released toolchain to archived OpenTelemetry Demo and Social Network evidence, covering every aggregate row reported by both empirical papers;
 - tool-produced inventory, topology-quality, resilience-profile, sweep, and cross-case analytics;
 - engineering limitations and operational conditions of the software complex.
 

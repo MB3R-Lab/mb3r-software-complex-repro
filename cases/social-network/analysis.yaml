@@ -1,25 +1,16 @@
 schema_version: "1.2"
 seed: 16
-trials: 20000
+trials: 300000
 endpoint_weights:
   home-timeline: 0.6
   user-timeline: 0.3
   compose-post: 0.1
 profiles:
-  - name: archived-p30
-    sampling_mode: fixed_k_replica_slots
-    failure_probability: 0.30
-sweeps:
-  - name: social-endpoint-failure-curves
-    profile: archived-p30
-    confidence_level: 0.95
-    axis:
-      type: independent_replica_failure_probability
-      values: [0.00, 0.10, 0.30, 0.50, 0.70, 0.90]
-    targets:
-      - {endpoint_id: home-timeline, slo: 0.50}
-      - {endpoint_id: user-timeline, slo: 0.50}
-      - {endpoint_id: compose-post, slo: 0.50}
+  - {name: p10, sampling_mode: fixed_k_replica_slots, failure_probability: 0.10}
+  - {name: p30, sampling_mode: fixed_k_replica_slots, failure_probability: 0.30}
+  - {name: p50, sampling_mode: fixed_k_replica_slots, failure_probability: 0.50}
+  - {name: p70, sampling_mode: fixed_k_replica_slots, failure_probability: 0.70}
+  - {name: p90, sampling_mode: fixed_k_replica_slots, failure_probability: 0.90}
 gate:
   mode: report
   default_action: report

@@ -35,6 +35,11 @@ var referenceFiles = []string{
 	"summary.md",
 }
 
+var aggregateReferenceFiles = []string{
+	"comparison.json",
+	"FULL_COMPARISON.md",
+}
+
 type componentPin struct {
 	Version string `json:"version"`
 	Source  struct {
@@ -50,9 +55,14 @@ type toolchainLock struct {
 }
 
 type caseSpec struct {
-	Name        string
-	SourceAlias string
-	Dir         string
+	Name                string
+	Family              string
+	Mode                string
+	SourceAlias         string
+	Dir                 string
+	TopologyFile        string
+	AnalysisFile        string
+	PublishedModelField string
 }
 
 type referenceManifest struct {
@@ -61,6 +71,7 @@ type referenceManifest struct {
 	DiscoveredAt     string                       `json:"discovered_at"`
 	Normalization    []string                     `json:"normalization"`
 	Cases            map[string]map[string]string `json:"cases"`
+	Aggregate        map[string]string            `json:"aggregate"`
 }
 
 func main() {
@@ -112,7 +123,17 @@ func acceptReferenceWork(workRoot string) error {
 		}
 		allHashes[c.Name] = hashes
 	}
-	if err := writeJSON(filepath.Join(referenceRoot, "manifest.json"), newReferenceManifest(lock.Toolchain.Version, allHashes)); err != nil {
+	if err := writeAggregateComparison(workRoot, reproductionCases(root)); err != nil {
+		return err
+	}
+	aggregateHashes, err := semanticHashesFor(workRoot, aggregateReferenceFiles)
+	if err != nil {
+		return err
+	}
+	if err := writeReferenceFiles(workRoot, referenceRoot, aggregateReferenceFiles); err != nil {
+		return err
+	}
+	if err := writeJSON(filepath.Join(referenceRoot, "manifest.json"), newReferenceManifest(lock.Toolchain.Version, allHashes, aggregateHashes)); err != nil {
 		return err
 	}
 	fmt.Printf("reference outputs accepted from %s\n", workRoot)
@@ -191,14 +212,24 @@ func run(update bool) error {
 		allHashes[c.Name] = second
 		fmt.Printf("stable %-14s files=%d\n", c.Name, len(second))
 	}
+	if err := writeAggregateComparison(workRoot, cases); err != nil {
+		return err
+	}
+	aggregateHashes, err := semanticHashesFor(workRoot, aggregateReferenceFiles)
+	if err != nil {
+		return err
+	}
 
 	referenceRoot := filepath.Join(root, "reference")
-	wanted := newReferenceManifest(manifest.Toolchain.Version, allHashes)
+	wanted := newReferenceManifest(manifest.Toolchain.Version, allHashes, aggregateHashes)
 	if update {
 		for _, c := range cases {
 			if err := writeReferenceCase(filepath.Join(workRoot, c.Name), filepath.Join(referenceRoot, c.Name)); err != nil {
 				return err
 			}
+		}
+		if err := writeReferenceFiles(workRoot, referenceRoot, aggregateReferenceFiles); err != nil {
+			return err
 		}
 		if err := writeJSON(filepath.Join(referenceRoot, "manifest.json"), wanted); err != nil {
 			return err
@@ -219,18 +250,23 @@ func run(update bool) error {
 			return err
 		}
 	}
+	if err := compareHashes("aggregate reference", current.Aggregate, wanted.Aggregate); err != nil {
+		return err
+	}
 	fmt.Printf("reproduce-paper-ok toolchain=%s cases=%d\n", manifest.Toolchain.Version, len(cases))
 	return nil
 }
 
 func reproductionCases(root string) []caseSpec {
 	return []caseSpec{
-		{Name: "otel-demo", SourceAlias: "paper", Dir: filepath.Join(root, "cases", "otel-demo")},
-		{Name: "social-network", SourceAlias: "compose", Dir: filepath.Join(root, "cases", "social-network")},
+		{Name: "otel-demo-all-blocking", Family: "otel-demo", Mode: "all-blocking", SourceAlias: "paper", Dir: filepath.Join(root, "cases", "otel-demo"), TopologyFile: "topology-all-blocking.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_all_blocking"},
+		{Name: "otel-demo-async", Family: "otel-demo", Mode: "async", SourceAlias: "paper", Dir: filepath.Join(root, "cases", "otel-demo"), TopologyFile: "topology-api.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_async"},
+		{Name: "social-network-norepl", Family: "social-network", Mode: "norepl", SourceAlias: "compose", Dir: filepath.Join(root, "cases", "social-network"), TopologyFile: "topology-norepl.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_mean"},
+		{Name: "social-network-repl", Family: "social-network", Mode: "repl", SourceAlias: "compose", Dir: filepath.Join(root, "cases", "social-network"), TopologyFile: "topology-api.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_mean"},
 	}
 }
 
-func newReferenceManifest(toolchainVersion string, cases map[string]map[string]string) referenceManifest {
+func newReferenceManifest(toolchainVersion string, cases map[string]map[string]string, aggregate map[string]string) referenceManifest {
 	return referenceManifest{
 		SchemaVersion:    "1.0.0",
 		ToolchainRelease: toolchainVersion,
@@ -243,7 +279,8 @@ func newReferenceManifest(toolchainVersion string, cases map[string]map[string]s
 			"remove the non-semantic Procrustes instrumentation evidence field selector (source document is retained)",
 			"canonicalize JSON object ordering and whitespace",
 		},
-		Cases: cases,
+		Cases:     cases,
+		Aggregate: aggregate,
 	}
 }
 
@@ -266,7 +303,7 @@ func runCase(c caseSpec, work string, bins map[string]string) error {
 	}
 	modelPath := filepath.Join(beringOut, "model.json")
 	if err := runCommand(c.Name+" bering", c.Dir, bins["bering"],
-		"discover", "--input", filepath.Join(c.Dir, "topology-api.yaml"),
+		"discover", "--input", filepath.Join(c.Dir, c.TopologyFile),
 		"--overlay", filepath.Join(procrustesOut, "bering.overlay.yaml"),
 		"--discovered-at", discoveredAt,
 		"--out", modelPath,
@@ -276,7 +313,7 @@ func runCase(c caseSpec, work string, bins map[string]string) error {
 		return err
 	}
 	if err := runCommand(c.Name+" sheaft", c.Dir, bins["sheaft"],
-		"run", "--model", modelPath, "--analysis", filepath.Join(c.Dir, "analysis.yaml"), "--out-dir", sheaftOut); err != nil {
+		"run", "--model", modelPath, "--analysis", filepath.Join(c.Dir, c.AnalysisFile), "--out-dir", sheaftOut); err != nil {
 		return err
 	}
 	return writeAnalytics(c, work)
@@ -305,6 +342,8 @@ func writeAnalytics(c caseSpec, work string) error {
 	analytics := map[string]any{
 		"schema_version": "1.0.0",
 		"case":           c.Name,
+		"family":         c.Family,
+		"mode":           c.Mode,
 		"procrustes": map[string]any{
 			"goal_status":              stringAt(preflight, "goal_status"),
 			"services_assessed":        len(arrayAt(preflight, "services")),
@@ -327,71 +366,260 @@ func writeAnalytics(c caseSpec, work string) error {
 		return fmt.Errorf("read %s publication metadata: %w", c.Name, err)
 	}
 	analytics["publication"] = publication
-	if comparison, ok := publication["comparison"].(map[string]any); ok {
-		result := publishedComparison(report, comparison)
-		if accepted, _ := result["within_tolerance"].(bool); !accepted {
-			return fmt.Errorf("%s result exceeds the published comparison tolerance: absolute delta %.6f", c.Name, asFloat(result["absolute_delta"]))
-		}
-		analytics["published_comparison"] = result
+	comparison, err := fullPublishedComparison(c, report, publication)
+	if err != nil {
+		return err
 	}
+	analytics["published_comparison"] = comparison
 	if err := writeJSON(filepath.Join(work, "analytics.json"), analytics); err != nil {
 		return err
 	}
 	return os.WriteFile(filepath.Join(work, "summary.md"), []byte(markdownSummary(c.Name, analytics)), 0o644)
 }
 
-func publishedComparison(report, comparison map[string]any) map[string]any {
-	summary, _ := report["summary"].(map[string]any)
-	metric := stringAt(comparison, "metric")
-	actual := numberAt(summary, metric)
-	published := numberAt(comparison, "published_value")
-	tolerance := numberAt(comparison, "absolute_tolerance")
-	delta := actual - published
-	result := map[string]any{
-		"profile":                      stringAt(comparison, "profile"),
-		"metric":                       metric,
-		"source":                       stringAt(comparison, "source"),
-		"actual_value":                 actual,
-		"published_value":              published,
-		"published_standard_deviation": numberAt(comparison, "published_standard_deviation"),
-		"delta":                        delta,
-		"absolute_delta":               math.Abs(delta),
-		"absolute_tolerance":           tolerance,
-		"within_tolerance":             math.Abs(delta) <= tolerance,
+func fullPublishedComparison(c caseSpec, report, publication map[string]any) (map[string]any, error) {
+	reported, _ := publication["reported_results"].(map[string]any)
+	profiles := profilesByName(report)
+	rows := make([]any, 0, 5)
+	for _, raw := range arrayAt(reported, "rows") {
+		publishedRow, ok := raw.(map[string]any)
+		if !ok {
+			continue
+		}
+		if c.Family == "social-network" && stringAt(publishedRow, "mode") != c.Mode {
+			continue
+		}
+		failureFraction := numberAt(publishedRow, "failure_fraction")
+		profileName := fmt.Sprintf("p%02d", int(math.Round(failureFraction*100)))
+		profile, ok := profiles[profileName]
+		if !ok {
+			return nil, fmt.Errorf("%s: Sheaft report is missing profile %s", c.Name, profileName)
+		}
+		simulation, _ := profile["simulation"].(map[string]any)
+		actual := numberAt(simulation, "weighted_aggregate")
+		publishedModel := numberAt(publishedRow, c.PublishedModelField)
+		liveField := "live"
+		modelSDField := ""
+		liveSDField := ""
+		if c.Family == "social-network" {
+			liveField = "live_mean"
+			modelSDField = "model_sd"
+			liveSDField = "live_sd"
+		}
+		publishedLive := numberAt(publishedRow, liveField)
+		row := map[string]any{
+			"profile":                        profileName,
+			"mode":                           c.Mode,
+			"failure_fraction":               failureFraction,
+			"fixed_k_failures":               numberAt(simulation, "fixed_k_failures"),
+			"trials":                         numberAt(simulation, "trials"),
+			"sheaft":                         actual,
+			"published_model":                publishedModel,
+			"published_live":                 publishedLive,
+			"delta_from_published_model":     actual - publishedModel,
+			"absolute_delta_published_model": math.Abs(actual - publishedModel),
+			"delta_from_published_live":      actual - publishedLive,
+			"absolute_delta_published_live":  math.Abs(actual - publishedLive),
+		}
+		if modelSDField != "" {
+			row["published_model_sd"] = numberAt(publishedRow, modelSDField)
+			row["published_live_sd"] = numberAt(publishedRow, liveSDField)
+		}
+		rows = append(rows, row)
 	}
-	return result
+	if len(rows) != 5 {
+		return nil, fmt.Errorf("%s: expected 5 published comparison rows, got %d", c.Name, len(rows))
+	}
+	return map[string]any{
+		"source":      stringAt(reported, "source"),
+		"metric":      stringAt(reported, "metric"),
+		"model_field": c.PublishedModelField,
+		"rows":        rows,
+		"statistics":  comparisonStatistics(rows),
+	}, nil
 }
 
 func markdownSummary(name string, analytics map[string]any) string {
 	p, _ := analytics["procrustes"].(map[string]any)
 	b, _ := analytics["bering"].(map[string]any)
-	s, _ := analytics["sheaft"].(map[string]any)
-	summary, _ := s["summary"].(map[string]any)
 	var out strings.Builder
 	fmt.Fprintf(&out, "# %s reference summary\n\n", name)
+	fmt.Fprintf(&out, "- Published comparison mode: `%s`.\n", stringAt(analytics, "mode"))
 	fmt.Fprintf(&out, "- Procrustes goal status: `%s`; assessed services: %.0f; blockers: %.0f.\n", stringAt(p, "goal_status"), asFloat(p["services_assessed"]), asFloat(p["blockers"]))
 	fmt.Fprintf(&out, "- Bering model: %.0f services, %.0f edges (%.0f async), %.0f endpoints.\n", asFloat(b["services"]), asFloat(b["edges"]), asFloat(b["async_edges"]), asFloat(b["endpoints"]))
-	fmt.Fprintf(&out, "- Sheaft p=0.30 weighted availability: %.6f.\n\n", numberAt(summary, "weighted_overall_availability"))
 	if publication, ok := analytics["publication"].(map[string]any); ok {
 		fmt.Fprintf(&out, "- Published source: %s, DOI `%s`.\n", stringAt(publication, "title"), stringAt(publication, "doi"))
 	}
+	out.WriteString("\n| p_fail | k | Sheaft | Published model | Δ model | Published live | Δ live |\n")
+	out.WriteString("|---:|---:|---:|---:|---:|---:|---:|\n")
 	if comparison, ok := analytics["published_comparison"].(map[string]any); ok {
-		fmt.Fprintf(&out, "- Published comparison: actual `%.6f`, published `%.6f`, absolute delta `%.6f` (tolerance `%.6f`).\n", numberAt(comparison, "actual_value"), numberAt(comparison, "published_value"), numberAt(comparison, "absolute_delta"), numberAt(comparison, "absolute_tolerance"))
-	}
-	out.WriteString("\n")
-	out.WriteString("| Endpoint | Availability |\n|---|---:|\n")
-	for _, raw := range arrayAt(s, "endpoint_results") {
-		endpoint, ok := raw.(map[string]any)
-		if ok {
-			fmt.Fprintf(&out, "| %s | %.6f |\n", stringAt(endpoint, "endpoint_id"), numberAt(endpoint, "availability"))
+		for _, raw := range arrayAt(comparison, "rows") {
+			row, ok := raw.(map[string]any)
+			if ok {
+				fmt.Fprintf(&out, "| %.1f | %.0f | %.6f | %.6f | %+.6f | %.6f | %+.6f |\n",
+					numberAt(row, "failure_fraction"), numberAt(row, "fixed_k_failures"), numberAt(row, "sheaft"),
+					numberAt(row, "published_model"), numberAt(row, "delta_from_published_model"),
+					numberAt(row, "published_live"), numberAt(row, "delta_from_published_live"))
+			}
 		}
 	}
 	return out.String()
 }
 
+func profilesByName(report map[string]any) map[string]map[string]any {
+	out := map[string]map[string]any{}
+	for _, raw := range arrayAt(report, "profiles") {
+		profile, ok := raw.(map[string]any)
+		if ok {
+			out[stringAt(profile, "name")] = profile
+		}
+	}
+	return out
+}
+
+func comparisonStatistics(rows []any) map[string]any {
+	return map[string]any{
+		"against_published_model": seriesComparisonStatistics(rows, "published_model"),
+		"against_published_live":  seriesComparisonStatistics(rows, "published_live"),
+	}
+}
+
+func seriesComparisonStatistics(rows []any, referenceField string) map[string]any {
+	actuals := make([]float64, 0, len(rows))
+	references := make([]float64, 0, len(rows))
+	meanSigned, meanAbsolute, meanSquare, maxAbsolute := 0.0, 0.0, 0.0, 0.0
+	for _, raw := range rows {
+		row, _ := raw.(map[string]any)
+		actual := numberAt(row, "sheaft")
+		reference := numberAt(row, referenceField)
+		delta := actual - reference
+		absolute := math.Abs(delta)
+		actuals = append(actuals, actual)
+		references = append(references, reference)
+		meanSigned += delta
+		meanAbsolute += absolute
+		meanSquare += delta * delta
+		if absolute > maxAbsolute {
+			maxAbsolute = absolute
+		}
+	}
+	n := float64(len(rows))
+	return map[string]any{
+		"mean_signed_error":      meanSigned / n,
+		"mean_absolute_error":    meanAbsolute / n,
+		"root_mean_square_error": math.Sqrt(meanSquare / n),
+		"maximum_absolute_error": maxAbsolute,
+		"pearson_correlation":    pearsonCorrelation(actuals, references),
+	}
+}
+
+func pearsonCorrelation(left, right []float64) any {
+	if len(left) == 0 || len(left) != len(right) {
+		return nil
+	}
+	leftMean, rightMean := 0.0, 0.0
+	for idx := range left {
+		leftMean += left[idx]
+		rightMean += right[idx]
+	}
+	leftMean /= float64(len(left))
+	rightMean /= float64(len(right))
+	numerator, leftSquare, rightSquare := 0.0, 0.0, 0.0
+	for idx := range left {
+		leftDelta := left[idx] - leftMean
+		rightDelta := right[idx] - rightMean
+		numerator += leftDelta * rightDelta
+		leftSquare += leftDelta * leftDelta
+		rightSquare += rightDelta * rightDelta
+	}
+	if leftSquare == 0 || rightSquare == 0 {
+		return nil
+	}
+	return numerator / math.Sqrt(leftSquare*rightSquare)
+}
+
+func writeAggregateComparison(workRoot string, cases []caseSpec) error {
+	families := map[string]any{}
+	analyticsByCase := map[string]map[string]any{}
+	for _, c := range cases {
+		var analytics map[string]any
+		if err := readJSON(filepath.Join(workRoot, c.Name, "analytics.json"), &analytics); err != nil {
+			return fmt.Errorf("read %s analytics for aggregate comparison: %w", c.Name, err)
+		}
+		analyticsByCase[c.Name] = analytics
+		family, _ := families[c.Family].(map[string]any)
+		if family == nil {
+			family = map[string]any{
+				"publication": analytics["publication"],
+				"variants":    map[string]any{},
+			}
+			families[c.Family] = family
+		}
+		variants, _ := family["variants"].(map[string]any)
+		variants[c.Mode] = analytics["published_comparison"]
+	}
+	aggregate := map[string]any{
+		"schema_version": "1.0.0",
+		"description":    "Full Sheaft comparison against every aggregate result row reported by both published experiments.",
+		"families":       families,
+	}
+	if err := writeJSON(filepath.Join(workRoot, "comparison.json"), aggregate); err != nil {
+		return err
+	}
+	return os.WriteFile(filepath.Join(workRoot, "FULL_COMPARISON.md"), []byte(aggregateComparisonMarkdown(analyticsByCase)), 0o644)
+}
+
+func aggregateComparisonMarkdown(analyticsByCase map[string]map[string]any) string {
+	var out strings.Builder
+	out.WriteString("# Full comparison with published results\n\n")
+	out.WriteString("These tables cover every aggregate row reported in Table 1 of the Social Network article and Table 2 of the OpenTelemetry Demo article. `Δ` is Sheaft minus the published value. Published live values are archival context; no live or chaos experiment is rerun here.\n\n")
+	out.WriteString("## Social Network — ICSE-NIER 2026\n\n")
+	out.WriteString("| Mode | p_fail | Sheaft | Published model | Δ model | Published live | Δ live |\n")
+	out.WriteString("|---|---:|---:|---:|---:|---:|---:|\n")
+	for _, mode := range []string{"norepl", "repl"} {
+		analytics := analyticsByCase["social-network-"+mode]
+		comparison, _ := analytics["published_comparison"].(map[string]any)
+		for _, raw := range arrayAt(comparison, "rows") {
+			row, _ := raw.(map[string]any)
+			fmt.Fprintf(&out, "| %s | %.1f | %.6f | %.6f | %+.6f | %.6f | %+.6f |\n",
+				mode, numberAt(row, "failure_fraction"), numberAt(row, "sheaft"), numberAt(row, "published_model"),
+				numberAt(row, "delta_from_published_model"), numberAt(row, "published_live"), numberAt(row, "delta_from_published_live"))
+		}
+	}
+	out.WriteString("\n## OpenTelemetry Demo — AINA 2026\n\n")
+	out.WriteString("| p_fail | Sheaft all-block | Published all-block | Δ all-block | Sheaft async | Published async | Δ async | Published live |\n")
+	out.WriteString("|---:|---:|---:|---:|---:|---:|---:|---:|\n")
+	allRows := comparisonRowsByFailureFraction(analyticsByCase["otel-demo-all-blocking"])
+	asyncRows := comparisonRowsByFailureFraction(analyticsByCase["otel-demo-async"])
+	for _, p := range []float64{0.1, 0.3, 0.5, 0.7, 0.9} {
+		key := fmt.Sprintf("%.1f", p)
+		all := allRows[key]
+		async := asyncRows[key]
+		fmt.Fprintf(&out, "| %.1f | %.6f | %.6f | %+.6f | %.6f | %.6f | %+.6f | %.6f |\n",
+			p, numberAt(all, "sheaft"), numberAt(all, "published_model"), numberAt(all, "delta_from_published_model"),
+			numberAt(async, "sheaft"), numberAt(async, "published_model"), numberAt(async, "delta_from_published_model"), numberAt(all, "published_live"))
+	}
+	out.WriteString("\nMachine-readable row deltas and aggregate error/correlation statistics are in `comparison.json`.\n")
+	return out.String()
+}
+
+func comparisonRowsByFailureFraction(analytics map[string]any) map[string]map[string]any {
+	out := map[string]map[string]any{}
+	comparison, _ := analytics["published_comparison"].(map[string]any)
+	for _, raw := range arrayAt(comparison, "rows") {
+		row, _ := raw.(map[string]any)
+		out[fmt.Sprintf("%.1f", numberAt(row, "failure_fraction"))] = row
+	}
+	return out
+}
+
 func semanticHashes(root string) (map[string]string, error) {
+	return semanticHashesFor(root, referenceFiles)
+}
+
+func semanticHashesFor(root string, files []string) (map[string]string, error) {
 	result := map[string]string{}
-	for _, rel := range referenceFiles {
+	for _, rel := range files {
 		path := filepath.Join(root, filepath.FromSlash(rel))
 		raw, err := normalizedFile(path)
 		if err != nil {
@@ -469,6 +697,10 @@ func normalize(value any, parent string) {
 func normalizedDiscoveryRef(value string) string {
 	lower := strings.ToLower(value)
 	switch {
+	case strings.Contains(lower, "topology-all-blocking.yaml"):
+		return "bering://discover?input=case://otel-demo/topology-all-blocking.yaml"
+	case strings.Contains(lower, "topology-norepl.yaml"):
+		return "bering://discover?input=case://social-network/topology-norepl.yaml"
 	case strings.Contains(lower, "/otel-demo/") || strings.Contains(lower, "%2fotel-demo%2f"):
 		return "bering://discover?input=case://otel-demo/topology-api.yaml"
 	case strings.Contains(lower, "/social-network/") || strings.Contains(lower, "%2fsocial-network%2f"):
@@ -486,7 +718,11 @@ func writeReferenceCase(work, destination string) error {
 	if err := os.RemoveAll(destination); err != nil {
 		return err
 	}
-	for _, rel := range referenceFiles {
+	return writeReferenceFiles(work, destination, referenceFiles)
+}
+
+func writeReferenceFiles(work, destination string, files []string) error {
+	for _, rel := range files {
 		raw, err := normalizedFile(filepath.Join(work, filepath.FromSlash(rel)))
 		if err != nil {
 			return err
