@@ -7,42 +7,6 @@
     "services": 12
   },
   "case": "social-network",
-  "legacy_contextual_comparison": {
-    "deltas": {
-      "endpoints": {
-        "compose-post": -0.0008099999999999982,
-        "home-timeline": 0.0029000000000000137,
-        "user-timeline": 0.005070000000000019
-      },
-      "max_absolute_delta": 0.005070000000000019,
-      "tolerance": 0.015,
-      "weighted_aggregate": 0.003180000000000016,
-      "within_tolerance": true
-    },
-    "reference": {
-      "description": "Archived Social Network fixed-slot result retained as contextual comparison; the reproduction does not execute the earlier scripts.",
-      "endpoints": {
-        "compose-post": 0.02326,
-        "home-timeline": 0.2822,
-        "user-timeline": 0.43688
-      },
-      "failure_probability": 0.30,
-      "sampling_mode": "fixed_k_replica_slots",
-      "secondary_python_reference": {
-        "endpoints": {
-          "compose-post": 0.02371,
-          "home-timeline": 0.28398,
-          "user-timeline": 0.43882
-        },
-        "sampling_mode": "independent_replica",
-        "trials": 500000,
-        "weighted_aggregate": 0.3044
-      },
-      "seed": 16,
-      "trials": 50000,
-      "weighted_aggregate": 0.30271
-    }
-  },
   "procrustes": {
     "blockers": 0,
     "capability_status_counts": {
@@ -51,6 +15,126 @@
     "goal_status": "EXPECTED",
     "remediation_items": 0,
     "services_assessed": 2
+  },
+  "publication": {
+    "artifact": {
+      "doi": "10.5281/zenodo.15332249",
+      "repository": "https://github.com/a-a-k/socialnet-resilience"
+    },
+    "comparison": {
+      "absolute_tolerance": 0.015,
+      "metric": "weighted_overall_availability",
+      "profile": "archived-p30",
+      "published_standard_deviation": 0.0007,
+      "published_value": 0.3054,
+      "source": "Table 1, replicated deployment, failure fraction 0.3"
+    },
+    "doi": "10.1145/3786582.3786823",
+    "pages": "121-125",
+    "publisher": "ACM",
+    "reported_results": {
+      "metric": "aggregate_availability",
+      "rows": [
+        {
+          "failure_fraction": 0.1,
+          "live_mean": 0.5533,
+          "live_sd": 0.0031,
+          "mode": "norepl",
+          "model_mean": 0.4182,
+          "model_sd": 0.0005
+        },
+        {
+          "failure_fraction": 0.3,
+          "live_mean": 0.1775,
+          "live_sd": 0.0021,
+          "mode": "norepl",
+          "model_mean": 0.1613,
+          "model_sd": 0.0005
+        },
+        {
+          "failure_fraction": 0.5,
+          "live_mean": 0.0376,
+          "live_sd": 0.0006,
+          "mode": "norepl",
+          "model_mean": 0.0454,
+          "model_sd": 0.0002
+        },
+        {
+          "failure_fraction": 0.7,
+          "live_mean": 0.0067,
+          "live_sd": 0.0000,
+          "mode": "norepl",
+          "model_mean": 0.0014,
+          "model_sd": 0.0000
+        },
+        {
+          "failure_fraction": 0.9,
+          "live_mean": 0.0000,
+          "live_sd": 0.0000,
+          "mode": "norepl",
+          "model_mean": 0.0000,
+          "model_sd": 0.0000
+        },
+        {
+          "failure_fraction": 0.1,
+          "live_mean": 0.6969,
+          "live_sd": 0.0026,
+          "mode": "repl",
+          "model_mean": 0.6281,
+          "model_sd": 0.0005
+        },
+        {
+          "failure_fraction": 0.3,
+          "live_mean": 0.3054,
+          "live_sd": 0.0017,
+          "mode": "repl",
+          "model_mean": 0.3054,
+          "model_sd": 0.0007
+        },
+        {
+          "failure_fraction": 0.5,
+          "live_mean": 0.0958,
+          "live_sd": 0.0011,
+          "mode": "repl",
+          "model_mean": 0.1145,
+          "model_sd": 0.0004
+        },
+        {
+          "failure_fraction": 0.7,
+          "live_mean": 0.0155,
+          "live_sd": 0.0003,
+          "mode": "repl",
+          "model_mean": 0.0132,
+          "model_sd": 0.0001
+        },
+        {
+          "failure_fraction": 0.9,
+          "live_mean": 0.0000,
+          "live_sd": 0.0000,
+          "mode": "repl",
+          "model_mean": 0.0000,
+          "model_sd": 0.0000
+        }
+      ],
+      "source": "Table 1"
+    },
+    "schema_version": "1.0.0",
+    "title": "Model Discovery and Graph Simulation: A Lightweight Gateway to Chaos Engineering",
+    "type": "published_experiment",
+    "url": "https://doi.org/10.1145/3786582.3786823",
+    "venue": "48th IEEE/ACM International Conference on Software Engineering, New Ideas and Emerging Results (ICSE-NIER 2026)"
+  },
+  "published_comparison": {
+    "absolute_delta": 0.0004899999999999904,
+    "absolute_tolerance": 0.015,
+    "actual_value": 0.30589,
+    "delta": 0.0004899999999999904,
+    "metric": "weighted_overall_availability",
+    "profile": "archived-p30",
+    "published_standard_deviation": 0.0007,
+    "published_value": 0.3054,
+    "source": "Table 1, replicated deployment, failure fraction 0.3",
+    "within_tolerance": true
   },
   "schema_version": "1.0.0",
   "sheaft": {

@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "type": "published_experiment",
+  "title": "Model Discovery and Graph Simulation: A Lightweight Gateway to Chaos Engineering",
+  "venue": "48th IEEE/ACM International Conference on Software Engineering, New Ideas and Emerging Results (ICSE-NIER 2026)",
+  "publisher": "ACM",
+  "pages": "121-125",
+  "doi": "10.1145/3786582.3786823",
+  "url": "https://doi.org/10.1145/3786582.3786823",
+  "artifact": {
+    "repository": "https://github.com/a-a-k/socialnet-resilience",
+    "doi": "10.5281/zenodo.15332249"
+  },
+  "reported_results": {
+    "source": "Table 1",
+    "metric": "aggregate_availability",
+    "rows": [
+      {"mode": "norepl", "failure_fraction": 0.1, "model_mean": 0.4182, "model_sd": 0.0005, "live_mean": 0.5533, "live_sd": 0.0031},
+      {"mode": "norepl", "failure_fraction": 0.3, "model_mean": 0.1613, "model_sd": 0.0005, "live_mean": 0.1775, "live_sd": 0.0021},
+      {"mode": "norepl", "failure_fraction": 0.5, "model_mean": 0.0454, "model_sd": 0.0002, "live_mean": 0.0376, "live_sd": 0.0006},
+      {"mode": "norepl", "failure_fraction": 0.7, "model_mean": 0.0014, "model_sd": 0.0000, "live_mean": 0.0067, "live_sd": 0.0000},
+      {"mode": "norepl", "failure_fraction": 0.9, "model_mean": 0.0000, "model_sd": 0.0000, "live_mean": 0.0000, "live_sd": 0.0000},
+      {"mode": "repl", "failure_fraction": 0.1, "model_mean": 0.6281, "model_sd": 0.0005, "live_mean": 0.6969, "live_sd": 0.0026},
+      {"mode": "repl", "failure_fraction": 0.3, "model_mean": 0.3054, "model_sd": 0.0007, "live_mean": 0.3054, "live_sd": 0.0017},
+      {"mode": "repl", "failure_fraction": 0.5, "model_mean": 0.1145, "model_sd": 0.0004, "live_mean": 0.0958, "live_sd": 0.0011},
+      {"mode": "repl", "failure_fraction": 0.7, "model_mean": 0.0132, "model_sd": 0.0001, "live_mean": 0.0155, "live_sd": 0.0003},
+      {"mode": "repl", "failure_fraction": 0.9, "model_mean": 0.0000, "model_sd": 0.0000, "live_mean": 0.0000, "live_sd": 0.0000}
+    ]
+  },
+  "comparison": {
+    "profile": "archived-p30",
+    "metric": "weighted_overall_availability",
+    "published_value": 0.3054,
+    "published_standard_deviation": 0.0007,
+    "absolute_tolerance": 0.015,
+    "source": "Table 1, replicated deployment, failure fraction 0.3"
+  }
+}

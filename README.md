@@ -2,8 +2,8 @@
 
 This standalone repository contains the workflow and evidence for reproducing the software-toolchain results of Procrustes → Bering → Sheaft on two archived systems:
 
-- OpenTelemetry Demo, using the archived 16-service trace-discovered graph and a representative checkout operation;
-- DeathStarBench Social Network, using the archived 12-service Jaeger dependency graph, replica map, endpoint predicates, and workload weights.
+- OpenTelemetry Demo, using the archived 16-service trace-discovered graph and a representative checkout operation from the [published AINA 2026 study](https://doi.org/10.1007/978-3-032-23304-2_24);
+- DeathStarBench Social Network, using the archived 12-service Jaeger dependency graph, replica map, endpoint predicates, and workload weights from the [published ICSE-NIER 2026 study](https://doi.org/10.1145/3786582.3786823).
 
 It deliberately performs no live deployment, trace collection, load test, or chaos experiment. Static evidence is inspected by Procrustes; the resulting overlay is consumed by Bering; the Bering model is consumed by Sheaft. Analytics are derived by the Go reproduction program from tool outputs, not by standalone Python simulation scripts.
 
@@ -34,5 +34,7 @@ This repository contains no Procrustes, Bering, or Sheaft product source. The pr
 ## Evidence provenance
 
 The topology inputs are normalized copies of existing archived results. Absolute workstation paths were replaced by stable `archive://` references; topology, replica counts, endpoint targets, and workload weights were not re-estimated here. The static manifests and tracing snippets are minimal, self-contained evidence fixtures derived from the corresponding deployments and are used only to exercise Procrustes' preflight contract.
+
+Each case contains `publication.json` with the publisher DOI, proceedings location, artifact DOI, and the reported table values used as publication context. The Social Network `p=0.30` replicated aggregate is compared directly with the published Table 1 value. The current OpenTelemetry case is explicitly marked as a representative-endpoint run rather than a direct comparison with the four-endpoint aggregate in published Table 2.
 
 See [CONTRIBUTION_BOUNDARY.md](CONTRIBUTION_BOUNDARY.md) for the publication claim boundary.

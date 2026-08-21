@@ -4,6 +4,9 @@
 - Bering model: 12 services, 19 edges (0 async), 4 endpoints.
 - Sheaft p=0.30 weighted availability: 0.305890.
 
+- Published source: Model Discovery and Graph Simulation: A Lightweight Gateway to Chaos Engineering, DOI `10.1145/3786582.3786823`.
+- Published comparison: actual `0.305890`, published `0.305400`, absolute delta `0.000490` (tolerance `0.015000`).
+
 | Endpoint | Availability |
 |---|---:|
 | compose-post | 0.022450 |

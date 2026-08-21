@@ -17,4 +17,4 @@
 - independent empirical validation of the model against new live or chaos measurements;
 - claims that the two archived cases validate the model in general.
 
-The model preprint may be cited as the computational foundation used by Sheaft. This artifact neither republishes that contribution nor treats a preprint as a completed peer-reviewed model publication. Results here support only software-complex, integration, provenance, and reproducibility claims.
+The published ICSE-NIER 2026 and AINA 2026 conference papers are the empirical sources for the Social Network and OpenTelemetry Demo cases. The separate formal-model manuscript may be cited as the computational foundation used by Sheaft; this artifact does not republish its formal contribution. Results here support only software-complex, integration, provenance, and reproducibility claims.

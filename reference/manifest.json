@@ -12,7 +12,7 @@
   ],
   "cases": {
     "otel-demo": {
-      "analytics.json": "sha256:8e9c8ffb9908756549912ef0753fdcf3bde3d5dc8ef61b3b55290767abf18be0",
+      "analytics.json": "sha256:f15595f7c47dd42d25fa51d1652044538eca15ff9dd3ee5ee8a7cfaa839a6c36",
       "bering/model-quality.json": "sha256:f2ceab2341ced260c69d3505954e07c1396727f181cf59e461199456a59be8b2",
       "bering/model.json": "sha256:ec4549367dd9a4827ce1628b1bf5a1be4b2680aa41a7cf3c780be2ff087b0683",
       "bering/snapshot-quality.json": "sha256:c3a523f47bddbb670092f621b4442b278ccc2257200003315873dea51329eb9a",
@@ -24,10 +24,10 @@
       "sheaft/model.json": "sha256:ec4549367dd9a4827ce1628b1bf5a1be4b2680aa41a7cf3c780be2ff087b0683",
       "sheaft/report.json": "sha256:1a5e67fbcba6a5a11ccd36df5d1793604f1c6a3a6da282dbb812486d1060f84f",
       "sheaft/summary.md": "sha256:8df41518dd4d1a8b37862ce675d3d8669a7563fab5692ca65c33a77c22409bba",
-      "summary.md": "sha256:6d969322e258b42ec782ee931bf2d3937d807d29723224c479c2cca71c16a67a"
+      "summary.md": "sha256:f7ef750d737eaab631a4fd1344f013335fc39e8c039b382e1dd376322035e09a"
     },
     "social-network": {
-      "analytics.json": "sha256:342ec1d030e48b85063a9bdc2a29b7788cebae9f12046fb51be9fa341826643c",
+      "analytics.json": "sha256:4eca7d4cb5a26e044265487715711142ed5b148f222b85f3fbbaebfad1c4f3db",
       "bering/model-quality.json": "sha256:f4b772122a3d40d178b78221df3633886f8b281d9a93cc8bdd3c08eec10b78f6",
       "bering/model.json": "sha256:7076fde08690dc3659163fed8dbc01997383461b57f5c0e21750a0e2caba4738",
       "bering/snapshot-quality.json": "sha256:d4944319c2d670932c42cc66e2abe00a1325da7974e172f97cdf75b0e6d76da6",
@@ -39,7 +39,7 @@
       "sheaft/model.json": "sha256:7076fde08690dc3659163fed8dbc01997383461b57f5c0e21750a0e2caba4738",
       "sheaft/report.json": "sha256:011a9b3113bb05febdaf30a977a48d57e50b1423a9cbe17ea640b0453e2690e2",
       "sheaft/summary.md": "sha256:54488e7a24a7561d8970c2c31ea5ffe47fb14d6a267203dad55a32c005e39d93",
-      "summary.md": "sha256:70abd9b1ebea4c8313a141b33f6442d8f6403e617caee8a8f529c2b7c3190bc8"
+      "summary.md": "sha256:3d7cf1c5d78c99b3d36bc6c3e33d137c80c78f5f27afa0e8551d64d30c3c499f"
     }
   }
 }

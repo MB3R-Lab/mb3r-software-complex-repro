@@ -98,16 +98,19 @@ func acceptReferenceWork(workRoot string) error {
 	}
 	allHashes := map[string]map[string]string{}
 	referenceRoot := filepath.Join(root, "reference")
-	for _, name := range []string{"otel-demo", "social-network"} {
-		caseWork := filepath.Join(workRoot, name)
+	for _, c := range reproductionCases(root) {
+		caseWork := filepath.Join(workRoot, c.Name)
+		if err := writeAnalytics(c, caseWork); err != nil {
+			return fmt.Errorf("refresh %s analytics: %w", c.Name, err)
+		}
 		hashes, err := semanticHashes(caseWork)
 		if err != nil {
-			return fmt.Errorf("accept %s: %w", name, err)
+			return fmt.Errorf("accept %s: %w", c.Name, err)
 		}
-		if err := writeReferenceCase(caseWork, filepath.Join(referenceRoot, name)); err != nil {
+		if err := writeReferenceCase(caseWork, filepath.Join(referenceRoot, c.Name)); err != nil {
 			return err
 		}
-		allHashes[name] = hashes
+		allHashes[c.Name] = hashes
 	}
 	if err := writeJSON(filepath.Join(referenceRoot, "manifest.json"), newReferenceManifest(lock.Toolchain.Version, allHashes)); err != nil {
 		return err
@@ -163,10 +166,7 @@ func run(update bool) error {
 		bins[item.name] = binary
 	}
 
-	cases := []caseSpec{
-		{Name: "otel-demo", SourceAlias: "paper", Dir: filepath.Join(root, "cases", "otel-demo")},
-		{Name: "social-network", SourceAlias: "compose", Dir: filepath.Join(root, "cases", "social-network")},
-	}
+	cases := reproductionCases(root)
 	allHashes := map[string]map[string]string{}
 	workRoot := filepath.Join(tmp, "work")
 	for _, c := range cases {
@@ -221,6 +221,13 @@ func run(update bool) error {
 	}
 	fmt.Printf("reproduce-paper-ok toolchain=%s cases=%d\n", manifest.Toolchain.Version, len(cases))
 	return nil
+}
+
+func reproductionCases(root string) []caseSpec {
+	return []caseSpec{
+		{Name: "otel-demo", SourceAlias: "paper", Dir: filepath.Join(root, "cases", "otel-demo")},
+		{Name: "social-network", SourceAlias: "compose", Dir: filepath.Join(root, "cases", "social-network")},
+	}
 }
 
 func newReferenceManifest(toolchainVersion string, cases map[string]map[string]string) referenceManifest {
@@ -315,17 +322,17 @@ func writeAnalytics(c caseSpec, work string) error {
 			"sweeps":           report["sweeps"],
 		},
 	}
-	if c.Name == "social-network" {
-		var legacy map[string]any
-		if err := readJSON(filepath.Join(c.Dir, "legacy-reference.json"), &legacy); err != nil {
-			return err
+	var publication map[string]any
+	if err := readJSON(filepath.Join(c.Dir, "publication.json"), &publication); err != nil {
+		return fmt.Errorf("read %s publication metadata: %w", c.Name, err)
+	}
+	analytics["publication"] = publication
+	if comparison, ok := publication["comparison"].(map[string]any); ok {
+		result := publishedComparison(report, comparison)
+		if accepted, _ := result["within_tolerance"].(bool); !accepted {
+			return fmt.Errorf("%s result exceeds the published comparison tolerance: absolute delta %.6f", c.Name, asFloat(result["absolute_delta"]))
 		}
-		deltas := legacyDeltas(report, legacy)
-		if accepted, _ := deltas["within_tolerance"].(bool); !accepted {
-			return fmt.Errorf("social-network result exceeds the archived comparison tolerance: max absolute delta %.6f", asFloat(deltas["max_absolute_delta"]))
-		}
-		comparison := map[string]any{"reference": legacy, "deltas": deltas}
-		analytics["legacy_contextual_comparison"] = comparison
+		analytics["published_comparison"] = result
 	}
 	if err := writeJSON(filepath.Join(work, "analytics.json"), analytics); err != nil {
 		return err
@@ -333,31 +340,26 @@ func writeAnalytics(c caseSpec, work string) error {
 	return os.WriteFile(filepath.Join(work, "summary.md"), []byte(markdownSummary(c.Name, analytics)), 0o644)
 }
 
-func legacyDeltas(report, legacy map[string]any) map[string]any {
-	deltas := map[string]any{}
+func publishedComparison(report, comparison map[string]any) map[string]any {
 	summary, _ := report["summary"].(map[string]any)
-	aggregateDelta := numberAt(summary, "weighted_overall_availability") - numberAt(legacy, "weighted_aggregate")
-	deltas["weighted_aggregate"] = aggregateDelta
-	maxAbsolute := math.Abs(aggregateDelta)
-	legacyEndpoints, _ := legacy["endpoints"].(map[string]any)
-	endpointDeltas := map[string]any{}
-	for _, raw := range arrayAt(report, "endpoint_results") {
-		endpoint, ok := raw.(map[string]any)
-		if !ok {
-			continue
-		}
-		id := stringAt(endpoint, "endpoint_id")
-		if previous, ok := legacyEndpoints[id]; ok {
-			delta := numberAt(endpoint, "availability") - asFloat(previous)
-			endpointDeltas[id] = delta
-			maxAbsolute = math.Max(maxAbsolute, math.Abs(delta))
-		}
+	metric := stringAt(comparison, "metric")
+	actual := numberAt(summary, metric)
+	published := numberAt(comparison, "published_value")
+	tolerance := numberAt(comparison, "absolute_tolerance")
+	delta := actual - published
+	result := map[string]any{
+		"profile":                      stringAt(comparison, "profile"),
+		"metric":                       metric,
+		"source":                       stringAt(comparison, "source"),
+		"actual_value":                 actual,
+		"published_value":              published,
+		"published_standard_deviation": numberAt(comparison, "published_standard_deviation"),
+		"delta":                        delta,
+		"absolute_delta":               math.Abs(delta),
+		"absolute_tolerance":           tolerance,
+		"within_tolerance":             math.Abs(delta) <= tolerance,
 	}
-	deltas["endpoints"] = endpointDeltas
-	deltas["tolerance"] = 0.015
-	deltas["max_absolute_delta"] = maxAbsolute
-	deltas["within_tolerance"] = maxAbsolute <= 0.015
-	return deltas
+	return result
 }
 
 func markdownSummary(name string, analytics map[string]any) string {
@@ -370,6 +372,13 @@ func markdownSummary(name string, analytics map[string]any) string {
 	fmt.Fprintf(&out, "- Procrustes goal status: `%s`; assessed services: %.0f; blockers: %.0f.\n", stringAt(p, "goal_status"), asFloat(p["services_assessed"]), asFloat(p["blockers"]))
 	fmt.Fprintf(&out, "- Bering model: %.0f services, %.0f edges (%.0f async), %.0f endpoints.\n", asFloat(b["services"]), asFloat(b["edges"]), asFloat(b["async_edges"]), asFloat(b["endpoints"]))
 	fmt.Fprintf(&out, "- Sheaft p=0.30 weighted availability: %.6f.\n\n", numberAt(summary, "weighted_overall_availability"))
+	if publication, ok := analytics["publication"].(map[string]any); ok {
+		fmt.Fprintf(&out, "- Published source: %s, DOI `%s`.\n", stringAt(publication, "title"), stringAt(publication, "doi"))
+	}
+	if comparison, ok := analytics["published_comparison"].(map[string]any); ok {
+		fmt.Fprintf(&out, "- Published comparison: actual `%.6f`, published `%.6f`, absolute delta `%.6f` (tolerance `%.6f`).\n", numberAt(comparison, "actual_value"), numberAt(comparison, "published_value"), numberAt(comparison, "absolute_delta"), numberAt(comparison, "absolute_tolerance"))
+	}
+	out.WriteString("\n")
 	out.WriteString("| Endpoint | Availability |\n|---|---:|\n")
 	for _, raw := range arrayAt(s, "endpoint_results") {
 		endpoint, ok := raw.(map[string]any)

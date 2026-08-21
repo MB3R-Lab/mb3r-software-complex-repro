@@ -16,6 +16,61 @@
     "remediation_items": 0,
     "services_assessed": 2
   },
+  "publication": {
+    "artifact": {
+      "doi": "10.5281/zenodo.17703953",
+      "repository": "https://github.com/a-a-k/otel-demo-resilience"
+    },
+    "doi": "10.1007/978-3-032-23304-2_24",
+    "pages": "301-311",
+    "publisher": "Springer Cham",
+    "reported_results": {
+      "metric": "probe_weighted_aggregate_availability",
+      "rows": [
+        {
+          "failure_fraction": 0.1,
+          "live": 0.683,
+          "model_all_blocking": 0.781,
+          "model_async": 0.781
+        },
+        {
+          "failure_fraction": 0.3,
+          "live": 0.557,
+          "model_all_blocking": 0.610,
+          "model_async": 0.610
+        },
+        {
+          "failure_fraction": 0.5,
+          "live": 0.360,
+          "model_all_blocking": 0.356,
+          "model_async": 0.356
+        },
+        {
+          "failure_fraction": 0.7,
+          "live": 0.289,
+          "model_all_blocking": 0.251,
+          "model_async": 0.251
+        },
+        {
+          "failure_fraction": 0.9,
+          "live": 0.172,
+          "model_all_blocking": 0.050,
+          "model_async": 0.050
+        }
+      ],
+      "source": "Table 2"
+    },
+    "reproduction_scope": {
+      "comparison_status": "not_direct",
+      "reason": "The current toolchain case evaluates the checkout endpoint only, while the published Table 2 reports a probe-weighted aggregate across four endpoints."
+    },
+    "schema_version": "1.0.0",
+    "series": "Lecture Notes on Data Engineering and Communications Technologies, volume 297",
+    "title": "Refining Resilience Model Discovery: A Case Study on the Limited Role of Asynchronous Edges in the OpenTelemetry Demo",
+    "type": "published_experiment",
+    "url": "https://doi.org/10.1007/978-3-032-23304-2_24",
+    "venue": "40th International Conference on Advanced Information Networking and Applications (AINA 2026)"
+  },
   "schema_version": "1.0.0",
   "sheaft": {
     "endpoint_results": [
