@@ -1,0 +1,2 @@
+reporter:
+  localAgentHostPort: jaeger-agent:6831

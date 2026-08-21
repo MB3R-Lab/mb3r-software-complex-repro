@@ -1,0 +1,9 @@
+type: Test
+spec:
+  id: social-compose-post
+  name: DeathStarBench Social Network compose post
+  trigger:
+    type: http
+    httpRequest:
+      method: POST
+      url: http://${var:SOCIAL_FRONTEND}/wrk2-api/post/compose

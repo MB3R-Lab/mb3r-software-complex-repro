@@ -59,6 +59,7 @@ type caseSpec struct {
 	Family              string
 	Mode                string
 	SourceAlias         string
+	StaticDir           string
 	Dir                 string
 	TopologyFile        string
 	AnalysisFile        string
@@ -259,10 +260,10 @@ func run(update bool) error {
 
 func reproductionCases(root string) []caseSpec {
 	return []caseSpec{
-		{Name: "otel-demo-all-blocking", Family: "otel-demo", Mode: "all-blocking", SourceAlias: "paper", Dir: filepath.Join(root, "cases", "otel-demo"), TopologyFile: "topology-all-blocking.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_all_blocking"},
-		{Name: "otel-demo-async", Family: "otel-demo", Mode: "async", SourceAlias: "paper", Dir: filepath.Join(root, "cases", "otel-demo"), TopologyFile: "topology-api.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_async"},
-		{Name: "social-network-norepl", Family: "social-network", Mode: "norepl", SourceAlias: "compose", Dir: filepath.Join(root, "cases", "social-network"), TopologyFile: "topology-norepl.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_mean"},
-		{Name: "social-network-repl", Family: "social-network", Mode: "repl", SourceAlias: "compose", Dir: filepath.Join(root, "cases", "social-network"), TopologyFile: "topology-api.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_mean"},
+		{Name: "otel-demo-all-blocking", Family: "otel-demo", Mode: "all-blocking", SourceAlias: "paper", StaticDir: "static", Dir: filepath.Join(root, "cases", "otel-demo"), TopologyFile: "topology-all-blocking.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_all_blocking"},
+		{Name: "otel-demo-async", Family: "otel-demo", Mode: "async", SourceAlias: "paper", StaticDir: "static", Dir: filepath.Join(root, "cases", "otel-demo"), TopologyFile: "topology-api.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_async"},
+		{Name: "social-network-norepl", Family: "social-network", Mode: "norepl", SourceAlias: "compose", StaticDir: "static-norepl", Dir: filepath.Join(root, "cases", "social-network"), TopologyFile: "topology-norepl.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_mean"},
+		{Name: "social-network-repl", Family: "social-network", Mode: "repl", SourceAlias: "compose", StaticDir: "static", Dir: filepath.Join(root, "cases", "social-network"), TopologyFile: "topology-api.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_mean"},
 	}
 }
 
@@ -297,7 +298,7 @@ func runCase(c caseSpec, work string, bins map[string]string) error {
 		}
 	}
 	if err := runCommand(c.Name+" procrustes", c.Dir, bins["procrustes"],
-		"analyze", "--source", c.SourceAlias+"="+filepath.Join(c.Dir, "static"),
+		"analyze", "--source", c.SourceAlias+"="+filepath.Join(c.Dir, c.StaticDir),
 		"--goal", filepath.Join(c.Dir, "goal.yaml"), "--out-dir", procrustesOut, "--fail-on-blocked"); err != nil {
 		return err
 	}
