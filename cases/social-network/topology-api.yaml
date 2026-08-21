@@ -1,0 +1,81 @@
+source:
+  type: topology_api
+  ref: archive://deathstarbench-social-network/jaeger-dependencies/2023-09-28
+services:
+  - {id: compose-post-service, replicas: 3}
+  - {id: home-timeline-service, replicas: 3}
+  - {id: media-service, replicas: 3}
+  - {id: nginx-web-server, replicas: 1}
+  - {id: post-storage-service, replicas: 1}
+  - {id: social-graph-service, replicas: 1}
+  - {id: text-service, replicas: 3}
+  - {id: unique-id-service, replicas: 1}
+  - {id: url-shorten-service, replicas: 1}
+  - {id: user-mention-service, replicas: 1}
+  - {id: user-service, replicas: 1}
+  - {id: user-timeline-service, replicas: 3}
+edges:
+  - {from: compose-post-service, to: home-timeline-service, kind: sync, blocking: true}
+  - {from: compose-post-service, to: media-service, kind: sync, blocking: true}
+  - {from: compose-post-service, to: post-storage-service, kind: sync, blocking: true}
+  - {from: compose-post-service, to: text-service, kind: sync, blocking: true}
+  - {from: compose-post-service, to: unique-id-service, kind: sync, blocking: true}
+  - {from: compose-post-service, to: user-service, kind: sync, blocking: true}
+  - {from: compose-post-service, to: user-timeline-service, kind: sync, blocking: true}
+  - {from: home-timeline-service, to: post-storage-service, kind: sync, blocking: true}
+  - {from: home-timeline-service, to: social-graph-service, kind: sync, blocking: true}
+  - {from: nginx-web-server, to: compose-post-service, kind: sync, blocking: true, identity: {protocol: http, operation: POST, route: /wrk2-api/post/compose}}
+  - {from: nginx-web-server, to: home-timeline-service, kind: sync, blocking: true}
+  - {from: nginx-web-server, to: social-graph-service, kind: sync, blocking: true}
+  - {from: nginx-web-server, to: user-service, kind: sync, blocking: true}
+  - {from: nginx-web-server, to: user-timeline-service, kind: sync, blocking: true}
+  - {from: social-graph-service, to: user-service, kind: sync, blocking: true}
+  - {from: text-service, to: url-shorten-service, kind: sync, blocking: true}
+  - {from: text-service, to: user-mention-service, kind: sync, blocking: true}
+  - {from: user-service, to: social-graph-service, kind: sync, blocking: true}
+  - {from: user-timeline-service, to: post-storage-service, kind: sync, blocking: true}
+endpoints:
+  - id: home-timeline
+    entry_service: nginx-web-server
+    predicate_ref: home-timeline
+    semantics:
+      predicate_mode: immediate_response
+      mandatory_targets: [home-timeline-service, post-storage-service, social-graph-service]
+      dependency_modes: [sync]
+      source: archived-workload
+      confidence: 1.0
+    weight: 0.6
+  - id: user-timeline
+    entry_service: nginx-web-server
+    predicate_ref: user-timeline
+    semantics:
+      predicate_mode: immediate_response
+      mandatory_targets: [user-timeline-service, post-storage-service]
+      dependency_modes: [sync]
+      source: archived-workload
+      confidence: 1.0
+    weight: 0.3
+  - id: compose-post
+    entry_service: nginx-web-server
+    method: POST
+    path: /wrk2-api/post/compose
+    predicate_ref: compose-post
+    semantics:
+      predicate_mode: immediate_response
+      mandatory_targets: [compose-post-service, unique-id-service, text-service, user-service, post-storage-service, user-timeline-service, home-timeline-service, social-graph-service, media-service, url-shorten-service, user-mention-service]
+      dependency_modes: [sync]
+      source: archived-workload
+      confidence: 1.0
+    weight: 0.1
+  - id: "nginx-web-server:POST /wrk2-api/post/compose"
+    entry_service: nginx-web-server
+    method: POST
+    path: /wrk2-api/post/compose
+    predicate_ref: procrustes.compose-post.preflight
+    semantics:
+      predicate_mode: immediate_response
+      mandatory_targets: [compose-post-service]
+      dependency_modes: [sync]
+      source: procrustes-preflight
+      confidence: 1.0
+    weight: 0.0

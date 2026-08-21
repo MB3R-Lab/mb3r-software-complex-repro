@@ -1,0 +1,41 @@
+{
+  "bering_overlay": "bering.overlay.yaml",
+  "contract": {
+    "name": "io.mb3r.procrustes.collection-plan",
+    "version": "0.1.0"
+  },
+  "expected_services": [
+    "checkout",
+    "frontend"
+  ],
+  "known_limitations": [
+    "DECLARED instrumentation and propagation remain runtime assumptions until matching traces are observed.",
+    "Procrustes evaluates static eligibility only; Bering must validate runtime evidence, coverage, and signal quality."
+  ],
+  "operation": {
+    "entry_service": "frontend",
+    "id": "otel-demo-checkout",
+    "mandatory_targets": [
+      "checkout"
+    ],
+    "method": "POST",
+    "path": "/api/checkout",
+    "scenario_ref": "checkout.tracetest.yaml"
+  },
+  "recommended_resource_attributes": [
+    "deployment.environment.name",
+    "service.namespace",
+    "service.version"
+  ],
+  "required_resource_attributes": [
+    "service.name"
+  ],
+  "scenarios": [
+    {
+      "id": "otel-demo-checkout",
+      "method": "POST",
+      "path": "/api/checkout",
+      "source": "paper/checkout.tracetest.yaml#doc=1"
+    }
+  ]
+}

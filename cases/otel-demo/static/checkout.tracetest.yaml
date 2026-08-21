@@ -1,0 +1,9 @@
+type: Test
+spec:
+  id: otel-demo-checkout
+  name: OpenTelemetry Demo checkout
+  trigger:
+    type: http
+    httpRequest:
+      url: http://${var:FRONTEND_ADDR}/api/checkout
+      method: POST

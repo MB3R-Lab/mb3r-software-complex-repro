@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  nginx-web-server:
+    image: deathstarbench/social-network-microservices:latest
+    ports: ["8080:8080"]
+    volumes:
+      - ./src/nginx-web-server/jaeger-config.json:/etc/jaeger-config.json
+  compose-post-service:
+    image: deathstarbench/social-network-microservices:latest
+    deploy:
+      replicas: 3
+  jaeger-agent:
+    image: jaegertracing/all-in-one:1.57

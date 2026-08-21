@@ -1,0 +1,57 @@
+source:
+  type: topology_api
+  ref: archive://otel-demo/trace-graph/async-paper
+services:
+  - {id: accounting, replicas: 1}
+  - {id: ad, replicas: 1}
+  - {id: cart, replicas: 1}
+  - {id: checkout, replicas: 1}
+  - {id: currency, replicas: 1}
+  - {id: email, replicas: 1}
+  - {id: flagd, replicas: 1}
+  - {id: fraud-detection, replicas: 1}
+  - {id: frontend, replicas: 1}
+  - {id: kafka, replicas: 1}
+  - {id: payment, replicas: 1}
+  - {id: product-catalog, replicas: 1}
+  - {id: product-reviews, replicas: 1}
+  - {id: quote, replicas: 1}
+  - {id: recommendation, replicas: 1}
+  - {id: shipping, replicas: 1}
+edges:
+  - {from: ad, to: flagd, kind: sync, blocking: true}
+  - {from: cart, to: flagd, kind: sync, blocking: true}
+  - {from: checkout, to: cart, kind: sync, blocking: true}
+  - {from: checkout, to: currency, kind: sync, blocking: true}
+  - {from: checkout, to: email, kind: sync, blocking: true}
+  - {from: checkout, to: kafka, kind: async, blocking: false}
+  - {from: checkout, to: payment, kind: sync, blocking: true}
+  - {from: checkout, to: product-catalog, kind: sync, blocking: true}
+  - {from: checkout, to: shipping, kind: sync, blocking: true}
+  - {from: fraud-detection, to: flagd, kind: sync, blocking: true}
+  - {from: frontend, to: ad, kind: sync, blocking: true}
+  - {from: frontend, to: cart, kind: sync, blocking: true}
+  - {from: frontend, to: checkout, kind: sync, blocking: true, identity: {protocol: http, operation: POST, route: /api/checkout}}
+  - {from: frontend, to: product-catalog, kind: sync, blocking: true}
+  - {from: frontend, to: product-reviews, kind: sync, blocking: true}
+  - {from: frontend, to: recommendation, kind: sync, blocking: true}
+  - {from: kafka, to: accounting, kind: async, blocking: false}
+  - {from: kafka, to: fraud-detection, kind: async, blocking: false}
+  - {from: payment, to: flagd, kind: sync, blocking: true}
+  - {from: product-reviews, to: flagd, kind: sync, blocking: true}
+  - {from: recommendation, to: flagd, kind: sync, blocking: true}
+  - {from: recommendation, to: product-catalog, kind: sync, blocking: true}
+  - {from: shipping, to: quote, kind: sync, blocking: true}
+endpoints:
+  - id: "frontend:POST /api/checkout"
+    entry_service: frontend
+    method: POST
+    path: /api/checkout
+    predicate_ref: otel-demo.checkout.immediate
+    semantics:
+      predicate_mode: immediate_response
+      mandatory_targets: [checkout]
+      dependency_modes: [sync]
+      source: archived-trace-graph
+      confidence: 1.0
+    weight: 1.0

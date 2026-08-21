@@ -1,0 +1,393 @@
+{
+  "contract_policy": {
+    "action": "allow",
+    "status": "current"
+  },
+  "diffs": {},
+  "endpoint_results": [
+    {
+      "availability": 0.49272,
+      "endpoint_id": "frontend:POST /api/checkout",
+      "profile": "archived-p30",
+      "status": "warn",
+      "threshold": 0.99,
+      "threshold_delta": -0.49728
+    }
+  ],
+  "input_artifact": {
+    "artifact_id": "bering://discover?input=C%3A%2FUsers%2Faakra%2FDesktop%2F%D1%81%D1%82%D0%B0%D1%80%D1%82%D0%B0%D0%BF%2Fsheaft%2Fmb3r-stack%2Fmb3r-stack%2Fresearch%2Fsoftware-complex-paper%2Fcases%2Fotel-demo%2Ftopology-api.yaml",
+    "contract_name": "io.mb3r.bering.model",
+    "contract_version": "1.3.0",
+    "digest": "sha256:84a568d62340587b2fe0588280c37e4b7716c9b46d1398ac16367cb2c5af8eda",
+    "kind": "model",
+    "produced_at": "2026-08-21T00:00:00Z",
+    "source_ref": "bering://discover?input=C%3A%2FUsers%2Faakra%2FDesktop%2F%D1%81%D1%82%D0%B0%D1%80%D1%82%D0%B0%D0%BF%2Fsheaft%2Fmb3r-stack%2Fmb3r-stack%2Fresearch%2Fsoftware-complex-paper%2Fcases%2Fotel-demo%2Ftopology-api.yaml",
+    "source_type": "bering"
+  },
+  "parameters": {
+    "calibration": {
+      "baselines": {
+        "active": false,
+        "fallback": "no baseline reports configured",
+        "source": "external"
+      },
+      "fault_contract": {
+        "active": false,
+        "fallback": "no fault contract configured; advanced fault profiles are inactive",
+        "source": "default"
+      },
+      "historical_signals": {
+        "active": false,
+        "fallback": "historical calibration inputs are not implemented; static configuration is used",
+        "source": "default"
+      },
+      "journey_overrides": {
+        "active": false,
+        "fallback": "using richer predicates or discovered journeys without manual journey override",
+        "source": "default"
+      },
+      "predicate_overlay": {
+        "active": false,
+        "fallback": "using artifact predicates or legacy path resolution without external predicate overlay",
+        "source": "external"
+      }
+    },
+    "config_source": "override",
+    "profiles": [
+      {
+        "endpoint_weights": {
+          "active": true,
+          "source": "override"
+        },
+        "failure_probability": {
+          "source": "override",
+          "value": 0.3
+        },
+        "fault_profile": {
+          "source": "default",
+          "value": ""
+        },
+        "fixed_k_failures": {
+          "source": "default",
+          "value": 0
+        },
+        "name": "archived-p30",
+        "reliability": {
+          "active": false,
+          "fallback": "using legacy failure_probability shorthand for node reliability and perfect-edge baseline",
+          "source": "default"
+        },
+        "sampling_mode": {
+          "source": "override",
+          "value": "independent_replica"
+        },
+        "seed": {
+          "source": "override",
+          "value": 406332969664037648
+        },
+        "trials": {
+          "source": "override",
+          "value": 50000
+        }
+      }
+    ]
+  },
+  "policy_evaluation": {
+    "decision": "report",
+    "evaluation_rule": "all_profiles",
+    "failed_endpoints": [
+      "frontend:POST /api/checkout"
+    ],
+    "failed_profiles": [
+      "archived-p30"
+    ],
+    "mode": "report",
+    "reasons": [
+      {
+        "availability": 0.49272,
+        "delta": -0.49728,
+        "endpoint_id": "frontend:POST /api/checkout",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:POST /api/checkout\" availability 0.4927 is below threshold 0.9900",
+        "profile": "archived-p30",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      }
+    ]
+  },
+  "profiles": [
+    {
+      "decision": "report",
+      "endpoint_results": [
+        {
+          "availability": 0.49272,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "profile": "archived-p30",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.49728
+        }
+      ],
+      "endpoints_below_threshold": 1,
+      "name": "archived-p30",
+      "reasons": [
+        {
+          "availability": 0.49272,
+          "delta": -0.49728,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:POST /api/checkout\" availability 0.4927 is below threshold 0.9900",
+          "profile": "archived-p30",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        }
+      ],
+      "simulation": {
+        "advanced": {
+          "blast_radius": {
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "edges": [
+            {
+              "edge_id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            }
+          ],
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:POST /api/checkout",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.49272
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.49272
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout",
+              "services": [
+                "frontend",
+                "checkout"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            }
+          ]
+        },
+        "endpoint_availability": {
+          "frontend:POST /api/checkout": 0.49272
+        },
+        "endpoint_weights": {
+          "frontend:POST /api/checkout": 1
+        },
+        "failure_probability": 0.3,
+        "name": "archived-p30",
+        "sampling_mode": "independent_replica",
+        "seed": 406332969664037648,
+        "trials": 50000,
+        "unweighted_aggregate": 0.49272,
+        "weighted_aggregate": 0.49272
+      }
+    }
+  ],
+  "provenance": {
+    "predicate_source": "default",
+    "weights_source": "default"
+  },
+  "simulation": {
+    "failure_probability": 0.3,
+    "seed": 406332969664037648,
+    "trials": 50000
+  },
+  "summary": {
+    "confidence": 1,
+    "cross_profile_availability": 0.49272,
+    "cross_profile_weighted_availability": 0.49272,
+    "overall_availability": 0.49272,
+    "risk_score": 0.50728,
+    "weighted_overall_availability": 0.49272
+  },
+  "sweeps": [
+    {
+      "axis_type": "independent_replica_failure_probability",
+      "base_profile": "archived-p30",
+      "boundaries": [
+        {
+          "certification_status": "certified",
+          "certified_tolerance": {
+            "availability": 0.80748,
+            "axis_value": 0.1,
+            "confidence_lower_bound": 0.8040004847619648,
+            "confidence_upper_bound": 0.8109122719973669
+          },
+          "confidence_level": 0.95,
+          "crossing_bracket": {
+            "lower_axis_value": 0.1,
+            "upper_axis_value": 0.3
+          },
+          "endpoint_id": "frontend:POST /api/checkout",
+          "first_violating_slo": {
+            "availability": 0.48528,
+            "axis_value": 0.3,
+            "confidence_lower_bound": 0.48090058591005946,
+            "confidence_upper_bound": 0.48966167576713127
+          },
+          "last_meeting_slo": {
+            "availability": 0.80748,
+            "axis_value": 0.1,
+            "confidence_lower_bound": 0.8040004847619648,
+            "confidence_upper_bound": 0.8109122719973669
+          },
+          "observed_monotonic": true,
+          "slo": 0.5,
+          "status": "crossed"
+        }
+      ],
+      "confidence_level": 0.95,
+      "fingerprint": "sha256:c86c3d4a88de20f5ac9dfdb38add3df2c52a7a6d07001c3fadbb983be1f4a445",
+      "name": "checkout-failure-curve",
+      "points": [
+        {
+          "axis_value": 0,
+          "endpoint_availability": {
+            "frontend:POST /api/checkout": 1
+          },
+          "endpoint_confidence": {
+            "frontend:POST /api/checkout": {
+              "confidence_level": 0.95,
+              "estimate": 1,
+              "lower_bound": 0.9999231767258548,
+              "successes": 50000,
+              "trials": 50000,
+              "upper_bound": 0.9999999999999999
+            }
+          },
+          "failure_probability": 0
+        },
+        {
+          "axis_value": 0.1,
+          "endpoint_availability": {
+            "frontend:POST /api/checkout": 0.80748
+          },
+          "endpoint_confidence": {
+            "frontend:POST /api/checkout": {
+              "confidence_level": 0.95,
+              "estimate": 0.80748,
+              "lower_bound": 0.8040004847619648,
+              "successes": 40374,
+              "trials": 50000,
+              "upper_bound": 0.8109122719973669
+            }
+          },
+          "failure_probability": 0.1
+        },
+        {
+          "axis_value": 0.3,
+          "endpoint_availability": {
+            "frontend:POST /api/checkout": 0.48528
+          },
+          "endpoint_confidence": {
+            "frontend:POST /api/checkout": {
+              "confidence_level": 0.95,
+              "estimate": 0.48528,
+              "lower_bound": 0.48090058591005946,
+              "successes": 24264,
+              "trials": 50000,
+              "upper_bound": 0.48966167576713127
+            }
+          },
+          "failure_probability": 0.3
+        },
+        {
+          "axis_value": 0.5,
+          "endpoint_availability": {
+            "frontend:POST /api/checkout": 0.24742
+          },
+          "endpoint_confidence": {
+            "frontend:POST /api/checkout": {
+              "confidence_level": 0.95,
+              "estimate": 0.24742,
+              "lower_bound": 0.24365719209988657,
+              "successes": 12371,
+              "trials": 50000,
+              "upper_bound": 0.2512216159452805
+            }
+          },
+          "failure_probability": 0.5
+        },
+        {
+          "axis_value": 0.7,
+          "endpoint_availability": {
+            "frontend:POST /api/checkout": 0.08908
+          },
+          "endpoint_confidence": {
+            "frontend:POST /api/checkout": {
+              "confidence_level": 0.95,
+              "estimate": 0.08908,
+              "lower_bound": 0.08661460962909708,
+              "successes": 4454,
+              "trials": 50000,
+              "upper_bound": 0.09160852681052627
+            }
+          },
+          "failure_probability": 0.7
+        },
+        {
+          "axis_value": 0.9,
+          "endpoint_availability": {
+            "frontend:POST /api/checkout": 0.00936
+          },
+          "endpoint_confidence": {
+            "frontend:POST /api/checkout": {
+              "confidence_level": 0.95,
+              "estimate": 0.00936,
+              "lower_bound": 0.00855285168703331,
+              "successes": 468,
+              "trials": 50000,
+              "upper_bound": 0.010242533455419695
+            }
+          },
+          "failure_probability": 0.9
+        }
+      ],
+      "seed": -2312467213180897557,
+      "total_replica_slots": 16,
+      "trials": 50000
+    }
+  ]
+}

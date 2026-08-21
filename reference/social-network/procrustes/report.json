@@ -1,0 +1,477 @@
+{
+  "capabilities": [
+    {
+      "basis": [
+        "service.compose-post-service.workload",
+        "service.nginx-web-server.workload"
+      ],
+      "id": "service_inventory",
+      "status": "EXPECTED"
+    },
+    {
+      "basis": [
+        "service.compose-post-service.exporter",
+        "service.compose-post-service.identity",
+        "service.compose-post-service.instrumentation",
+        "service.compose-post-service.propagation",
+        "service.compose-post-service.workload",
+        "service.nginx-web-server.exporter",
+        "service.nginx-web-server.identity",
+        "service.nginx-web-server.instrumentation",
+        "service.nginx-web-server.propagation",
+        "service.nginx-web-server.workload"
+      ],
+      "id": "candidate_topology",
+      "limitations": [
+        "A service-to-tracing-backend collection path is statically declared; Bering can collect it through the backend-specific source adapter",
+        "Legacy distributed-tracing propagation hooks are declared; the runtime carrier format must be verified by Bering",
+        "Non-OpenTelemetry tracing instrumentation is initialized for the service"
+      ],
+      "status": "EXPECTED"
+    },
+    {
+      "basis": [
+        "operation.entrypoint",
+        "operation.scenario",
+        "service.compose-post-service.exporter",
+        "service.compose-post-service.identity",
+        "service.compose-post-service.instrumentation",
+        "service.compose-post-service.propagation",
+        "service.compose-post-service.workload",
+        "service.nginx-web-server.exporter",
+        "service.nginx-web-server.identity",
+        "service.nginx-web-server.instrumentation",
+        "service.nginx-web-server.propagation",
+        "service.nginx-web-server.workload"
+      ],
+      "id": "operation_specific_model",
+      "limitations": [
+        "A service-to-tracing-backend collection path is statically declared; Bering can collect it through the backend-specific source adapter",
+        "Legacy distributed-tracing propagation hooks are declared; the runtime carrier format must be verified by Bering",
+        "Non-OpenTelemetry tracing instrumentation is initialized for the service"
+      ],
+      "status": "EXPECTED"
+    },
+    {
+      "basis": [
+        "operation.entrypoint",
+        "operation.scenario",
+        "service.compose-post-service.exporter",
+        "service.compose-post-service.identity",
+        "service.compose-post-service.instrumentation",
+        "service.compose-post-service.propagation",
+        "service.compose-post-service.replicas",
+        "service.compose-post-service.workload",
+        "service.nginx-web-server.exporter",
+        "service.nginx-web-server.identity",
+        "service.nginx-web-server.instrumentation",
+        "service.nginx-web-server.propagation",
+        "service.nginx-web-server.replicas",
+        "service.nginx-web-server.workload"
+      ],
+      "id": "replica_aware_model",
+      "limitations": [
+        "A service-to-tracing-backend collection path is statically declared; Bering can collect it through the backend-specific source adapter",
+        "Legacy distributed-tracing propagation hooks are declared; the runtime carrier format must be verified by Bering",
+        "Non-OpenTelemetry tracing instrumentation is initialized for the service"
+      ],
+      "status": "EXPECTED"
+    }
+  ],
+  "collection_plan": {
+    "bering_overlay": "bering.overlay.yaml",
+    "contract": {
+      "name": "io.mb3r.procrustes.collection-plan",
+      "version": "0.1.0"
+    },
+    "expected_services": [
+      "compose-post-service",
+      "nginx-web-server"
+    ],
+    "known_limitations": [
+      "Backend-specific tracing may require a source adapter before Bering ingestion; EXPECTED means that the static collection path is complete, not that runtime trace quality is proven.",
+      "DECLARED instrumentation and propagation remain runtime assumptions until matching traces are observed.",
+      "Procrustes evaluates static eligibility only; Bering must validate runtime evidence, coverage, and signal quality."
+    ],
+    "operation": {
+      "entry_service": "nginx-web-server",
+      "id": "social-compose-post",
+      "mandatory_targets": [
+        "compose-post-service"
+      ],
+      "method": "POST",
+      "path": "/wrk2-api/post/compose",
+      "scenario_ref": "compose-post.tracetest.yaml"
+    },
+    "recommended_resource_attributes": [
+      "deployment.environment.name",
+      "service.namespace",
+      "service.version"
+    ],
+    "required_resource_attributes": [
+      "service.name"
+    ],
+    "scenarios": [
+      {
+        "id": "social-compose-post",
+        "method": "POST",
+        "path": "/wrk2-api/post/compose",
+        "source": "compose/scenario/compose-post.tracetest.yaml#doc=1"
+      }
+    ],
+    "trace_sources": [
+      {
+        "adapter_required": true,
+        "bering_input": "normalized_spans",
+        "collection": "Jaeger /api/traces for the selected services, scenario, and collection window",
+        "evidence": [
+          {
+            "source": "compose/docker-compose.yaml"
+          }
+        ],
+        "system": "jaeger"
+      }
+    ]
+  },
+  "contract": {
+    "name": "io.mb3r.procrustes.report",
+    "version": "0.1.0"
+  },
+  "fingerprint": "sha256:c255bf3e223cf47e5f2f7a8c9c244a147119d9634137e4c20d9aa89ee88edc87",
+  "goal": {
+    "contract": {
+      "name": "io.mb3r.procrustes.goal",
+      "version": "0.1.0"
+    },
+    "operation": {
+      "entry_service": "nginx-web-server",
+      "id": "social-compose-post",
+      "mandatory_targets": [
+        "compose-post-service"
+      ],
+      "method": "POST",
+      "path": "/wrk2-api/post/compose",
+      "scenario_ref": "compose-post.tracetest.yaml"
+    },
+    "scope": {
+      "namespaces": [
+        "compose"
+      ],
+      "services": [
+        "compose-post-service",
+        "nginx-web-server"
+      ]
+    }
+  },
+  "goal_status": "EXPECTED",
+  "limitations": [
+    "Backend-specific tracing may require a source adapter before Bering ingestion; EXPECTED means that the static collection path is complete, not that runtime trace quality is proven.",
+    "DECLARED instrumentation and propagation remain runtime assumptions until matching traces are observed.",
+    "Procrustes evaluates static eligibility only; Bering must validate runtime evidence, coverage, and signal quality."
+  ],
+  "operation_facts": [
+    {
+      "evidence": [
+        {
+          "field": ".services.nginx-web-server",
+          "source": "compose/docker-compose.yaml#doc=1"
+        }
+      ],
+      "id": "operation.entrypoint",
+      "message": "The operation entry service is exposed by a matching deployment service",
+      "status": "CONFIRMED",
+      "value": "nginx-web-server"
+    },
+    {
+      "evidence": [
+        {
+          "field": ".spec.trigger.httpRequest",
+          "source": "compose/scenario/compose-post.tracetest.yaml#doc=1"
+        }
+      ],
+      "id": "operation.scenario",
+      "message": "At least one reproducible Tracetest HTTP scenario matches the operation",
+      "status": "CONFIRMED",
+      "value": "compose/scenario/compose-post.tracetest.yaml#doc=1"
+    }
+  ],
+  "services": [
+    {
+      "container": "compose-post-service",
+      "exporter": {
+        "evidence": [
+          {
+            "source": "compose/docker-compose.yaml"
+          },
+          {
+            "source": "compose/jaeger-config.yml"
+          },
+          {
+            "source": "compose/src/compose-post-service/ComposePostService.cpp"
+          }
+        ],
+        "id": "service.compose-post-service.exporter",
+        "message": "A service-to-tracing-backend collection path is statically declared; Bering can collect it through the backend-specific source adapter",
+        "status": "DECLARED",
+        "value": "jaeger,opentracing"
+      },
+      "id": "compose-post-service",
+      "identity": {
+        "evidence": [
+          {
+            "source": "compose/src/compose-post-service/ComposePostService.cpp"
+          }
+        ],
+        "id": "service.compose-post-service.identity",
+        "message": "A literal service identity in tracing initialization matches the scoped deployment service",
+        "status": "CONFIRMED",
+        "value": "compose-post-service"
+      },
+      "image": "deathstarbench/social-network-microservices:latest",
+      "instrumentation": {
+        "evidence": [
+          {
+            "source": "compose/src/compose-post-service/ComposePostService.cpp"
+          }
+        ],
+        "id": "service.compose-post-service.instrumentation",
+        "message": "Non-OpenTelemetry tracing instrumentation is initialized for the service",
+        "status": "DECLARED",
+        "value": "jaeger,opentracing"
+      },
+      "namespace": "compose",
+      "propagation": {
+        "evidence": [
+          {
+            "source": "compose/src/compose-post-service/TraceContext.cpp"
+          }
+        ],
+        "id": "service.compose-post-service.propagation",
+        "message": "Legacy distributed-tracing propagation hooks are declared; the runtime carrier format must be verified by Bering",
+        "status": "DECLARED",
+        "value": "opentracing"
+      },
+      "replicas": {
+        "evidence": [
+          {
+            "field": ".services.compose-post-service.deploy.replicas",
+            "source": "compose/docker-compose.yaml#doc=1"
+          }
+        ],
+        "id": "service.compose-post-service.replicas",
+        "message": "Docker Compose replica count is resolved",
+        "status": "CONFIRMED",
+        "value": "3"
+      },
+      "version": "latest",
+      "workload": "ComposeService/compose-post-service",
+      "workload_evidence": {
+        "evidence": [
+          {
+            "field": ".services.compose-post-service",
+            "source": "compose/docker-compose.yaml#doc=1"
+          }
+        ],
+        "id": "service.compose-post-service.workload",
+        "message": "A deployable workload container is resolved",
+        "status": "CONFIRMED",
+        "value": "compose/ComposeService/compose-post-service/compose-post-service"
+      }
+    },
+    {
+      "container": "nginx-web-server",
+      "deployment_entry": "nginx-web-server",
+      "exporter": {
+        "evidence": [
+          {
+            "source": "compose/docker-compose.yaml"
+          },
+          {
+            "source": "compose/jaeger-config.yml"
+          },
+          {
+            "source": "compose/src/nginx-web-server/jaeger-config.json"
+          }
+        ],
+        "id": "service.nginx-web-server.exporter",
+        "message": "A service-to-tracing-backend collection path is statically declared; Bering can collect it through the backend-specific source adapter",
+        "status": "DECLARED",
+        "value": "jaeger"
+      },
+      "id": "nginx-web-server",
+      "identity": {
+        "evidence": [
+          {
+            "source": "compose/src/nginx-web-server/jaeger-config.json"
+          }
+        ],
+        "id": "service.nginx-web-server.identity",
+        "message": "A mounted tracing configuration resolves the Compose service identity",
+        "status": "CONFIRMED",
+        "value": "nginx-web-server"
+      },
+      "image": "deathstarbench/social-network-microservices:latest",
+      "instrumentation": {
+        "evidence": [
+          {
+            "source": "compose/src/nginx-web-server/jaeger-config.json"
+          }
+        ],
+        "id": "service.nginx-web-server.instrumentation",
+        "message": "Non-OpenTelemetry tracing instrumentation is initialized for the service",
+        "status": "DECLARED",
+        "value": "jaeger"
+      },
+      "namespace": "compose",
+      "propagation": {
+        "evidence": [
+          {
+            "source": "compose/src/nginx-web-server/nginx.conf"
+          }
+        ],
+        "id": "service.nginx-web-server.propagation",
+        "message": "Legacy distributed-tracing propagation hooks are declared; the runtime carrier format must be verified by Bering",
+        "status": "DECLARED",
+        "value": "jaeger"
+      },
+      "replicas": {
+        "evidence": [
+          {
+            "field": ".services.nginx-web-server.replicas(default=1)",
+            "source": "compose/docker-compose.yaml#doc=1"
+          }
+        ],
+        "id": "service.nginx-web-server.replicas",
+        "message": "Replica count uses the Docker Compose default",
+        "status": "CONFIRMED",
+        "value": "1"
+      },
+      "version": "latest",
+      "workload": "ComposeService/nginx-web-server",
+      "workload_evidence": {
+        "evidence": [
+          {
+            "field": ".services.nginx-web-server",
+            "source": "compose/docker-compose.yaml#doc=1"
+          }
+        ],
+        "id": "service.nginx-web-server.workload",
+        "message": "A deployable workload container is resolved",
+        "status": "CONFIRMED",
+        "value": "compose/ComposeService/nginx-web-server/nginx-web-server"
+      }
+    }
+  ],
+  "sources": [
+    "compose"
+  ],
+  "tool_version": "0.1.0",
+  "trace_systems": [
+    {
+      "evidence": [
+        {
+          "source": "compose/docker-compose.yaml"
+        }
+      ],
+      "message": "Jaeger backend deployment is present",
+      "role": "backend",
+      "status": "DECLARED",
+      "system": "jaeger"
+    },
+    {
+      "evidence": [
+        {
+          "source": "compose/jaeger-config.yml"
+        }
+      ],
+      "message": "Jaeger tracing configuration is present",
+      "role": "configuration",
+      "status": "DECLARED",
+      "system": "jaeger"
+    },
+    {
+      "evidence": [
+        {
+          "source": "compose/src/compose-post-service/jaeger-config.yml"
+        }
+      ],
+      "message": "Jaeger tracing configuration is present",
+      "role": "configuration",
+      "service": "compose-post-service",
+      "status": "DECLARED",
+      "system": "jaeger"
+    },
+    {
+      "evidence": [
+        {
+          "source": "compose/src/nginx-web-server/jaeger-config.yml"
+        }
+      ],
+      "message": "Jaeger tracing configuration is present",
+      "role": "configuration",
+      "service": "nginx-web-server",
+      "status": "DECLARED",
+      "system": "jaeger"
+    },
+    {
+      "evidence": [
+        {
+          "source": "compose/src/compose-post-service/ComposePostService.cpp"
+        }
+      ],
+      "message": "Jaeger instrumentation declares the service identity as a literal",
+      "role": "instrumentation",
+      "service": "compose-post-service",
+      "status": "CONFIRMED",
+      "system": "jaeger"
+    },
+    {
+      "evidence": [
+        {
+          "source": "compose/src/nginx-web-server/jaeger-config.json"
+        }
+      ],
+      "message": "Jaeger instrumentation declares the service identity as a literal",
+      "role": "instrumentation",
+      "service": "nginx-web-server",
+      "status": "CONFIRMED",
+      "system": "jaeger"
+    },
+    {
+      "evidence": [
+        {
+          "source": "compose/src/nginx-web-server/nginx.conf"
+        }
+      ],
+      "message": "Jaeger propagation hooks are present for the service",
+      "role": "propagation",
+      "service": "nginx-web-server",
+      "status": "DECLARED",
+      "system": "jaeger"
+    },
+    {
+      "evidence": [
+        {
+          "source": "compose/src/compose-post-service/ComposePostService.cpp"
+        }
+      ],
+      "message": "OpenTracing instrumentation declares the service identity as a literal",
+      "role": "instrumentation",
+      "service": "compose-post-service",
+      "status": "CONFIRMED",
+      "system": "opentracing"
+    },
+    {
+      "evidence": [
+        {
+          "source": "compose/src/compose-post-service/TraceContext.cpp"
+        }
+      ],
+      "message": "OpenTracing propagation hooks are present for the service",
+      "role": "propagation",
+      "service": "compose-post-service",
+      "status": "DECLARED",
+      "system": "opentracing"
+    }
+  ]
+}

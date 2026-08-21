@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MB3R-Lab/mb3r-software-complex-repro/schemas/toolchain-lock.schema.json",
+  "title": "MB3R software-complex reproduction toolchain lock",
+  "type": "object",
+  "required": ["schema_version", "toolchain", "components"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "toolchain": {
+      "type": "object",
+      "required": ["name", "version", "status", "mb3r_stack_manifest"],
+      "properties": {
+        "name": {"const": "mb3r-software-complex"},
+        "version": {"$ref": "#/$defs/version"},
+        "status": {"enum": ["candidate", "verified", "deprecated"]},
+        "mb3r_stack_manifest": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "components": {
+      "type": "object",
+      "required": ["procrustes", "bering", "sheaft"],
+      "properties": {
+        "procrustes": {"$ref": "#/$defs/component"},
+        "bering": {"$ref": "#/$defs/component"},
+        "sheaft": {"$ref": "#/$defs/component"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+][A-Za-z0-9.-]+)?$"},
+    "component": {
+      "type": "object",
+      "required": ["version", "repository", "source"],
+      "properties": {
+        "version": {"$ref": "#/$defs/version"},
+        "repository": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+        "source": {
+          "type": "object",
+          "required": ["commit"],
+          "properties": {"commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"}},
+          "additionalProperties": false
+        },
+        "image_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

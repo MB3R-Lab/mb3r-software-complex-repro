@@ -1,0 +1,55 @@
+{
+  "bering_overlay": "bering.overlay.yaml",
+  "contract": {
+    "name": "io.mb3r.procrustes.collection-plan",
+    "version": "0.1.0"
+  },
+  "expected_services": [
+    "compose-post-service",
+    "nginx-web-server"
+  ],
+  "known_limitations": [
+    "Backend-specific tracing may require a source adapter before Bering ingestion; EXPECTED means that the static collection path is complete, not that runtime trace quality is proven.",
+    "DECLARED instrumentation and propagation remain runtime assumptions until matching traces are observed.",
+    "Procrustes evaluates static eligibility only; Bering must validate runtime evidence, coverage, and signal quality."
+  ],
+  "operation": {
+    "entry_service": "nginx-web-server",
+    "id": "social-compose-post",
+    "mandatory_targets": [
+      "compose-post-service"
+    ],
+    "method": "POST",
+    "path": "/wrk2-api/post/compose",
+    "scenario_ref": "compose-post.tracetest.yaml"
+  },
+  "recommended_resource_attributes": [
+    "deployment.environment.name",
+    "service.namespace",
+    "service.version"
+  ],
+  "required_resource_attributes": [
+    "service.name"
+  ],
+  "scenarios": [
+    {
+      "id": "social-compose-post",
+      "method": "POST",
+      "path": "/wrk2-api/post/compose",
+      "source": "compose/scenario/compose-post.tracetest.yaml#doc=1"
+    }
+  ],
+  "trace_sources": [
+    {
+      "adapter_required": true,
+      "bering_input": "normalized_spans",
+      "collection": "Jaeger /api/traces for the selected services, scenario, and collection window",
+      "evidence": [
+        {
+          "source": "compose/docker-compose.yaml"
+        }
+      ],
+      "system": "jaeger"
+    }
+  ]
+}

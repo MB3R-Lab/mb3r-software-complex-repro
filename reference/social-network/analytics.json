@@ -1,0 +1,416 @@
+{
+  "bering": {
+    "async_edges": 0,
+    "confidence": 1,
+    "edges": 19,
+    "endpoints": 4,
+    "services": 12
+  },
+  "case": "social-network",
+  "legacy_contextual_comparison": {
+    "deltas": {
+      "endpoints": {
+        "compose-post": -0.0008099999999999982,
+        "home-timeline": 0.0029000000000000137,
+        "user-timeline": 0.005070000000000019
+      },
+      "max_absolute_delta": 0.005070000000000019,
+      "tolerance": 0.015,
+      "weighted_aggregate": 0.003180000000000016,
+      "within_tolerance": true
+    },
+    "reference": {
+      "description": "Archived Social Network fixed-slot result retained as contextual comparison; the reproduction does not execute the earlier scripts.",
+      "endpoints": {
+        "compose-post": 0.02326,
+        "home-timeline": 0.2822,
+        "user-timeline": 0.43688
+      },
+      "failure_probability": 0.30,
+      "sampling_mode": "fixed_k_replica_slots",
+      "secondary_python_reference": {
+        "endpoints": {
+          "compose-post": 0.02371,
+          "home-timeline": 0.28398,
+          "user-timeline": 0.43882
+        },
+        "sampling_mode": "independent_replica",
+        "trials": 500000,
+        "weighted_aggregate": 0.3044
+      },
+      "seed": 16,
+      "trials": 50000,
+      "weighted_aggregate": 0.30271
+    }
+  },
+  "procrustes": {
+    "blockers": 0,
+    "capability_status_counts": {
+      "EXPECTED": 4
+    },
+    "goal_status": "EXPECTED",
+    "remediation_items": 0,
+    "services_assessed": 2
+  },
+  "schema_version": "1.0.0",
+  "sheaft": {
+    "endpoint_results": [
+      {
+        "availability": 0.02245,
+        "endpoint_id": "compose-post",
+        "profile": "archived-p30",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.96755
+      },
+      {
+        "availability": 0.2851,
+        "endpoint_id": "home-timeline",
+        "profile": "archived-p30",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.7049
+      },
+      {
+        "availability": 0.66215,
+        "endpoint_id": "nginx-web-server:POST /wrk2-api/post/compose",
+        "profile": "archived-p30",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.32785
+      },
+      {
+        "availability": 0.44195,
+        "endpoint_id": "user-timeline",
+        "profile": "archived-p30",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.5480499999999999
+      }
+    ],
+    "summary": {
+      "confidence": 1,
+      "cross_profile_availability": 0.3529125,
+      "cross_profile_weighted_availability": 0.30589,
+      "overall_availability": 0.3529125,
+      "risk_score": 0.69411,
+      "weighted_overall_availability": 0.30589
+    },
+    "sweeps": [
+      {
+        "axis_type": "independent_replica_failure_probability",
+        "base_profile": "archived-p30",
+        "boundaries": [
+          {
+            "certification_status": "certified",
+            "certified_tolerance": {
+              "availability": 1,
+              "axis_value": 0,
+              "confidence_lower_bound": 0.9998079639438954,
+              "confidence_upper_bound": 0.9999999999999999
+            },
+            "confidence_level": 0.95,
+            "crossing_bracket": {
+              "lower_axis_value": 0,
+              "upper_axis_value": 0.1
+            },
+            "endpoint_id": "compose-post",
+            "first_violating_slo": {
+              "availability": 0.4805,
+              "axis_value": 0.1,
+              "confidence_lower_bound": 0.473580161357844,
+              "confidence_upper_bound": 0.4874273280483441
+            },
+            "last_meeting_slo": {
+              "availability": 1,
+              "axis_value": 0,
+              "confidence_lower_bound": 0.9998079639438954,
+              "confidence_upper_bound": 0.9999999999999999
+            },
+            "observed_monotonic": true,
+            "slo": 0.5,
+            "status": "crossed"
+          },
+          {
+            "certification_status": "certified",
+            "certified_tolerance": {
+              "availability": 0.7297,
+              "axis_value": 0.1,
+              "confidence_lower_bound": 0.7235013189752331,
+              "confidence_upper_bound": 0.7358104596605926
+            },
+            "confidence_level": 0.95,
+            "crossing_bracket": {
+              "lower_axis_value": 0.1,
+              "upper_axis_value": 0.3
+            },
+            "endpoint_id": "home-timeline",
+            "first_violating_slo": {
+              "availability": 0.33675,
+              "axis_value": 0.3,
+              "confidence_lower_bound": 0.3302321416953891,
+              "confidence_upper_bound": 0.3433305580769291
+            },
+            "last_meeting_slo": {
+              "availability": 0.7297,
+              "axis_value": 0.1,
+              "confidence_lower_bound": 0.7235013189752331,
+              "confidence_upper_bound": 0.7358104596605926
+            },
+            "observed_monotonic": true,
+            "slo": 0.5,
+            "status": "crossed"
+          },
+          {
+            "certification_status": "certified",
+            "certified_tolerance": {
+              "availability": 0.80775,
+              "axis_value": 0.1,
+              "confidence_lower_bound": 0.8022296959219176,
+              "confidence_upper_bound": 0.8131521058855499
+            },
+            "confidence_level": 0.95,
+            "crossing_bracket": {
+              "lower_axis_value": 0.1,
+              "upper_axis_value": 0.3
+            },
+            "endpoint_id": "user-timeline",
+            "first_violating_slo": {
+              "availability": 0.476,
+              "axis_value": 0.3,
+              "confidence_lower_bound": 0.46908374024215477,
+              "confidence_upper_bound": 0.48292547748853826
+            },
+            "last_meeting_slo": {
+              "availability": 0.80775,
+              "axis_value": 0.1,
+              "confidence_lower_bound": 0.8022296959219176,
+              "confidence_upper_bound": 0.8131521058855499
+            },
+            "observed_monotonic": true,
+            "slo": 0.5,
+            "status": "crossed"
+          }
+        ],
+        "confidence_level": 0.95,
+        "fingerprint": "sha256:99b4216dd2efaca242cab1ebb855d05313db95b246c961206ce2dbad54877a23",
+        "name": "social-endpoint-failure-curves",
+        "points": [
+          {
+            "axis_value": 0,
+            "endpoint_availability": {
+              "compose-post": 1,
+              "home-timeline": 1,
+              "user-timeline": 1
+            },
+            "endpoint_confidence": {
+              "compose-post": {
+                "confidence_level": 0.95,
+                "estimate": 1,
+                "lower_bound": 0.9998079639438954,
+                "successes": 20000,
+                "trials": 20000,
+                "upper_bound": 0.9999999999999999
+              },
+              "home-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 1,
+                "lower_bound": 0.9998079639438954,
+                "successes": 20000,
+                "trials": 20000,
+                "upper_bound": 0.9999999999999999
+              },
+              "user-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 1,
+                "lower_bound": 0.9998079639438954,
+                "successes": 20000,
+                "trials": 20000,
+                "upper_bound": 0.9999999999999999
+              }
+            },
+            "failure_probability": 0
+          },
+          {
+            "axis_value": 0.1,
+            "endpoint_availability": {
+              "compose-post": 0.4805,
+              "home-timeline": 0.7297,
+              "user-timeline": 0.80775
+            },
+            "endpoint_confidence": {
+              "compose-post": {
+                "confidence_level": 0.95,
+                "estimate": 0.4805,
+                "lower_bound": 0.473580161357844,
+                "successes": 9610,
+                "trials": 20000,
+                "upper_bound": 0.4874273280483441
+              },
+              "home-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 0.7297,
+                "lower_bound": 0.7235013189752331,
+                "successes": 14594,
+                "trials": 20000,
+                "upper_bound": 0.7358104596605926
+              },
+              "user-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 0.80775,
+                "lower_bound": 0.8022296959219176,
+                "successes": 16155,
+                "trials": 20000,
+                "upper_bound": 0.8131521058855499
+              }
+            },
+            "failure_probability": 0.1
+          },
+          {
+            "axis_value": 0.3,
+            "endpoint_availability": {
+              "compose-post": 0.07515,
+              "home-timeline": 0.33675,
+              "user-timeline": 0.476
+            },
+            "endpoint_confidence": {
+              "compose-post": {
+                "confidence_level": 0.95,
+                "estimate": 0.07515,
+                "lower_bound": 0.0715773235245355,
+                "successes": 1503,
+                "trials": 20000,
+                "upper_bound": 0.0788858495123366
+              },
+              "home-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 0.33675,
+                "lower_bound": 0.3302321416953891,
+                "successes": 6735,
+                "trials": 20000,
+                "upper_bound": 0.3433305580769291
+              },
+              "user-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 0.476,
+                "lower_bound": 0.46908374024215477,
+                "successes": 9520,
+                "trials": 20000,
+                "upper_bound": 0.48292547748853826
+              }
+            },
+            "failure_probability": 0.3
+          },
+          {
+            "axis_value": 0.5,
+            "endpoint_availability": {
+              "compose-post": 0.00495,
+              "home-timeline": 0.1112,
+              "user-timeline": 0.21935
+            },
+            "endpoint_confidence": {
+              "compose-post": {
+                "confidence_level": 0.95,
+                "estimate": 0.00495,
+                "lower_bound": 0.004067872006368984,
+                "successes": 99,
+                "trials": 20000,
+                "upper_bound": 0.006022262892780206
+              },
+              "home-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 0.1112,
+                "lower_bound": 0.10691744274227723,
+                "successes": 2224,
+                "trials": 20000,
+                "upper_bound": 0.11563188449494972
+              },
+              "user-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 0.21935,
+                "lower_bound": 0.21366923628674156,
+                "successes": 4387,
+                "trials": 20000,
+                "upper_bound": 0.22513855355154988
+              }
+            },
+            "failure_probability": 0.5
+          },
+          {
+            "axis_value": 0.7,
+            "endpoint_availability": {
+              "compose-post": 0.00015,
+              "home-timeline": 0.01725,
+              "user-timeline": 0.0561
+            },
+            "endpoint_confidence": {
+              "compose-post": {
+                "confidence_level": 0.95,
+                "estimate": 0.00015,
+                "lower_bound": 0.00005101481799495061,
+                "successes": 3,
+                "trials": 20000,
+                "upper_bound": 0.0004409636272928434
+              },
+              "home-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 0.01725,
+                "lower_bound": 0.015536030689601917,
+                "successes": 345,
+                "trials": 20000,
+                "upper_bound": 0.019149380122567096
+              },
+              "user-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 0.0561,
+                "lower_bound": 0.05299524298270851,
+                "successes": 1122,
+                "trials": 20000,
+                "upper_bound": 0.05937524662790117
+              }
+            },
+            "failure_probability": 0.7
+          },
+          {
+            "axis_value": 0.9,
+            "endpoint_availability": {
+              "compose-post": 0,
+              "home-timeline": 0.00015,
+              "user-timeline": 0.0024
+            },
+            "endpoint_confidence": {
+              "compose-post": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 20000,
+                "upper_bound": 0.0001920360561046254
+              },
+              "home-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 0.00015,
+                "lower_bound": 0.00005101481799495061,
+                "successes": 3,
+                "trials": 20000,
+                "upper_bound": 0.0004409636272928434
+              },
+              "user-timeline": {
+                "confidence_level": 0.95,
+                "estimate": 0.0024,
+                "lower_bound": 0.0018107859576445631,
+                "successes": 48,
+                "trials": 20000,
+                "upper_bound": 0.00318032832539076
+              }
+            },
+            "failure_probability": 0.9
+          }
+        ],
+        "seed": -8217457401459344873,
+        "total_replica_slots": 22,
+        "trials": 20000
+      }
+    ]
+  }
+}

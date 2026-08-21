@@ -1,0 +1,188 @@
+{
+  "bering": {
+    "async_edges": 3,
+    "confidence": 1,
+    "edges": 23,
+    "endpoints": 1,
+    "services": 16
+  },
+  "case": "otel-demo",
+  "procrustes": {
+    "blockers": 0,
+    "capability_status_counts": {
+      "EXPECTED": 4
+    },
+    "goal_status": "EXPECTED",
+    "remediation_items": 0,
+    "services_assessed": 2
+  },
+  "schema_version": "1.0.0",
+  "sheaft": {
+    "endpoint_results": [
+      {
+        "availability": 0.49272,
+        "endpoint_id": "frontend:POST /api/checkout",
+        "profile": "archived-p30",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.49728
+      }
+    ],
+    "summary": {
+      "confidence": 1,
+      "cross_profile_availability": 0.49272,
+      "cross_profile_weighted_availability": 0.49272,
+      "overall_availability": 0.49272,
+      "risk_score": 0.50728,
+      "weighted_overall_availability": 0.49272
+    },
+    "sweeps": [
+      {
+        "axis_type": "independent_replica_failure_probability",
+        "base_profile": "archived-p30",
+        "boundaries": [
+          {
+            "certification_status": "certified",
+            "certified_tolerance": {
+              "availability": 0.80748,
+              "axis_value": 0.1,
+              "confidence_lower_bound": 0.8040004847619648,
+              "confidence_upper_bound": 0.8109122719973669
+            },
+            "confidence_level": 0.95,
+            "crossing_bracket": {
+              "lower_axis_value": 0.1,
+              "upper_axis_value": 0.3
+            },
+            "endpoint_id": "frontend:POST /api/checkout",
+            "first_violating_slo": {
+              "availability": 0.48528,
+              "axis_value": 0.3,
+              "confidence_lower_bound": 0.48090058591005946,
+              "confidence_upper_bound": 0.48966167576713127
+            },
+            "last_meeting_slo": {
+              "availability": 0.80748,
+              "axis_value": 0.1,
+              "confidence_lower_bound": 0.8040004847619648,
+              "confidence_upper_bound": 0.8109122719973669
+            },
+            "observed_monotonic": true,
+            "slo": 0.5,
+            "status": "crossed"
+          }
+        ],
+        "confidence_level": 0.95,
+        "fingerprint": "sha256:c86c3d4a88de20f5ac9dfdb38add3df2c52a7a6d07001c3fadbb983be1f4a445",
+        "name": "checkout-failure-curve",
+        "points": [
+          {
+            "axis_value": 0,
+            "endpoint_availability": {
+              "frontend:POST /api/checkout": 1
+            },
+            "endpoint_confidence": {
+              "frontend:POST /api/checkout": {
+                "confidence_level": 0.95,
+                "estimate": 1,
+                "lower_bound": 0.9999231767258548,
+                "successes": 50000,
+                "trials": 50000,
+                "upper_bound": 0.9999999999999999
+              }
+            },
+            "failure_probability": 0
+          },
+          {
+            "axis_value": 0.1,
+            "endpoint_availability": {
+              "frontend:POST /api/checkout": 0.80748
+            },
+            "endpoint_confidence": {
+              "frontend:POST /api/checkout": {
+                "confidence_level": 0.95,
+                "estimate": 0.80748,
+                "lower_bound": 0.8040004847619648,
+                "successes": 40374,
+                "trials": 50000,
+                "upper_bound": 0.8109122719973669
+              }
+            },
+            "failure_probability": 0.1
+          },
+          {
+            "axis_value": 0.3,
+            "endpoint_availability": {
+              "frontend:POST /api/checkout": 0.48528
+            },
+            "endpoint_confidence": {
+              "frontend:POST /api/checkout": {
+                "confidence_level": 0.95,
+                "estimate": 0.48528,
+                "lower_bound": 0.48090058591005946,
+                "successes": 24264,
+                "trials": 50000,
+                "upper_bound": 0.48966167576713127
+              }
+            },
+            "failure_probability": 0.3
+          },
+          {
+            "axis_value": 0.5,
+            "endpoint_availability": {
+              "frontend:POST /api/checkout": 0.24742
+            },
+            "endpoint_confidence": {
+              "frontend:POST /api/checkout": {
+                "confidence_level": 0.95,
+                "estimate": 0.24742,
+                "lower_bound": 0.24365719209988657,
+                "successes": 12371,
+                "trials": 50000,
+                "upper_bound": 0.2512216159452805
+              }
+            },
+            "failure_probability": 0.5
+          },
+          {
+            "axis_value": 0.7,
+            "endpoint_availability": {
+              "frontend:POST /api/checkout": 0.08908
+            },
+            "endpoint_confidence": {
+              "frontend:POST /api/checkout": {
+                "confidence_level": 0.95,
+                "estimate": 0.08908,
+                "lower_bound": 0.08661460962909708,
+                "successes": 4454,
+                "trials": 50000,
+                "upper_bound": 0.09160852681052627
+              }
+            },
+            "failure_probability": 0.7
+          },
+          {
+            "axis_value": 0.9,
+            "endpoint_availability": {
+              "frontend:POST /api/checkout": 0.00936
+            },
+            "endpoint_confidence": {
+              "frontend:POST /api/checkout": {
+                "confidence_level": 0.95,
+                "estimate": 0.00936,
+                "lower_bound": 0.00855285168703331,
+                "successes": 468,
+                "trials": 50000,
+                "upper_bound": 0.010242533455419695
+              }
+            },
+            "failure_probability": 0.9
+          }
+        ],
+        "seed": -2312467213180897557,
+        "total_replica_slots": 16,
+        "trials": 50000
+      }
+    ]
+  }
+}

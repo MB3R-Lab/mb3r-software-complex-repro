@@ -1,0 +1,75 @@
+name: Reproduce software-complex results
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out reproduction repository
+        uses: actions/checkout@v4
+        with:
+          path: reproduction
+
+      - name: Read toolchain lock
+        id: lock
+        working-directory: reproduction
+        shell: bash
+        run: |
+          echo "procrustes_commit=$(jq -r '.components.procrustes.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "bering_commit=$(jq -r '.components.bering.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "sheaft_commit=$(jq -r '.components.sheaft.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Check out Procrustes
+        uses: actions/checkout@v4
+        with:
+          repository: MB3R-Lab/Procrustes
+          ref: ${{ steps.lock.outputs.procrustes_commit }}
+          path: toolchain/Procrustes
+
+      - name: Check out Bering
+        uses: actions/checkout@v4
+        with:
+          repository: MB3R-Lab/Bering
+          ref: ${{ steps.lock.outputs.bering_commit }}
+          path: toolchain/Bering
+
+      - name: Check out Sheaft
+        uses: actions/checkout@v4
+        with:
+          repository: MB3R-Lab/Sheaft
+          ref: ${{ steps.lock.outputs.sheaft_commit }}
+          path: toolchain/Sheaft
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.26.2
+          cache-dependency-path: |
+            toolchain/Procrustes/go.sum
+            toolchain/Bering/go.sum
+            toolchain/Sheaft/go.sum
+
+      - name: Reproduce and verify references
+        working-directory: reproduction
+        env:
+          PROCRUSTES_REPO: ${{ github.workspace }}/toolchain/Procrustes
+          BERING_REPO: ${{ github.workspace }}/toolchain/Bering
+          SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
+        run: make reproduce-paper
+
+      - name: Upload generated outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: software-complex-reproduction-${{ github.sha }}
+          path: reproduction/.tmp/paper-reproduction/work
+          if-no-files-found: warn
+          retention-days: 14

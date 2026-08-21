@@ -1,0 +1,287 @@
+{
+  "edges": [
+    {
+      "blocking": true,
+      "from": "ad",
+      "id": "ad|flagd|sync|true",
+      "kind": "sync",
+      "to": "flagd"
+    },
+    {
+      "blocking": true,
+      "from": "cart",
+      "id": "cart|flagd|sync|true",
+      "kind": "sync",
+      "to": "flagd"
+    },
+    {
+      "blocking": true,
+      "from": "checkout",
+      "id": "checkout|cart|sync|true",
+      "kind": "sync",
+      "to": "cart"
+    },
+    {
+      "blocking": true,
+      "from": "checkout",
+      "id": "checkout|currency|sync|true",
+      "kind": "sync",
+      "to": "currency"
+    },
+    {
+      "blocking": true,
+      "from": "checkout",
+      "id": "checkout|email|sync|true",
+      "kind": "sync",
+      "to": "email"
+    },
+    {
+      "blocking": false,
+      "from": "checkout",
+      "id": "checkout|kafka|async|false",
+      "kind": "async",
+      "to": "kafka"
+    },
+    {
+      "blocking": true,
+      "from": "checkout",
+      "id": "checkout|payment|sync|true",
+      "kind": "sync",
+      "to": "payment"
+    },
+    {
+      "blocking": true,
+      "from": "checkout",
+      "id": "checkout|product-catalog|sync|true",
+      "kind": "sync",
+      "to": "product-catalog"
+    },
+    {
+      "blocking": true,
+      "from": "checkout",
+      "id": "checkout|shipping|sync|true",
+      "kind": "sync",
+      "to": "shipping"
+    },
+    {
+      "blocking": true,
+      "from": "fraud-detection",
+      "id": "fraud-detection|flagd|sync|true",
+      "kind": "sync",
+      "to": "flagd"
+    },
+    {
+      "blocking": true,
+      "from": "frontend",
+      "id": "frontend|ad|sync|true",
+      "kind": "sync",
+      "to": "ad"
+    },
+    {
+      "blocking": true,
+      "from": "frontend",
+      "id": "frontend|cart|sync|true",
+      "kind": "sync",
+      "to": "cart"
+    },
+    {
+      "blocking": true,
+      "from": "frontend",
+      "id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+      "identity": {
+        "operation": "POST",
+        "protocol": "http",
+        "route": "/api/checkout"
+      },
+      "kind": "sync",
+      "to": "checkout"
+    },
+    {
+      "blocking": true,
+      "from": "frontend",
+      "id": "frontend|product-catalog|sync|true",
+      "kind": "sync",
+      "to": "product-catalog"
+    },
+    {
+      "blocking": true,
+      "from": "frontend",
+      "id": "frontend|product-reviews|sync|true",
+      "kind": "sync",
+      "to": "product-reviews"
+    },
+    {
+      "blocking": true,
+      "from": "frontend",
+      "id": "frontend|recommendation|sync|true",
+      "kind": "sync",
+      "to": "recommendation"
+    },
+    {
+      "blocking": false,
+      "from": "kafka",
+      "id": "kafka|accounting|async|false",
+      "kind": "async",
+      "to": "accounting"
+    },
+    {
+      "blocking": false,
+      "from": "kafka",
+      "id": "kafka|fraud-detection|async|false",
+      "kind": "async",
+      "to": "fraud-detection"
+    },
+    {
+      "blocking": true,
+      "from": "payment",
+      "id": "payment|flagd|sync|true",
+      "kind": "sync",
+      "to": "flagd"
+    },
+    {
+      "blocking": true,
+      "from": "product-reviews",
+      "id": "product-reviews|flagd|sync|true",
+      "kind": "sync",
+      "to": "flagd"
+    },
+    {
+      "blocking": true,
+      "from": "recommendation",
+      "id": "recommendation|flagd|sync|true",
+      "kind": "sync",
+      "to": "flagd"
+    },
+    {
+      "blocking": true,
+      "from": "recommendation",
+      "id": "recommendation|product-catalog|sync|true",
+      "kind": "sync",
+      "to": "product-catalog"
+    },
+    {
+      "blocking": true,
+      "from": "shipping",
+      "id": "shipping|quote|sync|true",
+      "kind": "sync",
+      "to": "quote"
+    }
+  ],
+  "endpoints": [
+    {
+      "entry_service": "frontend",
+      "id": "frontend:POST /api/checkout",
+      "metadata": {
+        "semantics": {
+          "confidence": 1,
+          "dependency_modes": [
+            "sync"
+          ],
+          "mandatory_targets": [
+            "checkout"
+          ],
+          "predicate_mode": "immediate_response",
+          "source": "procrustes"
+        },
+        "weight": 1
+      },
+      "method": "POST",
+      "path": "/api/checkout",
+      "success_predicate_ref": "otel-demo.checkout.immediate"
+    }
+  ],
+  "metadata": {
+    "confidence": 1,
+    "discovered_at": "2026-08-21T00:00:00Z",
+    "schema": {
+      "digest": "sha256:2aa8a3550a25dc626ba6d2f5833569efca2f382b9e5c9c3405be93695d7d48ae",
+      "name": "io.mb3r.bering.model",
+      "uri": "https://mb3r-lab.github.io/Bering/schema/model/v1.3.0/model.schema.json",
+      "version": "1.3.0"
+    },
+    "source_ref": "bering://discover?input=C%3A%2FUsers%2Faakra%2FDesktop%2F%D1%81%D1%82%D0%B0%D1%80%D1%82%D0%B0%D0%BF%2Fsheaft%2Fmb3r-stack%2Fmb3r-stack%2Fresearch%2Fsoftware-complex-paper%2Fcases%2Fotel-demo%2Ftopology-api.yaml",
+    "source_type": "bering"
+  },
+  "services": [
+    {
+      "id": "accounting",
+      "name": "accounting",
+      "replicas": 1
+    },
+    {
+      "id": "ad",
+      "name": "ad",
+      "replicas": 1
+    },
+    {
+      "id": "cart",
+      "name": "cart",
+      "replicas": 1
+    },
+    {
+      "id": "checkout",
+      "name": "checkout",
+      "replicas": 1
+    },
+    {
+      "id": "currency",
+      "name": "currency",
+      "replicas": 1
+    },
+    {
+      "id": "email",
+      "name": "email",
+      "replicas": 1
+    },
+    {
+      "id": "flagd",
+      "name": "flagd",
+      "replicas": 1
+    },
+    {
+      "id": "fraud-detection",
+      "name": "fraud-detection",
+      "replicas": 1
+    },
+    {
+      "id": "frontend",
+      "name": "frontend",
+      "replicas": 1
+    },
+    {
+      "id": "kafka",
+      "name": "kafka",
+      "replicas": 1
+    },
+    {
+      "id": "payment",
+      "name": "payment",
+      "replicas": 1
+    },
+    {
+      "id": "product-catalog",
+      "name": "product-catalog",
+      "replicas": 1
+    },
+    {
+      "id": "product-reviews",
+      "name": "product-reviews",
+      "replicas": 1
+    },
+    {
+      "id": "quote",
+      "name": "quote",
+      "replicas": 1
+    },
+    {
+      "id": "recommendation",
+      "name": "recommendation",
+      "replicas": 1
+    },
+    {
+      "id": "shipping",
+      "name": "shipping",
+      "replicas": 1
+    }
+  ]
+}

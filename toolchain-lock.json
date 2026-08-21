@@ -1,0 +1,29 @@
+{
+  "$schema": "schemas/toolchain-lock.schema.json",
+  "schema_version": "1.0.0",
+  "toolchain": {
+    "name": "mb3r-software-complex",
+    "version": "1.2.0",
+    "status": "candidate",
+    "mb3r_stack_manifest": "https://github.com/MB3R-Lab/mb3r-stack/blob/main/compat/stack-manifest.json"
+  },
+  "components": {
+    "procrustes": {
+      "version": "0.1.0",
+      "repository": "MB3R-Lab/Procrustes",
+      "source": {"commit": "378f35f242f25fda7392646bfbba66312b669144"}
+    },
+    "bering": {
+      "version": "1.0.0",
+      "repository": "MB3R-Lab/Bering",
+      "source": {"commit": "86db92066a5284d52b87a1000af0a0ea7e925a91"},
+      "image_digest": "sha256:1da482d2629f695e0109525fb9c27e1fd8c502da85af4bbae95ddb176969c3d5"
+    },
+    "sheaft": {
+      "version": "1.2.0",
+      "repository": "MB3R-Lab/Sheaft",
+      "source": {"commit": "49df640448f3bdb4aaa071b636a7d96f66e9ccf4"},
+      "image_digest": "sha256:4968e8dca4cffc2834b94ee7d9298beff716c3b83bb8ba940ce6df0482fa5809"
+    }
+  }
+}

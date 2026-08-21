@@ -1,0 +1,340 @@
+{
+  "capabilities": [
+    {
+      "basis": [
+        "service.checkout.workload",
+        "service.frontend.workload"
+      ],
+      "id": "service_inventory",
+      "status": "EXPECTED"
+    },
+    {
+      "basis": [
+        "service.checkout.exporter",
+        "service.checkout.identity",
+        "service.checkout.instrumentation",
+        "service.checkout.propagation",
+        "service.checkout.workload",
+        "service.frontend.exporter",
+        "service.frontend.identity",
+        "service.frontend.instrumentation",
+        "service.frontend.propagation",
+        "service.frontend.workload"
+      ],
+      "id": "candidate_topology",
+      "limitations": [
+        "OpenTelemetry runtime configuration is declared; SDK presence remains a runtime assumption"
+      ],
+      "status": "EXPECTED"
+    },
+    {
+      "basis": [
+        "operation.entrypoint",
+        "operation.scenario",
+        "service.checkout.exporter",
+        "service.checkout.identity",
+        "service.checkout.instrumentation",
+        "service.checkout.propagation",
+        "service.checkout.workload",
+        "service.frontend.exporter",
+        "service.frontend.identity",
+        "service.frontend.instrumentation",
+        "service.frontend.propagation",
+        "service.frontend.workload"
+      ],
+      "id": "operation_specific_model",
+      "limitations": [
+        "OpenTelemetry runtime configuration is declared; SDK presence remains a runtime assumption"
+      ],
+      "status": "EXPECTED"
+    },
+    {
+      "basis": [
+        "operation.entrypoint",
+        "operation.scenario",
+        "service.checkout.exporter",
+        "service.checkout.identity",
+        "service.checkout.instrumentation",
+        "service.checkout.propagation",
+        "service.checkout.replicas",
+        "service.checkout.workload",
+        "service.frontend.exporter",
+        "service.frontend.identity",
+        "service.frontend.instrumentation",
+        "service.frontend.propagation",
+        "service.frontend.replicas",
+        "service.frontend.workload"
+      ],
+      "id": "replica_aware_model",
+      "limitations": [
+        "OpenTelemetry runtime configuration is declared; SDK presence remains a runtime assumption"
+      ],
+      "status": "EXPECTED"
+    }
+  ],
+  "collection_plan": {
+    "bering_overlay": "bering.overlay.yaml",
+    "contract": {
+      "name": "io.mb3r.procrustes.collection-plan",
+      "version": "0.1.0"
+    },
+    "expected_services": [
+      "checkout",
+      "frontend"
+    ],
+    "known_limitations": [
+      "DECLARED instrumentation and propagation remain runtime assumptions until matching traces are observed.",
+      "Procrustes evaluates static eligibility only; Bering must validate runtime evidence, coverage, and signal quality."
+    ],
+    "operation": {
+      "entry_service": "frontend",
+      "id": "otel-demo-checkout",
+      "mandatory_targets": [
+        "checkout"
+      ],
+      "method": "POST",
+      "path": "/api/checkout",
+      "scenario_ref": "checkout.tracetest.yaml"
+    },
+    "recommended_resource_attributes": [
+      "deployment.environment.name",
+      "service.namespace",
+      "service.version"
+    ],
+    "required_resource_attributes": [
+      "service.name"
+    ],
+    "scenarios": [
+      {
+        "id": "otel-demo-checkout",
+        "method": "POST",
+        "path": "/api/checkout",
+        "source": "paper/checkout.tracetest.yaml#doc=1"
+      }
+    ]
+  },
+  "contract": {
+    "name": "io.mb3r.procrustes.report",
+    "version": "0.1.0"
+  },
+  "fingerprint": "sha256:8c2dcf0af8803299aba1e5d20b80361fb594e7e8d765c6ecfab0b59f18069f8e",
+  "goal": {
+    "contract": {
+      "name": "io.mb3r.procrustes.goal",
+      "version": "0.1.0"
+    },
+    "operation": {
+      "entry_service": "frontend",
+      "id": "otel-demo-checkout",
+      "mandatory_targets": [
+        "checkout"
+      ],
+      "method": "POST",
+      "path": "/api/checkout",
+      "scenario_ref": "checkout.tracetest.yaml"
+    },
+    "scope": {
+      "namespaces": [
+        "default"
+      ],
+      "services": [
+        "checkout",
+        "frontend"
+      ]
+    }
+  },
+  "goal_status": "EXPECTED",
+  "limitations": [
+    "DECLARED instrumentation and propagation remain runtime assumptions until matching traces are observed.",
+    "Procrustes evaluates static eligibility only; Bering must validate runtime evidence, coverage, and signal quality."
+  ],
+  "operation_facts": [
+    {
+      "evidence": [
+        {
+          "field": ".spec.template.spec.containers",
+          "source": "paper/manifests.yaml#doc=5"
+        }
+      ],
+      "id": "operation.entrypoint",
+      "message": "The operation entry service is exposed by a matching deployment service",
+      "status": "CONFIRMED",
+      "value": "frontend"
+    },
+    {
+      "evidence": [
+        {
+          "field": ".spec.trigger.httpRequest",
+          "source": "paper/checkout.tracetest.yaml#doc=1"
+        }
+      ],
+      "id": "operation.scenario",
+      "message": "At least one reproducible Tracetest HTTP scenario matches the operation",
+      "status": "CONFIRMED",
+      "value": "paper/checkout.tracetest.yaml#doc=1"
+    }
+  ],
+  "services": [
+    {
+      "container": "checkout",
+      "exporter": {
+        "evidence": [
+          {
+            "field": ".spec.template.spec.containers[].env[OTEL_EXPORTER_OTLP_ENDPOINT]",
+            "source": "paper/manifests.yaml#doc=6"
+          }
+        ],
+        "id": "service.checkout.exporter",
+        "message": "Trace exporter resolves to a Kubernetes service and a Collector traces pipeline is present",
+        "status": "CONFIRMED",
+        "value": "http://otel-collector:4317"
+      },
+      "id": "checkout",
+      "identity": {
+        "evidence": [
+          {
+            "field": ".spec.template.spec.containers[].env[OTEL_SERVICE_NAME]",
+            "source": "paper/manifests.yaml#doc=6"
+          }
+        ],
+        "id": "service.checkout.identity",
+        "message": "OpenTelemetry service identity is resolved",
+        "status": "CONFIRMED",
+        "value": "checkout"
+      },
+      "image": "ghcr.io/open-telemetry/demo:2.0.2-checkout",
+      "instrumentation": {
+        "evidence": [
+          {
+            "source": "paper/manifests.yaml#doc=6"
+          }
+        ],
+        "id": "service.checkout.instrumentation",
+        "message": "OpenTelemetry runtime configuration is declared; SDK presence remains a runtime assumption",
+        "status": "DECLARED"
+      },
+      "namespace": "default",
+      "propagation": {
+        "evidence": [
+          {
+            "field": ".spec.template.spec.containers[].env[OTEL_PROPAGATORS]",
+            "source": "paper/manifests.yaml#doc=6"
+          }
+        ],
+        "id": "service.checkout.propagation",
+        "message": "W3C trace context propagation is configured",
+        "status": "CONFIRMED",
+        "value": "tracecontext"
+      },
+      "replicas": {
+        "evidence": [
+          {
+            "field": ".spec.replicas",
+            "source": "paper/manifests.yaml#doc=6"
+          }
+        ],
+        "id": "service.checkout.replicas",
+        "message": "Replica count is resolved",
+        "status": "CONFIRMED",
+        "value": "1"
+      },
+      "version": "2.0.2-checkout",
+      "workload": "Deployment/checkout",
+      "workload_evidence": {
+        "evidence": [
+          {
+            "field": ".spec.template.spec.containers",
+            "source": "paper/manifests.yaml#doc=6"
+          }
+        ],
+        "id": "service.checkout.workload",
+        "message": "A deployable workload container is resolved",
+        "status": "CONFIRMED",
+        "value": "default/Deployment/checkout/checkout"
+      }
+    },
+    {
+      "container": "frontend",
+      "deployment_entry": "frontend",
+      "exporter": {
+        "evidence": [
+          {
+            "field": ".spec.template.spec.containers[].env[OTEL_EXPORTER_OTLP_ENDPOINT]",
+            "source": "paper/manifests.yaml#doc=5"
+          }
+        ],
+        "id": "service.frontend.exporter",
+        "message": "Trace exporter resolves to a Kubernetes service and a Collector traces pipeline is present",
+        "status": "CONFIRMED",
+        "value": "http://otel-collector:4317"
+      },
+      "id": "frontend",
+      "identity": {
+        "evidence": [
+          {
+            "field": ".spec.template.spec.containers[].env[OTEL_SERVICE_NAME]",
+            "source": "paper/manifests.yaml#doc=5"
+          }
+        ],
+        "id": "service.frontend.identity",
+        "message": "OpenTelemetry service identity is resolved",
+        "status": "CONFIRMED",
+        "value": "frontend"
+      },
+      "image": "ghcr.io/open-telemetry/demo:2.0.2-frontend",
+      "instrumentation": {
+        "evidence": [
+          {
+            "source": "paper/manifests.yaml#doc=5"
+          }
+        ],
+        "id": "service.frontend.instrumentation",
+        "message": "OpenTelemetry runtime configuration is declared; SDK presence remains a runtime assumption",
+        "status": "DECLARED"
+      },
+      "namespace": "default",
+      "propagation": {
+        "evidence": [
+          {
+            "field": ".spec.template.spec.containers[].env[OTEL_PROPAGATORS]",
+            "source": "paper/manifests.yaml#doc=5"
+          }
+        ],
+        "id": "service.frontend.propagation",
+        "message": "W3C trace context propagation is configured",
+        "status": "CONFIRMED",
+        "value": "tracecontext"
+      },
+      "replicas": {
+        "evidence": [
+          {
+            "field": ".spec.replicas",
+            "source": "paper/manifests.yaml#doc=5"
+          }
+        ],
+        "id": "service.frontend.replicas",
+        "message": "Replica count is resolved",
+        "status": "CONFIRMED",
+        "value": "1"
+      },
+      "version": "2.0.2-frontend",
+      "workload": "Deployment/frontend",
+      "workload_evidence": {
+        "evidence": [
+          {
+            "field": ".spec.template.spec.containers",
+            "source": "paper/manifests.yaml#doc=5"
+          }
+        ],
+        "id": "service.frontend.workload",
+        "message": "A deployable workload container is resolved",
+        "status": "CONFIRMED",
+        "value": "default/Deployment/frontend/frontend"
+      }
+    }
+  ],
+  "sources": [
+    "paper"
+  ],
+  "tool_version": "0.1.0"
+}

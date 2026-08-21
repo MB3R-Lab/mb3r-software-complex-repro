@@ -1,0 +1,23 @@
+schema_version: "1.2"
+seed: 2607
+trials: 50000
+endpoint_weights:
+  "frontend:POST /api/checkout": 1.0
+profiles:
+  - name: archived-p30
+    sampling_mode: independent_replica
+    failure_probability: 0.30
+sweeps:
+  - name: checkout-failure-curve
+    profile: archived-p30
+    confidence_level: 0.95
+    axis:
+      type: independent_replica_failure_probability
+      values: [0.00, 0.10, 0.30, 0.50, 0.70, 0.90]
+    targets:
+      - endpoint_id: "frontend:POST /api/checkout"
+        slo: 0.50
+gate:
+  mode: report
+  default_action: report
+  global_threshold: 0.0
