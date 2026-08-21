@@ -1,0 +1,1442 @@
+{
+  "counts": {
+    "edges": 23,
+    "endpoints": 4,
+    "services": 16
+  },
+  "coverage": {
+    "confidence": 1,
+    "edge_support_min": 1,
+    "endpoint_support_min": 1,
+    "service_support_min": 1
+  },
+  "diff": {
+    "added_edges": 23,
+    "added_endpoints": 4,
+    "added_services": 16,
+    "changed_edges": 0,
+    "changed_endpoints": 0,
+    "changed_services": 0,
+    "removed_edges": 0,
+    "removed_endpoints": 0,
+    "removed_services": 0
+  },
+  "discovery": {
+    "edges": [
+      {
+        "blocking": true,
+        "from": "ad",
+        "id": "ad|flagd|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "cart",
+        "id": "cart|flagd|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|cart|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "cart"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|currency|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "currency"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|email|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "email"
+      },
+      {
+        "blocking": false,
+        "from": "checkout",
+        "id": "checkout|kafka|async|false",
+        "kind": "async",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "kafka"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|payment|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "payment"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|product-catalog|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "product-catalog"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|shipping|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "shipping"
+      },
+      {
+        "blocking": true,
+        "from": "fraud-detection",
+        "id": "fraud-detection|flagd|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|ad|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "ad"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|cart|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "cart"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+        "identity": {
+          "operation": "POST",
+          "protocol": "http",
+          "route": "/api/checkout"
+        },
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "checkout"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|product-catalog|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "product-catalog"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|product-reviews|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "product-reviews"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|recommendation|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "recommendation"
+      },
+      {
+        "blocking": false,
+        "from": "kafka",
+        "id": "kafka|accounting|async|false",
+        "kind": "async",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "accounting"
+      },
+      {
+        "blocking": false,
+        "from": "kafka",
+        "id": "kafka|fraud-detection|async|false",
+        "kind": "async",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "fraud-detection"
+      },
+      {
+        "blocking": true,
+        "from": "payment",
+        "id": "payment|flagd|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "product-reviews",
+        "id": "product-reviews|flagd|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "recommendation",
+        "id": "recommendation|flagd|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "recommendation",
+        "id": "recommendation|product-catalog|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "product-catalog"
+      },
+      {
+        "blocking": true,
+        "from": "shipping",
+        "id": "shipping|quote|sync|true",
+        "kind": "sync",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        },
+        "to": "quote"
+      }
+    ],
+    "endpoints": [
+      {
+        "entry_service": "frontend",
+        "id": "frontend:GET /api/cart",
+        "metadata": {
+          "predicate_ref": "otel-demo.cart",
+          "semantics": {
+            "confidence": 1,
+            "dependency_modes": [
+              "sync"
+            ],
+            "mandatory_targets": [
+              "cart"
+            ],
+            "predicate_mode": "immediate_response",
+            "source": "archived-endpoint-targets"
+          },
+          "weight": 0.25
+        },
+        "method": "GET",
+        "path": "/api/cart",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "entry_service": "frontend",
+        "id": "frontend:GET /api/products",
+        "metadata": {
+          "predicate_ref": "otel-demo.products",
+          "semantics": {
+            "confidence": 1,
+            "dependency_modes": [
+              "sync"
+            ],
+            "mandatory_targets": [
+              "product-catalog"
+            ],
+            "predicate_mode": "immediate_response",
+            "source": "archived-endpoint-targets"
+          },
+          "weight": 0.25
+        },
+        "method": "GET",
+        "path": "/api/products",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "entry_service": "frontend",
+        "id": "frontend:GET /api/recommendations",
+        "metadata": {
+          "predicate_ref": "otel-demo.recommendations",
+          "semantics": {
+            "confidence": 1,
+            "dependency_modes": [
+              "sync"
+            ],
+            "mandatory_targets": [
+              "recommendation"
+            ],
+            "predicate_mode": "immediate_response",
+            "source": "archived-endpoint-targets"
+          },
+          "weight": 0.25
+        },
+        "method": "GET",
+        "path": "/api/recommendations",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "entry_service": "frontend",
+        "id": "frontend:POST /api/checkout",
+        "metadata": {
+          "predicate_ref": "otel-demo.checkout.immediate",
+          "semantics": {
+            "confidence": 1,
+            "dependency_modes": [
+              "sync"
+            ],
+            "mandatory_targets": [
+              "cart",
+              "checkout",
+              "payment",
+              "shipping"
+            ],
+            "predicate_mode": "immediate_response",
+            "source": "procrustes"
+          },
+          "weight": 0.25
+        },
+        "method": "POST",
+        "path": "/api/checkout",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          },
+          {
+            "name": "procrustes-static-context-53817d39a4ee",
+            "precedence": 1,
+            "ref": "paper://procrustes/bering.overlay.yaml",
+            "type": "overlay"
+          }
+        ],
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      }
+    ],
+    "overlays": [
+      {
+        "name": "procrustes-static-context-53817d39a4ee",
+        "precedence": 1,
+        "ref": "paper://procrustes/bering.overlay.yaml"
+      }
+    ],
+    "services": [
+      {
+        "id": "accounting",
+        "name": "accounting",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "ad",
+        "name": "ad",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "cart",
+        "metadata": {
+          "attributes": {
+            "procrustes.container": "cart",
+            "procrustes.image": "ghcr.io/open-telemetry/demo:2.0.2-cart",
+            "procrustes.service_version": "2.0.2-cart",
+            "procrustes.workload": "default/Deployment/cart"
+          },
+          "replicas_override": 1
+        },
+        "name": "cart",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          },
+          {
+            "name": "procrustes-static-context-53817d39a4ee",
+            "precedence": 1,
+            "ref": "paper://procrustes/bering.overlay.yaml",
+            "type": "overlay"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "checkout",
+        "metadata": {
+          "attributes": {
+            "procrustes.container": "checkout",
+            "procrustes.image": "ghcr.io/open-telemetry/demo:2.0.2-checkout",
+            "procrustes.service_version": "2.0.2-checkout",
+            "procrustes.workload": "default/Deployment/checkout"
+          },
+          "replicas_override": 1
+        },
+        "name": "checkout",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          },
+          {
+            "name": "procrustes-static-context-53817d39a4ee",
+            "precedence": 1,
+            "ref": "paper://procrustes/bering.overlay.yaml",
+            "type": "overlay"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "currency",
+        "name": "currency",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "email",
+        "name": "email",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "flagd",
+        "name": "flagd",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "fraud-detection",
+        "name": "fraud-detection",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "frontend",
+        "metadata": {
+          "attributes": {
+            "procrustes.container": "frontend",
+            "procrustes.image": "ghcr.io/open-telemetry/demo:2.0.2-frontend",
+            "procrustes.service_version": "2.0.2-frontend",
+            "procrustes.workload": "default/Deployment/frontend"
+          },
+          "failure_eligible": false,
+          "replicas_override": 1
+        },
+        "name": "frontend",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          },
+          {
+            "name": "procrustes-static-context-53817d39a4ee",
+            "precedence": 1,
+            "ref": "paper://procrustes/bering.overlay.yaml",
+            "type": "overlay"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "kafka",
+        "name": "kafka",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "payment",
+        "metadata": {
+          "attributes": {
+            "procrustes.container": "payment",
+            "procrustes.image": "ghcr.io/open-telemetry/demo:2.0.2-payment",
+            "procrustes.service_version": "2.0.2-payment",
+            "procrustes.workload": "default/Deployment/payment"
+          },
+          "replicas_override": 1
+        },
+        "name": "payment",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          },
+          {
+            "name": "procrustes-static-context-53817d39a4ee",
+            "precedence": 1,
+            "ref": "paper://procrustes/bering.overlay.yaml",
+            "type": "overlay"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "product-catalog",
+        "name": "product-catalog",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "product-reviews",
+        "name": "product-reviews",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "quote",
+        "name": "quote",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "recommendation",
+        "name": "recommendation",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      },
+      {
+        "id": "shipping",
+        "metadata": {
+          "attributes": {
+            "procrustes.container": "shipping",
+            "procrustes.image": "ghcr.io/open-telemetry/demo:2.0.2-shipping",
+            "procrustes.service_version": "2.0.2-shipping",
+            "procrustes.workload": "default/Deployment/shipping"
+          },
+          "replicas_override": 1
+        },
+        "name": "shipping",
+        "provenance": [
+          {
+            "connector": "topology_file",
+            "ref": "archive://otel-demo/trace-graph/async-paper",
+            "type": "topology_api"
+          },
+          {
+            "name": "procrustes-static-context-53817d39a4ee",
+            "precedence": 1,
+            "ref": "paper://procrustes/bering.overlay.yaml",
+            "type": "overlay"
+          }
+        ],
+        "replicas": 1,
+        "support": {
+          "evidence": [
+            "topology_api"
+          ],
+          "observations": 1,
+          "trace_count": 0
+        }
+      }
+    ]
+  },
+  "ingest": {
+    "dropped_spans": 0,
+    "late_spans": 0,
+    "spans": 0,
+    "traces": 0
+  },
+  "metadata": {
+    "confidence": 1,
+    "emitted_at": "2026-08-21T00:00:00Z",
+    "schema": {
+      "digest": "sha256:cb778e5b0866d9ce5cfe7f23b8d98a339603593a0247cccd9cddaf05c7ae4bb1",
+      "name": "io.mb3r.bering.snapshot",
+      "uri": "https://mb3r-lab.github.io/Bering/schema/snapshot/v1.3.0/snapshot.schema.json",
+      "version": "1.3.0"
+    },
+    "source_ref": "bering://discover?input=case://otel-demo/topology-api.yaml",
+    "source_type": "bering"
+  },
+  "model": {
+    "edges": [
+      {
+        "blocking": true,
+        "from": "ad",
+        "id": "ad|flagd|sync|true",
+        "kind": "sync",
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "cart",
+        "id": "cart|flagd|sync|true",
+        "kind": "sync",
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|cart|sync|true",
+        "kind": "sync",
+        "to": "cart"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|currency|sync|true",
+        "kind": "sync",
+        "to": "currency"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|email|sync|true",
+        "kind": "sync",
+        "to": "email"
+      },
+      {
+        "blocking": false,
+        "from": "checkout",
+        "id": "checkout|kafka|async|false",
+        "kind": "async",
+        "to": "kafka"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|payment|sync|true",
+        "kind": "sync",
+        "to": "payment"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|product-catalog|sync|true",
+        "kind": "sync",
+        "to": "product-catalog"
+      },
+      {
+        "blocking": true,
+        "from": "checkout",
+        "id": "checkout|shipping|sync|true",
+        "kind": "sync",
+        "to": "shipping"
+      },
+      {
+        "blocking": true,
+        "from": "fraud-detection",
+        "id": "fraud-detection|flagd|sync|true",
+        "kind": "sync",
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|ad|sync|true",
+        "kind": "sync",
+        "to": "ad"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|cart|sync|true",
+        "kind": "sync",
+        "to": "cart"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+        "identity": {
+          "operation": "POST",
+          "protocol": "http",
+          "route": "/api/checkout"
+        },
+        "kind": "sync",
+        "to": "checkout"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|product-catalog|sync|true",
+        "kind": "sync",
+        "to": "product-catalog"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|product-reviews|sync|true",
+        "kind": "sync",
+        "to": "product-reviews"
+      },
+      {
+        "blocking": true,
+        "from": "frontend",
+        "id": "frontend|recommendation|sync|true",
+        "kind": "sync",
+        "to": "recommendation"
+      },
+      {
+        "blocking": false,
+        "from": "kafka",
+        "id": "kafka|accounting|async|false",
+        "kind": "async",
+        "to": "accounting"
+      },
+      {
+        "blocking": false,
+        "from": "kafka",
+        "id": "kafka|fraud-detection|async|false",
+        "kind": "async",
+        "to": "fraud-detection"
+      },
+      {
+        "blocking": true,
+        "from": "payment",
+        "id": "payment|flagd|sync|true",
+        "kind": "sync",
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "product-reviews",
+        "id": "product-reviews|flagd|sync|true",
+        "kind": "sync",
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "recommendation",
+        "id": "recommendation|flagd|sync|true",
+        "kind": "sync",
+        "to": "flagd"
+      },
+      {
+        "blocking": true,
+        "from": "recommendation",
+        "id": "recommendation|product-catalog|sync|true",
+        "kind": "sync",
+        "to": "product-catalog"
+      },
+      {
+        "blocking": true,
+        "from": "shipping",
+        "id": "shipping|quote|sync|true",
+        "kind": "sync",
+        "to": "quote"
+      }
+    ],
+    "endpoints": [
+      {
+        "entry_service": "frontend",
+        "id": "frontend:GET /api/cart",
+        "metadata": {
+          "semantics": {
+            "confidence": 1,
+            "dependency_modes": [
+              "sync"
+            ],
+            "mandatory_targets": [
+              "cart"
+            ],
+            "predicate_mode": "immediate_response",
+            "source": "archived-endpoint-targets"
+          },
+          "weight": 0.25
+        },
+        "method": "GET",
+        "path": "/api/cart",
+        "success_predicate_ref": "otel-demo.cart"
+      },
+      {
+        "entry_service": "frontend",
+        "id": "frontend:GET /api/products",
+        "metadata": {
+          "semantics": {
+            "confidence": 1,
+            "dependency_modes": [
+              "sync"
+            ],
+            "mandatory_targets": [
+              "product-catalog"
+            ],
+            "predicate_mode": "immediate_response",
+            "source": "archived-endpoint-targets"
+          },
+          "weight": 0.25
+        },
+        "method": "GET",
+        "path": "/api/products",
+        "success_predicate_ref": "otel-demo.products"
+      },
+      {
+        "entry_service": "frontend",
+        "id": "frontend:GET /api/recommendations",
+        "metadata": {
+          "semantics": {
+            "confidence": 1,
+            "dependency_modes": [
+              "sync"
+            ],
+            "mandatory_targets": [
+              "recommendation"
+            ],
+            "predicate_mode": "immediate_response",
+            "source": "archived-endpoint-targets"
+          },
+          "weight": 0.25
+        },
+        "method": "GET",
+        "path": "/api/recommendations",
+        "success_predicate_ref": "otel-demo.recommendations"
+      },
+      {
+        "entry_service": "frontend",
+        "id": "frontend:POST /api/checkout",
+        "metadata": {
+          "semantics": {
+            "confidence": 1,
+            "dependency_modes": [
+              "sync"
+            ],
+            "mandatory_targets": [
+              "cart",
+              "checkout",
+              "payment",
+              "shipping"
+            ],
+            "predicate_mode": "immediate_response",
+            "source": "procrustes"
+          },
+          "weight": 0.25
+        },
+        "method": "POST",
+        "path": "/api/checkout",
+        "success_predicate_ref": "otel-demo.checkout.immediate"
+      }
+    ],
+    "metadata": {
+      "confidence": 1,
+      "discovered_at": "2026-08-21T00:00:00Z",
+      "schema": {
+        "digest": "sha256:2aa8a3550a25dc626ba6d2f5833569efca2f382b9e5c9c3405be93695d7d48ae",
+        "name": "io.mb3r.bering.model",
+        "uri": "https://mb3r-lab.github.io/Bering/schema/model/v1.3.0/model.schema.json",
+        "version": "1.3.0"
+      },
+      "source_ref": "bering://discover?input=case://otel-demo/topology-api.yaml",
+      "source_type": "bering"
+    },
+    "services": [
+      {
+        "id": "accounting",
+        "name": "accounting",
+        "replicas": 1
+      },
+      {
+        "id": "ad",
+        "name": "ad",
+        "replicas": 1
+      },
+      {
+        "id": "cart",
+        "name": "cart",
+        "replicas": 1
+      },
+      {
+        "id": "checkout",
+        "name": "checkout",
+        "replicas": 1
+      },
+      {
+        "id": "currency",
+        "name": "currency",
+        "replicas": 1
+      },
+      {
+        "id": "email",
+        "name": "email",
+        "replicas": 1
+      },
+      {
+        "id": "flagd",
+        "name": "flagd",
+        "replicas": 1
+      },
+      {
+        "id": "fraud-detection",
+        "name": "fraud-detection",
+        "replicas": 1
+      },
+      {
+        "id": "frontend",
+        "metadata": {
+          "failure_eligible": false
+        },
+        "name": "frontend",
+        "replicas": 1
+      },
+      {
+        "id": "kafka",
+        "name": "kafka",
+        "replicas": 1
+      },
+      {
+        "id": "payment",
+        "name": "payment",
+        "replicas": 1
+      },
+      {
+        "id": "product-catalog",
+        "name": "product-catalog",
+        "replicas": 1
+      },
+      {
+        "id": "product-reviews",
+        "name": "product-reviews",
+        "replicas": 1
+      },
+      {
+        "id": "quote",
+        "name": "quote",
+        "replicas": 1
+      },
+      {
+        "id": "recommendation",
+        "name": "recommendation",
+        "replicas": 1
+      },
+      {
+        "id": "shipping",
+        "name": "shipping",
+        "replicas": 1
+      }
+    ]
+  },
+  "snapshot_id": "snap-000000000000000000000000",
+  "sources": [
+    {
+      "connector": "topology_file",
+      "observations": 43,
+      "ref": "archive://otel-demo/trace-graph/async-paper",
+      "type": "topology_api"
+    }
+  ],
+  "topology_version": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "window_end": "2026-08-21T00:00:00Z",
+  "window_start": "2026-08-21T00:00:00Z"
+}

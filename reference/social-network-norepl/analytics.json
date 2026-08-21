@@ -1,0 +1,274 @@
+{
+  "bering": {
+    "async_edges": 0,
+    "confidence": 1,
+    "edges": 19,
+    "endpoints": 4,
+    "services": 12
+  },
+  "case": "social-network-norepl",
+  "family": "social-network",
+  "mode": "norepl",
+  "procrustes": {
+    "blockers": 0,
+    "capability_status_counts": {
+      "EXPECTED": 4
+    },
+    "goal_status": "EXPECTED",
+    "remediation_items": 0,
+    "services_assessed": 2
+  },
+  "publication": {
+    "artifact": {
+      "doi": "10.5281/zenodo.15332249",
+      "repository": "https://github.com/a-a-k/socialnet-resilience"
+    },
+    "doi": "10.1145/3786582.3786823",
+    "pages": "121-125",
+    "publisher": "ACM",
+    "reported_results": {
+      "metric": "aggregate_availability",
+      "rows": [
+        {
+          "failure_fraction": 0.1,
+          "live_mean": 0.5533,
+          "live_sd": 0.0031,
+          "mode": "norepl",
+          "model_mean": 0.4182,
+          "model_sd": 0.0005
+        },
+        {
+          "failure_fraction": 0.3,
+          "live_mean": 0.1775,
+          "live_sd": 0.0021,
+          "mode": "norepl",
+          "model_mean": 0.1613,
+          "model_sd": 0.0005
+        },
+        {
+          "failure_fraction": 0.5,
+          "live_mean": 0.0376,
+          "live_sd": 0.0006,
+          "mode": "norepl",
+          "model_mean": 0.0454,
+          "model_sd": 0.0002
+        },
+        {
+          "failure_fraction": 0.7,
+          "live_mean": 0.0067,
+          "live_sd": 0.0000,
+          "mode": "norepl",
+          "model_mean": 0.0014,
+          "model_sd": 0.0000
+        },
+        {
+          "failure_fraction": 0.9,
+          "live_mean": 0.0000,
+          "live_sd": 0.0000,
+          "mode": "norepl",
+          "model_mean": 0.0000,
+          "model_sd": 0.0000
+        },
+        {
+          "failure_fraction": 0.1,
+          "live_mean": 0.6969,
+          "live_sd": 0.0026,
+          "mode": "repl",
+          "model_mean": 0.6281,
+          "model_sd": 0.0005
+        },
+        {
+          "failure_fraction": 0.3,
+          "live_mean": 0.3054,
+          "live_sd": 0.0017,
+          "mode": "repl",
+          "model_mean": 0.3054,
+          "model_sd": 0.0007
+        },
+        {
+          "failure_fraction": 0.5,
+          "live_mean": 0.0958,
+          "live_sd": 0.0011,
+          "mode": "repl",
+          "model_mean": 0.1145,
+          "model_sd": 0.0004
+        },
+        {
+          "failure_fraction": 0.7,
+          "live_mean": 0.0155,
+          "live_sd": 0.0003,
+          "mode": "repl",
+          "model_mean": 0.0132,
+          "model_sd": 0.0001
+        },
+        {
+          "failure_fraction": 0.9,
+          "live_mean": 0.0000,
+          "live_sd": 0.0000,
+          "mode": "repl",
+          "model_mean": 0.0000,
+          "model_sd": 0.0000
+        }
+      ],
+      "source": "Table 1"
+    },
+    "reproduction_scope": {
+      "comparison_status": "direct_protocol_replay",
+      "note": "The workflow evaluates both published replica modes and all five failure fractions using the archived graph, endpoint predicates, workload weights, and fixed-size replica-slot failure protocol; it does not rerun live chaos rounds."
+    },
+    "schema_version": "1.0.0",
+    "title": "Model Discovery and Graph Simulation: A Lightweight Gateway to Chaos Engineering",
+    "type": "published_experiment",
+    "url": "https://doi.org/10.1145/3786582.3786823",
+    "venue": "48th IEEE/ACM International Conference on Software Engineering, New Ideas and Emerging Results (ICSE-NIER 2026)"
+  },
+  "published_comparison": {
+    "metric": "aggregate_availability",
+    "model_field": "model_mean",
+    "rows": [
+      {
+        "absolute_delta_published_live": 0.13467700000000005,
+        "absolute_delta_published_model": 0.0004229999999999512,
+        "delta_from_published_live": -0.13467700000000005,
+        "delta_from_published_model": 0.0004229999999999512,
+        "failure_fraction": 0.1,
+        "fixed_k_failures": 2,
+        "mode": "norepl",
+        "profile": "p10",
+        "published_live": 0.5533,
+        "published_live_sd": 0.0031,
+        "published_model": 0.4182,
+        "published_model_sd": 0.0005,
+        "sheaft": 0.41862299999999997,
+        "trials": 300000
+      },
+      {
+        "absolute_delta_published_live": 0.014951999999999993,
+        "absolute_delta_published_model": 0.0012479999999999991,
+        "delta_from_published_live": -0.014951999999999993,
+        "delta_from_published_model": 0.0012479999999999991,
+        "failure_fraction": 0.3,
+        "fixed_k_failures": 4,
+        "mode": "norepl",
+        "profile": "p30",
+        "published_live": 0.1775,
+        "published_live_sd": 0.0021,
+        "published_model": 0.1613,
+        "published_model_sd": 0.0005,
+        "sheaft": 0.162548,
+        "trials": 300000
+      },
+      {
+        "absolute_delta_published_live": 0.007914999999999998,
+        "absolute_delta_published_model": 0.00011499999999999705,
+        "delta_from_published_live": 0.007914999999999998,
+        "delta_from_published_model": 0.00011499999999999705,
+        "failure_fraction": 0.5,
+        "fixed_k_failures": 6,
+        "mode": "norepl",
+        "profile": "p50",
+        "published_live": 0.0376,
+        "published_live_sd": 0.0006,
+        "published_model": 0.0454,
+        "published_model_sd": 0.0002,
+        "sheaft": 0.045515,
+        "trials": 300000
+      },
+      {
+        "absolute_delta_published_live": 0.005377,
+        "absolute_delta_published_model": 0.00007700000000000003,
+        "delta_from_published_live": -0.005377,
+        "delta_from_published_model": -0.00007700000000000003,
+        "failure_fraction": 0.7,
+        "fixed_k_failures": 9,
+        "mode": "norepl",
+        "profile": "p70",
+        "published_live": 0.0067,
+        "published_live_sd": 0,
+        "published_model": 0.0014,
+        "published_model_sd": 0,
+        "sheaft": 0.001323,
+        "trials": 300000
+      },
+      {
+        "absolute_delta_published_live": 0,
+        "absolute_delta_published_model": 0,
+        "delta_from_published_live": 0,
+        "delta_from_published_model": 0,
+        "failure_fraction": 0.9,
+        "fixed_k_failures": 11,
+        "mode": "norepl",
+        "profile": "p90",
+        "published_live": 0,
+        "published_live_sd": 0,
+        "published_model": 0,
+        "published_model_sd": 0,
+        "sheaft": 0,
+        "trials": 300000
+      }
+    ],
+    "source": "Table 1",
+    "statistics": {
+      "against_published_live": {
+        "maximum_absolute_error": 0.13467700000000005,
+        "mean_absolute_error": 0.03258420000000001,
+        "mean_signed_error": -0.029418200000000005,
+        "pearson_correlation": 0.9969727007942389,
+        "root_mean_square_error": 0.06075033495710128
+      },
+      "against_published_model": {
+        "maximum_absolute_error": 0.0012479999999999991,
+        "mean_absolute_error": 0.0003725999999999895,
+        "mean_signed_error": 0.00034179999999998944,
+        "pearson_correlation": 0.9999962301318575,
+        "root_mean_square_error": 0.0005925516011285356
+      }
+    }
+  },
+  "schema_version": "1.0.0",
+  "sheaft": {
+    "endpoint_results": [
+      {
+        "availability": 0,
+        "endpoint_id": "compose-post",
+        "profile": "p10",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.99
+      },
+      {
+        "availability": 0.42407333333333336,
+        "endpoint_id": "home-timeline",
+        "profile": "p10",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.5659266666666667
+      },
+      {
+        "availability": 0.6816233333333334,
+        "endpoint_id": "nginx-web-server:POST /wrk2-api/post/compose",
+        "profile": "p10",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.30837666666666663
+      },
+      {
+        "availability": 0.5472633333333333,
+        "endpoint_id": "user-timeline",
+        "profile": "p10",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.44273666666666667
+      }
+    ],
+    "summary": {
+      "confidence": 1,
+      "cross_profile_availability": 0.1437661666666667,
+      "cross_profile_weighted_availability": 0.12560179999999999,
+      "overall_availability": 0.41324000000000005,
+      "risk_score": 0.581377,
+      "weighted_overall_availability": 0.41862299999999997
+    },
+    "sweeps": null
+  }
+}

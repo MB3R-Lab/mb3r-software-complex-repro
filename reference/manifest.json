@@ -11,35 +11,69 @@
     "canonicalize JSON object ordering and whitespace"
   ],
   "cases": {
-    "otel-demo": {
-      "analytics.json": "sha256:f15595f7c47dd42d25fa51d1652044538eca15ff9dd3ee5ee8a7cfaa839a6c36",
-      "bering/model-quality.json": "sha256:f2ceab2341ced260c69d3505954e07c1396727f181cf59e461199456a59be8b2",
-      "bering/model.json": "sha256:ec4549367dd9a4827ce1628b1bf5a1be4b2680aa41a7cf3c780be2ff087b0683",
-      "bering/snapshot-quality.json": "sha256:c3a523f47bddbb670092f621b4442b278ccc2257200003315873dea51329eb9a",
-      "bering/snapshot.json": "sha256:65df2c64e6b6a91552875a51c5b2fc6488b8a0a5dc0cc505553a585297ee1266",
-      "procrustes/bering.overlay.yaml": "sha256:2e59b812b6af1348c529e94b8698953785fa58f7000e216c0c86749187f713e7",
-      "procrustes/collection-plan.json": "sha256:7c2d53d7fa997160700a205e16f000da8749cbd619507a46ffe2b96bbfafbda1",
-      "procrustes/report.json": "sha256:e4d7bf8bda0116a683a165762c9942083e91b378725409ed6948ba783ca5137a",
-      "procrustes/summary.md": "sha256:b4879f504818f2b3af14fee75d44fba827f0e5cc3ee6d1839c1a9181cb226a02",
-      "sheaft/model.json": "sha256:ec4549367dd9a4827ce1628b1bf5a1be4b2680aa41a7cf3c780be2ff087b0683",
-      "sheaft/report.json": "sha256:1a5e67fbcba6a5a11ccd36df5d1793604f1c6a3a6da282dbb812486d1060f84f",
-      "sheaft/summary.md": "sha256:8df41518dd4d1a8b37862ce675d3d8669a7563fab5692ca65c33a77c22409bba",
-      "summary.md": "sha256:f7ef750d737eaab631a4fd1344f013335fc39e8c039b382e1dd376322035e09a"
+    "otel-demo-all-blocking": {
+      "analytics.json": "sha256:f5f0419e6e8c8744e2762f84068f8e95986efc533ce54c5babda169a18707df3",
+      "bering/model-quality.json": "sha256:6a3d35ccb710f185a70f3194a2152396115efb3f16961afac0a1e1a219ece1bc",
+      "bering/model.json": "sha256:2cf5d6172018eadaf47e190795b973ccc05fb1527acb8fa0b92f85aeda47b14a",
+      "bering/snapshot-quality.json": "sha256:938814c7ffe41d9a29dc6e7acb1426d18d1c831c581e651e7f6c9b31bfc8d168",
+      "bering/snapshot.json": "sha256:73b6bb37f68d91bcbf3169022864f332233ce65db1a6dae3a59557ce2ef62f94",
+      "procrustes/bering.overlay.yaml": "sha256:74e46d0043b7e5bc420118a1264f4d5784c2872b252e2847c7fe7b29c7127594",
+      "procrustes/collection-plan.json": "sha256:9eb679d73062254b4dd104f88cb80da564e42e0243f7af7a29b0e539a105dd75",
+      "procrustes/report.json": "sha256:fbda15506356c67360c6630dad9ed1d2d952b4f3b8e7a67f7fe0e30c2cb8796a",
+      "procrustes/summary.md": "sha256:67ade41cbfda052e68c18bde9a4bfda29ac7d6744e4361feb337bbcbfdd00109",
+      "sheaft/model.json": "sha256:2cf5d6172018eadaf47e190795b973ccc05fb1527acb8fa0b92f85aeda47b14a",
+      "sheaft/report.json": "sha256:b2977cb4b55d64d15096006907b338f1ca5ca06f387871c4555afd9d98a485ad",
+      "sheaft/summary.md": "sha256:aa5a83a092995ec32e7589b9a8ecceedbf230850a8d1242e9d92eaa5460e29c7",
+      "summary.md": "sha256:1768ec97098d6c4be4406305f14cae5cc54ef9ee530e051206d700ae1779f3e0"
     },
-    "social-network": {
-      "analytics.json": "sha256:4eca7d4cb5a26e044265487715711142ed5b148f222b85f3fbbaebfad1c4f3db",
+    "otel-demo-async": {
+      "analytics.json": "sha256:324f740b4f5e16b748ba62644b72a0221385086cdfd2ab46e8f75dde5e536252",
+      "bering/model-quality.json": "sha256:853ce8f7b0acc6fc1e8a4404ec4b0634fa0350511b18622111f83253ba8929b1",
+      "bering/model.json": "sha256:23b5bf3c6f53f7bebb1e1ca0d99f00b10a1fe89911ef5cbb962c1c7ce67e7217",
+      "bering/snapshot-quality.json": "sha256:6e4a97e6efd4fce76d0e13048a6471d85f775969409c617983f3ad00a31aa1bd",
+      "bering/snapshot.json": "sha256:16e016607cf8d20364affafc1d13137271001634dd3039ed7dfb993fba5ed8ca",
+      "procrustes/bering.overlay.yaml": "sha256:74e46d0043b7e5bc420118a1264f4d5784c2872b252e2847c7fe7b29c7127594",
+      "procrustes/collection-plan.json": "sha256:9eb679d73062254b4dd104f88cb80da564e42e0243f7af7a29b0e539a105dd75",
+      "procrustes/report.json": "sha256:fbda15506356c67360c6630dad9ed1d2d952b4f3b8e7a67f7fe0e30c2cb8796a",
+      "procrustes/summary.md": "sha256:67ade41cbfda052e68c18bde9a4bfda29ac7d6744e4361feb337bbcbfdd00109",
+      "sheaft/model.json": "sha256:23b5bf3c6f53f7bebb1e1ca0d99f00b10a1fe89911ef5cbb962c1c7ce67e7217",
+      "sheaft/report.json": "sha256:4c4c6dbfb07c03b690e9234545f8bf4bc52ba8432c8713471b9e0945294bd3d0",
+      "sheaft/summary.md": "sha256:aa5a83a092995ec32e7589b9a8ecceedbf230850a8d1242e9d92eaa5460e29c7",
+      "summary.md": "sha256:93036cc146e441365226937af39b5122f7888e9e43fc54e99335fb359d99f00a"
+    },
+    "social-network-norepl": {
+      "analytics.json": "sha256:cdcc1d6600bc6abff5a003296471f20a5874635d9a10abbc34d8aac2f5d02034",
+      "bering/model-quality.json": "sha256:f4b772122a3d40d178b78221df3633886f8b281d9a93cc8bdd3c08eec10b78f6",
+      "bering/model.json": "sha256:3a963ab056aa15d357532a21a5f69159301982cdc3bd88cfd507a43dabde05c8",
+      "bering/snapshot-quality.json": "sha256:d4944319c2d670932c42cc66e2abe00a1325da7974e172f97cdf75b0e6d76da6",
+      "bering/snapshot.json": "sha256:4db4865c0ba57193c0825383f3f7925dbcbc81921176a85ce6e512d78e8c2bfd",
+      "procrustes/bering.overlay.yaml": "sha256:29d280809896aed65ef3ef256408648cd67bc3efdbc2cb27bc3261d04de04709",
+      "procrustes/collection-plan.json": "sha256:493eb53a53c2822ce8e96c5241c0a3dbb0ceefdccadecc5c1d162454b50c8249",
+      "procrustes/report.json": "sha256:bd24987393f837ce0ba1a17f703d26c30fa2b2cc6a6ee7f102f1e37ab43765d9",
+      "procrustes/summary.md": "sha256:fa71fcf13fdb70a2200fdc10f49b9c9b998a5789e370385bf484b889f6ad352b",
+      "sheaft/model.json": "sha256:3a963ab056aa15d357532a21a5f69159301982cdc3bd88cfd507a43dabde05c8",
+      "sheaft/report.json": "sha256:4ce3b66eb98ace10ab35a14352d811cf807c1867c116458f660e80d4bc449c77",
+      "sheaft/summary.md": "sha256:b0afba34e7159e21564d8ffd53b8dff58806c5125707b236a8d9a3b2594182e3",
+      "summary.md": "sha256:88ec5c6ff758fd692902eef2a14e67ee51db6213e151019d72038fb092706218"
+    },
+    "social-network-repl": {
+      "analytics.json": "sha256:a078897a1492ca66abbc62501593dd51718859d194aa1b0411cdad681857469f",
       "bering/model-quality.json": "sha256:f4b772122a3d40d178b78221df3633886f8b281d9a93cc8bdd3c08eec10b78f6",
       "bering/model.json": "sha256:7076fde08690dc3659163fed8dbc01997383461b57f5c0e21750a0e2caba4738",
       "bering/snapshot-quality.json": "sha256:d4944319c2d670932c42cc66e2abe00a1325da7974e172f97cdf75b0e6d76da6",
-      "bering/snapshot.json": "sha256:3ab111763bdff61badda65bd73dfa4bba23af290ce0179485951a1b4dd5952a8",
+      "bering/snapshot.json": "sha256:08b8fbf0e9451b24422e95d9c8384dcaf6461c3640d7c0501d1f7709bc753cd0",
       "procrustes/bering.overlay.yaml": "sha256:9bd3b7df7155042432ccc7ae47afdfe4ed9abafec71551289caed062fa83b6d7",
       "procrustes/collection-plan.json": "sha256:493eb53a53c2822ce8e96c5241c0a3dbb0ceefdccadecc5c1d162454b50c8249",
       "procrustes/report.json": "sha256:7e04e5ed54be1b8df0f3863ea3c4d06df60ae583a6b30c710ccb7ed10877521e",
       "procrustes/summary.md": "sha256:80369ddba98aa6239627ba387c0b6a79b5e31ccf8e216beee79d92f5b0482881",
       "sheaft/model.json": "sha256:7076fde08690dc3659163fed8dbc01997383461b57f5c0e21750a0e2caba4738",
-      "sheaft/report.json": "sha256:011a9b3113bb05febdaf30a977a48d57e50b1423a9cbe17ea640b0453e2690e2",
-      "sheaft/summary.md": "sha256:54488e7a24a7561d8970c2c31ea5ffe47fb14d6a267203dad55a32c005e39d93",
-      "summary.md": "sha256:3d7cf1c5d78c99b3d36bc6c3e33d137c80c78f5f27afa0e8551d64d30c3c499f"
+      "sheaft/report.json": "sha256:fa455f9aa82c737c64be1486110a1e5958e1caabe9cc51771b01558400b055c4",
+      "sheaft/summary.md": "sha256:b6981f8ea05f7a3dda1ae36f2264c4819a59d6d0e009835c68c842fdd374ed6e",
+      "summary.md": "sha256:23e4f289a55d65f9b755f0579f8d01e390a931a8c158e5ef4f86fd3a60aa9b55"
     }
+  },
+  "aggregate": {
+    "FULL_COMPARISON.md": "sha256:ca1ca58384f6185d141e71b036ad1d9e2d0264e9243b1d5c035ee2bd5d144cab",
+    "comparison.json": "sha256:c35e62cbbbc3272afc5aedf14b8635f071e2e943f4aa2704891c8f2409e22479"
   }
 }

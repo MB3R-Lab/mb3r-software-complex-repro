@@ -1,0 +1,565 @@
+{
+  "description": "Full Sheaft comparison against every aggregate result row reported by both published experiments.",
+  "families": {
+    "otel-demo": {
+      "publication": {
+        "artifact": {
+          "doi": "10.5281/zenodo.17703953",
+          "repository": "https://github.com/a-a-k/otel-demo-resilience"
+        },
+        "doi": "10.1007/978-3-032-23304-2_24",
+        "pages": "301-311",
+        "publisher": "Springer Cham",
+        "reported_results": {
+          "metric": "probe_weighted_aggregate_availability",
+          "rows": [
+            {
+              "failure_fraction": 0.1,
+              "live": 0.683,
+              "model_all_blocking": 0.781,
+              "model_async": 0.781
+            },
+            {
+              "failure_fraction": 0.3,
+              "live": 0.557,
+              "model_all_blocking": 0.610,
+              "model_async": 0.610
+            },
+            {
+              "failure_fraction": 0.5,
+              "live": 0.360,
+              "model_all_blocking": 0.356,
+              "model_async": 0.356
+            },
+            {
+              "failure_fraction": 0.7,
+              "live": 0.289,
+              "model_all_blocking": 0.251,
+              "model_async": 0.251
+            },
+            {
+              "failure_fraction": 0.9,
+              "live": 0.172,
+              "model_all_blocking": 0.050,
+              "model_async": 0.050
+            }
+          ],
+          "source": "Table 2"
+        },
+        "reproduction_scope": {
+          "comparison_status": "full_table_comparison",
+          "note": "The workflow evaluates all four published endpoint predicates with a uniform mix and the published fixed-size kill counts on the archived representative 16-service graph. Table 2 aggregates the paper's archived graph runs, so row deltas are reported rather than treated as an exact byte-for-byte reproduction. Live chaos windows are not rerun."
+        },
+        "schema_version": "1.0.0",
+        "series": "Lecture Notes on Data Engineering and Communications Technologies, volume 297",
+        "title": "Refining Resilience Model Discovery: A Case Study on the Limited Role of Asynchronous Edges in the OpenTelemetry Demo",
+        "type": "published_experiment",
+        "url": "https://doi.org/10.1007/978-3-032-23304-2_24",
+        "venue": "40th International Conference on Advanced Information Networking and Applications (AINA 2026)"
+      },
+      "variants": {
+        "all-blocking": {
+          "metric": "probe_weighted_aggregate_availability",
+          "model_field": "model_all_blocking",
+          "rows": [
+            {
+              "absolute_delta_published_live": 0.0986758333333333,
+              "absolute_delta_published_model": 0.00067583333333332,
+              "delta_from_published_live": 0.0986758333333333,
+              "delta_from_published_model": 0.00067583333333332,
+              "failure_fraction": 0.1,
+              "fixed_k_failures": 2,
+              "mode": "all-blocking",
+              "profile": "p10",
+              "published_live": 0.683,
+              "published_model": 0.781,
+              "sheaft": 0.7816758333333333,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.05286000000000002,
+              "absolute_delta_published_model": 0.00013999999999991797,
+              "delta_from_published_live": 0.05286000000000002,
+              "delta_from_published_model": -0.00013999999999991797,
+              "failure_fraction": 0.3,
+              "fixed_k_failures": 4,
+              "mode": "all-blocking",
+              "profile": "p30",
+              "published_live": 0.557,
+              "published_model": 0.61,
+              "sheaft": 0.6098600000000001,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.0036249999999999893,
+              "absolute_delta_published_model": 0.0003750000000000142,
+              "delta_from_published_live": -0.0036249999999999893,
+              "delta_from_published_model": 0.0003750000000000142,
+              "failure_fraction": 0.5,
+              "fixed_k_failures": 8,
+              "mode": "all-blocking",
+              "profile": "p50",
+              "published_live": 0.36,
+              "published_model": 0.356,
+              "sheaft": 0.356375,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.038158333333333294,
+              "absolute_delta_published_model": 0.0001583333333333159,
+              "delta_from_published_live": -0.038158333333333294,
+              "delta_from_published_model": -0.0001583333333333159,
+              "failure_fraction": 0.7,
+              "fixed_k_failures": 10,
+              "mode": "all-blocking",
+              "profile": "p70",
+              "published_live": 0.289,
+              "published_model": 0.251,
+              "sheaft": 0.2508416666666667,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.12202916666666665,
+              "absolute_delta_published_model": 0.000029166666666663454,
+              "delta_from_published_live": -0.12202916666666665,
+              "delta_from_published_model": -0.000029166666666663454,
+              "failure_fraction": 0.9,
+              "fixed_k_failures": 14,
+              "mode": "all-blocking",
+              "profile": "p90",
+              "published_live": 0.172,
+              "published_model": 0.05,
+              "sheaft": 0.04997083333333334,
+              "trials": 300000
+            }
+          ],
+          "source": "Table 2",
+          "statistics": {
+            "against_published_live": {
+              "maximum_absolute_error": 0.12202916666666665,
+              "mean_absolute_error": 0.06306966666666665,
+              "mean_signed_error": -0.0024553333333333233,
+              "pearson_correlation": 0.9982405505321771,
+              "root_mean_square_error": 0.07601501986997919
+            },
+            "against_published_model": {
+              "maximum_absolute_error": 0.00067583333333332,
+              "mean_absolute_error": 0.0002756666666666463,
+              "mean_signed_error": 0.00014466666666668738,
+              "pearson_correlation": 0.9999994511247076,
+              "root_mean_square_error": 0.0003585793728962382
+            }
+          }
+        },
+        "async": {
+          "metric": "probe_weighted_aggregate_availability",
+          "model_field": "model_async",
+          "rows": [
+            {
+              "absolute_delta_published_live": 0.0986758333333333,
+              "absolute_delta_published_model": 0.00067583333333332,
+              "delta_from_published_live": 0.0986758333333333,
+              "delta_from_published_model": 0.00067583333333332,
+              "failure_fraction": 0.1,
+              "fixed_k_failures": 2,
+              "mode": "async",
+              "profile": "p10",
+              "published_live": 0.683,
+              "published_model": 0.781,
+              "sheaft": 0.7816758333333333,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.05286000000000002,
+              "absolute_delta_published_model": 0.00013999999999991797,
+              "delta_from_published_live": 0.05286000000000002,
+              "delta_from_published_model": -0.00013999999999991797,
+              "failure_fraction": 0.3,
+              "fixed_k_failures": 4,
+              "mode": "async",
+              "profile": "p30",
+              "published_live": 0.557,
+              "published_model": 0.61,
+              "sheaft": 0.6098600000000001,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.0036249999999999893,
+              "absolute_delta_published_model": 0.0003750000000000142,
+              "delta_from_published_live": -0.0036249999999999893,
+              "delta_from_published_model": 0.0003750000000000142,
+              "failure_fraction": 0.5,
+              "fixed_k_failures": 8,
+              "mode": "async",
+              "profile": "p50",
+              "published_live": 0.36,
+              "published_model": 0.356,
+              "sheaft": 0.356375,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.038158333333333294,
+              "absolute_delta_published_model": 0.0001583333333333159,
+              "delta_from_published_live": -0.038158333333333294,
+              "delta_from_published_model": -0.0001583333333333159,
+              "failure_fraction": 0.7,
+              "fixed_k_failures": 10,
+              "mode": "async",
+              "profile": "p70",
+              "published_live": 0.289,
+              "published_model": 0.251,
+              "sheaft": 0.2508416666666667,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.12202916666666665,
+              "absolute_delta_published_model": 0.000029166666666663454,
+              "delta_from_published_live": -0.12202916666666665,
+              "delta_from_published_model": -0.000029166666666663454,
+              "failure_fraction": 0.9,
+              "fixed_k_failures": 14,
+              "mode": "async",
+              "profile": "p90",
+              "published_live": 0.172,
+              "published_model": 0.05,
+              "sheaft": 0.04997083333333334,
+              "trials": 300000
+            }
+          ],
+          "source": "Table 2",
+          "statistics": {
+            "against_published_live": {
+              "maximum_absolute_error": 0.12202916666666665,
+              "mean_absolute_error": 0.06306966666666665,
+              "mean_signed_error": -0.0024553333333333233,
+              "pearson_correlation": 0.9982405505321771,
+              "root_mean_square_error": 0.07601501986997919
+            },
+            "against_published_model": {
+              "maximum_absolute_error": 0.00067583333333332,
+              "mean_absolute_error": 0.0002756666666666463,
+              "mean_signed_error": 0.00014466666666668738,
+              "pearson_correlation": 0.9999994511247076,
+              "root_mean_square_error": 0.0003585793728962382
+            }
+          }
+        }
+      }
+    },
+    "social-network": {
+      "publication": {
+        "artifact": {
+          "doi": "10.5281/zenodo.15332249",
+          "repository": "https://github.com/a-a-k/socialnet-resilience"
+        },
+        "doi": "10.1145/3786582.3786823",
+        "pages": "121-125",
+        "publisher": "ACM",
+        "reported_results": {
+          "metric": "aggregate_availability",
+          "rows": [
+            {
+              "failure_fraction": 0.1,
+              "live_mean": 0.5533,
+              "live_sd": 0.0031,
+              "mode": "norepl",
+              "model_mean": 0.4182,
+              "model_sd": 0.0005
+            },
+            {
+              "failure_fraction": 0.3,
+              "live_mean": 0.1775,
+              "live_sd": 0.0021,
+              "mode": "norepl",
+              "model_mean": 0.1613,
+              "model_sd": 0.0005
+            },
+            {
+              "failure_fraction": 0.5,
+              "live_mean": 0.0376,
+              "live_sd": 0.0006,
+              "mode": "norepl",
+              "model_mean": 0.0454,
+              "model_sd": 0.0002
+            },
+            {
+              "failure_fraction": 0.7,
+              "live_mean": 0.0067,
+              "live_sd": 0.0000,
+              "mode": "norepl",
+              "model_mean": 0.0014,
+              "model_sd": 0.0000
+            },
+            {
+              "failure_fraction": 0.9,
+              "live_mean": 0.0000,
+              "live_sd": 0.0000,
+              "mode": "norepl",
+              "model_mean": 0.0000,
+              "model_sd": 0.0000
+            },
+            {
+              "failure_fraction": 0.1,
+              "live_mean": 0.6969,
+              "live_sd": 0.0026,
+              "mode": "repl",
+              "model_mean": 0.6281,
+              "model_sd": 0.0005
+            },
+            {
+              "failure_fraction": 0.3,
+              "live_mean": 0.3054,
+              "live_sd": 0.0017,
+              "mode": "repl",
+              "model_mean": 0.3054,
+              "model_sd": 0.0007
+            },
+            {
+              "failure_fraction": 0.5,
+              "live_mean": 0.0958,
+              "live_sd": 0.0011,
+              "mode": "repl",
+              "model_mean": 0.1145,
+              "model_sd": 0.0004
+            },
+            {
+              "failure_fraction": 0.7,
+              "live_mean": 0.0155,
+              "live_sd": 0.0003,
+              "mode": "repl",
+              "model_mean": 0.0132,
+              "model_sd": 0.0001
+            },
+            {
+              "failure_fraction": 0.9,
+              "live_mean": 0.0000,
+              "live_sd": 0.0000,
+              "mode": "repl",
+              "model_mean": 0.0000,
+              "model_sd": 0.0000
+            }
+          ],
+          "source": "Table 1"
+        },
+        "reproduction_scope": {
+          "comparison_status": "direct_protocol_replay",
+          "note": "The workflow evaluates both published replica modes and all five failure fractions using the archived graph, endpoint predicates, workload weights, and fixed-size replica-slot failure protocol; it does not rerun live chaos rounds."
+        },
+        "schema_version": "1.0.0",
+        "title": "Model Discovery and Graph Simulation: A Lightweight Gateway to Chaos Engineering",
+        "type": "published_experiment",
+        "url": "https://doi.org/10.1145/3786582.3786823",
+        "venue": "48th IEEE/ACM International Conference on Software Engineering, New Ideas and Emerging Results (ICSE-NIER 2026)"
+      },
+      "variants": {
+        "norepl": {
+          "metric": "aggregate_availability",
+          "model_field": "model_mean",
+          "rows": [
+            {
+              "absolute_delta_published_live": 0.13467700000000005,
+              "absolute_delta_published_model": 0.0004229999999999512,
+              "delta_from_published_live": -0.13467700000000005,
+              "delta_from_published_model": 0.0004229999999999512,
+              "failure_fraction": 0.1,
+              "fixed_k_failures": 2,
+              "mode": "norepl",
+              "profile": "p10",
+              "published_live": 0.5533,
+              "published_live_sd": 0.0031,
+              "published_model": 0.4182,
+              "published_model_sd": 0.0005,
+              "sheaft": 0.41862299999999997,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.014951999999999993,
+              "absolute_delta_published_model": 0.0012479999999999991,
+              "delta_from_published_live": -0.014951999999999993,
+              "delta_from_published_model": 0.0012479999999999991,
+              "failure_fraction": 0.3,
+              "fixed_k_failures": 4,
+              "mode": "norepl",
+              "profile": "p30",
+              "published_live": 0.1775,
+              "published_live_sd": 0.0021,
+              "published_model": 0.1613,
+              "published_model_sd": 0.0005,
+              "sheaft": 0.162548,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.007914999999999998,
+              "absolute_delta_published_model": 0.00011499999999999705,
+              "delta_from_published_live": 0.007914999999999998,
+              "delta_from_published_model": 0.00011499999999999705,
+              "failure_fraction": 0.5,
+              "fixed_k_failures": 6,
+              "mode": "norepl",
+              "profile": "p50",
+              "published_live": 0.0376,
+              "published_live_sd": 0.0006,
+              "published_model": 0.0454,
+              "published_model_sd": 0.0002,
+              "sheaft": 0.045515,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.005377,
+              "absolute_delta_published_model": 0.00007700000000000003,
+              "delta_from_published_live": -0.005377,
+              "delta_from_published_model": -0.00007700000000000003,
+              "failure_fraction": 0.7,
+              "fixed_k_failures": 9,
+              "mode": "norepl",
+              "profile": "p70",
+              "published_live": 0.0067,
+              "published_live_sd": 0,
+              "published_model": 0.0014,
+              "published_model_sd": 0,
+              "sheaft": 0.001323,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0,
+              "absolute_delta_published_model": 0,
+              "delta_from_published_live": 0,
+              "delta_from_published_model": 0,
+              "failure_fraction": 0.9,
+              "fixed_k_failures": 11,
+              "mode": "norepl",
+              "profile": "p90",
+              "published_live": 0,
+              "published_live_sd": 0,
+              "published_model": 0,
+              "published_model_sd": 0,
+              "sheaft": 0,
+              "trials": 300000
+            }
+          ],
+          "source": "Table 1",
+          "statistics": {
+            "against_published_live": {
+              "maximum_absolute_error": 0.13467700000000005,
+              "mean_absolute_error": 0.03258420000000001,
+              "mean_signed_error": -0.029418200000000005,
+              "pearson_correlation": 0.9969727007942389,
+              "root_mean_square_error": 0.06075033495710128
+            },
+            "against_published_model": {
+              "maximum_absolute_error": 0.0012479999999999991,
+              "mean_absolute_error": 0.0003725999999999895,
+              "mean_signed_error": 0.00034179999999998944,
+              "pearson_correlation": 0.9999962301318575,
+              "root_mean_square_error": 0.0005925516011285356
+            }
+          }
+        },
+        "repl": {
+          "metric": "aggregate_availability",
+          "model_field": "model_mean",
+          "rows": [
+            {
+              "absolute_delta_published_live": 0.06684733333333337,
+              "absolute_delta_published_model": 0.0019526666666666026,
+              "delta_from_published_live": -0.06684733333333337,
+              "delta_from_published_model": 0.0019526666666666026,
+              "failure_fraction": 0.1,
+              "fixed_k_failures": 3,
+              "mode": "repl",
+              "profile": "p10",
+              "published_live": 0.6969,
+              "published_live_sd": 0.0026,
+              "published_model": 0.6281,
+              "published_model_sd": 0.0005,
+              "sheaft": 0.6300526666666666,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.0010816666666666475,
+              "absolute_delta_published_model": 0.0010816666666666475,
+              "delta_from_published_live": 0.0010816666666666475,
+              "delta_from_published_model": 0.0010816666666666475,
+              "failure_fraction": 0.3,
+              "fixed_k_failures": 7,
+              "mode": "repl",
+              "profile": "p30",
+              "published_live": 0.3054,
+              "published_live_sd": 0.0017,
+              "published_model": 0.3054,
+              "published_model_sd": 0.0007,
+              "sheaft": 0.30648166666666665,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.01811800000000001,
+              "absolute_delta_published_model": 0.0005819999999999992,
+              "delta_from_published_live": 0.01811800000000001,
+              "delta_from_published_model": -0.0005819999999999992,
+              "failure_fraction": 0.5,
+              "fixed_k_failures": 11,
+              "mode": "repl",
+              "profile": "p50",
+              "published_live": 0.0958,
+              "published_live_sd": 0.0011,
+              "published_model": 0.1145,
+              "published_model_sd": 0.0004,
+              "sheaft": 0.113918,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0.002615000000000001,
+              "absolute_delta_published_model": 0.00031500000000000104,
+              "delta_from_published_live": -0.002615000000000001,
+              "delta_from_published_model": -0.00031500000000000104,
+              "failure_fraction": 0.7,
+              "fixed_k_failures": 16,
+              "mode": "repl",
+              "profile": "p70",
+              "published_live": 0.0155,
+              "published_live_sd": 0.0003,
+              "published_model": 0.0132,
+              "published_model_sd": 0.0001,
+              "sheaft": 0.012884999999999999,
+              "trials": 300000
+            },
+            {
+              "absolute_delta_published_live": 0,
+              "absolute_delta_published_model": 0,
+              "delta_from_published_live": 0,
+              "delta_from_published_model": 0,
+              "failure_fraction": 0.9,
+              "fixed_k_failures": 20,
+              "mode": "repl",
+              "profile": "p90",
+              "published_live": 0,
+              "published_live_sd": 0,
+              "published_model": 0,
+              "published_model_sd": 0,
+              "sheaft": 0,
+              "trials": 300000
+            }
+          ],
+          "source": "Table 1",
+          "statistics": {
+            "against_published_live": {
+              "maximum_absolute_error": 0.06684733333333337,
+              "mean_absolute_error": 0.017732400000000006,
+              "mean_signed_error": -0.010052533333333342,
+              "pearson_correlation": 0.9981479349225981,
+              "root_mean_square_error": 0.03099947136825259
+            },
+            "against_published_model": {
+              "maximum_absolute_error": 0.0019526666666666026,
+              "mean_absolute_error": 0.00078626666666665,
+              "mean_signed_error": 0.00042746666666665,
+              "pearson_correlation": 0.9999988427152277,
+              "root_mean_square_error": 0.0010412356975141215
+            }
+          }
+        }
+      }
+    }
+  },
+  "schema_version": "1.0.0"
+}

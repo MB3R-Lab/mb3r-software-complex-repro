@@ -1,0 +1,215 @@
+{
+  "bering": {
+    "async_edges": 0,
+    "confidence": 1,
+    "edges": 23,
+    "endpoints": 4,
+    "services": 16
+  },
+  "case": "otel-demo-all-blocking",
+  "family": "otel-demo",
+  "mode": "all-blocking",
+  "procrustes": {
+    "blockers": 0,
+    "capability_status_counts": {
+      "EXPECTED": 4
+    },
+    "goal_status": "EXPECTED",
+    "remediation_items": 0,
+    "services_assessed": 5
+  },
+  "publication": {
+    "artifact": {
+      "doi": "10.5281/zenodo.17703953",
+      "repository": "https://github.com/a-a-k/otel-demo-resilience"
+    },
+    "doi": "10.1007/978-3-032-23304-2_24",
+    "pages": "301-311",
+    "publisher": "Springer Cham",
+    "reported_results": {
+      "metric": "probe_weighted_aggregate_availability",
+      "rows": [
+        {
+          "failure_fraction": 0.1,
+          "live": 0.683,
+          "model_all_blocking": 0.781,
+          "model_async": 0.781
+        },
+        {
+          "failure_fraction": 0.3,
+          "live": 0.557,
+          "model_all_blocking": 0.610,
+          "model_async": 0.610
+        },
+        {
+          "failure_fraction": 0.5,
+          "live": 0.360,
+          "model_all_blocking": 0.356,
+          "model_async": 0.356
+        },
+        {
+          "failure_fraction": 0.7,
+          "live": 0.289,
+          "model_all_blocking": 0.251,
+          "model_async": 0.251
+        },
+        {
+          "failure_fraction": 0.9,
+          "live": 0.172,
+          "model_all_blocking": 0.050,
+          "model_async": 0.050
+        }
+      ],
+      "source": "Table 2"
+    },
+    "reproduction_scope": {
+      "comparison_status": "full_table_comparison",
+      "note": "The workflow evaluates all four published endpoint predicates with a uniform mix and the published fixed-size kill counts on the archived representative 16-service graph. Table 2 aggregates the paper's archived graph runs, so row deltas are reported rather than treated as an exact byte-for-byte reproduction. Live chaos windows are not rerun."
+    },
+    "schema_version": "1.0.0",
+    "series": "Lecture Notes on Data Engineering and Communications Technologies, volume 297",
+    "title": "Refining Resilience Model Discovery: A Case Study on the Limited Role of Asynchronous Edges in the OpenTelemetry Demo",
+    "type": "published_experiment",
+    "url": "https://doi.org/10.1007/978-3-032-23304-2_24",
+    "venue": "40th International Conference on Advanced Information Networking and Applications (AINA 2026)"
+  },
+  "published_comparison": {
+    "metric": "probe_weighted_aggregate_availability",
+    "model_field": "model_all_blocking",
+    "rows": [
+      {
+        "absolute_delta_published_live": 0.0986758333333333,
+        "absolute_delta_published_model": 0.00067583333333332,
+        "delta_from_published_live": 0.0986758333333333,
+        "delta_from_published_model": 0.00067583333333332,
+        "failure_fraction": 0.1,
+        "fixed_k_failures": 2,
+        "mode": "all-blocking",
+        "profile": "p10",
+        "published_live": 0.683,
+        "published_model": 0.781,
+        "sheaft": 0.7816758333333333,
+        "trials": 300000
+      },
+      {
+        "absolute_delta_published_live": 0.05286000000000002,
+        "absolute_delta_published_model": 0.00013999999999991797,
+        "delta_from_published_live": 0.05286000000000002,
+        "delta_from_published_model": -0.00013999999999991797,
+        "failure_fraction": 0.3,
+        "fixed_k_failures": 4,
+        "mode": "all-blocking",
+        "profile": "p30",
+        "published_live": 0.557,
+        "published_model": 0.61,
+        "sheaft": 0.6098600000000001,
+        "trials": 300000
+      },
+      {
+        "absolute_delta_published_live": 0.0036249999999999893,
+        "absolute_delta_published_model": 0.0003750000000000142,
+        "delta_from_published_live": -0.0036249999999999893,
+        "delta_from_published_model": 0.0003750000000000142,
+        "failure_fraction": 0.5,
+        "fixed_k_failures": 8,
+        "mode": "all-blocking",
+        "profile": "p50",
+        "published_live": 0.36,
+        "published_model": 0.356,
+        "sheaft": 0.356375,
+        "trials": 300000
+      },
+      {
+        "absolute_delta_published_live": 0.038158333333333294,
+        "absolute_delta_published_model": 0.0001583333333333159,
+        "delta_from_published_live": -0.038158333333333294,
+        "delta_from_published_model": -0.0001583333333333159,
+        "failure_fraction": 0.7,
+        "fixed_k_failures": 10,
+        "mode": "all-blocking",
+        "profile": "p70",
+        "published_live": 0.289,
+        "published_model": 0.251,
+        "sheaft": 0.2508416666666667,
+        "trials": 300000
+      },
+      {
+        "absolute_delta_published_live": 0.12202916666666665,
+        "absolute_delta_published_model": 0.000029166666666663454,
+        "delta_from_published_live": -0.12202916666666665,
+        "delta_from_published_model": -0.000029166666666663454,
+        "failure_fraction": 0.9,
+        "fixed_k_failures": 14,
+        "mode": "all-blocking",
+        "profile": "p90",
+        "published_live": 0.172,
+        "published_model": 0.05,
+        "sheaft": 0.04997083333333334,
+        "trials": 300000
+      }
+    ],
+    "source": "Table 2",
+    "statistics": {
+      "against_published_live": {
+        "maximum_absolute_error": 0.12202916666666665,
+        "mean_absolute_error": 0.06306966666666665,
+        "mean_signed_error": -0.0024553333333333233,
+        "pearson_correlation": 0.9982405505321771,
+        "root_mean_square_error": 0.07601501986997919
+      },
+      "against_published_model": {
+        "maximum_absolute_error": 0.00067583333333332,
+        "mean_absolute_error": 0.0002756666666666463,
+        "mean_signed_error": 0.00014466666666668738,
+        "pearson_correlation": 0.9999994511247076,
+        "root_mean_square_error": 0.0003585793728962382
+      }
+    }
+  },
+  "schema_version": "1.0.0",
+  "sheaft": {
+    "endpoint_results": [
+      {
+        "availability": 0.8676,
+        "endpoint_id": "frontend:GET /api/cart",
+        "profile": "p10",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.12239999999999995
+      },
+      {
+        "availability": 0.8673,
+        "endpoint_id": "frontend:GET /api/products",
+        "profile": "p10",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.12270000000000003
+      },
+      {
+        "availability": 0.8669866666666667,
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "profile": "p10",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.12301333333333331
+      },
+      {
+        "availability": 0.5248166666666667,
+        "endpoint_id": "frontend:POST /api/checkout",
+        "profile": "p10",
+        "status": "warn",
+        "threshold": 0.99,
+        "threshold_delta": -0.4651833333333333
+      }
+    ],
+    "summary": {
+      "confidence": 1,
+      "cross_profile_availability": 0.40974466666666676,
+      "cross_profile_weighted_availability": 0.40974466666666676,
+      "overall_availability": 0.7816758333333333,
+      "risk_score": 0.21832416666666665,
+      "weighted_overall_availability": 0.7816758333333333
+    },
+    "sweeps": null
+  }
+}

@@ -1,0 +1,52 @@
+name: procrustes-static-context-53817d39a4ee
+services:
+    - id: cart
+      replicas: 1
+      attributes:
+        procrustes.container: cart
+        procrustes.image: ghcr.io/open-telemetry/demo:2.0.2-cart
+        procrustes.service_version: 2.0.2-cart
+        procrustes.workload: default/Deployment/cart
+    - id: checkout
+      replicas: 1
+      attributes:
+        procrustes.container: checkout
+        procrustes.image: ghcr.io/open-telemetry/demo:2.0.2-checkout
+        procrustes.service_version: 2.0.2-checkout
+        procrustes.workload: default/Deployment/checkout
+    - id: frontend
+      replicas: 1
+      attributes:
+        procrustes.container: frontend
+        procrustes.image: ghcr.io/open-telemetry/demo:2.0.2-frontend
+        procrustes.service_version: 2.0.2-frontend
+        procrustes.workload: default/Deployment/frontend
+    - id: payment
+      replicas: 1
+      attributes:
+        procrustes.container: payment
+        procrustes.image: ghcr.io/open-telemetry/demo:2.0.2-payment
+        procrustes.service_version: 2.0.2-payment
+        procrustes.workload: default/Deployment/payment
+    - id: shipping
+      replicas: 1
+      attributes:
+        procrustes.container: shipping
+        procrustes.image: ghcr.io/open-telemetry/demo:2.0.2-shipping
+        procrustes.service_version: 2.0.2-shipping
+        procrustes.workload: default/Deployment/shipping
+endpoints:
+    - id: frontend:POST /api/checkout
+      entry_service: frontend
+      method: POST
+      path: /api/checkout
+      semantics:
+        predicate_mode: immediate_response
+        mandatory_targets:
+            - cart
+            - checkout
+            - payment
+            - shipping
+        dependency_modes:
+            - sync
+        source: procrustes

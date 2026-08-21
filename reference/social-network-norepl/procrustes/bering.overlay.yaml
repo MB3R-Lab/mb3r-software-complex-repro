@@ -1,0 +1,28 @@
+name: procrustes-static-context-468a3e2513b1
+services:
+    - id: compose-post-service
+      replicas: 1
+      attributes:
+        procrustes.container: compose-post-service
+        procrustes.image: deathstarbench/social-network-microservices:latest
+        procrustes.service_version: latest
+        procrustes.workload: compose/ComposeService/compose-post-service
+    - id: nginx-web-server
+      replicas: 1
+      attributes:
+        procrustes.container: nginx-web-server
+        procrustes.image: deathstarbench/social-network-microservices:latest
+        procrustes.service_version: latest
+        procrustes.workload: compose/ComposeService/nginx-web-server
+endpoints:
+    - id: nginx-web-server:POST /wrk2-api/post/compose
+      entry_service: nginx-web-server
+      method: POST
+      path: /wrk2-api/post/compose
+      semantics:
+        predicate_mode: immediate_response
+        mandatory_targets:
+            - compose-post-service
+        dependency_modes:
+            - sync
+        source: procrustes

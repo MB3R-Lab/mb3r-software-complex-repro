@@ -1,0 +1,3195 @@
+{
+  "contract_policy": {
+    "action": "allow",
+    "status": "current"
+  },
+  "diffs": {},
+  "endpoint_results": [
+    {
+      "availability": 0.8676,
+      "endpoint_id": "frontend:GET /api/cart",
+      "profile": "p10",
+      "status": "warn",
+      "threshold": 0.99,
+      "threshold_delta": -0.12239999999999995
+    },
+    {
+      "availability": 0.8673,
+      "endpoint_id": "frontend:GET /api/products",
+      "profile": "p10",
+      "status": "warn",
+      "threshold": 0.99,
+      "threshold_delta": -0.12270000000000003
+    },
+    {
+      "availability": 0.8669866666666667,
+      "endpoint_id": "frontend:GET /api/recommendations",
+      "profile": "p10",
+      "status": "warn",
+      "threshold": 0.99,
+      "threshold_delta": -0.12301333333333331
+    },
+    {
+      "availability": 0.5248166666666667,
+      "endpoint_id": "frontend:POST /api/checkout",
+      "profile": "p10",
+      "status": "warn",
+      "threshold": 0.99,
+      "threshold_delta": -0.4651833333333333
+    }
+  ],
+  "input_artifact": {
+    "artifact_id": "bering://discover?input=case://otel-demo/topology-all-blocking.yaml",
+    "contract_name": "io.mb3r.bering.model",
+    "contract_version": "1.3.0",
+    "digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "kind": "model",
+    "produced_at": "2026-08-21T00:00:00Z",
+    "source_ref": "bering://discover?input=case://otel-demo/topology-all-blocking.yaml",
+    "source_type": "bering"
+  },
+  "parameters": {
+    "calibration": {
+      "baselines": {
+        "active": false,
+        "fallback": "no baseline reports configured",
+        "source": "external"
+      },
+      "fault_contract": {
+        "active": false,
+        "fallback": "no fault contract configured; advanced fault profiles are inactive",
+        "source": "default"
+      },
+      "historical_signals": {
+        "active": false,
+        "fallback": "historical calibration inputs are not implemented; static configuration is used",
+        "source": "default"
+      },
+      "journey_overrides": {
+        "active": false,
+        "fallback": "using richer predicates or discovered journeys without manual journey override",
+        "source": "default"
+      },
+      "predicate_overlay": {
+        "active": false,
+        "fallback": "using artifact predicates or legacy path resolution without external predicate overlay",
+        "source": "external"
+      }
+    },
+    "config_source": "override",
+    "profiles": [
+      {
+        "endpoint_weights": {
+          "active": true,
+          "source": "override"
+        },
+        "failure_probability": {
+          "source": "override",
+          "value": 0.1
+        },
+        "fault_profile": {
+          "source": "default",
+          "value": ""
+        },
+        "fixed_k_failures": {
+          "source": "override",
+          "value": 2
+        },
+        "name": "p10",
+        "reliability": {
+          "active": false,
+          "fallback": "using legacy failure_probability shorthand for node reliability and perfect-edge baseline",
+          "source": "default"
+        },
+        "sampling_mode": {
+          "source": "override",
+          "value": "fixed_k_service_set"
+        },
+        "seed": {
+          "source": "override",
+          "value": 2535787318820954869
+        },
+        "trials": {
+          "source": "override",
+          "value": 300000
+        }
+      },
+      {
+        "endpoint_weights": {
+          "active": true,
+          "source": "override"
+        },
+        "failure_probability": {
+          "source": "override",
+          "value": 0.3
+        },
+        "fault_profile": {
+          "source": "default",
+          "value": ""
+        },
+        "fixed_k_failures": {
+          "source": "override",
+          "value": 4
+        },
+        "name": "p30",
+        "reliability": {
+          "active": false,
+          "fallback": "using legacy failure_probability shorthand for node reliability and perfect-edge baseline",
+          "source": "default"
+        },
+        "sampling_mode": {
+          "source": "override",
+          "value": "fixed_k_service_set"
+        },
+        "seed": {
+          "source": "override",
+          "value": -5091587592097367868
+        },
+        "trials": {
+          "source": "override",
+          "value": 300000
+        }
+      },
+      {
+        "endpoint_weights": {
+          "active": true,
+          "source": "override"
+        },
+        "failure_probability": {
+          "source": "override",
+          "value": 0.5
+        },
+        "fault_profile": {
+          "source": "default",
+          "value": ""
+        },
+        "fixed_k_failures": {
+          "source": "override",
+          "value": 8
+        },
+        "name": "p50",
+        "reliability": {
+          "active": false,
+          "fallback": "using legacy failure_probability shorthand for node reliability and perfect-edge baseline",
+          "source": "default"
+        },
+        "sampling_mode": {
+          "source": "override",
+          "value": "fixed_k_service_set"
+        },
+        "seed": {
+          "source": "override",
+          "value": -6620402501765758677
+        },
+        "trials": {
+          "source": "override",
+          "value": 300000
+        }
+      },
+      {
+        "endpoint_weights": {
+          "active": true,
+          "source": "override"
+        },
+        "failure_probability": {
+          "source": "override",
+          "value": 0.7
+        },
+        "fault_profile": {
+          "source": "default",
+          "value": ""
+        },
+        "fixed_k_failures": {
+          "source": "override",
+          "value": 10
+        },
+        "name": "p70",
+        "reliability": {
+          "active": false,
+          "fallback": "using legacy failure_probability shorthand for node reliability and perfect-edge baseline",
+          "source": "default"
+        },
+        "sampling_mode": {
+          "source": "override",
+          "value": "fixed_k_service_set"
+        },
+        "seed": {
+          "source": "override",
+          "value": 5664329790449573702
+        },
+        "trials": {
+          "source": "override",
+          "value": 300000
+        }
+      },
+      {
+        "endpoint_weights": {
+          "active": true,
+          "source": "override"
+        },
+        "failure_probability": {
+          "source": "override",
+          "value": 0.9
+        },
+        "fault_profile": {
+          "source": "default",
+          "value": ""
+        },
+        "fixed_k_failures": {
+          "source": "override",
+          "value": 14
+        },
+        "name": "p90",
+        "reliability": {
+          "active": false,
+          "fallback": "using legacy failure_probability shorthand for node reliability and perfect-edge baseline",
+          "source": "default"
+        },
+        "sampling_mode": {
+          "source": "override",
+          "value": "fixed_k_service_set"
+        },
+        "seed": {
+          "source": "override",
+          "value": -2077873716849886031
+        },
+        "trials": {
+          "source": "override",
+          "value": 300000
+        }
+      }
+    ]
+  },
+  "policy_evaluation": {
+    "decision": "report",
+    "evaluation_rule": "all_profiles",
+    "failed_endpoints": [
+      "frontend:GET /api/cart",
+      "frontend:GET /api/products",
+      "frontend:GET /api/recommendations",
+      "frontend:POST /api/checkout"
+    ],
+    "failed_profiles": [
+      "p10",
+      "p30",
+      "p50",
+      "p70",
+      "p90"
+    ],
+    "mode": "report",
+    "reasons": [
+      {
+        "availability": 0.8676,
+        "delta": -0.12239999999999995,
+        "endpoint_id": "frontend:GET /api/cart",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/cart\" availability 0.8676 is below threshold 0.9900",
+        "profile": "p10",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.8673,
+        "delta": -0.12270000000000003,
+        "endpoint_id": "frontend:GET /api/products",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/products\" availability 0.8673 is below threshold 0.9900",
+        "profile": "p10",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.8669866666666667,
+        "delta": -0.12301333333333331,
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.8670 is below threshold 0.9900",
+        "profile": "p10",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.5248166666666667,
+        "delta": -0.4651833333333333,
+        "endpoint_id": "frontend:POST /api/checkout",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:POST /api/checkout\" availability 0.5248 is below threshold 0.9900",
+        "profile": "p10",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.7324233333333333,
+        "delta": -0.2575766666666667,
+        "endpoint_id": "frontend:GET /api/cart",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/cart\" availability 0.7324 is below threshold 0.9900",
+        "profile": "p30",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.7332733333333333,
+        "delta": -0.25672666666666666,
+        "endpoint_id": "frontend:GET /api/products",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/products\" availability 0.7333 is below threshold 0.9900",
+        "profile": "p30",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.7317866666666667,
+        "delta": -0.2582133333333333,
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.7318 is below threshold 0.9900",
+        "profile": "p30",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.24195666666666665,
+        "delta": -0.7480433333333334,
+        "endpoint_id": "frontend:POST /api/checkout",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:POST /api/checkout\" availability 0.2420 is below threshold 0.9900",
+        "profile": "p30",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.4664066666666667,
+        "delta": -0.5235933333333334,
+        "endpoint_id": "frontend:GET /api/cart",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/cart\" availability 0.4664 is below threshold 0.9900",
+        "profile": "p50",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.46752,
+        "delta": -0.52248,
+        "endpoint_id": "frontend:GET /api/products",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/products\" availability 0.4675 is below threshold 0.9900",
+        "profile": "p50",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.46588666666666667,
+        "delta": -0.5241133333333333,
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.4659 is below threshold 0.9900",
+        "profile": "p50",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.025686666666666667,
+        "delta": -0.9643133333333334,
+        "endpoint_id": "frontend:POST /api/checkout",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:POST /api/checkout\" availability 0.0257 is below threshold 0.9900",
+        "profile": "p50",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.33310666666666666,
+        "delta": -0.6568933333333333,
+        "endpoint_id": "frontend:GET /api/cart",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/cart\" availability 0.3331 is below threshold 0.9900",
+        "profile": "p70",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.33304,
+        "delta": -0.65696,
+        "endpoint_id": "frontend:GET /api/products",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/products\" availability 0.3330 is below threshold 0.9900",
+        "profile": "p70",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.33351333333333333,
+        "delta": -0.6564866666666667,
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.3335 is below threshold 0.9900",
+        "profile": "p70",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.0037066666666666667,
+        "delta": -0.9862933333333334,
+        "endpoint_id": "frontend:POST /api/checkout",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:POST /api/checkout\" availability 0.0037 is below threshold 0.9900",
+        "profile": "p70",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.06648333333333334,
+        "delta": -0.9235166666666667,
+        "endpoint_id": "frontend:GET /api/cart",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/cart\" availability 0.0665 is below threshold 0.9900",
+        "profile": "p90",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.06723666666666667,
+        "delta": -0.9227633333333334,
+        "endpoint_id": "frontend:GET /api/products",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/products\" availability 0.0672 is below threshold 0.9900",
+        "profile": "p90",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0.06616333333333334,
+        "delta": -0.9238366666666666,
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.0662 is below threshold 0.9900",
+        "profile": "p90",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      },
+      {
+        "availability": 0,
+        "delta": -0.99,
+        "endpoint_id": "frontend:POST /api/checkout",
+        "id": "endpoint_below_threshold",
+        "message": "endpoint \"frontend:POST /api/checkout\" availability 0.0000 is below threshold 0.9900",
+        "profile": "p90",
+        "scope": "endpoint",
+        "status": "warn",
+        "threshold": 0.99
+      }
+    ]
+  },
+  "profiles": [
+    {
+      "decision": "report",
+      "endpoint_results": [
+        {
+          "availability": 0.8676,
+          "endpoint_id": "frontend:GET /api/cart",
+          "profile": "p10",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.12239999999999995
+        },
+        {
+          "availability": 0.8673,
+          "endpoint_id": "frontend:GET /api/products",
+          "profile": "p10",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.12270000000000003
+        },
+        {
+          "availability": 0.8669866666666667,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "profile": "p10",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.12301333333333331
+        },
+        {
+          "availability": 0.5248166666666667,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "profile": "p10",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.4651833333333333
+        }
+      ],
+      "endpoints_below_threshold": 4,
+      "name": "p10",
+      "reasons": [
+        {
+          "availability": 0.8676,
+          "delta": -0.12239999999999995,
+          "endpoint_id": "frontend:GET /api/cart",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/cart\" availability 0.8676 is below threshold 0.9900",
+          "profile": "p10",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.8673,
+          "delta": -0.12270000000000003,
+          "endpoint_id": "frontend:GET /api/products",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/products\" availability 0.8673 is below threshold 0.9900",
+          "profile": "p10",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.8669866666666667,
+          "delta": -0.12301333333333331,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.8670 is below threshold 0.9900",
+          "profile": "p10",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.5248166666666667,
+          "delta": -0.4651833333333333,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:POST /api/checkout\" availability 0.5248 is below threshold 0.9900",
+          "profile": "p10",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        }
+      ],
+      "simulation": {
+        "advanced": {
+          "blast_radius": {
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "edges": [
+            {
+              "edge_id": "checkout|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|payment|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|payment|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|shipping|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|shipping|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_id": "frontend|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true"
+              }
+            }
+          ],
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/cart",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8676
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/products",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8673
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8669866666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:POST /api/checkout",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.5248166666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.7352
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.7352
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8661266666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout",
+              "services": [
+                "frontend",
+                "checkout"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.4866333333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.4866333333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|payment|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7423133333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003epayment",
+              "services": [
+                "frontend",
+                "checkout",
+                "payment"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.74302
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "checkout",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|shipping|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7424833333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eshipping",
+              "services": [
+                "frontend",
+                "checkout",
+                "shipping"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8673
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              },
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8669866666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true",
+                "recommendation|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7436633333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            }
+          ]
+        },
+        "endpoint_availability": {
+          "frontend:GET /api/cart": 0.8676,
+          "frontend:GET /api/products": 0.8673,
+          "frontend:GET /api/recommendations": 0.8669866666666667,
+          "frontend:POST /api/checkout": 0.5248166666666667
+        },
+        "endpoint_weights": {
+          "frontend:GET /api/cart": 0.25,
+          "frontend:GET /api/products": 0.25,
+          "frontend:GET /api/recommendations": 0.25,
+          "frontend:POST /api/checkout": 0.25
+        },
+        "failure_probability": 0.1,
+        "fixed_k_failures": 2,
+        "name": "p10",
+        "sampling_mode": "fixed_k_service_set",
+        "seed": 2535787318820954869,
+        "trials": 300000,
+        "unweighted_aggregate": 0.7816758333333333,
+        "weighted_aggregate": 0.7816758333333333
+      }
+    },
+    {
+      "decision": "report",
+      "endpoint_results": [
+        {
+          "availability": 0.7324233333333333,
+          "endpoint_id": "frontend:GET /api/cart",
+          "profile": "p30",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.2575766666666667
+        },
+        {
+          "availability": 0.7332733333333333,
+          "endpoint_id": "frontend:GET /api/products",
+          "profile": "p30",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.25672666666666666
+        },
+        {
+          "availability": 0.7317866666666667,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "profile": "p30",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.2582133333333333
+        },
+        {
+          "availability": 0.24195666666666665,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "profile": "p30",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.7480433333333334
+        }
+      ],
+      "endpoints_below_threshold": 4,
+      "name": "p30",
+      "reasons": [
+        {
+          "availability": 0.7324233333333333,
+          "delta": -0.2575766666666667,
+          "endpoint_id": "frontend:GET /api/cart",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/cart\" availability 0.7324 is below threshold 0.9900",
+          "profile": "p30",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.7332733333333333,
+          "delta": -0.25672666666666666,
+          "endpoint_id": "frontend:GET /api/products",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/products\" availability 0.7333 is below threshold 0.9900",
+          "profile": "p30",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.7317866666666667,
+          "delta": -0.2582133333333333,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.7318 is below threshold 0.9900",
+          "profile": "p30",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.24195666666666665,
+          "delta": -0.7480433333333334,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:POST /api/checkout\" availability 0.2420 is below threshold 0.9900",
+          "profile": "p30",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        }
+      ],
+      "simulation": {
+        "advanced": {
+          "blast_radius": {
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "edges": [
+            {
+              "edge_id": "checkout|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|payment|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|payment|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|shipping|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|shipping|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_id": "frontend|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true"
+              }
+            }
+          ],
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/cart",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7324233333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/products",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7332733333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7317866666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:POST /api/checkout",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.24195666666666665
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.4648466666666666
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.4648466666666666
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7334133333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout",
+              "services": [
+                "frontend",
+                "checkout"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.04552
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.04552
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|payment|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.52419
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003epayment",
+              "services": [
+                "frontend",
+                "checkout",
+                "payment"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.52383
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "checkout",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|shipping|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.5249533333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eshipping",
+              "services": [
+                "frontend",
+                "checkout",
+                "shipping"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7332733333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              },
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7317866666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true",
+                "recommendation|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.52179
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            }
+          ]
+        },
+        "endpoint_availability": {
+          "frontend:GET /api/cart": 0.7324233333333333,
+          "frontend:GET /api/products": 0.7332733333333333,
+          "frontend:GET /api/recommendations": 0.7317866666666667,
+          "frontend:POST /api/checkout": 0.24195666666666665
+        },
+        "endpoint_weights": {
+          "frontend:GET /api/cart": 0.25,
+          "frontend:GET /api/products": 0.25,
+          "frontend:GET /api/recommendations": 0.25,
+          "frontend:POST /api/checkout": 0.25
+        },
+        "failure_probability": 0.3,
+        "fixed_k_failures": 4,
+        "name": "p30",
+        "sampling_mode": "fixed_k_service_set",
+        "seed": -5091587592097367868,
+        "trials": 300000,
+        "unweighted_aggregate": 0.6098600000000001,
+        "weighted_aggregate": 0.6098600000000001
+      }
+    },
+    {
+      "decision": "report",
+      "endpoint_results": [
+        {
+          "availability": 0.4664066666666667,
+          "endpoint_id": "frontend:GET /api/cart",
+          "profile": "p50",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.5235933333333334
+        },
+        {
+          "availability": 0.46752,
+          "endpoint_id": "frontend:GET /api/products",
+          "profile": "p50",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.52248
+        },
+        {
+          "availability": 0.46588666666666667,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "profile": "p50",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.5241133333333333
+        },
+        {
+          "availability": 0.025686666666666667,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "profile": "p50",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.9643133333333334
+        }
+      ],
+      "endpoints_below_threshold": 4,
+      "name": "p50",
+      "reasons": [
+        {
+          "availability": 0.4664066666666667,
+          "delta": -0.5235933333333334,
+          "endpoint_id": "frontend:GET /api/cart",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/cart\" availability 0.4664 is below threshold 0.9900",
+          "profile": "p50",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.46752,
+          "delta": -0.52248,
+          "endpoint_id": "frontend:GET /api/products",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/products\" availability 0.4675 is below threshold 0.9900",
+          "profile": "p50",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.46588666666666667,
+          "delta": -0.5241133333333333,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.4659 is below threshold 0.9900",
+          "profile": "p50",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.025686666666666667,
+          "delta": -0.9643133333333334,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:POST /api/checkout\" availability 0.0257 is below threshold 0.9900",
+          "profile": "p50",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        }
+      ],
+      "simulation": {
+        "advanced": {
+          "blast_radius": {
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "edges": [
+            {
+              "edge_id": "checkout|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|payment|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|payment|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|shipping|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|shipping|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_id": "frontend|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true"
+              }
+            }
+          ],
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/cart",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.4664066666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/products",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.46752
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.46588666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:POST /api/checkout",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.025686666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.9328133333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.9328133333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.46728
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout",
+              "services": [
+                "frontend",
+                "checkout"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.4002266666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.4002266666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|payment|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.20032666666666665
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003epayment",
+              "services": [
+                "frontend",
+                "checkout",
+                "payment"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.20076
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "checkout",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|shipping|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.19938
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eshipping",
+              "services": [
+                "frontend",
+                "checkout",
+                "shipping"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.46752
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              },
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.46588666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true",
+                "recommendation|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.19996333333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            }
+          ]
+        },
+        "endpoint_availability": {
+          "frontend:GET /api/cart": 0.4664066666666667,
+          "frontend:GET /api/products": 0.46752,
+          "frontend:GET /api/recommendations": 0.46588666666666667,
+          "frontend:POST /api/checkout": 0.025686666666666667
+        },
+        "endpoint_weights": {
+          "frontend:GET /api/cart": 0.25,
+          "frontend:GET /api/products": 0.25,
+          "frontend:GET /api/recommendations": 0.25,
+          "frontend:POST /api/checkout": 0.25
+        },
+        "failure_probability": 0.5,
+        "fixed_k_failures": 8,
+        "name": "p50",
+        "sampling_mode": "fixed_k_service_set",
+        "seed": -6620402501765758677,
+        "trials": 300000,
+        "unweighted_aggregate": 0.356375,
+        "weighted_aggregate": 0.356375
+      }
+    },
+    {
+      "decision": "report",
+      "endpoint_results": [
+        {
+          "availability": 0.33310666666666666,
+          "endpoint_id": "frontend:GET /api/cart",
+          "profile": "p70",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.6568933333333333
+        },
+        {
+          "availability": 0.33304,
+          "endpoint_id": "frontend:GET /api/products",
+          "profile": "p70",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.65696
+        },
+        {
+          "availability": 0.33351333333333333,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "profile": "p70",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.6564866666666667
+        },
+        {
+          "availability": 0.0037066666666666667,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "profile": "p70",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.9862933333333334
+        }
+      ],
+      "endpoints_below_threshold": 4,
+      "name": "p70",
+      "reasons": [
+        {
+          "availability": 0.33310666666666666,
+          "delta": -0.6568933333333333,
+          "endpoint_id": "frontend:GET /api/cart",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/cart\" availability 0.3331 is below threshold 0.9900",
+          "profile": "p70",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.33304,
+          "delta": -0.65696,
+          "endpoint_id": "frontend:GET /api/products",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/products\" availability 0.3330 is below threshold 0.9900",
+          "profile": "p70",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.33351333333333333,
+          "delta": -0.6564866666666667,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.3335 is below threshold 0.9900",
+          "profile": "p70",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.0037066666666666667,
+          "delta": -0.9862933333333334,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:POST /api/checkout\" availability 0.0037 is below threshold 0.9900",
+          "profile": "p70",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        }
+      ],
+      "simulation": {
+        "advanced": {
+          "blast_radius": {
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "edges": [
+            {
+              "edge_id": "checkout|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|payment|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|payment|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|shipping|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|shipping|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_id": "frontend|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true"
+              }
+            }
+          ],
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/cart",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.33310666666666666
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/products",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.33304
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.33351333333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:POST /api/checkout",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.0037066666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.6662133333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.6662133333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.3332733333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout",
+              "services": [
+                "frontend",
+                "checkout"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.19012
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.19012
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|payment|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.09511333333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003epayment",
+              "services": [
+                "frontend",
+                "checkout",
+                "payment"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.09473
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "checkout",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|shipping|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.09592333333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eshipping",
+              "services": [
+                "frontend",
+                "checkout",
+                "shipping"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.33304
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              },
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.33351333333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true",
+                "recommendation|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.09582
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            }
+          ]
+        },
+        "endpoint_availability": {
+          "frontend:GET /api/cart": 0.33310666666666666,
+          "frontend:GET /api/products": 0.33304,
+          "frontend:GET /api/recommendations": 0.33351333333333333,
+          "frontend:POST /api/checkout": 0.0037066666666666667
+        },
+        "endpoint_weights": {
+          "frontend:GET /api/cart": 0.25,
+          "frontend:GET /api/products": 0.25,
+          "frontend:GET /api/recommendations": 0.25,
+          "frontend:POST /api/checkout": 0.25
+        },
+        "failure_probability": 0.7,
+        "fixed_k_failures": 10,
+        "name": "p70",
+        "sampling_mode": "fixed_k_service_set",
+        "seed": 5664329790449573702,
+        "trials": 300000,
+        "unweighted_aggregate": 0.2508416666666667,
+        "weighted_aggregate": 0.2508416666666667
+      }
+    },
+    {
+      "decision": "report",
+      "endpoint_results": [
+        {
+          "availability": 0.06648333333333334,
+          "endpoint_id": "frontend:GET /api/cart",
+          "profile": "p90",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.9235166666666667
+        },
+        {
+          "availability": 0.06723666666666667,
+          "endpoint_id": "frontend:GET /api/products",
+          "profile": "p90",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.9227633333333334
+        },
+        {
+          "availability": 0.06616333333333334,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "profile": "p90",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.9238366666666666
+        },
+        {
+          "availability": 0,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "profile": "p90",
+          "status": "warn",
+          "threshold": 0.99,
+          "threshold_delta": -0.99
+        }
+      ],
+      "endpoints_below_threshold": 4,
+      "name": "p90",
+      "reasons": [
+        {
+          "availability": 0.06648333333333334,
+          "delta": -0.9235166666666667,
+          "endpoint_id": "frontend:GET /api/cart",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/cart\" availability 0.0665 is below threshold 0.9900",
+          "profile": "p90",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.06723666666666667,
+          "delta": -0.9227633333333334,
+          "endpoint_id": "frontend:GET /api/products",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/products\" availability 0.0672 is below threshold 0.9900",
+          "profile": "p90",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0.06616333333333334,
+          "delta": -0.9238366666666666,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.0662 is below threshold 0.9900",
+          "profile": "p90",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        },
+        {
+          "availability": 0,
+          "delta": -0.99,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "id": "endpoint_below_threshold",
+          "message": "endpoint \"frontend:POST /api/checkout\" availability 0.0000 is below threshold 0.9900",
+          "profile": "p90",
+          "scope": "endpoint",
+          "status": "warn",
+          "threshold": 0.99
+        }
+      ],
+      "simulation": {
+        "advanced": {
+          "blast_radius": {
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "edges": [
+            {
+              "edge_id": "checkout|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|payment|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|payment|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|shipping|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|shipping|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_id": "frontend|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true"
+              }
+            }
+          ],
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/cart",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.06648333333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/products",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.06723666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.06616333333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:POST /api/checkout",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.13296666666666668
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.13296666666666668
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.06608333333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout",
+              "services": [
+                "frontend",
+                "checkout"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|payment|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003epayment",
+              "services": [
+                "frontend",
+                "checkout",
+                "payment"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "checkout",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|shipping|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eshipping",
+              "services": [
+                "frontend",
+                "checkout",
+                "shipping"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.06723666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              },
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.06616333333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true",
+                "recommendation|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            }
+          ]
+        },
+        "endpoint_availability": {
+          "frontend:GET /api/cart": 0.06648333333333334,
+          "frontend:GET /api/products": 0.06723666666666667,
+          "frontend:GET /api/recommendations": 0.06616333333333334,
+          "frontend:POST /api/checkout": 0
+        },
+        "endpoint_weights": {
+          "frontend:GET /api/cart": 0.25,
+          "frontend:GET /api/products": 0.25,
+          "frontend:GET /api/recommendations": 0.25,
+          "frontend:POST /api/checkout": 0.25
+        },
+        "failure_probability": 0.9,
+        "fixed_k_failures": 14,
+        "name": "p90",
+        "sampling_mode": "fixed_k_service_set",
+        "seed": -2077873716849886031,
+        "trials": 300000,
+        "unweighted_aggregate": 0.04997083333333334,
+        "weighted_aggregate": 0.04997083333333334
+      }
+    }
+  ],
+  "provenance": {
+    "predicate_source": "default",
+    "weights_source": "default"
+  },
+  "simulation": {
+    "failure_probability": 0.1,
+    "seed": 2535787318820954869,
+    "trials": 300000
+  },
+  "summary": {
+    "confidence": 1,
+    "cross_profile_availability": 0.40974466666666676,
+    "cross_profile_weighted_availability": 0.40974466666666676,
+    "overall_availability": 0.7816758333333333,
+    "risk_score": 0.21832416666666665,
+    "weighted_overall_availability": 0.7816758333333333
+  }
+}
