@@ -39,13 +39,13 @@
     }
   ],
   "input_artifact": {
-    "artifact_id": "bering://discover?input=C%3A%2FUsers%2Faakra%2FDesktop%2F%D1%81%D1%82%D0%B0%D1%80%D1%82%D0%B0%D0%BF%2Fsheaft%2Fmb3r-stack%2Fmb3r-stack%2Fresearch%2Fsoftware-complex-paper%2Fcases%2Fsocial-network%2Ftopology-api.yaml",
+    "artifact_id": "bering://discover?input=case://social-network/topology-api.yaml",
     "contract_name": "io.mb3r.bering.model",
     "contract_version": "1.3.0",
-    "digest": "sha256:494e9fbedebb0910abed9fbe7c6c00558bc6ed269c23c46d6fac0103b1a5aff9",
+    "digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
     "kind": "model",
     "produced_at": "2026-08-21T00:00:00Z",
-    "source_ref": "bering://discover?input=C%3A%2FUsers%2Faakra%2FDesktop%2F%D1%81%D1%82%D0%B0%D1%80%D1%82%D0%B0%D0%BF%2Fsheaft%2Fmb3r-stack%2Fmb3r-stack%2Fresearch%2Fsoftware-complex-paper%2Fcases%2Fsocial-network%2Ftopology-api.yaml",
+    "source_ref": "bering://discover?input=case://social-network/topology-api.yaml",
     "source_type": "bering"
   },
   "parameters": {

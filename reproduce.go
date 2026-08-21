@@ -65,11 +65,55 @@ type referenceManifest struct {
 
 func main() {
 	update := flag.Bool("update-reference", false, "replace checked-in semantic reference outputs")
+	acceptWorkDir := flag.String("accept-work-dir", "", "normalize completed CI work outputs into the checked-in references without rerunning tools")
 	flag.Parse()
-	if err := run(*update); err != nil {
+	if *update && strings.TrimSpace(*acceptWorkDir) != "" {
+		fmt.Fprintln(os.Stderr, "reproduce-paper: --update-reference and --accept-work-dir are mutually exclusive")
+		os.Exit(1)
+	}
+	var err error
+	if strings.TrimSpace(*acceptWorkDir) != "" {
+		err = acceptReferenceWork(*acceptWorkDir)
+	} else {
+		err = run(*update)
+	}
+	if err != nil {
 		fmt.Fprintln(os.Stderr, "reproduce-paper:", err)
 		os.Exit(1)
 	}
+}
+
+func acceptReferenceWork(workRoot string) error {
+	root, err := repositoryRoot()
+	if err != nil {
+		return err
+	}
+	lock, err := loadToolchainLock(filepath.Join(root, "toolchain-lock.json"))
+	if err != nil {
+		return err
+	}
+	workRoot, err = filepath.Abs(workRoot)
+	if err != nil {
+		return err
+	}
+	allHashes := map[string]map[string]string{}
+	referenceRoot := filepath.Join(root, "reference")
+	for _, name := range []string{"otel-demo", "social-network"} {
+		caseWork := filepath.Join(workRoot, name)
+		hashes, err := semanticHashes(caseWork)
+		if err != nil {
+			return fmt.Errorf("accept %s: %w", name, err)
+		}
+		if err := writeReferenceCase(caseWork, filepath.Join(referenceRoot, name)); err != nil {
+			return err
+		}
+		allHashes[name] = hashes
+	}
+	if err := writeJSON(filepath.Join(referenceRoot, "manifest.json"), newReferenceManifest(lock.Toolchain.Version, allHashes)); err != nil {
+		return err
+	}
+	fmt.Printf("reference outputs accepted from %s\n", workRoot)
+	return nil
 }
 
 func run(update bool) error {
@@ -149,18 +193,7 @@ func run(update bool) error {
 	}
 
 	referenceRoot := filepath.Join(root, "reference")
-	wanted := referenceManifest{
-		SchemaVersion:    "1.0.0",
-		ToolchainRelease: manifest.Toolchain.Version,
-		DiscoveredAt:     discoveredAt,
-		Normalization: []string{
-			"remove generated_at and recompute_duration_ms",
-			"remove machine-local artifact.path and input_artifact.path",
-			"remove the non-semantic Procrustes instrumentation evidence field selector (source document is retained)",
-			"canonicalize JSON object ordering and whitespace",
-		},
-		Cases: allHashes,
-	}
+	wanted := newReferenceManifest(manifest.Toolchain.Version, allHashes)
 	if update {
 		for _, c := range cases {
 			if err := writeReferenceCase(filepath.Join(workRoot, c.Name), filepath.Join(referenceRoot, c.Name)); err != nil {
@@ -188,6 +221,23 @@ func run(update bool) error {
 	}
 	fmt.Printf("reproduce-paper-ok toolchain=%s cases=%d\n", manifest.Toolchain.Version, len(cases))
 	return nil
+}
+
+func newReferenceManifest(toolchainVersion string, cases map[string]map[string]string) referenceManifest {
+	return referenceManifest{
+		SchemaVersion:    "1.0.0",
+		ToolchainRelease: toolchainVersion,
+		DiscoveredAt:     discoveredAt,
+		Normalization: []string{
+			"remove generated_at and recompute_duration_ms",
+			"remove machine-local artifact.path and input_artifact.path",
+			"replace machine-local Bering discovery and overlay references with case-stable references",
+			"replace identifiers and digests derived from machine-local artifact bytes with valid zero-value identifiers",
+			"remove the non-semantic Procrustes instrumentation evidence field selector (source document is retained)",
+			"canonicalize JSON object ordering and whitespace",
+		},
+		Cases: cases,
+	}
 }
 
 func runCase(c caseSpec, work string, bins map[string]string) error {
@@ -370,6 +420,24 @@ func normalize(value any, parent string) {
 		if parent == "artifact" || parent == "input_artifact" {
 			delete(typed, "path")
 		}
+		for key, raw := range typed {
+			text, ok := raw.(string)
+			if !ok {
+				continue
+			}
+			switch {
+			case (key == "source_ref" || key == "artifact_id") && strings.HasPrefix(text, "bering://discover?input="):
+				typed[key] = normalizedDiscoveryRef(text)
+			case key == "ref" && strings.HasSuffix(strings.ReplaceAll(text, "\\", "/"), "/procrustes/bering.overlay.yaml"):
+				typed[key] = "paper://procrustes/bering.overlay.yaml"
+			case key == "topology_version" && strings.HasPrefix(text, "sha256:"):
+				typed[key] = zeroDigest()
+			case key == "snapshot_id" && strings.HasPrefix(text, "snap-"):
+				typed[key] = "snap-000000000000000000000000"
+			case parent == "input_artifact" && key == "digest" && strings.HasPrefix(text, "sha256:"):
+				typed[key] = zeroDigest()
+			}
+		}
 		if id, ok := typed["id"].(string); ok && strings.HasSuffix(id, ".instrumentation") {
 			if evidence, ok := typed["evidence"].([]any); ok {
 				for _, raw := range evidence {
@@ -387,6 +455,22 @@ func normalize(value any, parent string) {
 			normalize(child, parent)
 		}
 	}
+}
+
+func normalizedDiscoveryRef(value string) string {
+	lower := strings.ToLower(value)
+	switch {
+	case strings.Contains(lower, "/otel-demo/") || strings.Contains(lower, "%2fotel-demo%2f"):
+		return "bering://discover?input=case://otel-demo/topology-api.yaml"
+	case strings.Contains(lower, "/social-network/") || strings.Contains(lower, "%2fsocial-network%2f"):
+		return "bering://discover?input=case://social-network/topology-api.yaml"
+	default:
+		return "bering://discover?input=case://unknown/topology-api.yaml"
+	}
+}
+
+func zeroDigest() string {
+	return "sha256:" + strings.Repeat("0", 64)
 }
 
 func writeReferenceCase(work, destination string) error {

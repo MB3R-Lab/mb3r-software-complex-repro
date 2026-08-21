@@ -6,8 +6,8 @@
       "uri": "https://mb3r-lab.github.io/Bering/schema/snapshot/v1.3.0/snapshot.schema.json",
       "version": "1.3.0"
     },
-    "snapshot_id": "snap-5134b939dd71ff418fb83ef7",
-    "topology_version": "sha256:84a568d62340587b2fe0588280c37e4b7716c9b46d1398ac16367cb2c5af8eda",
+    "snapshot_id": "snap-000000000000000000000000",
+    "topology_version": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
     "type": "snapshot",
     "window_end": "2026-08-21T00:00:00Z",
     "window_start": "2026-08-21T00:00:00Z"

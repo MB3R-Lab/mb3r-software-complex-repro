@@ -21,6 +21,12 @@ The command verifies source revisions, builds all three CLIs, runs both cases tw
 
 Override sibling locations with `PROCRUSTES_REPO`, `BERING_REPO`, or `SHEAFT_REPO`. Use `make reproduce-paper-update` only when intentionally accepting a new checked-in reference set after reviewing the toolchain diff.
 
+Maintainers can accept outputs downloaded from a completed CI run without rerunning the tools locally:
+
+```bash
+go run ./reproduce.go --accept-work-dir <downloaded-artifact-root>
+```
+
 Generated CI working files live under `.tmp/paper-reproduction/` and are uploaded as workflow artifacts. Checked-in references contain complete Procrustes reports and handoff artifacts, Bering models and quality reports, Sheaft reports, plus compact paper analytics.
 
 This repository contains no Procrustes, Bering, or Sheaft product source. The product repositories contain no paper reproduction workflow or paper outputs.
