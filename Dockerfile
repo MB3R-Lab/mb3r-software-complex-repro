@@ -1,11 +1,13 @@
 # syntax=docker/dockerfile:1.7
 
 ARG GO_VERSION=1.26.2
-FROM golang:${GO_VERSION}-bookworm AS builder
+FROM --platform=$BUILDPLATFORM golang:${GO_VERSION}-bookworm AS builder
 
 ARG PROCRUSTES_COMMIT
 ARG BERING_COMMIT
 ARG SHEAFT_COMMIT
+ARG TARGETOS
+ARG TARGETARCH
 
 RUN test -n "${PROCRUSTES_COMMIT}" \
     && test -n "${BERING_COMMIT}" \
@@ -28,23 +30,23 @@ RUN set -eux; \
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
     cd /src/Procrustes \
-    && CGO_ENABLED=0 go build -trimpath -o /out/procrustes ./cmd/procrustes
+    && CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/procrustes ./cmd/procrustes
 
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
     cd /src/Bering \
-    && CGO_ENABLED=0 go build -trimpath -o /out/bering ./cmd/bering
+    && CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/bering ./cmd/bering
 
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
     cd /src/Sheaft \
-    && CGO_ENABLED=0 go build -trimpath -o /out/sheaft ./cmd/sheaft
+    && CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/sheaft ./cmd/sheaft
 
 COPY go.mod reproduce.go /src/reproduction/
 RUN cd /src/reproduction \
-    && CGO_ENABLED=0 go build -trimpath -o /out/reproduce .
+    && CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/reproduce .
 
-FROM alpine:3.22
+FROM --platform=$TARGETPLATFORM alpine:3.22
 
 ARG TOOLCHAIN_VERSION
 ARG IMAGE_REVISION

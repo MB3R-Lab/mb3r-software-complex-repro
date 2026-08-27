@@ -4,7 +4,7 @@
   "toolchain": {
     "name": "mb3r-software-complex",
     "version": "1.2.0",
-    "status": "candidate",
+    "status": "verified",
     "mb3r_stack_manifest": "https://github.com/MB3R-Lab/mb3r-stack/blob/main/compat/stack-manifest.json"
   },
   "components": {
