@@ -75,19 +75,61 @@ type referenceManifest struct {
 	Aggregate        map[string]string            `json:"aggregate"`
 }
 
+type runOptions struct {
+	Update   bool
+	Prebuilt bool
+	CaseName string
+	Repeat   int
+	WorkRoot string
+}
+
 func main() {
 	update := flag.Bool("update-reference", false, "replace checked-in semantic reference outputs")
 	acceptWorkDir := flag.String("accept-work-dir", "", "normalize completed CI work outputs into the checked-in references without rerunning tools")
+	prebuilt := flag.Bool("prebuilt", false, "use Procrustes, Bering, and Sheaft binaries from PATH or *_BIN variables")
+	caseName := flag.String("case", "", "run one named case instead of the complete four-case reproduction")
+	repeat := flag.Int("repeat", 2, "number of identical executions used to check deterministic output")
+	workRoot := flag.String("work-dir", "", "directory for generated outputs (default: .tmp/paper-reproduction/work)")
+	listCases := flag.Bool("list-cases", false, "list available case names and exit")
 	flag.Parse()
+	if *listCases {
+		root, err := repositoryRoot()
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "reproduce-paper:", err)
+			os.Exit(1)
+		}
+		for _, c := range reproductionCases(root) {
+			fmt.Println(c.Name)
+		}
+		return
+	}
 	if *update && strings.TrimSpace(*acceptWorkDir) != "" {
 		fmt.Fprintln(os.Stderr, "reproduce-paper: --update-reference and --accept-work-dir are mutually exclusive")
+		os.Exit(1)
+	}
+	if *repeat < 1 {
+		fmt.Fprintln(os.Stderr, "reproduce-paper: --repeat must be at least 1")
+		os.Exit(1)
+	}
+	if *update && strings.TrimSpace(*caseName) != "" {
+		fmt.Fprintln(os.Stderr, "reproduce-paper: --update-reference requires the complete case set")
+		os.Exit(1)
+	}
+	if *update && *prebuilt {
+		fmt.Fprintln(os.Stderr, "reproduce-paper: --update-reference is disabled for packaged prebuilt binaries")
 		os.Exit(1)
 	}
 	var err error
 	if strings.TrimSpace(*acceptWorkDir) != "" {
 		err = acceptReferenceWork(*acceptWorkDir)
 	} else {
-		err = run(*update)
+		err = run(runOptions{
+			Update:   *update,
+			Prebuilt: *prebuilt,
+			CaseName: strings.TrimSpace(*caseName),
+			Repeat:   *repeat,
+			WorkRoot: strings.TrimSpace(*workRoot),
+		})
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "reproduce-paper:", err)
@@ -141,7 +183,7 @@ func acceptReferenceWork(workRoot string) error {
 	return nil
 }
 
-func run(update bool) error {
+func run(options runOptions) error {
 	root, err := repositoryRoot()
 	if err != nil {
 		return err
@@ -150,80 +192,62 @@ func run(update bool) error {
 	if err != nil {
 		return err
 	}
-	repos := map[string]string{
-		"procrustes": repositoryPath(root, "PROCRUSTES_REPO", "Procrustes"),
-		"bering":     repositoryPath(root, "BERING_REPO", "Bering"),
-		"sheaft":     repositoryPath(root, "SHEAFT_REPO", "Sheaft"),
-	}
-	for _, name := range []string{"procrustes", "bering", "sheaft"} {
-		pin, ok := manifest.Components[name]
-		if !ok {
-			return fmt.Errorf("toolchain manifest is missing %s", name)
-		}
-		actual, err := commandOutput(repos[name], "git", "rev-parse", "HEAD")
-		if err != nil {
-			return fmt.Errorf("read %s revision: %w", name, err)
-		}
-		if actual != pin.Source.Commit {
-			return fmt.Errorf("%s revision mismatch: got %s, want %s", name, actual, pin.Source.Commit)
-		}
-		fmt.Printf("pin-ok %-11s version=%s commit=%s\n", name, pin.Version, actual[:12])
-	}
-
 	tmp := filepath.Join(root, ".tmp", "paper-reproduction")
-	binDir := filepath.Join(tmp, "bin")
-	if err := os.MkdirAll(binDir, 0o755); err != nil {
-		return err
-	}
-	bins := map[string]string{}
-	for _, item := range []struct{ name, command string }{
-		{"procrustes", "./cmd/procrustes"},
-		{"bering", "./cmd/bering"},
-		{"sheaft", "./cmd/sheaft"},
-	} {
-		binary := filepath.Join(binDir, item.name+executableSuffix())
-		if err := runCommand("build "+item.name, repos[item.name], "go", "build", "-trimpath", "-o", binary, item.command); err != nil {
-			return err
-		}
-		bins[item.name] = binary
-	}
-
-	cases := reproductionCases(root)
-	allHashes := map[string]map[string]string{}
-	workRoot := filepath.Join(tmp, "work")
-	for _, c := range cases {
-		caseWork := filepath.Join(workRoot, c.Name)
-		if err := runCase(c, caseWork, bins); err != nil {
-			return err
-		}
-		first, err := semanticHashes(caseWork)
-		if err != nil {
-			return err
-		}
-		if err := runCase(c, caseWork, bins); err != nil {
-			return err
-		}
-		second, err := semanticHashes(caseWork)
-		if err != nil {
-			return err
-		}
-		if err := compareHashes(c.Name+" repeated run", first, second); err != nil {
-			return err
-		}
-		allHashes[c.Name] = second
-		fmt.Printf("stable %-14s files=%d\n", c.Name, len(second))
-	}
-	if err := writeAggregateComparison(workRoot, cases); err != nil {
-		return err
-	}
-	aggregateHashes, err := semanticHashesFor(workRoot, aggregateReferenceFiles)
+	bins, err := prepareBinaries(root, tmp, manifest, options.Prebuilt)
 	if err != nil {
 		return err
 	}
 
+	allCases := reproductionCases(root)
+	cases, err := selectCases(allCases, options.CaseName)
+	if err != nil {
+		return err
+	}
+	allHashes := map[string]map[string]string{}
+	workRoot := filepath.Join(tmp, "work")
+	if options.WorkRoot != "" {
+		workRoot, err = filepath.Abs(options.WorkRoot)
+		if err != nil {
+			return fmt.Errorf("resolve work directory: %w", err)
+		}
+	}
+	for _, c := range cases {
+		caseWork := filepath.Join(workRoot, c.Name)
+		var first, current map[string]string
+		for iteration := 1; iteration <= options.Repeat; iteration++ {
+			if err := runCase(c, caseWork, bins); err != nil {
+				return err
+			}
+			current, err = semanticHashes(caseWork)
+			if err != nil {
+				return err
+			}
+			if iteration == 1 {
+				first = current
+				continue
+			}
+			if err := compareHashes(c.Name+" repeated run", first, current); err != nil {
+				return err
+			}
+		}
+		allHashes[c.Name] = current
+		fmt.Printf("case-ok %-23s files=%d repeats=%d\n", c.Name, len(current), options.Repeat)
+	}
+	complete := len(cases) == len(allCases)
+	aggregateHashes := map[string]string{}
+	if complete {
+		if err := writeAggregateComparison(workRoot, cases); err != nil {
+			return err
+		}
+		aggregateHashes, err = semanticHashesFor(workRoot, aggregateReferenceFiles)
+		if err != nil {
+			return err
+		}
+	}
+
 	referenceRoot := filepath.Join(root, "reference")
 	wanted := newReferenceManifest(manifest.Toolchain.Version, allHashes, aggregateHashes)
-	if update {
+	if options.Update {
 		for _, c := range cases {
 			if err := writeReferenceCase(filepath.Join(workRoot, c.Name), filepath.Join(referenceRoot, c.Name)); err != nil {
 				return err
@@ -251,11 +275,91 @@ func run(update bool) error {
 			return err
 		}
 	}
-	if err := compareHashes("aggregate reference", current.Aggregate, wanted.Aggregate); err != nil {
-		return err
+	if complete {
+		if err := compareHashes("aggregate reference", current.Aggregate, wanted.Aggregate); err != nil {
+			return err
+		}
 	}
-	fmt.Printf("reproduce-paper-ok toolchain=%s cases=%d\n", manifest.Toolchain.Version, len(cases))
+	fmt.Printf("reproduce-paper-ok toolchain=%s cases=%d repeats=%d\n", manifest.Toolchain.Version, len(cases), options.Repeat)
 	return nil
+}
+
+func selectCases(cases []caseSpec, name string) ([]caseSpec, error) {
+	if name == "" {
+		return cases, nil
+	}
+	for _, c := range cases {
+		if c.Name == name {
+			return []caseSpec{c}, nil
+		}
+	}
+	available := make([]string, 0, len(cases))
+	for _, c := range cases {
+		available = append(available, c.Name)
+	}
+	return nil, fmt.Errorf("unknown case %q (available: %s)", name, strings.Join(available, ", "))
+}
+
+func prepareBinaries(root, tmp string, manifest toolchainLock, prebuilt bool) (map[string]string, error) {
+	components := []struct {
+		name, command, repositoryEnv, sibling, binaryEnv string
+	}{
+		{"procrustes", "./cmd/procrustes", "PROCRUSTES_REPO", "Procrustes", "PROCRUSTES_BIN"},
+		{"bering", "./cmd/bering", "BERING_REPO", "Bering", "BERING_BIN"},
+		{"sheaft", "./cmd/sheaft", "SHEAFT_REPO", "Sheaft", "SHEAFT_BIN"},
+	}
+	bins := map[string]string{}
+	if prebuilt {
+		for _, item := range components {
+			pin, ok := manifest.Components[item.name]
+			if !ok {
+				return nil, fmt.Errorf("toolchain manifest is missing %s", item.name)
+			}
+			binary := strings.TrimSpace(os.Getenv(item.binaryEnv))
+			if binary == "" {
+				var err error
+				binary, err = exec.LookPath(item.name + executableSuffix())
+				if err != nil {
+					return nil, fmt.Errorf("locate prebuilt %s binary: %w", item.name, err)
+				}
+			}
+			if info, err := os.Stat(binary); err != nil || info.IsDir() {
+				return nil, fmt.Errorf("prebuilt %s binary is not readable at %s", item.name, binary)
+			}
+			bins[item.name] = binary
+			fmt.Printf("binary-ok %-11s version=%s commit=%s\n", item.name, pin.Version, pin.Source.Commit[:12])
+		}
+		return bins, nil
+	}
+
+	repos := map[string]string{}
+	for _, item := range components {
+		repos[item.name] = repositoryPath(root, item.repositoryEnv, item.sibling)
+		pin, ok := manifest.Components[item.name]
+		if !ok {
+			return nil, fmt.Errorf("toolchain manifest is missing %s", item.name)
+		}
+		actual, err := commandOutput(repos[item.name], "git", "rev-parse", "HEAD")
+		if err != nil {
+			return nil, fmt.Errorf("read %s revision: %w", item.name, err)
+		}
+		if actual != pin.Source.Commit {
+			return nil, fmt.Errorf("%s revision mismatch: got %s, want %s", item.name, actual, pin.Source.Commit)
+		}
+		fmt.Printf("pin-ok %-11s version=%s commit=%s\n", item.name, pin.Version, actual[:12])
+	}
+	binDir := filepath.Join(tmp, "bin")
+	if err := os.MkdirAll(binDir, 0o755); err != nil {
+		return nil, err
+	}
+	for _, item := range components {
+		binary := filepath.Join(binDir, item.name+executableSuffix())
+		if err := runCommand("build "+item.name, repos[item.name], "go", "build", "-trimpath", "-o", binary, item.command); err != nil {
+			return nil, err
+		}
+		bins[item.name] = binary
+	}
+	return bins, nil
 }
 
 func reproductionCases(root string) []caseSpec {
@@ -768,11 +872,30 @@ func compareHashes(label string, want, got map[string]string) error {
 }
 
 func repositoryRoot() (string, error) {
-	_, file, _, ok := runtime.Caller(0)
-	if !ok {
-		return "", errors.New("cannot locate reproduction source")
+	if configured := strings.TrimSpace(os.Getenv("REPRODUCTION_ROOT")); configured != "" {
+		root, err := filepath.Abs(configured)
+		if err != nil {
+			return "", fmt.Errorf("resolve REPRODUCTION_ROOT: %w", err)
+		}
+		if _, err := os.Stat(filepath.Join(root, "toolchain-lock.json")); err != nil {
+			return "", fmt.Errorf("REPRODUCTION_ROOT %s does not contain toolchain-lock.json", root)
+		}
+		return root, nil
 	}
-	return filepath.Dir(file), nil
+	_, file, _, ok := runtime.Caller(0)
+	if ok {
+		root := filepath.Dir(file)
+		if _, err := os.Stat(filepath.Join(root, "toolchain-lock.json")); err == nil {
+			return root, nil
+		}
+	}
+	workingDirectory, err := os.Getwd()
+	if err == nil {
+		if _, statErr := os.Stat(filepath.Join(workingDirectory, "toolchain-lock.json")); statErr == nil {
+			return workingDirectory, nil
+		}
+	}
+	return "", errors.New("cannot locate reproduction root; set REPRODUCTION_ROOT")
 }
 
 func repositoryPath(root, envName, sibling string) string {

@@ -9,7 +9,8 @@ permissions:
   contents: read
 
 jobs:
-  reproduce:
+  source-reproduction:
+    name: Verify locked source toolchain
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -73,3 +74,105 @@ jobs:
           path: reproduction/.tmp/paper-reproduction/work
           if-no-files-found: warn
           retention-days: 14
+
+  container-smoke:
+    name: Verify reviewer container
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out reproduction repository
+        uses: actions/checkout@v4
+
+      - name: Read toolchain lock
+        id: lock
+        shell: bash
+        run: |
+          echo "toolchain_version=$(jq -r '.toolchain.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "procrustes_commit=$(jq -r '.components.procrustes.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "bering_commit=$(jq -r '.components.bering.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "sheaft_commit=$(jq -r '.components.sheaft.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build local reviewer image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: mb3r-software-complex-repro:test
+          build-args: |
+            TOOLCHAIN_VERSION=${{ steps.lock.outputs.toolchain_version }}
+            IMAGE_REVISION=${{ github.sha }}
+            PROCRUSTES_COMMIT=${{ steps.lock.outputs.procrustes_commit }}
+            BERING_COMMIT=${{ steps.lock.outputs.bering_commit }}
+            SHEAFT_COMMIT=${{ steps.lock.outputs.sheaft_commit }}
+          cache-from: type=gha,scope=reviewer-container
+          cache-to: type=gha,mode=max,scope=reviewer-container
+
+      - name: Run default reviewer demonstration
+        run: docker run --rm mb3r-software-complex-repro:test
+
+      - name: Run alternate packaged case
+        run: docker run --rm mb3r-software-complex-repro:test --case otel-demo-async --repeat 1
+
+  publish-container:
+    name: Publish versioned reviewer container
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [source-reproduction, container-smoke]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: Check out reproduction repository
+        uses: actions/checkout@v4
+
+      - name: Read toolchain lock
+        id: lock
+        shell: bash
+        run: |
+          echo "toolchain_version=$(jq -r '.toolchain.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "procrustes_commit=$(jq -r '.components.procrustes.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "bering_commit=$(jq -r '.components.bering.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "sheaft_commit=$(jq -r '.components.sheaft.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and publish multi-platform image
+        id: publish
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-${{ steps.lock.outputs.toolchain_version }}
+            ghcr.io/mb3r-lab/mb3r-software-complex-repro:latest
+          build-args: |
+            TOOLCHAIN_VERSION=${{ steps.lock.outputs.toolchain_version }}
+            IMAGE_REVISION=${{ github.sha }}
+            PROCRUSTES_COMMIT=${{ steps.lock.outputs.procrustes_commit }}
+            BERING_COMMIT=${{ steps.lock.outputs.bering_commit }}
+            SHEAFT_COMMIT=${{ steps.lock.outputs.sheaft_commit }}
+          cache-from: type=gha,scope=reviewer-container
+          cache-to: type=gha,mode=max,scope=reviewer-container
+          provenance: mode=max
+          sbom: true
+
+      - name: Record published digest
+        shell: bash
+        run: echo "Published digest \`${{ steps.publish.outputs.digest }}\`" >> "$GITHUB_STEP_SUMMARY"

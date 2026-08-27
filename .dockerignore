@@ -1,0 +1,10 @@
+.git
+.github
+.tmp
+docs
+*.exe
+LICENSE
+README.md
+CONTRIBUTION_BOUNDARY.md
+Makefile
+compose.yaml

@@ -1,0 +1,8 @@
+services:
+  demo:
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0
+    pull_policy: always
+  reproduce:
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0
+    pull_policy: always
+    command: ["--repeat", "2"]

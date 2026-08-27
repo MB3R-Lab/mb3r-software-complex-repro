@@ -1,40 +1,92 @@
-# Software-complex paper reproduction
+# Procrustes-Bering-Sheaft demonstration artifact
 
-This standalone repository contains the workflow and evidence for reproducing the software-toolchain results of Procrustes → Bering → Sheaft on two archived systems:
+[![Reproduce software-complex results](https://github.com/MB3R-Lab/mb3r-software-complex-repro/actions/workflows/reproduce.yml/badge.svg)](https://github.com/MB3R-Lab/mb3r-software-complex-repro/actions/workflows/reproduce.yml)
 
-- OpenTelemetry Demo, using the archived representative 16-service trace-discovered graph, all four published endpoint predicates, both edge semantics, and all five failure fractions from the [published AINA 2026 study](https://doi.org/10.1007/978-3-032-23304-2_24);
-- DeathStarBench Social Network, using the archived 12-service Jaeger dependency graph, replica map, endpoint predicates, and workload weights from the [published ICSE-NIER 2026 study](https://doi.org/10.1145/3786582.3786823).
+This repository is the standalone demonstration and reproduction artifact for the Procrustes → Bering → Sheaft resilience-analysis toolchain. It packages pinned builds, archived evidence fixtures, published baselines, reference outputs, and the workflow that connects the three tools.
 
-It deliberately performs no live deployment, trace collection, load test, or chaos experiment. Static evidence is inspected by Procrustes; the resulting overlay is consumed by Bering; the Bering model is consumed by Sheaft. Analytics are derived by the Go reproduction program from tool outputs, not by standalone Python simulation scripts.
+The artifact covers two published studies:
 
-## Run
+- OpenTelemetry Demo: the representative 16-service trace-discovered graph, four endpoint predicates, both edge semantics, and all five failure fractions from the [AINA 2026 article](https://doi.org/10.1007/978-3-032-23304-2_24);
+- DeathStarBench Social Network: the archived 12-service Jaeger dependency graph, both replica modes, endpoint predicates, workload weights, and all five failure fractions from the [ICSE-NIER 2026 article](https://doi.org/10.1145/3786582.3786823).
 
-The canonical run is the GitHub Actions workflow in `.github/workflows/reproduce.yml`. It reads exact revisions from `toolchain-lock.json`, checks out all three software repositories, builds their CLIs, runs four case variants twice, and compares the results with the checked-in semantic references.
+No deployment, trace collection, load generation, or chaos experiment is performed. Procrustes inspects static evidence, Bering constructs the resilience model, and Sheaft calculates the reported profiles. The Go artifact runner only orchestrates those CLIs, checks their outputs, and calculates comparison statistics; it does not reimplement the resilience analysis.
 
-For an optional developer run, prerequisites are Go and sibling checkouts named `Procrustes`, `Bering`, and `Sheaft` next to this repository. Their exact revisions must match `toolchain-lock.json`.
+## Quick start
+
+Prerequisite: Docker with Compose support. No Go installation or source build is required.
+
+```bash
+git clone https://github.com/MB3R-Lab/mb3r-software-complex-repro.git
+cd mb3r-software-complex-repro
+docker compose run --rm demo
+```
+
+The demo pulls the versioned container and runs the replicated Social Network case once through all three tools. Success ends with:
+
+```text
+reproduce-paper-ok toolchain=1.2.0 cases=1 repeats=1
+```
+
+The equivalent command without Compose is:
+
+```bash
+docker run --rm --pull=always \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0
+```
+
+## Full reproduction
+
+Run all four case variants twice, verify deterministic semantic outputs, and compare every aggregate row reported by both articles:
+
+```bash
+docker compose run --rm reproduce
+```
+
+The complete readable comparison is checked in as [`reference/FULL_COMPARISON.md`](reference/FULL_COMPARISON.md). Machine-readable row deltas, MAE, RMSE, maximum and signed error, and Pearson correlation are in [`reference/comparison.json`](reference/comparison.json).
+
+Available cases can be listed or selected directly:
+
+```bash
+docker run --rm \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0 \
+  --list-cases
+
+docker run --rm \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0 \
+  --case otel-demo-async --repeat 1
+```
+
+## What is verified
+
+- the exact component revisions in [`toolchain-lock.json`](toolchain-lock.json);
+- the Procrustes preflight report and Procrustes-to-Bering overlay;
+- the Bering model, discovery snapshot, and quality reports;
+- the Sheaft model, report, endpoint results, and sweeps;
+- semantic stability across repeated executions after documented normalization of runtime-only fields;
+- complete row-level comparison with Social Network Table 1 and OpenTelemetry Demo Table 2.
+
+The canonical source-build run is the [GitHub Actions workflow](https://github.com/MB3R-Lab/mb3r-software-complex-repro/actions/workflows/reproduce.yml). It checks out the locked revisions of [Procrustes](https://github.com/MB3R-Lab/Procrustes), [Bering](https://github.com/MB3R-Lab/Bering), and [Sheaft](https://github.com/MB3R-Lab/Sheaft), then independently verifies the same checked-in references.
+
+## Documentation
+
+- [`docs/manual.md`](docs/manual.md): commands, output locations, and reviewer walkthrough;
+- [`docs/architecture.md`](docs/architecture.md): component responsibilities and handoff contracts;
+- [`docs/data-provenance.md`](docs/data-provenance.md): origin and transformation of case inputs and published baselines;
+- [`docs/troubleshooting.md`](docs/troubleshooting.md): common Docker, platform, and verification failures;
+- [`CONTRIBUTION_BOUNDARY.md`](CONTRIBUTION_BOUNDARY.md): claims supported by this artifact and claims deliberately excluded.
+
+## Maintainer source run
+
+A source run is optional and is not the reviewer path. It requires Go plus sibling checkouts named `Procrustes`, `Bering`, and `Sheaft` at the exact commits in `toolchain-lock.json`.
 
 ```bash
 make reproduce-paper
 ```
 
-The command verifies source revisions, builds all three CLIs, runs both cases twice, checks semantic byte stability after removal of explicitly documented runtime fields, and compares the outputs with `reference/manifest.json`.
+Override checkout locations with `PROCRUSTES_REPO`, `BERING_REPO`, and `SHEAFT_REPO`. Use `make reproduce-paper-update` only after intentionally changing the locked toolchain or case inputs and reviewing the resulting reference diff.
 
-Override sibling locations with `PROCRUSTES_REPO`, `BERING_REPO`, or `SHEAFT_REPO`. Use `make reproduce-paper-update` only when intentionally accepting a new checked-in reference set after reviewing the toolchain diff.
+Generated files are written below `.tmp/paper-reproduction/`. The product repositories contain neither this workflow nor paper-specific outputs.
 
-Maintainers can accept outputs downloaded from a completed CI run without rerunning the tools locally:
+## License
 
-```bash
-go run ./reproduce.go --accept-work-dir <downloaded-artifact-root>
-```
-
-Generated CI working files live under `.tmp/paper-reproduction/` and are uploaded as workflow artifacts. Checked-in references contain complete Procrustes reports and handoff artifacts, Bering models and quality reports, Sheaft reports, compact case analytics, `comparison.json`, and `FULL_COMPARISON.md`.
-
-This repository contains no Procrustes, Bering, or Sheaft product source. The product repositories contain no paper reproduction workflow or paper outputs.
-
-## Evidence provenance
-
-The topology inputs are normalized copies of existing archived results. Absolute workstation paths were replaced by stable `archive://` references; topology, replica counts, endpoint targets, and workload weights were not re-estimated here. The static manifests and tracing snippets are minimal, self-contained evidence fixtures derived from the corresponding deployments and are used only to exercise Procrustes' preflight contract.
-
-Each case contains `publication.json` with the publisher DOI, proceedings location, artifact DOI, and all reported table values. The workflow compares Sheaft with every row of Social Network Table 1 (both replica modes) and OpenTelemetry Table 2 (both edge semantics), and records row deltas plus MAE, RMSE, maximum error, signed error, and Pearson correlation. The OpenTelemetry comparison uses the archived representative graph while the publication table aggregates archived graph runs; that distinction is retained in the metadata and conclusions.
-
-See [CONTRIBUTION_BOUNDARY.md](CONTRIBUTION_BOUNDARY.md) for the publication claim boundary.
+The artifact runner and repository documentation are available under the [MIT License](LICENSE). Fixture provenance and upstream notices are documented in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
