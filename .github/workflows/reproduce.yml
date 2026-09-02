@@ -66,6 +66,14 @@ jobs:
           SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
         run: make reproduce-paper
 
+      - name: Verify expected-failure walkthroughs
+        working-directory: reproduction
+        env:
+          PROCRUSTES_REPO: ${{ github.workspace }}/toolchain/Procrustes
+          BERING_REPO: ${{ github.workspace }}/toolchain/Bering
+          SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
+        run: make reproduce-paper-failures
+
       - name: Upload generated outputs
         if: always()
         uses: actions/upload-artifact@v4
@@ -115,6 +123,9 @@ jobs:
 
       - name: Run alternate packaged case
         run: docker run --rm mb3r-software-complex-repro:test --case otel-demo-async --repeat 1
+
+      - name: Run packaged expected-failure walkthroughs
+        run: docker run --rm mb3r-software-complex-repro:test --failure-walkthroughs
 
   publish-container:
     name: Publish versioned reviewer container

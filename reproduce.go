@@ -76,11 +76,12 @@ type referenceManifest struct {
 }
 
 type runOptions struct {
-	Update   bool
-	Prebuilt bool
-	CaseName string
-	Repeat   int
-	WorkRoot string
+	Update              bool
+	Prebuilt            bool
+	FailureWalkthroughs bool
+	CaseName            string
+	Repeat              int
+	WorkRoot            string
 }
 
 func main() {
@@ -91,6 +92,7 @@ func main() {
 	repeat := flag.Int("repeat", 2, "number of identical executions used to check deterministic output")
 	workRoot := flag.String("work-dir", "", "directory for generated outputs (default: .tmp/paper-reproduction/work)")
 	listCases := flag.Bool("list-cases", false, "list available case names and exit")
+	failureWalkthroughs := flag.Bool("failure-walkthroughs", false, "run the two expected-failure reviewer walkthroughs")
 	flag.Parse()
 	if *listCases {
 		root, err := repositoryRoot()
@@ -115,6 +117,10 @@ func main() {
 		fmt.Fprintln(os.Stderr, "reproduce-paper: --update-reference requires the complete case set")
 		os.Exit(1)
 	}
+	if *failureWalkthroughs && (*update || strings.TrimSpace(*acceptWorkDir) != "" || strings.TrimSpace(*caseName) != "") {
+		fmt.Fprintln(os.Stderr, "reproduce-paper: --failure-walkthroughs cannot be combined with reference updates or --case")
+		os.Exit(1)
+	}
 	if *update && *prebuilt {
 		fmt.Fprintln(os.Stderr, "reproduce-paper: --update-reference is disabled for packaged prebuilt binaries")
 		os.Exit(1)
@@ -124,11 +130,12 @@ func main() {
 		err = acceptReferenceWork(*acceptWorkDir)
 	} else {
 		err = run(runOptions{
-			Update:   *update,
-			Prebuilt: *prebuilt,
-			CaseName: strings.TrimSpace(*caseName),
-			Repeat:   *repeat,
-			WorkRoot: strings.TrimSpace(*workRoot),
+			Update:              *update,
+			Prebuilt:            *prebuilt,
+			FailureWalkthroughs: *failureWalkthroughs,
+			CaseName:            strings.TrimSpace(*caseName),
+			Repeat:              *repeat,
+			WorkRoot:            strings.TrimSpace(*workRoot),
 		})
 	}
 	if err != nil {
@@ -211,6 +218,13 @@ func run(options runOptions) error {
 			return fmt.Errorf("resolve work directory: %w", err)
 		}
 	}
+	if options.FailureWalkthroughs {
+		if err := runFailureWalkthroughs(root, filepath.Join(workRoot, "failure-walkthroughs"), bins); err != nil {
+			return err
+		}
+		fmt.Printf("failure-walkthroughs-ok toolchain=%s scenarios=2\n", manifest.Toolchain.Version)
+		return nil
+	}
 	for _, c := range cases {
 		caseWork := filepath.Join(workRoot, c.Name)
 		var first, current map[string]string
@@ -281,6 +295,121 @@ func run(options runOptions) error {
 		}
 	}
 	fmt.Printf("reproduce-paper-ok toolchain=%s cases=%d repeats=%d\n", manifest.Toolchain.Version, len(cases), options.Repeat)
+	return nil
+}
+
+func runFailureWalkthroughs(root, work string, bins map[string]string) error {
+	if err := os.RemoveAll(work); err != nil {
+		return err
+	}
+	if err := os.MkdirAll(work, 0o755); err != nil {
+		return err
+	}
+	if err := runProcrustesBlockedWalkthrough(root, filepath.Join(work, "procrustes-blocked"), bins["procrustes"]); err != nil {
+		return err
+	}
+	if err := runSheaftContractWalkthrough(root, filepath.Join(work, "sheaft-contract-rejection"), bins["sheaft"]); err != nil {
+		return err
+	}
+	return writeJSON(filepath.Join(work, "summary.json"), map[string]any{
+		"schema_version": "1.0.0",
+		"scenarios":      []string{"procrustes-blocked", "sheaft-contract-rejection"},
+		"status":         "EXPECTED_FAILURES_OBSERVED",
+	})
+}
+
+func runProcrustesBlockedWalkthrough(root, work, binary string) error {
+	fixture := filepath.Join(root, "cases", "failure-walkthroughs", "procrustes-blocked")
+	outDir := filepath.Join(work, "output")
+	if err := os.MkdirAll(outDir, 0o755); err != nil {
+		return err
+	}
+	exitCode, output, err := runCommandWithExit(fixture, binary,
+		"analyze", "--source", "incomplete="+filepath.Join(fixture, "static"),
+		"--goal", filepath.Join(fixture, "goal.yaml"), "--out-dir", outDir, "--fail-on-blocked")
+	if err != nil {
+		return fmt.Errorf("procrustes blocked walkthrough: %w", err)
+	}
+	if exitCode != 2 {
+		return fmt.Errorf("procrustes blocked walkthrough: exit code %d, want 2\n%s", exitCode, output)
+	}
+	var report map[string]any
+	if err := readJSON(filepath.Join(outDir, "report.json"), &report); err != nil {
+		return fmt.Errorf("procrustes blocked walkthrough report: %w", err)
+	}
+	if status := stringAt(report, "goal_status"); status != "BLOCKED" {
+		return fmt.Errorf("procrustes blocked walkthrough: goal_status %q, want BLOCKED", status)
+	}
+	blockers := arrayAt(report, "blockers")
+	if len(blockers) == 0 {
+		return errors.New("procrustes blocked walkthrough: expected at least one blocker")
+	}
+	ruleSet := make(map[string]struct{}, len(blockers))
+	for _, raw := range blockers {
+		if blocker, ok := raw.(map[string]any); ok {
+			if rule := stringAt(blocker, "rule_id"); rule != "" {
+				ruleSet[rule] = struct{}{}
+			}
+		}
+	}
+	rules := make([]string, 0, len(ruleSet))
+	for rule := range ruleSet {
+		rules = append(rules, rule)
+	}
+	sort.Strings(rules)
+	if len(rules) == 0 {
+		return errors.New("procrustes blocked walkthrough: blockers contain no rule_id values")
+	}
+	if err := writeJSON(filepath.Join(work, "result.json"), map[string]any{
+		"schema_version":     "1.0.0",
+		"scenario":           "procrustes-blocked",
+		"expected_outcome":   "BLOCKED",
+		"observed_exit_code": exitCode,
+		"goal_status":        "BLOCKED",
+		"blocker_count":      len(blockers),
+		"blocker_rules":      rules,
+		"evidence":           []string{"output/report.json", "output/summary.md", "output/collection-plan.json"},
+	}); err != nil {
+		return err
+	}
+	fmt.Printf("failure-ok %-27s exit=%d blockers=%d rules=%d\n", "procrustes-blocked", exitCode, len(blockers), len(rules))
+	return nil
+}
+
+func runSheaftContractWalkthrough(root, work, binary string) error {
+	fixture := filepath.Join(root, "cases", "failure-walkthroughs", "sheaft-contract-rejection")
+	if err := os.MkdirAll(work, 0o755); err != nil {
+		return err
+	}
+	reportPath := filepath.Join(work, "report.json")
+	exitCode, output, err := runCommandWithExit(fixture, binary,
+		"simulate", "--model", filepath.Join(fixture, "unsupported-model.json"),
+		"--analysis", filepath.Join(fixture, "analysis.yaml"), "--out", reportPath)
+	if err != nil {
+		return fmt.Errorf("sheaft contract walkthrough: %w", err)
+	}
+	const rejection = "unsupported contract io.mb3r.bering.model@1.0.1; supported contracts:"
+	if exitCode != 1 {
+		return fmt.Errorf("sheaft contract walkthrough: exit code %d, want 1\n%s", exitCode, output)
+	}
+	if !strings.Contains(output, rejection) {
+		return fmt.Errorf("sheaft contract walkthrough: expected rejection %q\n%s", rejection, output)
+	}
+	if _, err := os.Stat(reportPath); !os.IsNotExist(err) {
+		return errors.New("sheaft contract walkthrough: rejected input unexpectedly produced report.json")
+	}
+	if err := writeJSON(filepath.Join(work, "result.json"), map[string]any{
+		"schema_version":       "1.0.0",
+		"scenario":             "sheaft-contract-rejection",
+		"expected_outcome":     "UNSUPPORTED_CONTRACT_REJECTED",
+		"observed_exit_code":   exitCode,
+		"rejected_contract":    "io.mb3r.bering.model@1.0.1",
+		"accepted_contract":    "io.mb3r.bering.model@1.3.0",
+		"analysis_report_made": false,
+	}); err != nil {
+		return err
+	}
+	fmt.Printf("failure-ok %-27s exit=%d report_created=false\n", "sheaft-contract-rejection", exitCode)
 	return nil
 }
 
@@ -927,6 +1056,21 @@ func runCommand(label, dir, name string, args ...string) error {
 		return fmt.Errorf("%s: %w\n%s", label, err, strings.TrimSpace(output.String()))
 	}
 	return nil
+}
+
+func runCommandWithExit(dir, name string, args ...string) (int, string, error) {
+	cmd := exec.Command(name, args...)
+	cmd.Dir = dir
+	raw, err := cmd.CombinedOutput()
+	output := strings.TrimSpace(string(raw))
+	if err == nil {
+		return 0, output, nil
+	}
+	var exitErr *exec.ExitError
+	if errors.As(err, &exitErr) {
+		return exitErr.ExitCode(), output, nil
+	}
+	return -1, output, err
 }
 
 func commandOutput(dir, name string, args ...string) (string, error) {

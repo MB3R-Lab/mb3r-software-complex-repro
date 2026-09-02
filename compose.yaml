@@ -1,8 +1,12 @@
 services:
   demo:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1
     pull_policy: always
+  failures:
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1
+    pull_policy: always
+    command: ["--failure-walkthroughs"]
   reproduce:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1
     pull_policy: always
     command: ["--repeat", "2"]

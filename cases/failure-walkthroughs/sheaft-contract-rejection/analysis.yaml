@@ -1,0 +1,11 @@
+schema_version: "1.2"
+seed: 7
+trials: 100
+profiles:
+  - name: p10
+    sampling_mode: fixed_k_replica_slots
+    failure_probability: 0.10
+gate:
+  mode: report
+  default_action: report
+  global_threshold: 0.0

@@ -32,6 +32,8 @@ archived configuration and topology
 
 The artifact runner invokes pinned public CLI contracts. It does not import internal packages from the three tools and does not calculate the resilience model independently.
 
+The separate fail-closed path stops at the boundary under test: incomplete evidence is retained as a Procrustes `BLOCKED` report, while an unsupported Bering contract is rejected by Sheaft before simulation. Canonical `result.json` records make both outcomes inspectable without treating an expected process failure as an artifact failure.
+
 ## Component responsibilities
 
 | Component | Input in this artifact | Responsibility | Output consumed downstream |

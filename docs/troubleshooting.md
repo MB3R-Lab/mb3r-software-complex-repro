@@ -16,7 +16,7 @@ Both commands must succeed before the artifact can start.
 Confirm the exact lowercase image name and version:
 
 ```bash
-docker pull ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0
+docker pull ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1
 ```
 
 No registry login is required for the public artifact. A `manifest unknown` response normally means the tag was typed incorrectly or the release workflow has not completed.
@@ -32,7 +32,7 @@ On Linux, run the container with the host user identity:
 ```bash
 docker run --rm --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=$PWD/output,target=/output" \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1 \
   --repeat 2 --work-dir /output
 ```
 
@@ -44,7 +44,7 @@ A mismatch is reported with the semantic file and expected/actual SHA-256 values
 
 Check, in order:
 
-1. the container tag is `toolchain-1.2.0`;
+1. the container tag is `toolchain-1.2.1`;
 2. local case files have not replaced files inside a bind-mounted artifact root;
 3. a source run uses the exact commits in `toolchain-lock.json`;
 4. the mismatch is not caused by an intentional reviewed toolchain change.

@@ -1,0 +1,29 @@
+{
+  "services": [
+    {
+      "id": "frontend",
+      "name": "frontend",
+      "replicas": 1
+    }
+  ],
+  "edges": [],
+  "endpoints": [
+    {
+      "id": "frontend:GET /health",
+      "entry_service": "frontend",
+      "success_predicate_ref": "frontend:GET /health"
+    }
+  ],
+  "metadata": {
+    "source_type": "bering",
+    "source_ref": "bering://unsupported-contract-walkthrough",
+    "discovered_at": "2026-08-21T00:00:00Z",
+    "confidence": 0.8,
+    "schema": {
+      "name": "io.mb3r.bering.model",
+      "version": "1.0.1",
+      "uri": "https://mb3r-lab.github.io/Bering/schema/model/v1.0.1/model.schema.json",
+      "digest": "sha256:deadbeef"
+    }
+  }
+}

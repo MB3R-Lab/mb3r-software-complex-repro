@@ -11,7 +11,7 @@ Install Docker with Compose support and ensure the Docker daemon is running. The
 The published image is:
 
 ```text
-ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0
+ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1
 ```
 
 ## Reviewer walkthrough
@@ -33,7 +33,7 @@ The command performs these steps on the `social-network-repl` fixture:
 The final line must be:
 
 ```text
-reproduce-paper-ok toolchain=1.2.0 cases=1 repeats=1
+reproduce-paper-ok toolchain=1.2.1 cases=1 repeats=1
 ```
 
 ### 2. Inspect the generated evidence
@@ -66,11 +66,25 @@ This runs:
 
 Every case is executed twice. The runner first checks equality between the two semantic runs and then checks the final hashes against `reference/manifest.json`. It also regenerates and verifies `comparison.json` and `FULL_COMPARISON.md`.
 
-### 4. Run one alternative case
+### 4. Inspect fail-closed behavior
+
+```bash
+docker compose run --rm failures
+```
+
+This is a separate two-scenario walkthrough, not an additional scientific experiment. It verifies that incomplete static evidence makes Procrustes emit a stored `BLOCKED` assessment and exit with code `2`, and that Sheaft rejects an unsupported Bering contract before creating an analysis report. Inspect the generated canonical evidence under `failure-walkthroughs/` when using a bind-mounted `--work-dir`.
+
+The final line must be:
+
+```text
+failure-walkthroughs-ok toolchain=1.2.1 scenarios=2
+```
+
+### 5. Run one alternative case
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -78,7 +92,7 @@ List accepted names with:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1 \
   --list-cases
 ```
 
@@ -90,7 +104,7 @@ On Linux or macOS:
 mkdir -p output
 docker run --rm --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=$PWD/output,target=/output" \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1 \
   --repeat 2 --work-dir /output
 ```
 
@@ -101,7 +115,7 @@ New-Item -ItemType Directory -Force output
 $artifactOutput = (Resolve-Path output).Path
 docker run --rm `
   --mount "type=bind,source=$artifactOutput,target=/output" `
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0 `
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1 `
   --repeat 2 --work-dir /output
 ```
 
@@ -119,6 +133,7 @@ The source-build path verifies that the current checkouts match the locked commi
 
 ```bash
 make reproduce-paper
+make reproduce-paper-failures
 ```
 
 It is intentionally separate from the container path and is not required of reviewers.

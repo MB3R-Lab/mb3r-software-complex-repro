@@ -24,14 +24,14 @@ docker compose run --rm demo
 The demo pulls the versioned container and runs the replicated Social Network case once through all three tools. Success ends with:
 
 ```text
-reproduce-paper-ok toolchain=1.2.0 cases=1 repeats=1
+reproduce-paper-ok toolchain=1.2.1 cases=1 repeats=1
 ```
 
 The equivalent command without Compose is:
 
 ```bash
 docker run --rm --pull=always \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1
 ```
 
 ## Full reproduction
@@ -48,12 +48,26 @@ Available cases can be listed or selected directly:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1 \
   --list-cases
 
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1 \
   --case otel-demo-async --repeat 1
+```
+
+## Fail-closed walkthroughs
+
+Run the two short negative demonstrations independently of the four scientific-result cases:
+
+```bash
+docker compose run --rm failures
+```
+
+The first supplies incomplete static evidence to Procrustes and requires exit code `2`, a `BLOCKED` goal, and explicit blocker rules. The second supplies an unsupported Bering model contract to Sheaft and requires exit code `1`, the precise compatibility rejection, and no generated analysis report. The wrapper returns success only when both expected failures are observed and ends with:
+
+```text
+failure-walkthroughs-ok toolchain=1.2.1 scenarios=2
 ```
 
 ## What is verified
@@ -64,6 +78,7 @@ docker run --rm \
 - the Sheaft model, report, endpoint results, and sweeps;
 - semantic stability across repeated executions after documented normalization of runtime-only fields;
 - complete row-level comparison with Social Network Table 1 and OpenTelemetry Demo Table 2.
+- fail-closed behavior for incomplete Procrustes evidence and an unsupported Bering-to-Sheaft contract.
 
 The canonical source-build run is the [GitHub Actions workflow](https://github.com/MB3R-Lab/mb3r-software-complex-repro/actions/workflows/reproduce.yml). It checks out the locked revisions of [Procrustes](https://github.com/MB3R-Lab/Procrustes), [Bering](https://github.com/MB3R-Lab/Bering), and [Sheaft](https://github.com/MB3R-Lab/Sheaft), then independently verifies the same checked-in references.
 
@@ -81,6 +96,7 @@ A source run is optional and is not the reviewer path. It requires Go plus sibli
 
 ```bash
 make reproduce-paper
+make reproduce-paper-failures
 ```
 
 Override checkout locations with `PROCRUSTES_REPO`, `BERING_REPO`, and `SHEAFT_REPO`. Use `make reproduce-paper-update` only after intentionally changing the locked toolchain or case inputs and reviewing the resulting reference diff.

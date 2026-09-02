@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "toolchain_release": "1.2.0",
+  "toolchain_release": "1.2.1",
   "discovered_at": "2026-08-21T00:00:00Z",
   "normalization": [
     "remove generated_at and recompute_duration_ms",
