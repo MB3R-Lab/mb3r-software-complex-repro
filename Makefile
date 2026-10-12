@@ -1,10 +1,13 @@
 GO ?= go
 DOCKER_COMPOSE ?= docker compose
 
-.PHONY: demo failure-walkthroughs reproduce reproduce-paper reproduce-paper-failures reproduce-paper-update verify-runner
+.PHONY: demo criticality-walkthrough failure-walkthroughs reproduce reproduce-paper reproduce-paper-criticality reproduce-paper-failures reproduce-paper-update verify-runner
 
 demo:
 	$(DOCKER_COMPOSE) run --rm demo
+
+criticality-walkthrough:
+	$(DOCKER_COMPOSE) run --rm criticality
 
 failure-walkthroughs:
 	$(DOCKER_COMPOSE) run --rm failures
@@ -14,6 +17,9 @@ reproduce:
 
 reproduce-paper:
 	$(GO) run ./reproduce.go
+
+reproduce-paper-criticality:
+	$(GO) run ./reproduce.go --criticality-walkthrough
 
 reproduce-paper-failures:
 	$(GO) run ./reproduce.go --failure-walkthroughs

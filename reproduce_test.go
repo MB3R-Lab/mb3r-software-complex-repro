@@ -116,3 +116,22 @@ func TestCheckedInCriticalityReports(t *testing.T) {
 		})
 	}
 }
+
+func TestSelectCriticalityWalkthroughCase(t *testing.T) {
+	cases := reproductionCases(t.TempDir())
+	got, err := selectCriticalityWalkthroughCase(cases, "")
+	if err != nil {
+		t.Fatalf("select default criticality walkthrough: %v", err)
+	}
+	if got.Name != "otel-demo-async" {
+		t.Fatalf("default criticality walkthrough = %q, want otel-demo-async", got.Name)
+	}
+
+	got, err = selectCriticalityWalkthroughCase(cases, "social-network-repl")
+	if err != nil {
+		t.Fatalf("select named criticality walkthrough: %v", err)
+	}
+	if got.Name != "social-network-repl" {
+		t.Fatalf("named criticality walkthrough = %q, want social-network-repl", got.Name)
+	}
+}

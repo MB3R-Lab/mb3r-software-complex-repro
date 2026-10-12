@@ -80,12 +80,13 @@ type referenceManifest struct {
 }
 
 type runOptions struct {
-	Update              bool
-	Prebuilt            bool
-	FailureWalkthroughs bool
-	CaseName            string
-	Repeat              int
-	WorkRoot            string
+	Update                 bool
+	Prebuilt               bool
+	FailureWalkthroughs    bool
+	CriticalityWalkthrough bool
+	CaseName               string
+	Repeat                 int
+	WorkRoot               string
 }
 
 func main() {
@@ -97,6 +98,7 @@ func main() {
 	workRoot := flag.String("work-dir", "", "directory for generated outputs (default: .tmp/paper-reproduction/work)")
 	listCases := flag.Bool("list-cases", false, "list available case names and exit")
 	failureWalkthroughs := flag.Bool("failure-walkthroughs", false, "run the two expected-failure reviewer walkthroughs")
+	criticalityWalkthrough := flag.Bool("criticality-walkthrough", false, "run a reviewer-facing Birnbaum component-criticality walkthrough")
 	flag.Parse()
 	if *listCases {
 		root, err := repositoryRoot()
@@ -125,6 +127,10 @@ func main() {
 		fmt.Fprintln(os.Stderr, "reproduce-paper: --failure-walkthroughs cannot be combined with reference updates or --case")
 		os.Exit(1)
 	}
+	if *criticalityWalkthrough && (*update || strings.TrimSpace(*acceptWorkDir) != "" || *failureWalkthroughs) {
+		fmt.Fprintln(os.Stderr, "reproduce-paper: --criticality-walkthrough cannot be combined with reference updates or --failure-walkthroughs")
+		os.Exit(1)
+	}
 	if *update && *prebuilt {
 		fmt.Fprintln(os.Stderr, "reproduce-paper: --update-reference is disabled for packaged prebuilt binaries")
 		os.Exit(1)
@@ -134,12 +140,13 @@ func main() {
 		err = acceptReferenceWork(*acceptWorkDir)
 	} else {
 		err = run(runOptions{
-			Update:              *update,
-			Prebuilt:            *prebuilt,
-			FailureWalkthroughs: *failureWalkthroughs,
-			CaseName:            strings.TrimSpace(*caseName),
-			Repeat:              *repeat,
-			WorkRoot:            strings.TrimSpace(*workRoot),
+			Update:                 *update,
+			Prebuilt:               *prebuilt,
+			FailureWalkthroughs:    *failureWalkthroughs,
+			CriticalityWalkthrough: *criticalityWalkthrough,
+			CaseName:               strings.TrimSpace(*caseName),
+			Repeat:                 *repeat,
+			WorkRoot:               strings.TrimSpace(*workRoot),
 		})
 	}
 	if err != nil {
@@ -210,10 +217,6 @@ func run(options runOptions) error {
 	}
 
 	allCases := reproductionCases(root)
-	cases, err := selectCases(allCases, options.CaseName)
-	if err != nil {
-		return err
-	}
 	allHashes := map[string]map[string]string{}
 	workRoot := filepath.Join(tmp, "work")
 	if options.WorkRoot != "" {
@@ -228,6 +231,17 @@ func run(options runOptions) error {
 		}
 		fmt.Printf("failure-walkthroughs-ok toolchain=%s scenarios=2\n", manifest.Toolchain.Version)
 		return nil
+	}
+	if options.CriticalityWalkthrough {
+		walkthroughCase, err := selectCriticalityWalkthroughCase(allCases, options.CaseName)
+		if err != nil {
+			return err
+		}
+		return runCriticalityWalkthrough(root, filepath.Join(workRoot, "criticality-walkthrough", walkthroughCase.Name), bins, manifest.Toolchain.Version, walkthroughCase)
+	}
+	cases, err := selectCases(allCases, options.CaseName)
+	if err != nil {
+		return err
 	}
 	for _, c := range cases {
 		caseWork := filepath.Join(workRoot, c.Name)
@@ -299,6 +313,69 @@ func run(options runOptions) error {
 		}
 	}
 	fmt.Printf("reproduce-paper-ok toolchain=%s cases=%d repeats=%d\n", manifest.Toolchain.Version, len(cases), options.Repeat)
+	return nil
+}
+
+func selectCriticalityWalkthroughCase(cases []caseSpec, name string) (caseSpec, error) {
+	if name == "" {
+		name = "otel-demo-async"
+	}
+	selected, err := selectCases(cases, name)
+	if err != nil {
+		return caseSpec{}, err
+	}
+	return selected[0], nil
+}
+
+func runCriticalityWalkthrough(root, work string, bins map[string]string, toolchainVersion string, c caseSpec) error {
+	if err := runCase(c, work, bins); err != nil {
+		return err
+	}
+	hashes, err := semanticHashes(work)
+	if err != nil {
+		return err
+	}
+	var references referenceManifest
+	if err := readJSON(filepath.Join(root, "reference", "manifest.json"), &references); err != nil {
+		return fmt.Errorf("read reference manifest: %w", err)
+	}
+	if references.ToolchainRelease != toolchainVersion {
+		return errors.New("reference manifest belongs to a different toolchain release")
+	}
+	if err := compareHashes(c.Name+" criticality walkthrough reference", references.Cases[c.Name], hashes); err != nil {
+		return err
+	}
+
+	var report map[string]any
+	if err := readJSON(filepath.Join(work, "criticality", "report.json"), &report); err != nil {
+		return err
+	}
+	analysis, err := criticalityAnalysis(c, report)
+	if err != nil {
+		return err
+	}
+	if err := writeJSON(filepath.Join(work, "criticality-walkthrough.json"), map[string]any{
+		"schema_version": "1.0.0",
+		"scenario":       "endpoint-component-criticality",
+		"case":           c.Name,
+		"analysis":       analysis,
+	}); err != nil {
+		return err
+	}
+	fmt.Printf("criticality-analysis case=%s method=%s profile=%s sampling=%s trials=%.0f confidence=%.2f\n",
+		c.Name, stringAt(analysis, "method"), stringAt(analysis, "base_profile"), stringAt(analysis, "sampling_mode"),
+		numberAt(analysis, "trials"), numberAt(analysis, "confidence_level"))
+	for _, raw := range arrayAt(analysis, "endpoints") {
+		endpoint, _ := raw.(map[string]any)
+		service, _ := endpoint["top_service"].(map[string]any)
+		edge, _ := endpoint["top_edge"].(map[string]any)
+		fmt.Printf("criticality-ok endpoint=%q top_service=%q service_I_B=%.6f service_ci=[%.6f,%.6f] top_edge=%q edge_I_B=%.6f edge_ci=[%.6f,%.6f]\n",
+			stringAt(endpoint, "endpoint_id"),
+			stringAt(service, "id"), numberAt(service, "birnbaum_importance"), numberAt(service, "confidence_lower_bound"), numberAt(service, "confidence_upper_bound"),
+			stringAt(edge, "id"), numberAt(edge, "birnbaum_importance"), numberAt(edge, "confidence_lower_bound"), numberAt(edge, "confidence_upper_bound"))
+	}
+	fmt.Printf("criticality-walkthrough-ok toolchain=%s case=%s endpoints=%d components=%.0f trials=%.0f files=%d\n",
+		toolchainVersion, c.Name, len(arrayAt(analysis, "endpoints")), numberAt(analysis, "evaluated_components"), numberAt(analysis, "trials"), len(hashes))
 	return nil
 }
 

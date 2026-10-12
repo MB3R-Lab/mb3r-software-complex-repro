@@ -11,7 +11,7 @@ Install Docker with Compose support and ensure the Docker daemon is running. The
 The published image is:
 
 ```text
-ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0
+ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1
 ```
 
 ## Reviewer walkthrough
@@ -34,7 +34,7 @@ The command performs these steps on the `social-network-repl` fixture:
 The final line must be:
 
 ```text
-reproduce-paper-ok toolchain=1.3.0 cases=1 repeats=1
+reproduce-paper-ok toolchain=1.3.1 cases=1 repeats=1
 ```
 
 ### 2. Inspect the generated evidence
@@ -68,7 +68,23 @@ This runs:
 
 Every case is executed twice. The runner first checks equality between the two semantic runs and then checks 16 files per case against `reference/manifest.json`. It also regenerates and verifies `comparison.json` and `FULL_COMPARISON.md`.
 
-### 4. Inspect fail-closed behavior
+### 4. Run the Birnbaum criticality walkthrough
+
+```bash
+docker compose run --rm criticality
+```
+
+This reviewer-facing scenario runs the archived OpenTelemetry async case once, verifies the complete 16-file case surface against the reference manifest, and prints one `criticality-ok` record per endpoint. Each record identifies the top service and edge, their Birnbaum importance estimates, and their Wilson confidence intervals. The full rankings remain in `criticality/report.json`, while `criticality-walkthrough.json` retains the compact walkthrough view when `--work-dir` is bind-mounted.
+
+The final line must be:
+
+```text
+criticality-walkthrough-ok toolchain=1.3.1 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
+```
+
+Use `--criticality-walkthrough --case <name>` to run the same scenario on any of the four archived variants.
+
+### 5. Inspect fail-closed behavior
 
 ```bash
 docker compose run --rm failures
@@ -79,14 +95,14 @@ This is a separate two-scenario walkthrough, not an additional scientific experi
 The final line must be:
 
 ```text
-failure-walkthroughs-ok toolchain=1.3.0 scenarios=2
+failure-walkthroughs-ok toolchain=1.3.1 scenarios=2
 ```
 
-### 5. Run one alternative case
+### 6. Run one alternative case
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -94,7 +110,7 @@ List accepted names with:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
   --list-cases
 ```
 
@@ -106,7 +122,7 @@ On Linux or macOS:
 mkdir -p output
 docker run --rm --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=$PWD/output,target=/output" \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
   --repeat 2 --work-dir /output
 ```
 
@@ -117,7 +133,7 @@ New-Item -ItemType Directory -Force output
 $artifactOutput = (Resolve-Path output).Path
 docker run --rm `
   --mount "type=bind,source=$artifactOutput,target=/output" `
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0 `
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 `
   --repeat 2 --work-dir /output
 ```
 
@@ -137,6 +153,7 @@ The source-build path verifies that the current checkouts match the locked commi
 
 ```bash
 make reproduce-paper
+make reproduce-paper-criticality
 make reproduce-paper-failures
 ```
 

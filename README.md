@@ -24,14 +24,14 @@ docker compose run --rm demo
 The demo pulls the versioned container and runs the replicated Social Network case once through all three tools. Success ends with:
 
 ```text
-reproduce-paper-ok toolchain=1.3.0 cases=1 repeats=1
+reproduce-paper-ok toolchain=1.3.1 cases=1 repeats=1
 ```
 
 The equivalent command without Compose is:
 
 ```bash
 docker run --rm --pull=always \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1
 ```
 
 ## Full reproduction
@@ -48,12 +48,34 @@ Available cases can be listed or selected directly:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
   --list-cases
 
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
   --case otel-demo-async --repeat 1
+```
+
+## Birnbaum criticality walkthrough
+
+Run the endpoint-specific component-importance scenario independently:
+
+```bash
+docker compose run --rm criticality
+```
+
+The walkthrough uses the archived OpenTelemetry async case by default, executes Procrustes and Bering, runs Sheaft's schema 1.3 Birnbaum analysis, verifies all 16 semantic case files, and prints the top service and edge with confidence intervals for each of the four endpoints. It ends with:
+
+```text
+criticality-walkthrough-ok toolchain=1.3.1 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
+```
+
+Select another archived case with `--case`, for example:
+
+```bash
+docker run --rm \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
+  --criticality-walkthrough --case social-network-repl
 ```
 
 ## Fail-closed walkthroughs
@@ -67,7 +89,7 @@ docker compose run --rm failures
 The first supplies incomplete static evidence to Procrustes and requires exit code `2`, a `BLOCKED` goal, and explicit blocker rules. The second supplies an unsupported Bering model contract to Sheaft and requires exit code `1`, the precise compatibility rejection, and no generated analysis report. The wrapper returns success only when both expected failures are observed and ends with:
 
 ```text
-failure-walkthroughs-ok toolchain=1.3.0 scenarios=2
+failure-walkthroughs-ok toolchain=1.3.1 scenarios=2
 ```
 
 ## What is verified
@@ -98,6 +120,7 @@ A source run is optional and is not the reviewer path. It requires Go plus sibli
 
 ```bash
 make reproduce-paper
+make reproduce-paper-criticality
 make reproduce-paper-failures
 ```
 
