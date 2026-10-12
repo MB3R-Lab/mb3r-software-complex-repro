@@ -31,6 +31,9 @@ var referenceFiles = []string{
 	"sheaft/report.json",
 	"sheaft/model.json",
 	"sheaft/summary.md",
+	"criticality/report.json",
+	"criticality/model.json",
+	"criticality/summary.md",
 	"analytics.json",
 	"summary.md",
 }
@@ -63,6 +66,7 @@ type caseSpec struct {
 	Dir                 string
 	TopologyFile        string
 	AnalysisFile        string
+	CriticalityFile     string
 	PublishedModelField string
 }
 
@@ -493,10 +497,10 @@ func prepareBinaries(root, tmp string, manifest toolchainLock, prebuilt bool) (m
 
 func reproductionCases(root string) []caseSpec {
 	return []caseSpec{
-		{Name: "otel-demo-all-blocking", Family: "otel-demo", Mode: "all-blocking", SourceAlias: "paper", StaticDir: "static", Dir: filepath.Join(root, "cases", "otel-demo"), TopologyFile: "topology-all-blocking.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_all_blocking"},
-		{Name: "otel-demo-async", Family: "otel-demo", Mode: "async", SourceAlias: "paper", StaticDir: "static", Dir: filepath.Join(root, "cases", "otel-demo"), TopologyFile: "topology-api.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_async"},
-		{Name: "social-network-norepl", Family: "social-network", Mode: "norepl", SourceAlias: "compose", StaticDir: "static-norepl", Dir: filepath.Join(root, "cases", "social-network"), TopologyFile: "topology-norepl.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_mean"},
-		{Name: "social-network-repl", Family: "social-network", Mode: "repl", SourceAlias: "compose", StaticDir: "static", Dir: filepath.Join(root, "cases", "social-network"), TopologyFile: "topology-api.yaml", AnalysisFile: "analysis.yaml", PublishedModelField: "model_mean"},
+		{Name: "otel-demo-all-blocking", Family: "otel-demo", Mode: "all-blocking", SourceAlias: "paper", StaticDir: "static", Dir: filepath.Join(root, "cases", "otel-demo"), TopologyFile: "topology-all-blocking.yaml", AnalysisFile: "analysis.yaml", CriticalityFile: "criticality.yaml", PublishedModelField: "model_all_blocking"},
+		{Name: "otel-demo-async", Family: "otel-demo", Mode: "async", SourceAlias: "paper", StaticDir: "static", Dir: filepath.Join(root, "cases", "otel-demo"), TopologyFile: "topology-api.yaml", AnalysisFile: "analysis.yaml", CriticalityFile: "criticality.yaml", PublishedModelField: "model_async"},
+		{Name: "social-network-norepl", Family: "social-network", Mode: "norepl", SourceAlias: "compose", StaticDir: "static-norepl", Dir: filepath.Join(root, "cases", "social-network"), TopologyFile: "topology-norepl.yaml", AnalysisFile: "analysis.yaml", CriticalityFile: "criticality.yaml", PublishedModelField: "model_mean"},
+		{Name: "social-network-repl", Family: "social-network", Mode: "repl", SourceAlias: "compose", StaticDir: "static", Dir: filepath.Join(root, "cases", "social-network"), TopologyFile: "topology-api.yaml", AnalysisFile: "analysis.yaml", CriticalityFile: "criticality.yaml", PublishedModelField: "model_mean"},
 	}
 }
 
@@ -525,7 +529,8 @@ func runCase(c caseSpec, work string, bins map[string]string) error {
 	procrustesOut := filepath.Join(work, "procrustes")
 	beringOut := filepath.Join(work, "bering")
 	sheaftOut := filepath.Join(work, "sheaft")
-	for _, dir := range []string{procrustesOut, beringOut, sheaftOut} {
+	criticalityOut := filepath.Join(work, "criticality")
+	for _, dir := range []string{procrustesOut, beringOut, sheaftOut, criticalityOut} {
 		if err := os.MkdirAll(dir, 0o755); err != nil {
 			return err
 		}
@@ -550,11 +555,15 @@ func runCase(c caseSpec, work string, bins map[string]string) error {
 		"run", "--model", modelPath, "--analysis", filepath.Join(c.Dir, c.AnalysisFile), "--out-dir", sheaftOut); err != nil {
 		return err
 	}
+	if err := runCommand(c.Name+" criticality", c.Dir, bins["sheaft"],
+		"run", "--model", modelPath, "--analysis", filepath.Join(c.Dir, c.CriticalityFile), "--out-dir", criticalityOut); err != nil {
+		return err
+	}
 	return writeAnalytics(c, work)
 }
 
 func writeAnalytics(c caseSpec, work string) error {
-	var preflight, model, report map[string]any
+	var preflight, model, report, criticalityReport map[string]any
 	if err := readJSON(filepath.Join(work, "procrustes", "report.json"), &preflight); err != nil {
 		return err
 	}
@@ -562,6 +571,13 @@ func writeAnalytics(c caseSpec, work string) error {
 		return err
 	}
 	if err := readJSON(filepath.Join(work, "sheaft", "report.json"), &report); err != nil {
+		return err
+	}
+	if err := readJSON(filepath.Join(work, "criticality", "report.json"), &criticalityReport); err != nil {
+		return err
+	}
+	criticality, err := criticalityAnalysis(c, criticalityReport)
+	if err != nil {
 		return err
 	}
 	services := arrayAt(model, "services")
@@ -593,6 +609,7 @@ func writeAnalytics(c caseSpec, work string) error {
 			"summary":          report["summary"],
 			"endpoint_results": report["endpoint_results"],
 			"sweeps":           report["sweeps"],
+			"criticality":      criticality,
 		},
 	}
 	var publication map[string]any
@@ -609,6 +626,100 @@ func writeAnalytics(c caseSpec, work string) error {
 		return err
 	}
 	return os.WriteFile(filepath.Join(work, "summary.md"), []byte(markdownSummary(c.Name, analytics)), 0o644)
+}
+
+func criticalityAnalysis(c caseSpec, report map[string]any) (map[string]any, error) {
+	outputs := arrayAt(report, "importance")
+	if len(outputs) != 1 {
+		return nil, fmt.Errorf("%s: expected one criticality analysis, got %d", c.Name, len(outputs))
+	}
+	analysis, ok := outputs[0].(map[string]any)
+	if !ok || stringAt(analysis, "method") != "birnbaum" || stringAt(analysis, "base_profile") != "importance-baseline" {
+		return nil, fmt.Errorf("%s: malformed Birnbaum criticality result", c.Name)
+	}
+	expectedEndpoints := 4
+	if c.Family == "social-network" {
+		expectedEndpoints = 3
+	}
+	endpoints := arrayAt(analysis, "endpoints")
+	if len(endpoints) != expectedEndpoints {
+		return nil, fmt.Errorf("%s: expected %d criticality endpoints, got %d", c.Name, expectedEndpoints, len(endpoints))
+	}
+	evaluatedComponents := int(numberAt(analysis, "evaluated_components"))
+	if evaluatedComponents == 0 {
+		return nil, fmt.Errorf("%s: criticality result has no evaluated components", c.Name)
+	}
+	endpointSummaries := make([]any, 0, len(endpoints))
+	seenEndpoints := make(map[string]bool, len(endpoints))
+	for _, raw := range endpoints {
+		endpoint, ok := raw.(map[string]any)
+		components := arrayAt(endpoint, "components")
+		endpointID := stringAt(endpoint, "endpoint_id")
+		if !ok || endpointID == "" || len(components) != evaluatedComponents {
+			return nil, fmt.Errorf("%s: criticality endpoint is missing a ranked component list", c.Name)
+		}
+		if seenEndpoints[endpointID] {
+			return nil, fmt.Errorf("%s: duplicate criticality endpoint %s", c.Name, endpointID)
+		}
+		seenEndpoints[endpointID] = true
+		var topService, topEdge map[string]any
+		for _, componentRaw := range components {
+			component, ok := componentRaw.(map[string]any)
+			if !ok {
+				continue
+			}
+			switch stringAt(component, "kind") {
+			case "service":
+				if topService == nil {
+					topService = criticalityComponentSummary(component)
+				}
+			case "edge":
+				if topEdge == nil {
+					topEdge = criticalityComponentSummary(component)
+				}
+			}
+		}
+		if topService == nil || topEdge == nil {
+			return nil, fmt.Errorf("%s: criticality endpoint %s is missing service or edge rankings", c.Name, stringAt(endpoint, "endpoint_id"))
+		}
+		topComponent, ok := components[0].(map[string]any)
+		if !ok {
+			return nil, fmt.Errorf("%s: criticality endpoint %s has a malformed top component", c.Name, stringAt(endpoint, "endpoint_id"))
+		}
+		endpointSummaries = append(endpointSummaries, map[string]any{
+			"endpoint_id":           endpointID,
+			"baseline_availability": numberAt(endpoint, "baseline_availability"),
+			"ranked_components":     len(components),
+			"top_component":         criticalityComponentSummary(topComponent),
+			"top_service":           topService,
+			"top_edge":              topEdge,
+		})
+	}
+	return map[string]any{
+		"name":                 stringAt(analysis, "name"),
+		"method":               stringAt(analysis, "method"),
+		"base_profile":         stringAt(analysis, "base_profile"),
+		"sampling_mode":        stringAt(analysis, "sampling_mode"),
+		"trials":               numberAt(analysis, "trials"),
+		"confidence_level":     numberAt(analysis, "confidence_level"),
+		"evaluated_components": evaluatedComponents,
+		"endpoints":            endpointSummaries,
+	}, nil
+}
+
+func criticalityComponentSummary(component map[string]any) map[string]any {
+	confidence, _ := component["confidence"].(map[string]any)
+	return map[string]any{
+		"kind":                   stringAt(component, "kind"),
+		"id":                     stringAt(component, "id"),
+		"rank":                   numberAt(component, "rank"),
+		"live_probability":       numberAt(component, "live_probability"),
+		"birnbaum_importance":    numberAt(component, "birnbaum_importance"),
+		"confidence_lower_bound": numberAt(confidence, "lower_bound"),
+		"confidence_upper_bound": numberAt(confidence, "upper_bound"),
+		"forced_down_impact":     numberAt(component, "forced_down_impact"),
+		"perfect_component_gain": numberAt(component, "perfect_component_gain"),
+	}
 }
 
 func fullPublishedComparison(c caseSpec, report, publication map[string]any) (map[string]any, error) {
@@ -676,6 +787,7 @@ func fullPublishedComparison(c caseSpec, report, publication map[string]any) (ma
 func markdownSummary(name string, analytics map[string]any) string {
 	p, _ := analytics["procrustes"].(map[string]any)
 	b, _ := analytics["bering"].(map[string]any)
+	s, _ := analytics["sheaft"].(map[string]any)
 	var out strings.Builder
 	fmt.Fprintf(&out, "# %s reference summary\n\n", name)
 	fmt.Fprintf(&out, "- Published comparison mode: `%s`.\n", stringAt(analytics, "mode"))
@@ -696,6 +808,20 @@ func markdownSummary(name string, analytics map[string]any) string {
 					numberAt(row, "published_live"), numberAt(row, "delta_from_published_live"))
 			}
 		}
+	}
+	if criticality, ok := s["criticality"].(map[string]any); ok {
+		fmt.Fprintf(&out, "\n## Endpoint component criticality\n\nBirnbaum importance uses `%s` with %.0f paired trials; values are conditional on the archived model and configured independent-replica baseline.\n\n", stringAt(criticality, "base_profile"), numberAt(criticality, "trials"))
+		out.WriteString("| Endpoint | Top service (I_B) | Top edge (I_B) | Baseline availability |\n")
+		out.WriteString("|---|---|---|---:|\n")
+		for _, raw := range arrayAt(criticality, "endpoints") {
+			endpoint, _ := raw.(map[string]any)
+			service, _ := endpoint["top_service"].(map[string]any)
+			edge, _ := endpoint["top_edge"].(map[string]any)
+			fmt.Fprintf(&out, "| `%s` | `%s` (%.4f) | `%s` (%.4f) | %.4f |\n",
+				stringAt(endpoint, "endpoint_id"), stringAt(service, "id"), numberAt(service, "birnbaum_importance"),
+				stringAt(edge, "id"), numberAt(edge, "birnbaum_importance"), numberAt(endpoint, "baseline_availability"))
+		}
+		out.WriteString("\nRanks use point estimates; overlapping intervals do not establish a reliable ordering.\n")
 	}
 	return out.String()
 }

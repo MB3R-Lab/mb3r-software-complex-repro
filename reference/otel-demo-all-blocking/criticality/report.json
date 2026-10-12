@@ -1,0 +1,3797 @@
+{
+  "contract_policy": {
+    "action": "allow",
+    "status": "current"
+  },
+  "diffs": {},
+  "endpoint_results": [
+    {
+      "availability": 0.9,
+      "endpoint_id": "frontend:GET /api/cart",
+      "profile": "importance-baseline",
+      "status": "pass",
+      "threshold": 0.01,
+      "threshold_delta": 0.89
+    },
+    {
+      "availability": 0.8975833333333333,
+      "endpoint_id": "frontend:GET /api/products",
+      "profile": "importance-baseline",
+      "status": "pass",
+      "threshold": 0.01,
+      "threshold_delta": 0.8875833333333333
+    },
+    {
+      "availability": 0.8975833333333333,
+      "endpoint_id": "frontend:GET /api/recommendations",
+      "profile": "importance-baseline",
+      "status": "pass",
+      "threshold": 0.01,
+      "threshold_delta": 0.8875833333333333
+    },
+    {
+      "availability": 0.6544166666666666,
+      "endpoint_id": "frontend:POST /api/checkout",
+      "profile": "importance-baseline",
+      "status": "pass",
+      "threshold": 0.01,
+      "threshold_delta": 0.6444166666666666
+    }
+  ],
+  "importance": [
+    {
+      "base_profile": "importance-baseline",
+      "confidence_level": 0.95,
+      "endpoints": [
+        {
+          "baseline_availability": 0.90325,
+          "components": [
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 1,
+              "birnbaum_importance": 1,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 1,
+                "lower_bound": 0.9996799808766326,
+                "successes": 12000,
+                "trials": 12000,
+                "upper_bound": 1
+              },
+              "forced_down_impact": 0.9,
+              "id": "cart",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.09999999999999998,
+              "rank": 1,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0.90325,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.90325,
+                "lower_bound": 0.8978310615058704,
+                "successes": 10839,
+                "trials": 12000,
+                "upper_bound": 0.9084108430711337
+              },
+              "forced_down_impact": 0.90325,
+              "id": "frontend",
+              "kind": "service",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 2,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.81275,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0.0905,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.0905,
+                "lower_bound": 0.08549705644286766,
+                "successes": 1086,
+                "trials": 12000,
+                "upper_bound": 0.0957650392191703
+              },
+              "forced_down_impact": 0.0905,
+              "id": "frontend|cart|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 3,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "ad|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "cart|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|cart|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|currency|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|email|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|kafka|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|payment|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|shipping|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "fraud-detection|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|ad|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|product-reviews|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|recommendation|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka|accounting|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka|fraud-detection|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "payment|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-reviews|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "shipping|quote|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "accounting",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "ad",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "currency",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "email",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "flagd",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "fraud-detection",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "payment",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-catalog",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-reviews",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "quote",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.90325,
+              "availability_if_up": 0.90325,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "shipping",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            }
+          ],
+          "endpoint_id": "frontend:GET /api/cart"
+        },
+        {
+          "baseline_availability": 0.8973333333333333,
+          "components": [
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 1,
+              "birnbaum_importance": 1,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 1,
+                "lower_bound": 0.9996799808766326,
+                "successes": 12000,
+                "trials": 12000,
+                "upper_bound": 1
+              },
+              "forced_down_impact": 0.9,
+              "id": "product-catalog",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.09999999999999998,
+              "rank": 1,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0.8973333333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.8973333333333333,
+                "lower_bound": 0.8917749433818599,
+                "successes": 10768,
+                "trials": 12000,
+                "upper_bound": 0.9026374147547706
+              },
+              "forced_down_impact": 0.8973333333333333,
+              "id": "frontend",
+              "kind": "service",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 2,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.88775,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0.009583333333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.009583333333333333,
+                "lower_bound": 0.007990393105611594,
+                "successes": 115,
+                "trials": 12000,
+                "upper_bound": 0.011490158984558015
+              },
+              "forced_down_impact": 0.009583333333333333,
+              "id": "frontend|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 3,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "ad|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "cart|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|cart|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|currency|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|email|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|kafka|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|payment|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|shipping|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "fraud-detection|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|ad|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|cart|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|product-reviews|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|recommendation|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka|accounting|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka|fraud-detection|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "payment|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-reviews|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "shipping|quote|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "accounting",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "ad",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "cart",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "currency",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "email",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "flagd",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "fraud-detection",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "payment",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-reviews",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "quote",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8973333333333333,
+              "availability_if_up": 0.8973333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "shipping",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            }
+          ],
+          "endpoint_id": "frontend:GET /api/products"
+        },
+        {
+          "baseline_availability": 0.8991666666666667,
+          "components": [
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 1,
+              "birnbaum_importance": 1,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 1,
+                "lower_bound": 0.9996799808766326,
+                "successes": 12000,
+                "trials": 12000,
+                "upper_bound": 1
+              },
+              "forced_down_impact": 0.9,
+              "id": "recommendation",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.09999999999999998,
+              "rank": 1,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0.8991666666666667,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.8991666666666667,
+                "lower_bound": 0.8936508682851949,
+                "successes": 10790,
+                "trials": 12000,
+                "upper_bound": 0.9044269831146501
+              },
+              "forced_down_impact": 0.8991666666666667,
+              "id": "frontend|recommendation|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 2,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0.8991666666666667,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.8991666666666667,
+                "lower_bound": 0.8936508682851949,
+                "successes": 10790,
+                "trials": 12000,
+                "upper_bound": 0.9044269831146501
+              },
+              "forced_down_impact": 0.8991666666666667,
+              "id": "frontend",
+              "kind": "service",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 2,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "ad|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "cart|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|cart|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|currency|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|email|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|kafka|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|payment|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|shipping|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "fraud-detection|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|ad|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|cart|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|product-reviews|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka|accounting|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka|fraud-detection|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "payment|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-reviews|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "shipping|quote|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "accounting",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "ad",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "cart",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "currency",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "email",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "flagd",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "fraud-detection",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "payment",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-catalog",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-reviews",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "quote",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8991666666666667,
+              "availability_if_up": 0.8991666666666667,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "shipping",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            }
+          ],
+          "endpoint_id": "frontend:GET /api/recommendations"
+        },
+        {
+          "baseline_availability": 0.6573333333333333,
+          "components": [
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.732,
+              "birnbaum_importance": 0.732,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.732,
+                "lower_bound": 0.7240020200944152,
+                "successes": 8784,
+                "trials": 12000,
+                "upper_bound": 0.7398494910323422
+              },
+              "forced_down_impact": 0.6588,
+              "id": "shipping",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.07319999999999999,
+              "rank": 1,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.73025,
+              "birnbaum_importance": 0.73025,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.73025,
+                "lower_bound": 0.7222362667048907,
+                "successes": 8763,
+                "trials": 12000,
+                "upper_bound": 0.7381163644887985
+              },
+              "forced_down_impact": 0.657225,
+              "id": "checkout",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.07302499999999998,
+              "rank": 2,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.7295833333333334,
+              "birnbaum_importance": 0.7295833333333334,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.7295833333333334,
+                "lower_bound": 0.7215636399881709,
+                "successes": 8755,
+                "trials": 12000,
+                "upper_bound": 0.7374560845643496
+              },
+              "forced_down_impact": 0.656625,
+              "id": "payment",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.07295833333333332,
+              "rank": 3,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.7271666666666666,
+              "birnbaum_importance": 0.7271666666666666,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.7271666666666666,
+                "lower_bound": 0.7191255578102157,
+                "successes": 8726,
+                "trials": 12000,
+                "upper_bound": 0.7350623801680675
+              },
+              "forced_down_impact": 0.65445,
+              "id": "cart",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.07271666666666665,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0.6573333333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.6573333333333333,
+                "lower_bound": 0.6487926577709384,
+                "successes": 7888,
+                "trials": 12000,
+                "upper_bound": 0.6657733095449085
+              },
+              "forced_down_impact": 0.6573333333333333,
+              "id": "checkout|payment|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0.6573333333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.6573333333333333,
+                "lower_bound": 0.6487926577709384,
+                "successes": 7888,
+                "trials": 12000,
+                "upper_bound": 0.6657733095449085
+              },
+              "forced_down_impact": 0.6573333333333333,
+              "id": "checkout|shipping|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0.6573333333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.6573333333333333,
+                "lower_bound": 0.6487926577709384,
+                "successes": 7888,
+                "trials": 12000,
+                "upper_bound": 0.6657733095449085
+              },
+              "forced_down_impact": 0.6573333333333333,
+              "id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0.6573333333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.6573333333333333,
+                "lower_bound": 0.6487926577709384,
+                "successes": 7888,
+                "trials": 12000,
+                "upper_bound": 0.6657733095449085
+              },
+              "forced_down_impact": 0.6573333333333333,
+              "id": "frontend",
+              "kind": "service",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "ad|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "cart|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|cart|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|currency|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|email|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|kafka|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "checkout|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "fraud-detection|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|ad|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|cart|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|product-reviews|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "frontend|recommendation|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka|accounting|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka|fraud-detection|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "payment|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-reviews|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation|flagd|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation|product-catalog|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "shipping|quote|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "accounting",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "ad",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "currency",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "email",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "flagd",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "fraud-detection",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "kafka",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-catalog",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "product-reviews",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "quote",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.6573333333333333,
+              "availability_if_up": 0.6573333333333333,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "recommendation",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            }
+          ],
+          "endpoint_id": "frontend:POST /api/checkout"
+        }
+      ],
+      "evaluated_components": 39,
+      "method": "birnbaum",
+      "name": "published-endpoint-criticality",
+      "sampling_mode": "independent_replica",
+      "seed": -5347578254911850970,
+      "trials": 12000
+    }
+  ],
+  "input_artifact": {
+    "artifact_id": "bering://discover?input=case://otel-demo/topology-all-blocking.yaml",
+    "contract_name": "io.mb3r.bering.model",
+    "contract_version": "1.3.0",
+    "digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "kind": "model",
+    "produced_at": "2026-08-21T00:00:00Z",
+    "source_ref": "bering://discover?input=case://otel-demo/topology-all-blocking.yaml",
+    "source_type": "bering"
+  },
+  "parameters": {
+    "calibration": {
+      "baselines": {
+        "active": false,
+        "fallback": "no baseline reports configured",
+        "source": "external"
+      },
+      "fault_contract": {
+        "active": false,
+        "fallback": "no fault contract configured; advanced fault profiles are inactive",
+        "source": "default"
+      },
+      "historical_signals": {
+        "active": false,
+        "fallback": "historical calibration inputs are not implemented; static configuration is used",
+        "source": "default"
+      },
+      "journey_overrides": {
+        "active": false,
+        "fallback": "using richer predicates or discovered journeys without manual journey override",
+        "source": "default"
+      },
+      "predicate_overlay": {
+        "active": false,
+        "fallback": "using artifact predicates or legacy path resolution without external predicate overlay",
+        "source": "external"
+      }
+    },
+    "config_source": "override",
+    "profiles": [
+      {
+        "endpoint_weights": {
+          "active": false,
+          "fallback": "no endpoint weights configured; weighted aggregate falls back to arithmetic mean",
+          "source": "default"
+        },
+        "failure_probability": {
+          "source": "override",
+          "value": 0.1
+        },
+        "fault_profile": {
+          "source": "default",
+          "value": ""
+        },
+        "fixed_k_failures": {
+          "source": "default",
+          "value": 0
+        },
+        "name": "importance-baseline",
+        "reliability": {
+          "active": false,
+          "fallback": "using legacy failure_probability shorthand for node reliability and perfect-edge baseline",
+          "source": "default"
+        },
+        "sampling_mode": {
+          "source": "override",
+          "value": "independent_replica"
+        },
+        "seed": {
+          "source": "override",
+          "value": 4655453604182545506
+        },
+        "trials": {
+          "source": "override",
+          "value": 12000
+        }
+      }
+    ]
+  },
+  "policy_evaluation": {
+    "decision": "report",
+    "evaluation_rule": "all_profiles",
+    "failed_endpoints": [],
+    "failed_profiles": [
+      "importance-baseline"
+    ],
+    "mode": "report",
+    "reasons": [
+      {
+        "id": "gate_pass",
+        "message": "all evaluated endpoints, assertions, and aggregates satisfy the configured gate",
+        "scope": "gate",
+        "status": "report"
+      }
+    ]
+  },
+  "profiles": [
+    {
+      "decision": "report",
+      "endpoint_results": [
+        {
+          "availability": 0.9,
+          "endpoint_id": "frontend:GET /api/cart",
+          "profile": "importance-baseline",
+          "status": "pass",
+          "threshold": 0.01,
+          "threshold_delta": 0.89
+        },
+        {
+          "availability": 0.8975833333333333,
+          "endpoint_id": "frontend:GET /api/products",
+          "profile": "importance-baseline",
+          "status": "pass",
+          "threshold": 0.01,
+          "threshold_delta": 0.8875833333333333
+        },
+        {
+          "availability": 0.8975833333333333,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "profile": "importance-baseline",
+          "status": "pass",
+          "threshold": 0.01,
+          "threshold_delta": 0.8875833333333333
+        },
+        {
+          "availability": 0.6544166666666666,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "profile": "importance-baseline",
+          "status": "pass",
+          "threshold": 0.01,
+          "threshold_delta": 0.6444166666666666
+        }
+      ],
+      "endpoints_below_threshold": 0,
+      "name": "importance-baseline",
+      "simulation": {
+        "advanced": {
+          "blast_radius": {
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "edges": [
+            {
+              "edge_id": "checkout|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|payment|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|payment|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "checkout|shipping|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge checkout|shipping|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|cart|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_id": "frontend|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true"
+              }
+            }
+          ],
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/cart",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.9
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/products",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8975833333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8975833333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "frontend:POST /api/checkout",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.6544166666666666
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.8
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.8
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|cart|sync|true"
+              },
+              "path_id": "frontend-\u003ecart",
+              "services": [
+                "frontend",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|cart|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.9014166666666666
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout",
+              "services": [
+                "frontend",
+                "checkout"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.6221666666666668
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|cart|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.6221666666666668
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003ecart",
+              "services": [
+                "frontend",
+                "checkout",
+                "cart"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|payment|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.80725
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003epayment",
+              "services": [
+                "frontend",
+                "checkout",
+                "payment"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8085833333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "checkout",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout",
+                "checkout|shipping|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.812
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              },
+              "path_id": "frontend-\u003echeckout-\u003eshipping",
+              "services": [
+                "frontend",
+                "checkout",
+                "shipping"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|checkout|sync|true|protocol=http|operation=POST|route=%2Fapi%2Fcheckout"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8975833333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true"
+              },
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8975833333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "frontend|recommendation|sync|true",
+                "recommendation|product-catalog|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8061666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true"
+              },
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true"
+              }
+            }
+          ]
+        },
+        "endpoint_availability": {
+          "frontend:GET /api/cart": 0.9,
+          "frontend:GET /api/products": 0.8975833333333333,
+          "frontend:GET /api/recommendations": 0.8975833333333333,
+          "frontend:POST /api/checkout": 0.6544166666666666
+        },
+        "failure_probability": 0.1,
+        "name": "importance-baseline",
+        "sampling_mode": "independent_replica",
+        "seed": 4655453604182545506,
+        "trials": 12000,
+        "unweighted_aggregate": 0.8373958333333333,
+        "weighted_aggregate": 0.8373958333333333
+      }
+    }
+  ],
+  "provenance": {
+    "predicate_source": "default",
+    "weights_source": "default"
+  },
+  "simulation": {
+    "failure_probability": 0.1,
+    "seed": 4655453604182545506,
+    "trials": 12000
+  },
+  "summary": {
+    "confidence": 1,
+    "cross_profile_availability": 0.8373958333333333,
+    "cross_profile_weighted_availability": 0.8373958333333333,
+    "overall_availability": 0.8373958333333333,
+    "risk_score": 0.16260416666666666,
+    "weighted_overall_availability": 0.8373958333333333
+  }
+}

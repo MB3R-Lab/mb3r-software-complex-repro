@@ -23,6 +23,9 @@ archived configuration and topology
       ├─ report.json
       └─ summary.md
               │
+              ├─ published-result replay
+              └─ endpoint component criticality
+              │
               ▼
      comparison and verification
       ├─ analytics.json
@@ -40,7 +43,7 @@ The separate fail-closed path stops at the boundary under test: incomplete evide
 |---|---|---|---|
 | Procrustes | analysis goal and minimal static evidence | conservative evidence and capability preflight | Bering overlay and traceable assessment report |
 | Bering | archived topology plus Procrustes overlay | construct and validate the versioned system model | model, discovery snapshot, and quality reports |
-| Sheaft | Bering model plus analysis configuration | evaluate endpoint and aggregate resilience profiles | report, model view, summaries, and sweeps |
+| Sheaft | Bering model plus replay or criticality configuration | evaluate endpoint profiles and paired component counterfactuals | reports, model views, summaries, sweeps, and rankings |
 | Artifact runner | tool outputs plus published table metadata | orchestration, normalization, hashing, and comparison | reference manifest and human/machine-readable comparisons |
 
 ## Contract boundaries
@@ -50,6 +53,7 @@ The important handoffs are stored rather than hidden in an in-process integratio
 1. `procrustes/bering.overlay.yaml` carries the preflight-derived overlay into Bering.
 2. `bering/model.json` carries services, replicas, edges, endpoints, predicates, provenance, and failure eligibility into Sheaft.
 3. `sheaft/report.json` carries tool-produced endpoint and aggregate results into the comparison layer.
+4. `criticality/report.json` carries Sheaft's complete endpoint-specific service/edge Birnbaum rankings; the runner derives only compact top-component views from it.
 
 `toolchain-lock.json` pins the exact source revision and declared version of every component. `reference/manifest.json` binds that toolchain release to normalized SHA-256 hashes for each expected semantic output.
 
@@ -63,7 +67,7 @@ Repeated runs compare semantic normal forms. The following runtime-only differen
 - the non-semantic selection of one OpenTelemetry evidence field by Procrustes;
 - JSON object ordering and whitespace.
 
-Topology, contracts, predicates, replica counts, simulation parameters, results, and published comparisons remain within the hash boundary. The complete rules are recorded in `reference/manifest.json`.
+Topology, contracts, predicates, replica counts, simulation parameters, profile results, criticality rankings, and published comparisons remain within the hash boundary. The complete rules are recorded in `reference/manifest.json`.
 
 ## Container trust boundary
 

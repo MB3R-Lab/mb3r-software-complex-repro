@@ -227,6 +227,131 @@
   },
   "schema_version": "1.0.0",
   "sheaft": {
+    "criticality": {
+      "base_profile": "importance-baseline",
+      "confidence_level": 0.95,
+      "endpoints": [
+        {
+          "baseline_availability": 0.28491666666666665,
+          "endpoint_id": "compose-post",
+          "ranked_components": 31,
+          "top_component": {
+            "birnbaum_importance": 0.32008333333333333,
+            "confidence_lower_bound": 0.31179530799113386,
+            "confidence_upper_bound": 0.3284865122234245,
+            "forced_down_impact": 0.288075,
+            "id": "user-mention-service",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.032008333333333326,
+            "rank": 1
+          },
+          "top_edge": {
+            "birnbaum_importance": 0.28491666666666665,
+            "confidence_lower_bound": 0.27691052593156745,
+            "confidence_upper_bound": 0.2930604689613345,
+            "forced_down_impact": 0.28491666666666665,
+            "id": "compose-post-service|media-service|sync|true",
+            "kind": "edge",
+            "live_probability": 1,
+            "perfect_component_gain": 0,
+            "rank": 13
+          },
+          "top_service": {
+            "birnbaum_importance": 0.32008333333333333,
+            "confidence_lower_bound": 0.31179530799113386,
+            "confidence_upper_bound": 0.3284865122234245,
+            "forced_down_impact": 0.288075,
+            "id": "user-mention-service",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.032008333333333326,
+            "rank": 1
+          }
+        },
+        {
+          "baseline_availability": 0.6635833333333333,
+          "endpoint_id": "home-timeline",
+          "ranked_components": 31,
+          "top_component": {
+            "birnbaum_importance": 0.7380833333333333,
+            "confidence_lower_bound": 0.7301413474046219,
+            "confidence_upper_bound": 0.7458729368228012,
+            "forced_down_impact": 0.664275,
+            "id": "nginx-web-server",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.07380833333333331,
+            "rank": 1
+          },
+          "top_edge": {
+            "birnbaum_importance": 0.06316666666666666,
+            "confidence_lower_bound": 0.0589524751518485,
+            "confidence_upper_bound": 0.06766044822226686,
+            "forced_down_impact": 0.06316666666666666,
+            "id": "nginx-web-server|home-timeline-service|sync|true",
+            "kind": "edge",
+            "live_probability": 1,
+            "perfect_component_gain": 0,
+            "rank": 5
+          },
+          "top_service": {
+            "birnbaum_importance": 0.7380833333333333,
+            "confidence_lower_bound": 0.7301413474046219,
+            "confidence_upper_bound": 0.7458729368228012,
+            "forced_down_impact": 0.664275,
+            "id": "nginx-web-server",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.07380833333333331,
+            "rank": 1
+          }
+        },
+        {
+          "baseline_availability": 0.7366666666666667,
+          "endpoint_id": "user-timeline",
+          "ranked_components": 31,
+          "top_component": {
+            "birnbaum_importance": 0.81625,
+            "confidence_lower_bound": 0.8092199693116264,
+            "confidence_upper_bound": 0.8230776185928437,
+            "forced_down_impact": 0.7346250000000001,
+            "id": "user-timeline-service",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.08162499999999999,
+            "rank": 1
+          },
+          "top_edge": {
+            "birnbaum_importance": 0.06841666666666667,
+            "confidence_lower_bound": 0.06403640145444456,
+            "confidence_upper_bound": 0.07307316171887548,
+            "forced_down_impact": 0.06841666666666667,
+            "id": "nginx-web-server|user-timeline-service|sync|true",
+            "kind": "edge",
+            "live_probability": 1,
+            "perfect_component_gain": 0,
+            "rank": 4
+          },
+          "top_service": {
+            "birnbaum_importance": 0.81625,
+            "confidence_lower_bound": 0.8092199693116264,
+            "confidence_upper_bound": 0.8230776185928437,
+            "forced_down_impact": 0.7346250000000001,
+            "id": "user-timeline-service",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.08162499999999999,
+            "rank": 1
+          }
+        }
+      ],
+      "evaluated_components": 31,
+      "method": "birnbaum",
+      "name": "published-endpoint-criticality",
+      "sampling_mode": "independent_replica",
+      "trials": 12000
+    },
     "endpoint_results": [
       {
         "availability": 0,

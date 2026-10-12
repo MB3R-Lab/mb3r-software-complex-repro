@@ -12,3 +12,15 @@
 | 0.5 | 11 | 0.113918 | 0.114500 | -0.000582 | 0.095800 | +0.018118 |
 | 0.7 | 16 | 0.012885 | 0.013200 | -0.000315 | 0.015500 | -0.002615 |
 | 0.9 | 20 | 0.000000 | 0.000000 | +0.000000 | 0.000000 | +0.000000 |
+
+## Endpoint component criticality
+
+Birnbaum importance uses `importance-baseline` with 12000 paired trials; values are conditional on the archived model and configured independent-replica baseline.
+
+| Endpoint | Top service (I_B) | Top edge (I_B) | Baseline availability |
+|---|---|---|---:|
+| `compose-post` | `unique-id-service` (0.5294) | `compose-post-service|media-service|sync|true` (0.4741) | 0.4741 |
+| `home-timeline` | `post-storage-service` (0.8099) | `nginx-web-server|home-timeline-service|sync|true` (0.0003) | 0.7275 |
+| `user-timeline` | `post-storage-service` (0.8993) | `nginx-web-server|user-timeline-service|sync|true` (0.0004) | 0.8077 |
+
+Ranks use point estimates; overlapping intervals do not establish a reliable ordering.

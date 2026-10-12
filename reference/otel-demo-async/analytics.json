@@ -168,6 +168,169 @@
   },
   "schema_version": "1.0.0",
   "sheaft": {
+    "criticality": {
+      "base_profile": "importance-baseline",
+      "confidence_level": 0.95,
+      "endpoints": [
+        {
+          "baseline_availability": 0.90325,
+          "endpoint_id": "frontend:GET /api/cart",
+          "ranked_components": 39,
+          "top_component": {
+            "birnbaum_importance": 1,
+            "confidence_lower_bound": 0.9996799808766326,
+            "confidence_upper_bound": 1,
+            "forced_down_impact": 0.9,
+            "id": "cart",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.09999999999999998,
+            "rank": 1
+          },
+          "top_edge": {
+            "birnbaum_importance": 0.0905,
+            "confidence_lower_bound": 0.08549705644286766,
+            "confidence_upper_bound": 0.0957650392191703,
+            "forced_down_impact": 0.0905,
+            "id": "frontend|cart|sync|true",
+            "kind": "edge",
+            "live_probability": 1,
+            "perfect_component_gain": 0,
+            "rank": 3
+          },
+          "top_service": {
+            "birnbaum_importance": 1,
+            "confidence_lower_bound": 0.9996799808766326,
+            "confidence_upper_bound": 1,
+            "forced_down_impact": 0.9,
+            "id": "cart",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.09999999999999998,
+            "rank": 1
+          }
+        },
+        {
+          "baseline_availability": 0.8973333333333333,
+          "endpoint_id": "frontend:GET /api/products",
+          "ranked_components": 39,
+          "top_component": {
+            "birnbaum_importance": 1,
+            "confidence_lower_bound": 0.9996799808766326,
+            "confidence_upper_bound": 1,
+            "forced_down_impact": 0.9,
+            "id": "product-catalog",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.09999999999999998,
+            "rank": 1
+          },
+          "top_edge": {
+            "birnbaum_importance": 0.009583333333333333,
+            "confidence_lower_bound": 0.007990393105611594,
+            "confidence_upper_bound": 0.011490158984558015,
+            "forced_down_impact": 0.009583333333333333,
+            "id": "frontend|product-catalog|sync|true",
+            "kind": "edge",
+            "live_probability": 1,
+            "perfect_component_gain": 0,
+            "rank": 3
+          },
+          "top_service": {
+            "birnbaum_importance": 1,
+            "confidence_lower_bound": 0.9996799808766326,
+            "confidence_upper_bound": 1,
+            "forced_down_impact": 0.9,
+            "id": "product-catalog",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.09999999999999998,
+            "rank": 1
+          }
+        },
+        {
+          "baseline_availability": 0.8991666666666667,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "ranked_components": 39,
+          "top_component": {
+            "birnbaum_importance": 1,
+            "confidence_lower_bound": 0.9996799808766326,
+            "confidence_upper_bound": 1,
+            "forced_down_impact": 0.9,
+            "id": "recommendation",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.09999999999999998,
+            "rank": 1
+          },
+          "top_edge": {
+            "birnbaum_importance": 0.8991666666666667,
+            "confidence_lower_bound": 0.8936508682851949,
+            "confidence_upper_bound": 0.9044269831146501,
+            "forced_down_impact": 0.8991666666666667,
+            "id": "frontend|recommendation|sync|true",
+            "kind": "edge",
+            "live_probability": 1,
+            "perfect_component_gain": 0,
+            "rank": 2
+          },
+          "top_service": {
+            "birnbaum_importance": 1,
+            "confidence_lower_bound": 0.9996799808766326,
+            "confidence_upper_bound": 1,
+            "forced_down_impact": 0.9,
+            "id": "recommendation",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.09999999999999998,
+            "rank": 1
+          }
+        },
+        {
+          "baseline_availability": 0.6573333333333333,
+          "endpoint_id": "frontend:POST /api/checkout",
+          "ranked_components": 39,
+          "top_component": {
+            "birnbaum_importance": 0.732,
+            "confidence_lower_bound": 0.7240020200944152,
+            "confidence_upper_bound": 0.7398494910323422,
+            "forced_down_impact": 0.6588,
+            "id": "shipping",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.07319999999999999,
+            "rank": 1
+          },
+          "top_edge": {
+            "birnbaum_importance": 0.6573333333333333,
+            "confidence_lower_bound": 0.6487926577709384,
+            "confidence_upper_bound": 0.6657733095449085,
+            "forced_down_impact": 0.6573333333333333,
+            "id": "checkout|payment|sync|true",
+            "kind": "edge",
+            "live_probability": 1,
+            "perfect_component_gain": 0,
+            "rank": 5
+          },
+          "top_service": {
+            "birnbaum_importance": 0.732,
+            "confidence_lower_bound": 0.7240020200944152,
+            "confidence_upper_bound": 0.7398494910323422,
+            "forced_down_impact": 0.6588,
+            "id": "shipping",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.07319999999999999,
+            "rank": 1
+          }
+        }
+      ],
+      "evaluated_components": 39,
+      "method": "birnbaum",
+      "name": "published-endpoint-criticality",
+      "sampling_mode": "independent_replica",
+      "trials": 12000
+    },
     "endpoint_results": [
       {
         "availability": 0.8676,

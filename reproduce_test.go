@@ -89,3 +89,30 @@ func TestRepositoryRootFromEnvironment(t *testing.T) {
 		t.Fatalf("repositoryRoot = %q, want %q", got, want)
 	}
 }
+
+func TestCheckedInCriticalityReports(t *testing.T) {
+	root, err := filepath.Abs(".")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, c := range reproductionCases(root) {
+		t.Run(c.Name, func(t *testing.T) {
+			var report map[string]any
+			path := filepath.Join(root, "reference", c.Name, "criticality", "report.json")
+			if err := readJSON(path, &report); err != nil {
+				t.Fatalf("read criticality reference: %v", err)
+			}
+			analysis, err := criticalityAnalysis(c, report)
+			if err != nil {
+				t.Fatalf("validate criticality reference: %v", err)
+			}
+			wantEndpoints := 4
+			if c.Family == "social-network" {
+				wantEndpoints = 3
+			}
+			if got := len(arrayAt(analysis, "endpoints")); got != wantEndpoints {
+				t.Fatalf("criticality endpoint count = %d, want %d", got, wantEndpoints)
+			}
+		})
+	}
+}

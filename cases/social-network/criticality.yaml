@@ -1,0 +1,22 @@
+schema_version: "1.3"
+seed: 16
+trials: 12000
+profiles:
+  - name: importance-baseline
+    sampling_mode: independent_replica
+    failure_probability: 0.10
+importance:
+  - name: published-endpoint-criticality
+    profile: importance-baseline
+    method: birnbaum
+    targets:
+      - endpoint_id: compose-post
+      - endpoint_id: home-timeline
+      - endpoint_id: user-timeline
+    components:
+      kinds: [service, edge]
+    confidence_level: 0.95
+gate:
+  mode: report
+  default_action: report
+  global_threshold: 0.01

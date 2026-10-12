@@ -1,0 +1,311 @@
+{
+  "edges": [
+    {
+      "blocking": true,
+      "from": "compose-post-service",
+      "id": "compose-post-service|home-timeline-service|sync|true",
+      "kind": "sync",
+      "to": "home-timeline-service"
+    },
+    {
+      "blocking": true,
+      "from": "compose-post-service",
+      "id": "compose-post-service|media-service|sync|true",
+      "kind": "sync",
+      "to": "media-service"
+    },
+    {
+      "blocking": true,
+      "from": "compose-post-service",
+      "id": "compose-post-service|post-storage-service|sync|true",
+      "kind": "sync",
+      "to": "post-storage-service"
+    },
+    {
+      "blocking": true,
+      "from": "compose-post-service",
+      "id": "compose-post-service|text-service|sync|true",
+      "kind": "sync",
+      "to": "text-service"
+    },
+    {
+      "blocking": true,
+      "from": "compose-post-service",
+      "id": "compose-post-service|unique-id-service|sync|true",
+      "kind": "sync",
+      "to": "unique-id-service"
+    },
+    {
+      "blocking": true,
+      "from": "compose-post-service",
+      "id": "compose-post-service|user-service|sync|true",
+      "kind": "sync",
+      "to": "user-service"
+    },
+    {
+      "blocking": true,
+      "from": "compose-post-service",
+      "id": "compose-post-service|user-timeline-service|sync|true",
+      "kind": "sync",
+      "to": "user-timeline-service"
+    },
+    {
+      "blocking": true,
+      "from": "home-timeline-service",
+      "id": "home-timeline-service|post-storage-service|sync|true",
+      "kind": "sync",
+      "to": "post-storage-service"
+    },
+    {
+      "blocking": true,
+      "from": "home-timeline-service",
+      "id": "home-timeline-service|social-graph-service|sync|true",
+      "kind": "sync",
+      "to": "social-graph-service"
+    },
+    {
+      "blocking": true,
+      "from": "nginx-web-server",
+      "id": "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+      "identity": {
+        "operation": "POST",
+        "protocol": "http",
+        "route": "/wrk2-api/post/compose"
+      },
+      "kind": "sync",
+      "to": "compose-post-service"
+    },
+    {
+      "blocking": true,
+      "from": "nginx-web-server",
+      "id": "nginx-web-server|home-timeline-service|sync|true",
+      "kind": "sync",
+      "to": "home-timeline-service"
+    },
+    {
+      "blocking": true,
+      "from": "nginx-web-server",
+      "id": "nginx-web-server|social-graph-service|sync|true",
+      "kind": "sync",
+      "to": "social-graph-service"
+    },
+    {
+      "blocking": true,
+      "from": "nginx-web-server",
+      "id": "nginx-web-server|user-service|sync|true",
+      "kind": "sync",
+      "to": "user-service"
+    },
+    {
+      "blocking": true,
+      "from": "nginx-web-server",
+      "id": "nginx-web-server|user-timeline-service|sync|true",
+      "kind": "sync",
+      "to": "user-timeline-service"
+    },
+    {
+      "blocking": true,
+      "from": "social-graph-service",
+      "id": "social-graph-service|user-service|sync|true",
+      "kind": "sync",
+      "to": "user-service"
+    },
+    {
+      "blocking": true,
+      "from": "text-service",
+      "id": "text-service|url-shorten-service|sync|true",
+      "kind": "sync",
+      "to": "url-shorten-service"
+    },
+    {
+      "blocking": true,
+      "from": "text-service",
+      "id": "text-service|user-mention-service|sync|true",
+      "kind": "sync",
+      "to": "user-mention-service"
+    },
+    {
+      "blocking": true,
+      "from": "user-service",
+      "id": "user-service|social-graph-service|sync|true",
+      "kind": "sync",
+      "to": "social-graph-service"
+    },
+    {
+      "blocking": true,
+      "from": "user-timeline-service",
+      "id": "user-timeline-service|post-storage-service|sync|true",
+      "kind": "sync",
+      "to": "post-storage-service"
+    }
+  ],
+  "endpoints": [
+    {
+      "entry_service": "nginx-web-server",
+      "id": "compose-post",
+      "metadata": {
+        "semantics": {
+          "confidence": 1,
+          "dependency_modes": [
+            "sync"
+          ],
+          "mandatory_targets": [
+            "compose-post-service",
+            "home-timeline-service",
+            "media-service",
+            "post-storage-service",
+            "social-graph-service",
+            "text-service",
+            "unique-id-service",
+            "url-shorten-service",
+            "user-mention-service",
+            "user-service",
+            "user-timeline-service"
+          ],
+          "predicate_mode": "immediate_response",
+          "source": "archived-workload"
+        },
+        "weight": 0.1
+      },
+      "method": "POST",
+      "path": "/wrk2-api/post/compose",
+      "success_predicate_ref": "compose-post"
+    },
+    {
+      "entry_service": "nginx-web-server",
+      "id": "home-timeline",
+      "metadata": {
+        "semantics": {
+          "confidence": 1,
+          "dependency_modes": [
+            "sync"
+          ],
+          "mandatory_targets": [
+            "home-timeline-service",
+            "post-storage-service",
+            "social-graph-service"
+          ],
+          "predicate_mode": "immediate_response",
+          "source": "archived-workload"
+        },
+        "weight": 0.6
+      },
+      "success_predicate_ref": "home-timeline"
+    },
+    {
+      "entry_service": "nginx-web-server",
+      "id": "nginx-web-server:POST /wrk2-api/post/compose",
+      "metadata": {
+        "semantics": {
+          "confidence": 1,
+          "dependency_modes": [
+            "sync"
+          ],
+          "mandatory_targets": [
+            "compose-post-service"
+          ],
+          "predicate_mode": "immediate_response",
+          "source": "procrustes"
+        },
+        "weight": 0
+      },
+      "method": "POST",
+      "path": "/wrk2-api/post/compose",
+      "success_predicate_ref": "procrustes.compose-post.preflight"
+    },
+    {
+      "entry_service": "nginx-web-server",
+      "id": "user-timeline",
+      "metadata": {
+        "semantics": {
+          "confidence": 1,
+          "dependency_modes": [
+            "sync"
+          ],
+          "mandatory_targets": [
+            "post-storage-service",
+            "user-timeline-service"
+          ],
+          "predicate_mode": "immediate_response",
+          "source": "archived-workload"
+        },
+        "weight": 0.3
+      },
+      "success_predicate_ref": "user-timeline"
+    }
+  ],
+  "metadata": {
+    "confidence": 1,
+    "discovered_at": "2026-08-21T00:00:00Z",
+    "schema": {
+      "digest": "sha256:2aa8a3550a25dc626ba6d2f5833569efca2f382b9e5c9c3405be93695d7d48ae",
+      "name": "io.mb3r.bering.model",
+      "uri": "https://mb3r-lab.github.io/Bering/schema/model/v1.3.0/model.schema.json",
+      "version": "1.3.0"
+    },
+    "source_ref": "bering://discover?input=case://social-network/topology-norepl.yaml",
+    "source_type": "bering"
+  },
+  "services": [
+    {
+      "id": "compose-post-service",
+      "name": "compose-post-service",
+      "replicas": 1
+    },
+    {
+      "id": "home-timeline-service",
+      "name": "home-timeline-service",
+      "replicas": 1
+    },
+    {
+      "id": "media-service",
+      "name": "media-service",
+      "replicas": 1
+    },
+    {
+      "id": "nginx-web-server",
+      "name": "nginx-web-server",
+      "replicas": 1
+    },
+    {
+      "id": "post-storage-service",
+      "name": "post-storage-service",
+      "replicas": 1
+    },
+    {
+      "id": "social-graph-service",
+      "name": "social-graph-service",
+      "replicas": 1
+    },
+    {
+      "id": "text-service",
+      "name": "text-service",
+      "replicas": 1
+    },
+    {
+      "id": "unique-id-service",
+      "name": "unique-id-service",
+      "replicas": 1
+    },
+    {
+      "id": "url-shorten-service",
+      "name": "url-shorten-service",
+      "replicas": 1
+    },
+    {
+      "id": "user-mention-service",
+      "name": "user-mention-service",
+      "replicas": 1
+    },
+    {
+      "id": "user-service",
+      "name": "user-service",
+      "replicas": 1
+    },
+    {
+      "id": "user-timeline-service",
+      "name": "user-timeline-service",
+      "replicas": 1
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 [![Reproduce software-complex results](https://github.com/MB3R-Lab/mb3r-software-complex-repro/actions/workflows/reproduce.yml/badge.svg)](https://github.com/MB3R-Lab/mb3r-software-complex-repro/actions/workflows/reproduce.yml)
 
-This repository is the standalone demonstration and reproduction artifact for the Procrustes → Bering → Sheaft resilience-analysis toolchain. It packages pinned builds, archived evidence fixtures, published baselines, reference outputs, and the workflow that connects the three tools.
+This repository is the standalone demonstration and reproduction artifact for the Procrustes → Bering → Sheaft resilience-analysis toolchain. It packages pinned builds, archived evidence fixtures, published baselines, reference outputs, endpoint-specific component-criticality rankings, and the workflow that connects the three tools.
 
 The artifact covers two published studies:
 
@@ -24,19 +24,19 @@ docker compose run --rm demo
 The demo pulls the versioned container and runs the replicated Social Network case once through all three tools. Success ends with:
 
 ```text
-reproduce-paper-ok toolchain=1.2.1 cases=1 repeats=1
+reproduce-paper-ok toolchain=1.3.0 cases=1 repeats=1
 ```
 
 The equivalent command without Compose is:
 
 ```bash
 docker run --rm --pull=always \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0
 ```
 
 ## Full reproduction
 
-Run all four case variants twice, verify deterministic semantic outputs, and compare every aggregate row reported by both articles:
+Run all four case variants twice, verify deterministic semantic outputs, compare every aggregate row reported by both articles, and generate Birnbaum service/edge rankings for all seven published endpoints:
 
 ```bash
 docker compose run --rm reproduce
@@ -48,11 +48,11 @@ Available cases can be listed or selected directly:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0 \
   --list-cases
 
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.2.1 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.0 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -67,7 +67,7 @@ docker compose run --rm failures
 The first supplies incomplete static evidence to Procrustes and requires exit code `2`, a `BLOCKED` goal, and explicit blocker rules. The second supplies an unsupported Bering model contract to Sheaft and requires exit code `1`, the precise compatibility rejection, and no generated analysis report. The wrapper returns success only when both expected failures are observed and ends with:
 
 ```text
-failure-walkthroughs-ok toolchain=1.2.1 scenarios=2
+failure-walkthroughs-ok toolchain=1.3.0 scenarios=2
 ```
 
 ## What is verified
@@ -76,8 +76,10 @@ failure-walkthroughs-ok toolchain=1.2.1 scenarios=2
 - the Procrustes preflight report and Procrustes-to-Bering overlay;
 - the Bering model, discovery snapshot, and quality reports;
 - the Sheaft model, report, endpoint results, and sweeps;
+- separate Sheaft 1.3 Birnbaum importance reports with complete service/edge rankings, paired-trial intervals, forced-down impact, and perfect-component gain;
 - semantic stability across repeated executions after documented normalization of runtime-only fields;
 - complete row-level comparison with Social Network Table 1 and OpenTelemetry Demo Table 2.
+- criticality coverage for three Social Network endpoints and four OpenTelemetry endpoints in every represented deployment/edge-semantics variant.
 - fail-closed behavior for incomplete Procrustes evidence and an unsupported Bering-to-Sheaft contract.
 
 The canonical source-build run is the [GitHub Actions workflow](https://github.com/MB3R-Lab/mb3r-software-complex-repro/actions/workflows/reproduce.yml). It checks out the locked revisions of [Procrustes](https://github.com/MB3R-Lab/Procrustes), [Bering](https://github.com/MB3R-Lab/Bering), and [Sheaft](https://github.com/MB3R-Lab/Sheaft), then independently verifies the same checked-in references.

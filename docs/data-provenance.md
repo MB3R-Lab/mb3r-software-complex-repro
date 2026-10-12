@@ -21,6 +21,7 @@ The exact published numbers are transcribed into each case family's `publication
 - `topology-norepl.yaml`: the corresponding non-replicated interpretation;
 - `goal.yaml`: evidence requirements supplied to Procrustes;
 - `analysis.yaml`: endpoint predicates, weights, failure fractions, and fixed-size protocol supplied to Sheaft;
+- `criticality.yaml`: separate Sheaft 1.3 analysis of the same discovered model, using a 0.10 independent-replica failure baseline and 12,000 paired trials;
 - `static/` and `static-norepl/`: minimal configuration and tracing fixtures used to exercise Procrustes' preflight contract.
 
 ### OpenTelemetry Demo
@@ -29,11 +30,14 @@ The exact published numbers are transcribed into each case family's `publication
 - `topology-all-blocking.yaml`: the same representative graph under the all-blocking interpretation;
 - `goal.yaml`: evidence requirements supplied to Procrustes;
 - `analysis.yaml`: the four endpoint predicates, equal workload mix, and published fixed-size failure schedule;
+- `criticality.yaml`: the same four endpoints evaluated for service/edge Birnbaum importance under the separate paired-trial baseline;
 - `static/`: minimal Kubernetes and tracing-test fixtures used to exercise Procrustes' preflight contract.
 
 ## Normalization performed for this repository
 
 Absolute workstation paths were replaced with stable `archive://` references. Machine-local identifiers and byte-derived digests are normalized only when reference hashes are calculated. The archived topology, replica counts, endpoint targets, workload weights, failure fractions, and published table values were not re-estimated.
+
+The criticality configurations are new tool-demonstration inputs rather than transcriptions from the two prior articles. They do not alter `analysis.yaml`, the published-result comparison, or the archived live baselines.
 
 The small static evidence directories are self-contained preflight fixtures derived from the corresponding deployment configurations. They are not asserted to be complete deployable copies of either system.
 
@@ -44,7 +48,8 @@ Each reference case retains the stage boundary:
 - `procrustes/`: assessment, collection plan, and Bering overlay;
 - `bering/`: model, discovery snapshot, and quality reports;
 - `sheaft/`: consumed model view, analysis report, and summary;
-- `analytics.json`: inventory and published-result comparison derived from those outputs;
-- `summary.md`: a readable rendering of the same case-level comparison.
+- `criticality/`: consumed model view, complete Birnbaum ranking report, and summary;
+- `analytics.json`: inventory, published-result comparison, and compact top-service/top-edge views derived from those outputs;
+- `summary.md`: a readable rendering of the case-level comparison and criticality highlights.
 
 The workflow is deterministic with respect to these archived inputs and the pinned toolchain. This is a software-complex reproduction claim, not a new empirical validation of the underlying mathematical model.

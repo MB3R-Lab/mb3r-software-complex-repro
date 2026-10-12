@@ -1,0 +1,3551 @@
+{
+  "contract_policy": {
+    "action": "allow",
+    "status": "current"
+  },
+  "diffs": {},
+  "endpoint_results": [
+    {
+      "availability": 0.4776666666666667,
+      "endpoint_id": "compose-post",
+      "profile": "importance-baseline",
+      "status": "pass",
+      "threshold": 0.01,
+      "threshold_delta": 0.4676666666666667
+    },
+    {
+      "availability": 0.7273333333333334,
+      "endpoint_id": "home-timeline",
+      "profile": "importance-baseline",
+      "status": "pass",
+      "threshold": 0.01,
+      "threshold_delta": 0.7173333333333334
+    },
+    {
+      "availability": 0.8998333333333334,
+      "endpoint_id": "nginx-web-server:POST /wrk2-api/post/compose",
+      "profile": "importance-baseline",
+      "status": "pass",
+      "threshold": 0.01,
+      "threshold_delta": 0.8898333333333334
+    },
+    {
+      "availability": 0.8069166666666666,
+      "endpoint_id": "user-timeline",
+      "profile": "importance-baseline",
+      "status": "pass",
+      "threshold": 0.01,
+      "threshold_delta": 0.7969166666666666
+    }
+  ],
+  "importance": [
+    {
+      "base_profile": "importance-baseline",
+      "confidence_level": 0.95,
+      "endpoints": [
+        {
+          "baseline_availability": 0.47408333333333336,
+          "components": [
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.5294166666666666,
+              "birnbaum_importance": 0.5294166666666666,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.5294166666666666,
+                "lower_bound": 0.5204782022038908,
+                "successes": 6353,
+                "trials": 12000,
+                "upper_bound": 0.5383363033376843
+              },
+              "forced_down_impact": 0.476475,
+              "id": "unique-id-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.05294166666666665,
+              "rank": 1,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.5290833333333333,
+              "birnbaum_importance": 0.5290833333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.5290833333333333,
+                "lower_bound": 0.5201446262201295,
+                "successes": 6349,
+                "trials": 12000,
+                "upper_bound": 0.5380034260008613
+              },
+              "forced_down_impact": 0.476175,
+              "id": "user-mention-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.05290833333333332,
+              "rank": 2,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.5276666666666666,
+              "birnbaum_importance": 0.5276666666666666,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.5276666666666666,
+                "lower_bound": 0.518726972845288,
+                "successes": 6332,
+                "trials": 12000,
+                "upper_bound": 0.536588652763219
+              },
+              "forced_down_impact": 0.4749,
+              "id": "nginx-web-server",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.05276666666666665,
+              "rank": 3,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.5276666666666666,
+              "birnbaum_importance": 0.5276666666666666,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.5276666666666666,
+                "lower_bound": 0.518726972845288,
+                "successes": 6332,
+                "trials": 12000,
+                "upper_bound": 0.536588652763219
+              },
+              "forced_down_impact": 0.4749,
+              "id": "post-storage-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.05276666666666665,
+              "rank": 3,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.5271666666666667,
+              "birnbaum_importance": 0.5271666666666667,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.5271666666666667,
+                "lower_bound": 0.5182266418143233,
+                "successes": 6326,
+                "trials": 12000,
+                "upper_bound": 0.536089303813307
+              },
+              "forced_down_impact": 0.47445000000000004,
+              "id": "social-graph-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.052716666666666655,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.5249166666666667,
+              "birnbaum_importance": 0.5249166666666667,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.5249166666666667,
+                "lower_bound": 0.5159752632991607,
+                "successes": 6299,
+                "trials": 12000,
+                "upper_bound": 0.533842122414525
+              },
+              "forced_down_impact": 0.47242500000000004,
+              "id": "url-shorten-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.05249166666666666,
+              "rank": 6,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.5241666666666667,
+              "birnbaum_importance": 0.5241666666666667,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.5241666666666667,
+                "lower_bound": 0.5152248441881692,
+                "successes": 6290,
+                "trials": 12000,
+                "upper_bound": 0.5330930215542015
+              },
+              "forced_down_impact": 0.47175,
+              "id": "user-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.05241666666666665,
+              "rank": 7,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.4746666666666667,
+              "birnbaum_importance": 0.4746666666666667,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.4746666666666667,
+                "lower_bound": 0.4657417191663343,
+                "successes": 5696,
+                "trials": 12000,
+                "upper_bound": 0.4836078284692497
+              },
+              "forced_down_impact": 0.474192,
+              "id": "media-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0.00047466666666666713,
+              "rank": 8,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.4745,
+              "birnbaum_importance": 0.4745,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.4745,
+                "lower_bound": 0.4655752575440076,
+                "successes": 5694,
+                "trials": 12000,
+                "upper_bound": 0.48344106343128407
+              },
+              "forced_down_impact": 0.4740255,
+              "id": "home-timeline-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0.0004745000000000004,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.4745,
+              "birnbaum_importance": 0.4745,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.4745,
+                "lower_bound": 0.4655752575440076,
+                "successes": 5694,
+                "trials": 12000,
+                "upper_bound": 0.48344106343128407
+              },
+              "forced_down_impact": 0.4740255,
+              "id": "text-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0.0004745000000000004,
+              "rank": 9,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.47441666666666665,
+              "birnbaum_importance": 0.47441666666666665,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.47441666666666665,
+                "lower_bound": 0.4654920271068688,
+                "successes": 5693,
+                "trials": 12000,
+                "upper_bound": 0.4833576805382768
+              },
+              "forced_down_impact": 0.47394225,
+              "id": "user-timeline-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0.0004744166666666671,
+              "rank": 11,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.47425,
+              "birnbaum_importance": 0.47425,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.47425,
+                "lower_bound": 0.46532556698067223,
+                "successes": 5691,
+                "trials": 12000,
+                "upper_bound": 0.4831909140041812
+              },
+              "forced_down_impact": 0.47377575,
+              "id": "compose-post-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0.00047425000000000044,
+              "rank": 12,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0.47408333333333336,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.47408333333333336,
+                "lower_bound": 0.46515910785195985,
+                "successes": 5689,
+                "trials": 12000,
+                "upper_bound": 0.48302414647260145
+              },
+              "forced_down_impact": 0.47408333333333336,
+              "id": "compose-post-service|media-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 13,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0.47408333333333336,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.47408333333333336,
+                "lower_bound": 0.46515910785195985,
+                "successes": 5689,
+                "trials": 12000,
+                "upper_bound": 0.48302414647260145
+              },
+              "forced_down_impact": 0.47408333333333336,
+              "id": "compose-post-service|text-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 13,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0.47408333333333336,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.47408333333333336,
+                "lower_bound": 0.46515910785195985,
+                "successes": 5689,
+                "trials": 12000,
+                "upper_bound": 0.48302414647260145
+              },
+              "forced_down_impact": 0.47408333333333336,
+              "id": "compose-post-service|unique-id-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 13,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0.47408333333333336,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.47408333333333336,
+                "lower_bound": 0.46515910785195985,
+                "successes": 5689,
+                "trials": 12000,
+                "upper_bound": 0.48302414647260145
+              },
+              "forced_down_impact": 0.47408333333333336,
+              "id": "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 13,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0.47408333333333336,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.47408333333333336,
+                "lower_bound": 0.46515910785195985,
+                "successes": 5689,
+                "trials": 12000,
+                "upper_bound": 0.48302414647260145
+              },
+              "forced_down_impact": 0.47408333333333336,
+              "id": "text-service|url-shorten-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 13,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0.47408333333333336,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.47408333333333336,
+                "lower_bound": 0.46515910785195985,
+                "successes": 5689,
+                "trials": 12000,
+                "upper_bound": 0.48302414647260145
+              },
+              "forced_down_impact": 0.47408333333333336,
+              "id": "text-service|user-mention-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 13,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|home-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|post-storage-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|user-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|user-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "home-timeline-service|post-storage-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "home-timeline-service|social-graph-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|home-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|social-graph-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|user-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|user-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "social-graph-service|user-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-service|social-graph-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.47408333333333336,
+              "availability_if_up": 0.47408333333333336,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-timeline-service|post-storage-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 19,
+              "state_semantics": "edge_connectivity"
+            }
+          ],
+          "endpoint_id": "compose-post"
+        },
+        {
+          "baseline_availability": 0.7275,
+          "components": [
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.8099166666666666,
+              "birnbaum_importance": 0.8099166666666666,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.8099166666666666,
+                "lower_bound": 0.8027977073737412,
+                "successes": 9719,
+                "trials": 12000,
+                "upper_bound": 0.8168372674396246
+              },
+              "forced_down_impact": 0.7289249999999999,
+              "id": "post-storage-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.08099166666666664,
+              "rank": 1,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.8093333333333333,
+              "birnbaum_importance": 0.8093333333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.8093333333333333,
+                "lower_bound": 0.8022063342800697,
+                "successes": 9712,
+                "trials": 12000,
+                "upper_bound": 0.8162623472222735
+              },
+              "forced_down_impact": 0.7284,
+              "id": "nginx-web-server",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.08093333333333332,
+              "rank": 2,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.8074166666666667,
+              "birnbaum_importance": 0.8074166666666667,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.8074166666666667,
+                "lower_bound": 0.8002634274392211,
+                "successes": 9689,
+                "trials": 12000,
+                "upper_bound": 0.8143731474697617
+              },
+              "forced_down_impact": 0.7266750000000001,
+              "id": "social-graph-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.08074166666666666,
+              "rank": 3,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.72825,
+              "birnbaum_importance": 0.72825,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.72825,
+                "lower_bound": 0.7202184545180014,
+                "successes": 8739,
+                "trials": 12000,
+                "upper_bound": 0.7361354567521813
+              },
+              "forced_down_impact": 0.72752175,
+              "id": "home-timeline-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0.0007282500000000006,
+              "rank": 4,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.7271666666666666,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0.0003333333333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.0003333333333333333,
+                "lower_bound": 0.0001296342180783187,
+                "successes": 4,
+                "trials": 12000,
+                "upper_bound": 0.0008568382258735924
+              },
+              "forced_down_impact": 0.0003333333333333333,
+              "id": "nginx-web-server|home-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|home-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|media-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|post-storage-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|text-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|unique-id-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|user-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|user-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "home-timeline-service|post-storage-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "home-timeline-service|social-graph-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|social-graph-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|user-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|user-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "social-graph-service|user-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "text-service|url-shorten-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "text-service|user-mention-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-service|social-graph-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-timeline-service|post-storage-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "media-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "text-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "unique-id-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "url-shorten-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-mention-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.7275,
+              "availability_if_up": 0.7275,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-timeline-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0,
+              "rank": 6,
+              "state_semantics": "service_liveness"
+            }
+          ],
+          "endpoint_id": "home-timeline"
+        },
+        {
+          "baseline_availability": 0.8076666666666666,
+          "components": [
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.8993333333333333,
+              "birnbaum_importance": 0.8993333333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.8993333333333333,
+                "lower_bound": 0.8938214339863221,
+                "successes": 10792,
+                "trials": 12000,
+                "upper_bound": 0.9045896440738149
+              },
+              "forced_down_impact": 0.8094,
+              "id": "post-storage-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.08993333333333331,
+              "rank": 1,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.8985833333333333,
+              "birnbaum_importance": 0.8985833333333333,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.8985833333333333,
+                "lower_bound": 0.8930539240594165,
+                "successes": 10783,
+                "trials": 12000,
+                "upper_bound": 0.9038576340294057
+              },
+              "forced_down_impact": 0.808725,
+              "id": "nginx-web-server",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0.0898583333333333,
+              "rank": 2,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0,
+              "availability_if_up": 0.8081666666666667,
+              "birnbaum_importance": 0.8081666666666667,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.8081666666666667,
+                "lower_bound": 0.8010236632734178,
+                "successes": 9698,
+                "trials": 12000,
+                "upper_bound": 0.8151124316068801
+              },
+              "forced_down_impact": 0.8073585,
+              "id": "user-timeline-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0.0008081666666666674,
+              "rank": 3,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.80725,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0.0004166666666666667,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0.0004166666666666667,
+                "lower_bound": 0.00017798781134267761,
+                "successes": 5,
+                "trials": 12000,
+                "upper_bound": 0.0009750979627553388
+              },
+              "forced_down_impact": 0.0004166666666666667,
+              "id": "nginx-web-server|user-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 4,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|home-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|media-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|post-storage-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|text-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|unique-id-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|user-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service|user-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "home-timeline-service|post-storage-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "home-timeline-service|social-graph-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|home-timeline-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|social-graph-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "nginx-web-server|user-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "social-graph-service|user-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "text-service|url-shorten-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "text-service|user-mention-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-service|social-graph-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-timeline-service|post-storage-service|sync|true",
+              "kind": "edge",
+              "live_probability": 1,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "edge_connectivity"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "compose-post-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "home-timeline-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "media-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "social-graph-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "text-service",
+              "kind": "service",
+              "live_probability": 0.999,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "unique-id-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "url-shorten-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-mention-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            },
+            {
+              "availability_if_down": 0.8076666666666666,
+              "availability_if_up": 0.8076666666666666,
+              "birnbaum_importance": 0,
+              "confidence": {
+                "confidence_level": 0.95,
+                "estimate": 0,
+                "lower_bound": 0,
+                "successes": 0,
+                "trials": 12000,
+                "upper_bound": 0.0003200191233674893
+              },
+              "forced_down_impact": 0,
+              "id": "user-service",
+              "kind": "service",
+              "live_probability": 0.9,
+              "perfect_component_gain": 0,
+              "rank": 5,
+              "state_semantics": "service_liveness"
+            }
+          ],
+          "endpoint_id": "user-timeline"
+        }
+      ],
+      "evaluated_components": 31,
+      "method": "birnbaum",
+      "name": "published-endpoint-criticality",
+      "sampling_mode": "independent_replica",
+      "seed": 2965800468845279292,
+      "trials": 12000
+    }
+  ],
+  "input_artifact": {
+    "artifact_id": "bering://discover?input=case://social-network/topology-api.yaml",
+    "contract_name": "io.mb3r.bering.model",
+    "contract_version": "1.3.0",
+    "digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "kind": "model",
+    "produced_at": "2026-08-21T00:00:00Z",
+    "source_ref": "bering://discover?input=case://social-network/topology-api.yaml",
+    "source_type": "bering"
+  },
+  "parameters": {
+    "calibration": {
+      "baselines": {
+        "active": false,
+        "fallback": "no baseline reports configured",
+        "source": "external"
+      },
+      "fault_contract": {
+        "active": false,
+        "fallback": "no fault contract configured; advanced fault profiles are inactive",
+        "source": "default"
+      },
+      "historical_signals": {
+        "active": false,
+        "fallback": "historical calibration inputs are not implemented; static configuration is used",
+        "source": "default"
+      },
+      "journey_overrides": {
+        "active": false,
+        "fallback": "using richer predicates or discovered journeys without manual journey override",
+        "source": "default"
+      },
+      "predicate_overlay": {
+        "active": false,
+        "fallback": "using artifact predicates or legacy path resolution without external predicate overlay",
+        "source": "external"
+      }
+    },
+    "config_source": "override",
+    "profiles": [
+      {
+        "endpoint_weights": {
+          "active": false,
+          "fallback": "no endpoint weights configured; weighted aggregate falls back to arithmetic mean",
+          "source": "default"
+        },
+        "failure_probability": {
+          "source": "override",
+          "value": 0.1
+        },
+        "fault_profile": {
+          "source": "default",
+          "value": ""
+        },
+        "fixed_k_failures": {
+          "source": "default",
+          "value": 0
+        },
+        "name": "importance-baseline",
+        "reliability": {
+          "active": false,
+          "fallback": "using legacy failure_probability shorthand for node reliability and perfect-edge baseline",
+          "source": "default"
+        },
+        "sampling_mode": {
+          "source": "override",
+          "value": "independent_replica"
+        },
+        "seed": {
+          "source": "override",
+          "value": -6300153348273990712
+        },
+        "trials": {
+          "source": "override",
+          "value": 12000
+        }
+      }
+    ]
+  },
+  "policy_evaluation": {
+    "decision": "report",
+    "evaluation_rule": "all_profiles",
+    "failed_endpoints": [],
+    "failed_profiles": [
+      "importance-baseline"
+    ],
+    "mode": "report",
+    "reasons": [
+      {
+        "id": "gate_pass",
+        "message": "all evaluated endpoints, assertions, and aggregates satisfy the configured gate",
+        "scope": "gate",
+        "status": "report"
+      }
+    ]
+  },
+  "profiles": [
+    {
+      "decision": "report",
+      "endpoint_results": [
+        {
+          "availability": 0.4776666666666667,
+          "endpoint_id": "compose-post",
+          "profile": "importance-baseline",
+          "status": "pass",
+          "threshold": 0.01,
+          "threshold_delta": 0.4676666666666667
+        },
+        {
+          "availability": 0.7273333333333334,
+          "endpoint_id": "home-timeline",
+          "profile": "importance-baseline",
+          "status": "pass",
+          "threshold": 0.01,
+          "threshold_delta": 0.7173333333333334
+        },
+        {
+          "availability": 0.8998333333333334,
+          "endpoint_id": "nginx-web-server:POST /wrk2-api/post/compose",
+          "profile": "importance-baseline",
+          "status": "pass",
+          "threshold": 0.01,
+          "threshold_delta": 0.8898333333333334
+        },
+        {
+          "availability": 0.8069166666666666,
+          "endpoint_id": "user-timeline",
+          "profile": "importance-baseline",
+          "status": "pass",
+          "threshold": 0.01,
+          "threshold_delta": 0.7969166666666666
+        }
+      ],
+      "endpoints_below_threshold": 0,
+      "name": "importance-baseline",
+      "simulation": {
+        "advanced": {
+          "blast_radius": {
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "edges": [
+            {
+              "edge_id": "compose-post-service|home-timeline-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge compose-post-service|home-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "compose-post-service|media-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge compose-post-service|media-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "compose-post-service|post-storage-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge compose-post-service|post-storage-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "compose-post-service|text-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge compose-post-service|text-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "compose-post-service|unique-id-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge compose-post-service|unique-id-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "compose-post-service|user-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge compose-post-service|user-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "compose-post-service|user-timeline-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge compose-post-service|user-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "home-timeline-service|post-storage-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge home-timeline-service|post-storage-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "home-timeline-service|social-graph-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge home-timeline-service|social-graph-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_id": "nginx-web-server|home-timeline-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "nginx-web-server|social-graph-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|social-graph-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "nginx-web-server|user-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|user-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "nginx-web-server|user-timeline-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "social-graph-service|user-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge social-graph-service|user-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "text-service|url-shorten-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge text-service|url-shorten-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "text-service|user-mention-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge text-service|user-mention-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "user-service|social-graph-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge user-service|social-graph-service|sync|true"
+              }
+            },
+            {
+              "edge_id": "user-timeline-service|post-storage-service|sync|true",
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge user-timeline-service|post-storage-service|sync|true"
+              }
+            }
+          ],
+          "endpoints": [
+            {
+              "endpoint_id": "compose-post",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.4776666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "home-timeline",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7273333333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "nginx-web-server:POST /wrk2-api/post/compose",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8998333333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            },
+            {
+              "endpoint_id": "user-timeline",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8069166666666666
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable on at least one path"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.7996666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.7996666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|home-timeline-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.798
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003ehome-timeline-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "home-timeline-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|home-timeline-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.798
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003ehome-timeline-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "home-timeline-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|home-timeline-service|sync|true",
+                "home-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.41875
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003ehome-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "home-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|home-timeline-service|sync|true",
+                "home-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.41875
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003ehome-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "home-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|home-timeline-service|sync|true",
+                "home-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.41875
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003ehome-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "home-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|home-timeline-service|sync|true",
+                "home-timeline-service|social-graph-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.6196666666666666
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003ehome-timeline-service-\u003esocial-graph-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "home-timeline-service",
+                "social-graph-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|home-timeline-service|sync|true",
+                "home-timeline-service|social-graph-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.6196666666666666
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003ehome-timeline-service-\u003esocial-graph-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "home-timeline-service",
+                "social-graph-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|home-timeline-service|sync|true",
+                "home-timeline-service|social-graph-service|sync|true",
+                "social-graph-service|user-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7314166666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003ehome-timeline-service-\u003esocial-graph-service-\u003euser-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "home-timeline-service",
+                "social-graph-service",
+                "user-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|media-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8990833333333333
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003emedia-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "media-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.42075
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.42075
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.42075
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|text-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8989166666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003etext-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "text-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|text-service|sync|true",
+                "text-service|url-shorten-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8101666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003etext-service-\u003eurl-shorten-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "text-service",
+                "url-shorten-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|text-service|sync|true",
+                "text-service|user-mention-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.80375
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003etext-service-\u003euser-mention-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "text-service",
+                "user-mention-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|unique-id-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8145
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003eunique-id-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "unique-id-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|user-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.8115
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003euser-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "user-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|user-service|sync|true",
+                "user-service|social-graph-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.464
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003euser-service-\u003esocial-graph-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "user-service",
+                "social-graph-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|user-service|sync|true",
+                "user-service|social-graph-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.464
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003euser-service-\u003esocial-graph-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "user-service",
+                "social-graph-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|user-timeline-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.798
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003euser-timeline-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "user-timeline-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|user-timeline-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.798
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003euser-timeline-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "user-timeline-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|user-timeline-service|sync|true",
+                "user-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.4185
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003euser-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "user-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|user-timeline-service|sync|true",
+                "user-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.4185
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003euser-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "user-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose",
+                "compose-post-service|user-timeline-service|sync|true",
+                "user-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.4185
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              },
+              "path_id": "nginx-web-server-\u003ecompose-post-service-\u003euser-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "compose-post-service",
+                "user-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|compose-post-service|sync|true|protocol=http|operation=POST|route=%2Fwrk2-api%2Fpost%2Fcompose"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|home-timeline-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.7996666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003ehome-timeline-service",
+              "services": [
+                "nginx-web-server",
+                "home-timeline-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|home-timeline-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.7996666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003ehome-timeline-service",
+              "services": [
+                "nginx-web-server",
+                "home-timeline-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|home-timeline-service|sync|true",
+                "home-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.421
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003ehome-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "home-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|home-timeline-service|sync|true",
+                "home-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.421
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003ehome-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "home-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|home-timeline-service|sync|true",
+                "home-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.421
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003ehome-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "home-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|home-timeline-service|sync|true",
+                "home-timeline-service|social-graph-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.621
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003ehome-timeline-service-\u003esocial-graph-service",
+              "services": [
+                "nginx-web-server",
+                "home-timeline-service",
+                "social-graph-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|home-timeline-service|sync|true",
+                "home-timeline-service|social-graph-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.621
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003ehome-timeline-service-\u003esocial-graph-service",
+              "services": [
+                "nginx-web-server",
+                "home-timeline-service",
+                "social-graph-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|home-timeline-service|sync|true",
+                "home-timeline-service|social-graph-service|sync|true",
+                "social-graph-service|user-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.732
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003ehome-timeline-service-\u003esocial-graph-service-\u003euser-service",
+              "services": [
+                "nginx-web-server",
+                "home-timeline-service",
+                "social-graph-service",
+                "user-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|home-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|social-graph-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.6223333333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|social-graph-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003esocial-graph-service",
+              "services": [
+                "nginx-web-server",
+                "social-graph-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|social-graph-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|social-graph-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.6223333333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|social-graph-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003esocial-graph-service",
+              "services": [
+                "nginx-web-server",
+                "social-graph-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|social-graph-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|social-graph-service|sync|true",
+                "social-graph-service|user-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.7325833333333334
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|social-graph-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003esocial-graph-service-\u003euser-service",
+              "services": [
+                "nginx-web-server",
+                "social-graph-service",
+                "user-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|social-graph-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|user-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 0.81225
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|user-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003euser-service",
+              "services": [
+                "nginx-web-server",
+                "user-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|user-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|user-service|sync|true",
+                "user-service|social-graph-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.4651666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|user-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003euser-service-\u003esocial-graph-service",
+              "services": [
+                "nginx-web-server",
+                "user-service",
+                "social-graph-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|user-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|user-service|sync|true",
+                "user-service|social-graph-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.4651666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|user-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003euser-service-\u003esocial-graph-service",
+              "services": [
+                "nginx-web-server",
+                "user-service",
+                "social-graph-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|user-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|user-timeline-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.7996666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003euser-timeline-service",
+              "services": [
+                "nginx-web-server",
+                "user-timeline-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|user-timeline-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 1.7996666666666667
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003euser-timeline-service",
+              "services": [
+                "nginx-web-server",
+                "user-timeline-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|user-timeline-service|sync|true",
+                "user-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.42075
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003euser-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "user-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|user-timeline-service|sync|true",
+                "user-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.42075
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003euser-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "user-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              }
+            },
+            {
+              "edge_ids": [
+                "nginx-web-server|user-timeline-service|sync|true",
+                "user-timeline-service|post-storage-service|sync|true"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact",
+                "value": 2.42075
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "retry metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              },
+              "path_id": "nginx-web-server-\u003euser-timeline-service-\u003epost-storage-service",
+              "services": [
+                "nginx-web-server",
+                "user-timeline-service",
+                "post-storage-service"
+              ],
+              "timeout_mismatch_count": {
+                "available": false,
+                "provenance": "unavailable",
+                "reason": "timeout metadata unavailable for edge nginx-web-server|user-timeline-service|sync|true"
+              }
+            }
+          ]
+        },
+        "endpoint_availability": {
+          "compose-post": 0.4776666666666667,
+          "home-timeline": 0.7273333333333334,
+          "nginx-web-server:POST /wrk2-api/post/compose": 0.8998333333333334,
+          "user-timeline": 0.8069166666666666
+        },
+        "failure_probability": 0.1,
+        "name": "importance-baseline",
+        "sampling_mode": "independent_replica",
+        "seed": -6300153348273990712,
+        "trials": 12000,
+        "unweighted_aggregate": 0.7279375,
+        "weighted_aggregate": 0.7279375
+      }
+    }
+  ],
+  "provenance": {
+    "predicate_source": "default",
+    "weights_source": "default"
+  },
+  "simulation": {
+    "failure_probability": 0.1,
+    "seed": -6300153348273990712,
+    "trials": 12000
+  },
+  "summary": {
+    "confidence": 1,
+    "cross_profile_availability": 0.7279375,
+    "cross_profile_weighted_availability": 0.7279375,
+    "overall_availability": 0.7279375,
+    "risk_score": 0.2720625,
+    "weighted_overall_availability": 0.7279375
+  }
+}

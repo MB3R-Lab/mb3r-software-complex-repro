@@ -227,6 +227,131 @@
   },
   "schema_version": "1.0.0",
   "sheaft": {
+    "criticality": {
+      "base_profile": "importance-baseline",
+      "confidence_level": 0.95,
+      "endpoints": [
+        {
+          "baseline_availability": 0.47408333333333336,
+          "endpoint_id": "compose-post",
+          "ranked_components": 31,
+          "top_component": {
+            "birnbaum_importance": 0.5294166666666666,
+            "confidence_lower_bound": 0.5204782022038908,
+            "confidence_upper_bound": 0.5383363033376843,
+            "forced_down_impact": 0.476475,
+            "id": "unique-id-service",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.05294166666666665,
+            "rank": 1
+          },
+          "top_edge": {
+            "birnbaum_importance": 0.47408333333333336,
+            "confidence_lower_bound": 0.46515910785195985,
+            "confidence_upper_bound": 0.48302414647260145,
+            "forced_down_impact": 0.47408333333333336,
+            "id": "compose-post-service|media-service|sync|true",
+            "kind": "edge",
+            "live_probability": 1,
+            "perfect_component_gain": 0,
+            "rank": 13
+          },
+          "top_service": {
+            "birnbaum_importance": 0.5294166666666666,
+            "confidence_lower_bound": 0.5204782022038908,
+            "confidence_upper_bound": 0.5383363033376843,
+            "forced_down_impact": 0.476475,
+            "id": "unique-id-service",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.05294166666666665,
+            "rank": 1
+          }
+        },
+        {
+          "baseline_availability": 0.7275,
+          "endpoint_id": "home-timeline",
+          "ranked_components": 31,
+          "top_component": {
+            "birnbaum_importance": 0.8099166666666666,
+            "confidence_lower_bound": 0.8027977073737412,
+            "confidence_upper_bound": 0.8168372674396246,
+            "forced_down_impact": 0.7289249999999999,
+            "id": "post-storage-service",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.08099166666666664,
+            "rank": 1
+          },
+          "top_edge": {
+            "birnbaum_importance": 0.0003333333333333333,
+            "confidence_lower_bound": 0.0001296342180783187,
+            "confidence_upper_bound": 0.0008568382258735924,
+            "forced_down_impact": 0.0003333333333333333,
+            "id": "nginx-web-server|home-timeline-service|sync|true",
+            "kind": "edge",
+            "live_probability": 1,
+            "perfect_component_gain": 0,
+            "rank": 5
+          },
+          "top_service": {
+            "birnbaum_importance": 0.8099166666666666,
+            "confidence_lower_bound": 0.8027977073737412,
+            "confidence_upper_bound": 0.8168372674396246,
+            "forced_down_impact": 0.7289249999999999,
+            "id": "post-storage-service",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.08099166666666664,
+            "rank": 1
+          }
+        },
+        {
+          "baseline_availability": 0.8076666666666666,
+          "endpoint_id": "user-timeline",
+          "ranked_components": 31,
+          "top_component": {
+            "birnbaum_importance": 0.8993333333333333,
+            "confidence_lower_bound": 0.8938214339863221,
+            "confidence_upper_bound": 0.9045896440738149,
+            "forced_down_impact": 0.8094,
+            "id": "post-storage-service",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.08993333333333331,
+            "rank": 1
+          },
+          "top_edge": {
+            "birnbaum_importance": 0.0004166666666666667,
+            "confidence_lower_bound": 0.00017798781134267761,
+            "confidence_upper_bound": 0.0009750979627553388,
+            "forced_down_impact": 0.0004166666666666667,
+            "id": "nginx-web-server|user-timeline-service|sync|true",
+            "kind": "edge",
+            "live_probability": 1,
+            "perfect_component_gain": 0,
+            "rank": 4
+          },
+          "top_service": {
+            "birnbaum_importance": 0.8993333333333333,
+            "confidence_lower_bound": 0.8938214339863221,
+            "confidence_upper_bound": 0.9045896440738149,
+            "forced_down_impact": 0.8094,
+            "id": "post-storage-service",
+            "kind": "service",
+            "live_probability": 0.9,
+            "perfect_component_gain": 0.08993333333333331,
+            "rank": 1
+          }
+        }
+      ],
+      "evaluated_components": 31,
+      "method": "birnbaum",
+      "name": "published-endpoint-criticality",
+      "sampling_mode": "independent_replica",
+      "trials": 12000
+    },
     "endpoint_results": [
       {
         "availability": 0.29262666666666665,
