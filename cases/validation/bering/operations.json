@@ -1,0 +1,46 @@
+{
+  "spans": [
+    {
+      "trace_id": "read-trace",
+      "span_id": "read-root",
+      "service": "frontend",
+      "kind": "server",
+      "name": "GET /items",
+      "start_time": "2026-08-21T00:00:00Z",
+      "end_time": "2026-08-21T00:00:00.010Z",
+      "attributes": {"http.request.method": "GET", "http.route": "/items"}
+    },
+    {
+      "trace_id": "read-trace",
+      "span_id": "read-child",
+      "parent_span_id": "read-root",
+      "service": "catalog",
+      "kind": "server",
+      "name": "GET /internal/items",
+      "start_time": "2026-08-21T00:00:00.001Z",
+      "end_time": "2026-08-21T00:00:00.008Z",
+      "attributes": {"http.request.method": "GET", "http.route": "/internal/items"}
+    },
+    {
+      "trace_id": "write-trace",
+      "span_id": "write-root",
+      "service": "frontend",
+      "kind": "server",
+      "name": "POST /items",
+      "start_time": "2026-08-21T00:01:00Z",
+      "end_time": "2026-08-21T00:01:00.020Z",
+      "attributes": {"http.request.method": "POST", "http.route": "/items"}
+    },
+    {
+      "trace_id": "write-trace",
+      "span_id": "write-child",
+      "parent_span_id": "write-root",
+      "service": "catalog",
+      "kind": "server",
+      "name": "POST /internal/items",
+      "start_time": "2026-08-21T00:01:00.002Z",
+      "end_time": "2026-08-21T00:01:00.018Z",
+      "attributes": {"http.request.method": "POST", "http.route": "/internal/items"}
+    }
+  ]
+}

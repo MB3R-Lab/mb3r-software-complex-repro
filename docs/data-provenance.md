@@ -41,6 +41,15 @@ The criticality configurations are new tool-demonstration inputs rather than tra
 
 The small static evidence directories are self-contained preflight fixtures derived from the corresponding deployment configurations. They are not asserted to be complete deployable copies of either system.
 
+### Extended evaluation fixtures
+
+- `cases/decision-walkthrough/` contains three explicit replica maps and fixed Sheaft configurations for the accepted baseline, rejected candidate, Birnbaum analysis, and corrected candidate. All variants reuse the archived OpenTelemetry Demo topology and static evidence; no deployment is changed or executed.
+- `cases/validation/procrustes/` contains a minimal positive fixture and fixed goal contracts. The runner derives the identity-conflict and missing-scenario inputs by one documented mutation or omission and retains those generated inputs with the output.
+- `cases/validation/bering/operations.json` is a constructed two-trace fixture with GET and POST operations between the same service pair. `expected.json` fixes the exact service, operation-aware edge, and endpoint sets.
+- `cases/validation/oracle/` defines a three-service series/async model. With independent service liveness `0.9` and perfect edges, its closed-form immediate and eventual endpoint availabilities are `0.9` and `0.81`; its series-component Birnbaum importance is `1.0`.
+
+These fixtures validate software behavior on controlled inputs. They are not additional live or chaos measurements and do not claim general empirical validity of the underlying stochastic-connectivity model.
+
 ## Output provenance
 
 Each reference case retains the stage boundary:
@@ -51,5 +60,7 @@ Each reference case retains the stage boundary:
 - `criticality/`: consumed model view, complete Birnbaum ranking report, and summary;
 - `analytics.json`: inventory, published-result comparison, and compact top-service/top-edge views derived from those outputs;
 - `summary.md`: a readable rendering of the case-level comparison and criticality highlights.
+
+`reference/evaluation/decision.json` and `reference/evaluation/validation-matrix.json` retain deterministic summaries of the extended checks. Runtime and memory measurements are generated on demand because they are machine-dependent.
 
 The workflow is deterministic with respect to these archived inputs and the pinned toolchain. This is a software-complex reproduction claim, not a new empirical validation of the underlying mathematical model.

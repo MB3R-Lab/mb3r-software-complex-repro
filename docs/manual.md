@@ -11,8 +11,10 @@ Install Docker with Compose support and ensure the Docker daemon is running. The
 The published image is:
 
 ```text
-ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1
+ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
 ```
+
+Artifact release `1.1.0` packages pinned software-complex release `1.3.1`. The separate versions prevent a documentation or evaluation update from overwriting an existing toolchain image tag.
 
 ## Reviewer walkthrough
 
@@ -98,11 +100,43 @@ The final line must be:
 failure-walkthroughs-ok toolchain=1.3.1 scenarios=2
 ```
 
-### 6. Run one alternative case
+### 6. Exercise an SLO regression and remediation
+
+```bash
+docker compose run --rm decision
+```
+
+The selected OpenTelemetry Demo operation is `frontend:GET /api/recommendations` with SLO `0.95`. The controlled baseline has two `recommendation` and two `ad` replicas. The proposed cost reduction removes one `recommendation` replica; the gate must report a compatible boundary regression from `0.20` to `0.04`. Birnbaum importance nominates `recommendation` for inspection but is not itself treated as a causal or release verdict. The corrected candidate preserves its two replicas and instead removes one `ad` replica. A separate Sheaft run must recover the `0.20` certified boundary and pass the gate.
+
+The final line must be:
+
+```text
+decision-walkthrough-ok toolchain=1.3.1 endpoint="frontend:GET /api/recommendations" tolerance=0.20->0.04->0.20 decisions=pass,fail,pass
+```
+
+### 7. Run the controlled validation matrix
+
+```bash
+docker compose run --rm validation
+```
+
+This scenario checks controlled static evidence and diagnoses in Procrustes, exact service/edge/endpoint sets from constructed Bering traces, small Sheaft models with closed-form answers, and strict rejection of an unsupported contract. The stochastic oracle fixes the independent fail-stop distribution, failure population, 50,000 trials, and seed `2711`. Its output records each expected value, observed value, absolute error, and tolerance. Success requires all 15 checks to pass.
+
+### 8. Measure descriptive application cost
+
+```bash
+docker compose run --rm cost --benchmark-repeats 5
+```
+
+The result reports min/median/max wall time for a complete Procrustes → Bering → Sheaft pass and for repeating Sheaft analysis on the saved Bering model. Peak child-process RSS is included on Linux. Treat these values as measurements of the stated machine, not as a comparative performance claim.
+
+Run all three scenarios together with `docker compose run --rm evaluation --benchmark-repeats 5`.
+
+### 9. Run one alternative case
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -110,7 +144,7 @@ List accepted names with:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
   --list-cases
 ```
 
@@ -122,7 +156,7 @@ On Linux or macOS:
 mkdir -p output
 docker run --rm --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=$PWD/output,target=/output" \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
   --repeat 2 --work-dir /output
 ```
 
@@ -133,7 +167,7 @@ New-Item -ItemType Directory -Force output
 $artifactOutput = (Resolve-Path output).Path
 docker run --rm `
   --mount "type=bind,source=$artifactOutput,target=/output" `
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 `
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 `
   --repeat 2 --work-dir /output
 ```
 
@@ -147,6 +181,8 @@ The published live/chaos values are comparison context only. The artifact never 
 
 Criticality is an additional explanatory analysis, not a result transcribed from either prior article. It uses a 0.10 independent-replica failure baseline and 12,000 paired trials. Birnbaum values and Wilson intervals are conditional on the archived topology, predicates, and configured probabilities; overlapping intervals do not establish a reliable ordering, and importance is not used as a release gate.
 
+The controlled validation matrix tests implementation behavior against constructed or closed-form oracles. It is not empirical validation against a new production system and does not establish that the mathematical model is generally valid. In the decision walkthrough, only the re-analysis of the modified candidate establishes its modelled effect; the Birnbaum ranking merely nominates a component for inspection.
+
 ## Source-build path for maintainers
 
 The source-build path verifies that the current checkouts match the locked commits before it builds anything:
@@ -155,6 +191,7 @@ The source-build path verifies that the current checkouts match the locked commi
 make reproduce-paper
 make reproduce-paper-criticality
 make reproduce-paper-failures
+make reproduce-paper-evaluation BENCHMARK_REPEATS=3
 ```
 
 It is intentionally separate from the container path and is not required of reviewers.

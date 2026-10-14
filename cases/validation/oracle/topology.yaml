@@ -1,0 +1,43 @@
+source:
+  type: topology_api
+  ref: oracle://closed-form/series-async
+services:
+  - {id: gateway, replicas: 1, failure_eligible: false}
+  - {id: sync-worker, replicas: 1}
+  - {id: async-worker, replicas: 1}
+edges:
+  - from: gateway
+    to: sync-worker
+    kind: sync
+    blocking: true
+    identity: {protocol: http, operation: GET, route: /immediate}
+  - from: gateway
+    to: async-worker
+    kind: async
+    blocking: false
+    identity: {protocol: messaging, operation: publish, topic: completion}
+endpoints:
+  - id: "gateway:GET /immediate"
+    entry_service: gateway
+    method: GET
+    path: /immediate
+    predicate_ref: oracle.immediate
+    semantics:
+      predicate_mode: immediate_response
+      mandatory_targets: [sync-worker]
+      dependency_modes: [sync]
+      source: constructed-oracle
+      confidence: 1.0
+    weight: 0.5
+  - id: "gateway:POST /eventual"
+    entry_service: gateway
+    method: POST
+    path: /eventual
+    predicate_ref: oracle.eventual
+    semantics:
+      predicate_mode: eventual_completion
+      mandatory_targets: [sync-worker, async-worker]
+      dependency_modes: [sync, async]
+      source: constructed-oracle
+      confidence: 1.0
+    weight: 0.5

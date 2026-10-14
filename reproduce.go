@@ -84,6 +84,11 @@ type runOptions struct {
 	Prebuilt               bool
 	FailureWalkthroughs    bool
 	CriticalityWalkthrough bool
+	DecisionWalkthrough    bool
+	ValidationMatrix       bool
+	CostProfile            bool
+	EvaluationSuite        bool
+	BenchmarkRepeats       int
 	CaseName               string
 	Repeat                 int
 	WorkRoot               string
@@ -99,6 +104,11 @@ func main() {
 	listCases := flag.Bool("list-cases", false, "list available case names and exit")
 	failureWalkthroughs := flag.Bool("failure-walkthroughs", false, "run the two expected-failure reviewer walkthroughs")
 	criticalityWalkthrough := flag.Bool("criticality-walkthrough", false, "run a reviewer-facing Birnbaum component-criticality walkthrough")
+	decisionWalkthrough := flag.Bool("decision-walkthrough", false, "run the baseline, regression, importance-guided remediation, and re-check scenario")
+	validationMatrix := flag.Bool("validation-matrix", false, "run controlled Procrustes/Bering checks and Sheaft analytical oracles")
+	costProfile := flag.Bool("cost-profile", false, "measure full-pipeline and saved-model analysis cost on this machine")
+	evaluationSuite := flag.Bool("evaluation-suite", false, "run the decision walkthrough, validation matrix, and cost profile")
+	benchmarkRepeats := flag.Int("benchmark-repeats", 3, "number of repetitions for --cost-profile or --evaluation-suite")
 	flag.Parse()
 	if *listCases {
 		root, err := repositoryRoot()
@@ -131,6 +141,24 @@ func main() {
 		fmt.Fprintln(os.Stderr, "reproduce-paper: --criticality-walkthrough cannot be combined with reference updates or --failure-walkthroughs")
 		os.Exit(1)
 	}
+	evaluationModes := 0
+	for _, enabled := range []bool{*decisionWalkthrough, *validationMatrix, *costProfile, *evaluationSuite} {
+		if enabled {
+			evaluationModes++
+		}
+	}
+	if evaluationModes > 1 {
+		fmt.Fprintln(os.Stderr, "reproduce-paper: choose only one evaluation mode")
+		os.Exit(1)
+	}
+	if evaluationModes > 0 && (*update || strings.TrimSpace(*acceptWorkDir) != "" || *failureWalkthroughs || *criticalityWalkthrough || strings.TrimSpace(*caseName) != "") {
+		fmt.Fprintln(os.Stderr, "reproduce-paper: evaluation modes cannot be combined with reference updates, legacy walkthroughs, or --case")
+		os.Exit(1)
+	}
+	if *benchmarkRepeats < 1 {
+		fmt.Fprintln(os.Stderr, "reproduce-paper: --benchmark-repeats must be at least 1")
+		os.Exit(1)
+	}
 	if *update && *prebuilt {
 		fmt.Fprintln(os.Stderr, "reproduce-paper: --update-reference is disabled for packaged prebuilt binaries")
 		os.Exit(1)
@@ -144,6 +172,11 @@ func main() {
 			Prebuilt:               *prebuilt,
 			FailureWalkthroughs:    *failureWalkthroughs,
 			CriticalityWalkthrough: *criticalityWalkthrough,
+			DecisionWalkthrough:    *decisionWalkthrough,
+			ValidationMatrix:       *validationMatrix,
+			CostProfile:            *costProfile,
+			EvaluationSuite:        *evaluationSuite,
+			BenchmarkRepeats:       *benchmarkRepeats,
 			CaseName:               strings.TrimSpace(*caseName),
 			Repeat:                 *repeat,
 			WorkRoot:               strings.TrimSpace(*workRoot),
@@ -238,6 +271,28 @@ func run(options runOptions) error {
 			return err
 		}
 		return runCriticalityWalkthrough(root, filepath.Join(workRoot, "criticality-walkthrough", walkthroughCase.Name), bins, manifest.Toolchain.Version, walkthroughCase)
+	}
+	if options.DecisionWalkthrough {
+		return runDecisionWalkthrough(root, filepath.Join(workRoot, "decision-walkthrough"), bins, manifest.Toolchain.Version)
+	}
+	if options.ValidationMatrix {
+		return runValidationMatrix(root, filepath.Join(workRoot, "validation-matrix"), bins, manifest.Toolchain.Version)
+	}
+	if options.CostProfile {
+		return runCostProfile(root, filepath.Join(workRoot, "cost-profile"), bins, manifest.Toolchain.Version, options.BenchmarkRepeats)
+	}
+	if options.EvaluationSuite {
+		if err := runDecisionWalkthrough(root, filepath.Join(workRoot, "decision-walkthrough"), bins, manifest.Toolchain.Version); err != nil {
+			return err
+		}
+		if err := runValidationMatrix(root, filepath.Join(workRoot, "validation-matrix"), bins, manifest.Toolchain.Version); err != nil {
+			return err
+		}
+		if err := runCostProfile(root, filepath.Join(workRoot, "cost-profile"), bins, manifest.Toolchain.Version, options.BenchmarkRepeats); err != nil {
+			return err
+		}
+		fmt.Printf("evaluation-suite-ok toolchain=%s scenarios=3 benchmark_repeats=%d\n", manifest.Toolchain.Version, options.BenchmarkRepeats)
+		return nil
 	}
 	cases, err := selectCases(allCases, options.CaseName)
 	if err != nil {

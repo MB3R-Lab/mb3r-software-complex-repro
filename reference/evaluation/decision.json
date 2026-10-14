@@ -1,0 +1,69 @@
+{
+  "application": "OpenTelemetry Demo",
+  "candidate_importance": {
+    "ad": {
+      "availability_if_down": 0.8960833333333333,
+      "availability_if_up": 0.8960833333333333,
+      "birnbaum_importance": 0,
+      "confidence": {
+        "confidence_level": 0.95,
+        "estimate": 0,
+        "lower_bound": 0,
+        "successes": 0,
+        "trials": 12000,
+        "upper_bound": 0.0003200191233674893
+      },
+      "forced_down_impact": 0,
+      "id": "ad",
+      "kind": "service",
+      "live_probability": 0.99,
+      "perfect_component_gain": 0,
+      "rank": 4,
+      "state_semantics": "service_liveness"
+    },
+    "interpretation": "Birnbaum is used to nominate a component for inspection; the remediated model is evaluated independently.",
+    "recommendation": {
+      "availability_if_down": 0,
+      "availability_if_up": 0.99475,
+      "birnbaum_importance": 0.99475,
+      "confidence": {
+        "confidence_level": 0.95,
+        "estimate": 0.99475,
+        "lower_bound": 0.9932892312545618,
+        "successes": 11937,
+        "trials": 12000,
+        "upper_bound": 0.995894109822866
+      },
+      "forced_down_impact": 0.895275,
+      "id": "recommendation",
+      "kind": "service",
+      "live_probability": 0.9,
+      "perfect_component_gain": 0.09947499999999998,
+      "rank": 1,
+      "state_semantics": "service_liveness"
+    }
+  },
+  "changes": [
+    {"ad_replicas": 2, "recommendation_replicas": 2, "stage": "baseline"},
+    {"ad_replicas": 2, "recommendation_replicas": 1, "stage": "regressed"},
+    {"ad_replicas": 1, "recommendation_replicas": 2, "stage": "remediated"}
+  ],
+  "endpoint": "frontend:GET /api/recommendations",
+  "outcome": "REGRESSION_DETECTED_AND_REMEDIATION_VERIFIED",
+  "sampling": {
+    "distribution": "independent replica fail-stop",
+    "failure_population": "failure-eligible replicas in the Bering model",
+    "importance_trials": 12000,
+    "seed": 2701,
+    "trials": 20000
+  },
+  "scenario": "slo-regression-and-importance-guided-remediation",
+  "schema_version": "1.0.0",
+  "slo": 0.95,
+  "stages": [
+    {"availability": 0.99285, "certified_tolerance": 0.2, "decision": "pass", "name": "baseline", "reason_ids": ["gate_pass"]},
+    {"availability": 0.946, "certified_tolerance": 0.04, "decision": "fail", "name": "regressed", "reason_ids": ["boundary_regressed", "endpoint_below_threshold"]},
+    {"availability": 0.99275, "certified_tolerance": 0.2, "decision": "pass", "name": "remediated", "reason_ids": ["gate_pass"]}
+  ],
+  "toolchain_release": "1.3.1"
+}

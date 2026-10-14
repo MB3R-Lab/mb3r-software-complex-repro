@@ -82,14 +82,22 @@ jobs:
           SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
         run: make reproduce-paper-criticality
 
+      - name: Verify extended evaluation scenarios
+        working-directory: reproduction
+        env:
+          PROCRUSTES_REPO: ${{ github.workspace }}/toolchain/Procrustes
+          BERING_REPO: ${{ github.workspace }}/toolchain/Bering
+          SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
+        run: make reproduce-paper-evaluation BENCHMARK_REPEATS=1
+
       - name: Upload generated outputs
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: software-complex-reproduction-${{ github.sha }}
           path: reproduction/.tmp/paper-reproduction/work
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 7
 
   container-smoke:
     name: Verify reviewer container
@@ -104,6 +112,7 @@ jobs:
         shell: bash
         run: |
           echo "toolchain_version=$(jq -r '.toolchain.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "artifact_version=$(jq -r '.artifact.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "procrustes_commit=$(jq -r '.components.procrustes.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "bering_commit=$(jq -r '.components.bering.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "sheaft_commit=$(jq -r '.components.sheaft.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
@@ -119,6 +128,7 @@ jobs:
           tags: mb3r-software-complex-repro:test
           build-args: |
             TOOLCHAIN_VERSION=${{ steps.lock.outputs.toolchain_version }}
+            ARTIFACT_VERSION=${{ steps.lock.outputs.artifact_version }}
             IMAGE_REVISION=${{ github.sha }}
             PROCRUSTES_COMMIT=${{ steps.lock.outputs.procrustes_commit }}
             BERING_COMMIT=${{ steps.lock.outputs.bering_commit }}
@@ -137,6 +147,9 @@ jobs:
 
       - name: Run packaged expected-failure walkthroughs
         run: docker run --rm mb3r-software-complex-repro:test --failure-walkthroughs
+
+      - name: Run packaged extended evaluation scenarios
+        run: docker run --rm mb3r-software-complex-repro:test --evaluation-suite --benchmark-repeats 1
 
   publish-container:
     name: Publish versioned reviewer container
@@ -157,6 +170,7 @@ jobs:
         shell: bash
         run: |
           echo "toolchain_version=$(jq -r '.toolchain.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "artifact_version=$(jq -r '.artifact.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "procrustes_commit=$(jq -r '.components.procrustes.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "bering_commit=$(jq -r '.components.bering.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "sheaft_commit=$(jq -r '.components.sheaft.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
@@ -182,10 +196,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-${{ steps.lock.outputs.toolchain_version }}
+            ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-${{ steps.lock.outputs.artifact_version }}
             ghcr.io/mb3r-lab/mb3r-software-complex-repro:latest
           build-args: |
             TOOLCHAIN_VERSION=${{ steps.lock.outputs.toolchain_version }}
+            ARTIFACT_VERSION=${{ steps.lock.outputs.artifact_version }}
             IMAGE_REVISION=${{ github.sha }}
             PROCRUSTES_COMMIT=${{ steps.lock.outputs.procrustes_commit }}
             BERING_COMMIT=${{ steps.lock.outputs.bering_commit }}

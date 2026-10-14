@@ -3,10 +3,19 @@
   "$id": "https://github.com/MB3R-Lab/mb3r-software-complex-repro/schemas/toolchain-lock.schema.json",
   "title": "MB3R software-complex reproduction toolchain lock",
   "type": "object",
-  "required": ["schema_version", "toolchain", "components"],
+  "required": ["schema_version", "artifact", "toolchain", "components"],
   "properties": {
     "$schema": {"type": "string"},
     "schema_version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "artifact": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"const": "mb3r-software-complex-repro"},
+        "version": {"$ref": "#/$defs/version"}
+      },
+      "additionalProperties": false
+    },
     "toolchain": {
       "type": "object",
       "required": ["name", "version", "status", "mb3r_stack_manifest"],

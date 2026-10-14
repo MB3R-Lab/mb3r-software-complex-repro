@@ -1,0 +1,13 @@
+{
+  "services": ["catalog", "frontend"],
+  "edges": [
+    "frontend|catalog|sync|true|protocol=http|operation=GET|route=%2Finternal%2Fitems|span_kind=server",
+    "frontend|catalog|sync|true|protocol=http|operation=POST|route=%2Finternal%2Fitems|span_kind=server"
+  ],
+  "endpoints": [
+    "catalog:GET /internal/items",
+    "catalog:POST /internal/items",
+    "frontend:GET /items",
+    "frontend:POST /items"
+  ]
+}

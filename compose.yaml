@@ -1,16 +1,32 @@
 services:
   demo:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
     pull_policy: always
   criticality:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
     pull_policy: always
     command: ["--criticality-walkthrough"]
   failures:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
     pull_policy: always
     command: ["--failure-walkthroughs"]
+  decision:
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
+    pull_policy: always
+    command: ["--decision-walkthrough"]
+  validation:
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
+    pull_policy: always
+    command: ["--validation-matrix"]
+  cost:
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
+    pull_policy: always
+    command: ["--cost-profile"]
+  evaluation:
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
+    pull_policy: always
+    command: ["--evaluation-suite"]
   reproduce:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
     pull_policy: always
     command: ["--repeat", "2"]

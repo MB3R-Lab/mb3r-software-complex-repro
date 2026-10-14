@@ -135,3 +135,48 @@ func TestSelectCriticalityWalkthroughCase(t *testing.T) {
 		t.Fatalf("named criticality walkthrough = %q, want social-network-repl", got.Name)
 	}
 }
+
+func TestNumericOracleCheck(t *testing.T) {
+	pass := newNumericCheck("pass", "example", 0.9, 0.895, 0.01)
+	if pass.Status != "PASS" {
+		t.Fatalf("numeric check status = %s, want PASS", pass.Status)
+	}
+	fail := newNumericCheck("fail", "example", 0.9, 0.85, 0.01)
+	if fail.Status != "FAIL" {
+		t.Fatalf("numeric check status = %s, want FAIL", fail.Status)
+	}
+}
+
+func TestSetDifferenceReturnsExplicitEmptySlice(t *testing.T) {
+	got := setDifference([]string{"a", "b"}, []string{"a", "b"})
+	if got == nil || len(got) != 0 {
+		t.Fatalf("setDifference = %#v, want non-nil empty slice", got)
+	}
+}
+
+func TestCheckedInEvaluationReferences(t *testing.T) {
+	var decision map[string]any
+	if err := readJSON(filepath.Join("reference", "evaluation", "decision.json"), &decision); err != nil {
+		t.Fatal(err)
+	}
+	stages := arrayAt(decision, "stages")
+	if len(stages) != 3 {
+		t.Fatalf("decision stages = %d, want 3", len(stages))
+	}
+	wantDecisions := []string{"pass", "fail", "pass"}
+	for index, raw := range stages {
+		stage, _ := raw.(map[string]any)
+		if got := stringAt(stage, "decision"); got != wantDecisions[index] {
+			t.Fatalf("decision stage %d = %q, want %q", index, got, wantDecisions[index])
+		}
+	}
+
+	var validation map[string]any
+	if err := readJSON(filepath.Join("reference", "evaluation", "validation-matrix.json"), &validation); err != nil {
+		t.Fatal(err)
+	}
+	summary, _ := validation["summary"].(map[string]any)
+	if got := int(numberAt(summary, "passed")); got != 15 {
+		t.Fatalf("validation passed = %d, want 15", got)
+	}
+}

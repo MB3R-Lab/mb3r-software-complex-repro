@@ -1,0 +1,40 @@
+schema_version: "1.3"
+seed: 2711
+trials: 50000
+profiles:
+  - name: oracle-state
+    sampling_mode: independent_replica
+    failure_probability: 0.10
+    reliability:
+      edge_live_probability: 1.0
+sweeps:
+  - name: immediate-failure-tolerance
+    profile: oracle-state
+    confidence_level: 0.95
+    axis:
+      type: independent_replica_failure_probability
+      values: [0.00, 0.05, 0.10, 0.20]
+    targets:
+      - endpoint_id: "gateway:GET /immediate"
+        slo: 0.90
+importance:
+  - name: oracle-component-importance
+    profile: oracle-state
+    method: birnbaum
+    targets:
+      - endpoint_id: "gateway:GET /immediate"
+      - endpoint_id: "gateway:POST /eventual"
+    components:
+      kinds: [service, edge]
+    confidence_level: 0.95
+gate:
+  mode: fail
+  default_action: fail
+  global_threshold: 0.0
+  endpoint_thresholds:
+    "gateway:GET /immediate": 0.0
+    "gateway:POST /eventual": 0.0
+  boundary_rules:
+    - sweep: immediate-failure-tolerance
+      endpoint_id: "gateway:GET /immediate"
+      minimum_certified_tolerance: __MINIMUM_TOLERANCE__

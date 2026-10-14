@@ -37,6 +37,8 @@ The artifact runner invokes pinned public CLI contracts. It does not import inte
 
 The separate fail-closed path stops at the boundary under test: incomplete evidence is retained as a Procrustes `BLOCKED` report, while an unsupported Bering contract is rejected by Sheaft before simulation. Canonical `result.json` records make both outcomes inspectable without treating an expected process failure as an artifact failure.
 
+The extended evaluation keeps three concerns separate. The decision walkthrough uses the normal Procrustes → Bering → Sheaft handoffs for three explicit replica maps. The validation matrix compares public CLI outputs with fixed diagnoses, exact trace-derived sets, and closed-form numeric oracles. The cost profile measures the same commands but does not participate in semantic reference hashing because timing and memory are machine-dependent.
+
 ## Component responsibilities
 
 | Component | Input in this artifact | Responsibility | Output consumed downstream |

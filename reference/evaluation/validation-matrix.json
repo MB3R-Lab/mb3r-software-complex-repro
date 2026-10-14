@@ -1,0 +1,29 @@
+{
+  "checks": [
+    {"component": "Procrustes", "expected": "EXPECTED", "expected_exit_code": 0, "id": "procrustes.ready", "observed": "EXPECTED", "observed_exit_code": 0, "observed_rules": [], "required_rule": "", "status": "PASS"},
+    {"component": "Procrustes", "expected": "BLOCKED", "expected_exit_code": 2, "id": "procrustes.identity-conflict", "observed": "BLOCKED", "observed_exit_code": 2, "observed_rules": ["identity.unique"], "required_rule": "identity.unique", "status": "PASS"},
+    {"component": "Procrustes", "expected": "BLOCKED", "expected_exit_code": 2, "id": "procrustes.missing-scenario", "observed": "BLOCKED", "observed_exit_code": 2, "observed_rules": ["operation.scenario"], "required_rule": "operation.scenario", "status": "PASS"},
+    {"component": "Procrustes", "expected": "INPUT_REJECTED", "expected_exit_code": 1, "id": "procrustes.unsupported-goal-contract", "observed": "INPUT_REJECTED", "observed_exit_code": 1, "observed_rules": [], "required_rule": "", "status": "PASS"},
+    {"component": "Bering", "expected": ["catalog", "frontend"], "extra": [], "id": "bering.trace-services", "missing": [], "observed": ["catalog", "frontend"], "status": "PASS", "true_positives": 2},
+    {"component": "Bering", "expected": ["frontend|catalog|sync|true|protocol=http|operation=GET|route=%2Finternal%2Fitems|span_kind=server", "frontend|catalog|sync|true|protocol=http|operation=POST|route=%2Finternal%2Fitems|span_kind=server"], "extra": [], "id": "bering.trace-edges", "missing": [], "observed": ["frontend|catalog|sync|true|protocol=http|operation=GET|route=%2Finternal%2Fitems|span_kind=server", "frontend|catalog|sync|true|protocol=http|operation=POST|route=%2Finternal%2Fitems|span_kind=server"], "status": "PASS", "true_positives": 2},
+    {"component": "Bering", "expected": ["catalog:GET /internal/items", "catalog:POST /internal/items", "frontend:GET /items", "frontend:POST /items"], "extra": [], "id": "bering.trace-endpoints", "missing": [], "observed": ["catalog:GET /internal/items", "catalog:POST /internal/items", "frontend:GET /items", "frontend:POST /items"], "status": "PASS", "true_positives": 4},
+    {"id": "sheaft.immediate-availability", "capability": "immediate response excludes async work", "expected": 0.9, "observed": 0.899, "absolute_error": 0.0010000000000000009, "tolerance": 0.012, "status": "PASS"},
+    {"id": "sheaft.eventual-availability", "capability": "eventual completion requires sync and async work", "expected": 0.81, "observed": 0.80914, "absolute_error": 0.0008600000000000829, "tolerance": 0.012, "status": "PASS"},
+    {"id": "sheaft.birnbaum-series-service", "capability": "paired Birnbaum importance", "expected": 1, "observed": 1, "absolute_error": 0, "tolerance": 0.001, "status": "PASS"},
+    {"id": "sheaft.certified-slo-boundary", "capability": "confidence-certified evaluated-grid tolerance", "expected": 0.05, "observed": 0.05, "absolute_error": 0, "tolerance": 0, "status": "PASS"},
+    {"id": "sheaft.gate-pass", "capability": "SLO gate exit code", "expected": 0, "observed": 0, "absolute_error": 0, "tolerance": 0, "status": "PASS"},
+    {"id": "sheaft.gate-fail", "capability": "SLO gate exit code", "expected": 2, "observed": 2, "absolute_error": 0, "tolerance": 0, "status": "PASS"},
+    {"id": "sheaft.gate-indeterminate", "capability": "SLO gate exit code", "expected": 2, "observed": 2, "absolute_error": 0, "tolerance": 0, "status": "PASS"},
+    {"component": "Procrustes-Bering-Sheaft boundary", "expected": "UNSUPPORTED_CONTRACT_REJECTED", "id": "contract.unsupported-bering-schema", "observed": "UNSUPPORTED_CONTRACT_REJECTED", "status": "PASS"}
+  ],
+  "scenario": "controlled-validation-matrix",
+  "schema_version": "1.0.0",
+  "stochastic_protocol": {
+    "distribution": "independent replica fail-stop with perfect edges",
+    "failure_population": "two failure-eligible oracle services; gateway excluded",
+    "seed": 2711,
+    "trials": 50000
+  },
+  "summary": {"failed": 0, "passed": 15, "total": 15},
+  "toolchain_release": "1.3.1"
+}

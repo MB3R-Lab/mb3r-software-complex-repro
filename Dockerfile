@@ -42,21 +42,27 @@ RUN --mount=type=cache,target=/go/pkg/mod \
     cd /src/Sheaft \
     && CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/sheaft ./cmd/sheaft
 
-COPY go.mod reproduce.go /src/reproduction/
+COPY go.mod *.go /src/reproduction/
 RUN cd /src/reproduction \
     && CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -o /out/reproduce .
 
 FROM --platform=$TARGETPLATFORM alpine:3.22
 
 ARG TOOLCHAIN_VERSION
+ARG ARTIFACT_VERSION
 ARG IMAGE_REVISION
 
 LABEL org.opencontainers.image.title="Procrustes-Bering-Sheaft demonstration artifact" \
       org.opencontainers.image.description="Executable ICSE tool-demonstration artifact for the MB3R resilience-analysis toolchain" \
       org.opencontainers.image.source="https://github.com/MB3R-Lab/mb3r-software-complex-repro" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.version="${TOOLCHAIN_VERSION}" \
-      org.opencontainers.image.revision="${IMAGE_REVISION}"
+      org.opencontainers.image.version="${ARTIFACT_VERSION}" \
+      org.opencontainers.image.revision="${IMAGE_REVISION}" \
+      io.mb3r.toolchain.version="${TOOLCHAIN_VERSION}"
+
+RUN test -n "${ARTIFACT_VERSION}" \
+    && test -n "${TOOLCHAIN_VERSION}" \
+    && test -n "${IMAGE_REVISION}"
 
 RUN addgroup -S artifact && adduser -S -G artifact artifact \
     && mkdir -p /artifact /work \

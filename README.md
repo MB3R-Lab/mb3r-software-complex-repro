@@ -31,8 +31,10 @@ The equivalent command without Compose is:
 
 ```bash
 docker run --rm --pull=always \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
 ```
+
+The immutable image tag identifies artifact release `1.1.0`; `toolchain-lock.json` independently pins software-complex release `1.3.1` and the exact three component commits.
 
 ## Full reproduction
 
@@ -48,11 +50,11 @@ Available cases can be listed or selected directly:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
   --list-cases
 
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -74,7 +76,7 @@ Select another archived case with `--case`, for example:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:toolchain-1.3.1 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
   --criticality-walkthrough --case social-network-repl
 ```
 
@@ -92,6 +94,30 @@ The first supplies incomplete static evidence to Procrustes and requires exit co
 failure-walkthroughs-ok toolchain=1.3.1 scenarios=2
 ```
 
+## Extended evaluation
+
+Run the paper-facing evaluation suite:
+
+```bash
+docker compose run --rm evaluation
+```
+
+It contains three separate scenarios:
+
+1. `decision`: on the OpenTelemetry Demo recommendations endpoint, compare an accepted two-replica baseline with a one-replica regression, use the complete Birnbaum ranking to nominate the component to preserve, move the same replica reduction to an endpoint-irrelevant component, and independently re-evaluate the result. The certified failure-tolerance sequence is `0.20 → 0.04 → 0.20`, with gate decisions `pass → fail → pass`.
+2. `validation`: run 15 controlled checks covering Procrustes positive/negative diagnoses, exact Bering service/operation/edge discovery from constructed traces, analytical Sheaft availability and Birnbaum oracles, confidence-certified SLO `pass`, `fail`, and `indeterminate` outcomes, and an unsupported handoff contract.
+3. `cost`: report full-pipeline and saved-model-analysis wall time plus peak child-process RSS where the operating system exposes it. These are descriptive measurements for the stated machine, not a cross-system performance benchmark.
+
+Run them independently with:
+
+```bash
+docker compose run --rm decision
+docker compose run --rm validation
+docker compose run --rm cost --benchmark-repeats 5
+```
+
+Checked-in deterministic summaries are in [`reference/evaluation/`](reference/evaluation/). Cost measurements are generated on demand and are deliberately not treated as reference values.
+
 ## What is verified
 
 - the exact component revisions in [`toolchain-lock.json`](toolchain-lock.json);
@@ -103,6 +129,10 @@ failure-walkthroughs-ok toolchain=1.3.1 scenarios=2
 - complete row-level comparison with Social Network Table 1 and OpenTelemetry Demo Table 2.
 - criticality coverage for three Social Network endpoints and four OpenTelemetry endpoints in every represented deployment/edge-semantics variant.
 - fail-closed behavior for incomplete Procrustes evidence and an unsupported Bering-to-Sheaft contract.
+- an end-to-end SLO decision sequence with a compatible baseline, an explicitly rejected regression, a Birnbaum-nominated component, and an independently verified remediation;
+- controlled oracle checks with fixed distributions, failure populations, trials, seeds, expected values, observed values, and complete discrepancies;
+- exact operation-aware Bering discovery on constructed traces with zero missing and zero extra services, edges, and endpoints;
+- descriptive full-pass and saved-model-analysis execution cost.
 
 The canonical source-build run is the [GitHub Actions workflow](https://github.com/MB3R-Lab/mb3r-software-complex-repro/actions/workflows/reproduce.yml). It checks out the locked revisions of [Procrustes](https://github.com/MB3R-Lab/Procrustes), [Bering](https://github.com/MB3R-Lab/Bering), and [Sheaft](https://github.com/MB3R-Lab/Sheaft), then independently verifies the same checked-in references.
 
@@ -122,6 +152,9 @@ A source run is optional and is not the reviewer path. It requires Go plus sibli
 make reproduce-paper
 make reproduce-paper-criticality
 make reproduce-paper-failures
+make reproduce-paper-decision
+make reproduce-paper-validation
+make reproduce-paper-cost BENCHMARK_REPEATS=5
 ```
 
 Override checkout locations with `PROCRUSTES_REPO`, `BERING_REPO`, and `SHEAFT_REPO`. Use `make reproduce-paper-update` only after intentionally changing the locked toolchain or case inputs and reviewing the resulting reference diff.
