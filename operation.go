@@ -134,9 +134,12 @@ func runOperationWalkthrough(root, work string, bins map[string]string, version 
 		if name != "baseline" {
 			cfg["baselines"] = []any{map[string]any{"name": "accepted", "path": models["baseline"]}}
 			gate := cfg["gate"].(map[string]any)
-			rule := gate["boundary_rules"].([]any)[0].(map[string]any)
-			rule["baseline"] = "accepted"
-			rule["max_regression"] = plan["max_regression"]
+			// Independent rules retain both diagnoses: a failed minimum check
+			// must not short-circuit the compatible-baseline comparison.
+			gate["boundary_rules"] = append(gate["boundary_rules"].([]any), map[string]any{
+				"sweep": "operation-boundary", "endpoint_id": endpoint,
+				"baseline": "accepted", "max_regression": plan["max_regression"],
+			})
 		}
 		if name == "current" {
 			cfg["importance"] = []any{map[string]any{"name": "candidate-choice", "profile": "scenario", "method": "birnbaum", "confidence_level": 0.95, "targets": []any{map[string]any{"endpoint_id": endpoint}}, "components": map[string]any{"kinds": []string{"service", "edge"}}}}
@@ -169,6 +172,7 @@ func runOperationWalkthrough(root, work string, bins map[string]string, version 
 		row["analytical_availability"] = theoretical
 		row["absolute_error"] = math.Abs(availability - theoretical)
 		row["availability_wilson_95"] = operationWilson(availability, numberAt(plan, "trials"))
+		row["boundary_rules"] = nestedAt(report, "policy_evaluation", "boundary_results")
 		stages = append(stages, row)
 	}
 	checks, err := checkOperationStates(plan, evidence, work, models["current"], predicatePath, observed, byPair, bins["sheaft"])
