@@ -1,0 +1,65 @@
+name: Validate recommendations execution semantics
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [operation-semantics-validation]
+    paths:
+      - '.github/workflows/operation-semantics.yml'
+      - 'experiments/operation-semantics/**'
+      - 'cmd/operation-probe/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: operation-semantics-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  observe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      APP_SOURCE: ${{ github.workspace }}/application
+      APP_REVISION: be466eb395294e0b5c2f91f7e76bed475953eaa6
+      COMPOSE_FILE: experiments/operation-semantics/compose.yaml
+      COMPOSE_PROJECT_NAME: operation-semantics
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: MB3R-Lab/opentelemetry-demo-mb3r-stack
+          ref: be466eb395294e0b5c2f91f7e76bed475953eaa6
+          path: application
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 1.26.2
+          cache: false
+      - name: Validate experiment driver
+        run: go test ./cmd/operation-probe
+      - name: Build the pinned application and fault proxy
+        run: docker compose build --parallel
+      - name: Start the isolated operation deployment
+        run: docker compose up -d
+      - name: Collect responses and real traces for predeclared fault states
+        run: go run ./cmd/operation-probe collect
+      - name: Record application and image provenance
+        if: always()
+        run: |
+          mkdir -p .tmp/operation-evidence
+          git -C application rev-parse HEAD > .tmp/operation-evidence/application-commit.txt
+          docker compose config > .tmp/operation-evidence/resolved-compose.yaml
+          docker compose images --format json > .tmp/operation-evidence/images.json
+          docker compose logs --no-color --tail 120 > .tmp/operation-evidence/service-logs.txt
+      - name: Retain bounded operation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: operation-evidence-${{ github.run_id }}
+          path: .tmp/operation-evidence
+          retention-days: 3
+          if-no-files-found: error
+      - name: Stop experiment containers
+        if: always()
+        run: docker compose down -v
