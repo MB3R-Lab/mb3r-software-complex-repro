@@ -1,12 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"math"
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 )
 
 func runOperationWalkthrough(root, work string, bins map[string]string, version string) error {
@@ -25,6 +27,10 @@ func runOperationWalkthrough(root, work string, bins map[string]string, version 
 	if stringAt(plan, "application_commit") != stringAt(collection, "application_commit") {
 		return fmt.Errorf("application revision mismatch")
 	}
+	observedAt, err := validateOperationEvidence(evidence)
+	if err != nil {
+		return err
+	}
 	preflight := filepath.Join(work, "procrustes")
 	if err := os.MkdirAll(preflight, 0755); err != nil {
 		return err
@@ -35,7 +41,7 @@ func runOperationWalkthrough(root, work string, bins map[string]string, version 
 	baseOverlay := filepath.Join(preflight, "bering.overlay.yaml")
 	rawModel := filepath.Join(work, "observed-model.json")
 	tracePath := filepath.Join(evidence, "bering-traces.json")
-	if err := runCommand("operation discovery from observed traces", fixture, bins["bering"], "discover", "--input", tracePath, "--overlay", baseOverlay, "--discovered-at", discoveredAt, "--out", rawModel, "--snapshot-out", filepath.Join(work, "observed-snapshot.json")); err != nil {
+	if err := runCommand("operation discovery from observed traces", fixture, bins["bering"], "discover", "--input", tracePath, "--overlay", baseOverlay, "--discovered-at", observedAt, "--out", rawModel, "--snapshot-out", filepath.Join(work, "observed-snapshot.json")); err != nil {
 		return err
 	}
 	var observed map[string]any
@@ -51,9 +57,6 @@ func runOperationWalkthrough(root, work string, bins map[string]string, version 
 			return fmt.Errorf("invalid directed call pair")
 		}
 		pair := []string{fmt.Sprint(items[0]), fmt.Sprint(items[1])}
-		if len(pair) != 2 {
-			return fmt.Errorf("invalid call pair")
-		}
 		matches := []string{}
 		for _, edgeRaw := range arrayAt(observed, "edges") {
 			edge := edgeRaw.(map[string]any)
@@ -110,7 +113,7 @@ func runOperationWalkthrough(root, work string, bins map[string]string, version 
 		}}); err != nil {
 			return err
 		}
-		if err := runCommand("operation Bering "+name, fixture, bins["bering"], "discover", "--input", tracePath, "--overlay", baseOverlay, "--overlay", overlayPath, "--overlay", whatif, "--discovered-at", discoveredAt, "--out", modelPath, "--snapshot-out", filepath.Join(dir, "snapshot.json")); err != nil {
+		if err := runCommand("operation Bering "+name, fixture, bins["bering"], "discover", "--input", tracePath, "--overlay", baseOverlay, "--overlay", overlayPath, "--overlay", whatif, "--discovered-at", observedAt, "--out", modelPath, "--snapshot-out", filepath.Join(dir, "snapshot.json")); err != nil {
 			return err
 		}
 		// Verify discovery actually applied the replica what-if, after all overlays.
@@ -165,6 +168,7 @@ func runOperationWalkthrough(root, work string, bins map[string]string, version 
 		row["replicas"] = variant
 		row["analytical_availability"] = theoretical
 		row["absolute_error"] = math.Abs(availability - theoretical)
+		row["availability_wilson_95"] = operationWilson(availability, numberAt(plan, "trials"))
 		stages = append(stages, row)
 	}
 	checks, err := checkOperationStates(plan, evidence, work, models["current"], predicatePath, observed, byPair, bins["sheaft"])
@@ -258,6 +262,22 @@ func checkOperationStates(plan map[string]any, evidence, work, model, predicate 
 	if err != nil {
 		return nil, err
 	}
+	// Keep the same discovered graph and mandatory targets; change only the
+	// predicate contract to reachability without required calls.
+	legacyPredicate := filepath.Join(work, "reachability-only-predicate.json")
+	if err := writeJSON(legacyPredicate, map[string]any{"schema_version": "1.0", "predicates": map[string]any{stringAt(plan, "predicate_ref"): map[string]any{
+		"type": "edge_aware", "entry_service": "frontend", "mandatory_targets": []string{"recommendation", "product-catalog"}, "edge_modes": []string{"sync"},
+	}}}); err != nil {
+		return nil, err
+	}
+	legacyConfig := filepath.Join(work, "reachability-only-analysis.json")
+	if err := writeJSON(legacyConfig, map[string]any{"schema_version": "1.3", "seed": 2719, "trials": 1, "predicate_contract": legacyPredicate, "profiles": profiles, "gate": map[string]any{"mode": "report", "global_threshold": 0.0}}); err != nil {
+		return nil, err
+	}
+	legacy, err := runOperationAnalysis(binary, model, legacyConfig, filepath.Join(work, "reachability-only-check"))
+	if err != nil {
+		return nil, err
+	}
 	checks := []any{}
 	for _, name := range conditions {
 		value, err := reportEndpointAvailability(report, name, stringAt(plan, "endpoint"))
@@ -280,7 +300,100 @@ func checkOperationStates(plan map[string]any, evidence, work, model, predicate 
 		if count != 2 {
 			return nil, fmt.Errorf("expected two recorded requests for %s, got %d", name, count)
 		}
-		checks = append(checks, map[string]any{"condition": name, "observed_requests": count, "predicate": value == 1, "agreement": true})
+		oldValue, err := reportEndpointAvailability(legacy, name, stringAt(plan, "endpoint"))
+		if err != nil {
+			return nil, err
+		}
+		checks = append(checks, map[string]any{"condition": name, "observed_requests": count, "predicate": value == 1, "agreement": true, "reachability_only_predicate": oldValue == 1, "reachability_only_agreement": oldValue == value})
 	}
 	return checks, nil
+}
+
+// These intervals describe the ordinary profile estimate, not the sweep gate.
+func operationWilson(p, n float64) map[string]float64 {
+	z := 1.959963984540054
+	d := 1 + z*z/n
+	c := (p + z*z/(2*n)) / d
+	h := z * math.Sqrt(p*(1-p)/n+z*z/(4*n*n)) / d
+	return map[string]float64{"lower_bound": math.Max(0, c-h), "upper_bound": math.Min(1, c+h)}
+}
+
+func operationResponseSuccess(status float64, body string) bool {
+	var products []struct {
+		ID string `json:"id"`
+	}
+	if status != 200 || json.Unmarshal([]byte(body), &products) != nil || len(products) == 0 {
+		return false
+	}
+	for _, product := range products {
+		if strings.TrimSpace(product.ID) == "" {
+			return false
+		}
+	}
+	return true
+}
+
+// Validate response/trace linkage before invoking the tools. Use the last span
+// end as a deterministic discovery timestamp, never an archival case timestamp.
+func validateOperationEvidence(evidence string) (string, error) {
+	var observations []map[string]any
+	if err := readJSON(filepath.Join(evidence, "observations.json"), &observations); err != nil {
+		return "", err
+	}
+	healthySpans := map[string]string{}
+	seen := map[string]bool{}
+	for _, o := range observations {
+		id := stringAt(o, "trace_id")
+		if id == "" || seen[id] || stringAt(o, "transport_error") != "" {
+			return "", fmt.Errorf("invalid, duplicate, or inconclusive observation %q", id)
+		}
+		seen[id] = true
+		if operationResponseSuccess(numberAt(o, "http_status"), stringAt(o, "body")) != o["success"] {
+			return "", fmt.Errorf("stored success disagrees with actual response %s", id)
+		}
+		var raw map[string]any
+		path := filepath.Join(evidence, "traces", fmt.Sprintf("%s-%.0f.json", stringAt(o, "condition"), numberAt(o, "attempt")))
+		if err := readJSON(path, &raw); err != nil {
+			return "", err
+		}
+		data := arrayAt(raw, "data")
+		if len(data) != 1 || stringAt(data[0].(map[string]any), "traceID") != id {
+			return "", fmt.Errorf("raw trace does not match response %s", id)
+		}
+		spans := arrayAt(data[0].(map[string]any), "spans")
+		if len(spans) == 0 {
+			return "", fmt.Errorf("empty trace %s", id)
+		}
+		if stringAt(o, "condition") == "healthy" {
+			for _, s := range spans {
+				span := s.(map[string]any)
+				healthySpans[id+"/"+stringAt(span, "spanID")] = stringAt(span, "operationName")
+			}
+		}
+	}
+	var normalized map[string]any
+	if err := readJSON(filepath.Join(evidence, "bering-traces.json"), &normalized); err != nil {
+		return "", err
+	}
+	last := time.Time{}
+	for _, s := range arrayAt(normalized, "spans") {
+		span := s.(map[string]any)
+		key := stringAt(span, "trace_id") + "/" + stringAt(span, "span_id")
+		name, ok := healthySpans[key]
+		if !ok || name != stringAt(span, "name") {
+			return "", fmt.Errorf("normalized span has no matching recorded healthy span: %s", key)
+		}
+		delete(healthySpans, key)
+		end, err := time.Parse(time.RFC3339Nano, stringAt(span, "end_time"))
+		if err != nil {
+			return "", err
+		}
+		if end.After(last) {
+			last = end
+		}
+	}
+	if len(healthySpans) != 0 || last.IsZero() {
+		return "", fmt.Errorf("missing normalized healthy spans")
+	}
+	return last.UTC().Format(time.RFC3339Nano), nil
 }
