@@ -73,6 +73,12 @@ services:
       HOSTNAME: 0.0.0.0
       RECOMMENDATION_ADDR: fault-proxy:19001
       PRODUCT_CATALOG_ADDR: fault-proxy:23550
+      CURRENCY_ADDR: unused:7001
+      AD_ADDR: unused:9555
+      CART_ADDR: unused:7070
+      CHECKOUT_ADDR: unused:5050
+      SHIPPING_ADDR: unused:50051
+      PRODUCT_REVIEWS_ADDR: unused:3551
     ports: ['127.0.0.1:8080:8080']
     depends_on: [recommendation, fault-proxy, jaeger]
   fault-proxy:

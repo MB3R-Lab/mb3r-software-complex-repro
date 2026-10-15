@@ -206,13 +206,16 @@ func compose(args ...string) error {
 }
 
 func waitHealthy() error {
+	var last observation
 	for i := 0; i < 60; i++ {
-		if request("recovery", i).Success {
+		last = request("recovery", i)
+		if last.Success {
 			return nil
 		}
 		time.Sleep(2 * time.Second)
 	}
-	return fmt.Errorf("application did not recover to a successful nonempty response")
+	writeJSON(".tmp/operation-evidence/readiness-failure.json", last)
+	return fmt.Errorf("application did not recover to a successful nonempty response: HTTP %d, transport=%s", last.Status, last.TransportError)
 }
 
 type jaegerTag struct {
