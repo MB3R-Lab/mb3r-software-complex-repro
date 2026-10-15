@@ -99,7 +99,14 @@ func runOperationWalkthrough(root, work string, bins map[string]string, version 
 		}
 		modelPath := filepath.Join(dir, "model.json")
 		models[name] = modelPath
-		if err := runCommand("operation Bering "+name, fixture, bins["bering"], "discover", "--input", tracePath, "--overlay", baseOverlay, "--overlay", overlayPath, "--replicas", replicas, "--discovered-at", discoveredAt, "--out", modelPath, "--snapshot-out", filepath.Join(dir, "snapshot.json")); err != nil {
+		whatif := filepath.Join(dir, "replica-overlay.json")
+		if err := writeJSON(whatif, map[string]any{"name": "declared-replica-whatif", "services": []any{
+			map[string]any{"id": "recommendation", "replicas": variant["recommendation"]},
+			map[string]any{"id": "product-catalog", "replicas": variant["product-catalog"]},
+		}}); err != nil {
+			return err
+		}
+		if err := runCommand("operation Bering "+name, fixture, bins["bering"], "discover", "--input", tracePath, "--overlay", baseOverlay, "--overlay", overlayPath, "--overlay", whatif, "--discovered-at", discoveredAt, "--out", modelPath, "--snapshot-out", filepath.Join(dir, "snapshot.json")); err != nil {
 			return err
 		}
 		// Verify discovery actually applied the replica what-if, after all overlays.
