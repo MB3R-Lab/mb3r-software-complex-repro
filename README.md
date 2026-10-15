@@ -4,12 +4,12 @@
 
 This repository is the standalone demonstration and reproduction artifact for the Procrustes → Bering → Sheaft resilience-analysis toolchain. It packages pinned builds, archived evidence fixtures, published baselines, reference outputs, endpoint-specific component-criticality rankings, and the workflow that connects the three tools.
 
-The artifact covers two published studies:
+The primary demonstration uses one observed HTTP operation from a pinned application revision, checks its execution predicate, and compares two replica changes. It also preserves numerical replay of two published studies:
 
 - OpenTelemetry Demo: the representative 16-service trace-discovered graph, four endpoint predicates, both edge semantics, and all five failure fractions from the [AINA 2026 article](https://doi.org/10.1007/978-3-032-23304-2_24);
 - DeathStarBench Social Network: the archived 12-service Jaeger dependency graph, both replica modes, endpoint predicates, workload weights, and all five failure fractions from the [ICSE-NIER 2026 article](https://doi.org/10.1145/3786582.3786823).
 
-No deployment, trace collection, load generation, or chaos experiment is performed. Procrustes inspects static evidence, Bering constructs the resilience model, and Sheaft calculates the reported profiles. The Go artifact runner only orchestrates those CLIs, checks their outputs, and calculates comparison statistics; it does not reimplement the resilience analysis.
+The normal reviewer command replays recorded evidence without deploying the application. A separate GitHub Actions workflow collected real HTTP responses and Jaeger traces under six predeclared conditions; its inputs and evidence are retained in this repository. Procrustes inspects static evidence for the same operation, Bering constructs the model from observed healthy traces, and Sheaft evaluates it. The Go runner orchestrates the public CLIs and checks their outputs against response semantics, analytical oracles, and references; it is not another resilience simulator.
 
 ## Quick start
 
@@ -21,20 +21,28 @@ cd mb3r-software-complex-repro
 docker compose run --rm demo
 ```
 
-The demo pulls the versioned container and runs the replicated Social Network case once through all three tools. Success ends with:
+The demo pulls the versioned container and runs the recommendations operation through all three tools. It compares a baseline, a replica reduction, and two one-replica additions to relevant components. Generated reports are retained in `output/operation-walkthrough/`. Success ends with:
 
 ```text
-reproduce-paper-ok toolchain=1.3.1 cases=1 repeats=1
+operation-walkthrough-ok states=6 variants=4 endpoint="frontend:GET /api/recommendations"
 ```
 
 The equivalent command without Compose is:
 
 ```bash
 docker run --rm --pull=always \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0
 ```
 
-The immutable image tag identifies artifact release `1.1.0`; `toolchain-lock.json` independently pins software-complex release `1.3.1` and the exact three component commits.
+The immutable image tag identifies artifact release `1.2.0`; `toolchain-lock.json` independently pins software-complex release `1.3.2` and the exact three component commits.
+
+## Observed operation and two candidate changes
+
+The operation is `GET /api/recommendations?currencyCode=USD` on application commit `be466eb395294e0b5c2f91f7e76bed475953eaa6`, with fixed catalog data and the recommendation cache disabled. Success requires HTTP 200 and a nonempty product array. Six conditions (healthy, two service outages, three directed-channel outages) have two recorded requests each. The model retains both catalog calls; an external predicate contract 1.1 declares all three RPC channels mandatory. Reachability alone is not treated as execution success.
+
+Both candidates add one replica to the reduced configuration: either recommendation or product-catalog. Both components have nonzero Birnbaum importance. All candidates use the same failure distribution, SLO, trial budget, seed, and grid. These are conditional model-based replica changes, not live replication-failover measurements or an automatically synthesized correction.
+
+See [`docs/operation-walkthrough.md`](docs/operation-walkthrough.md), the preregistered [`plan.json`](cases/operation-semantics/plan.json), and the retained [`evidence/`](cases/operation-semantics/evidence/). The original archived scenario and its `0.20 → 0.04 → 0.20` results remain unchanged under `decision`; they are not results for the new predicate.
 
 ## Full reproduction
 
@@ -50,11 +58,11 @@ Available cases can be listed or selected directly:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0 \
   --list-cases
 
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -69,14 +77,14 @@ docker compose run --rm criticality
 The walkthrough uses the archived OpenTelemetry async case by default, executes Procrustes and Bering, runs Sheaft's schema 1.3 Birnbaum analysis, verifies all 16 semantic case files, and prints the top service and edge with confidence intervals for each of the four endpoints. It ends with:
 
 ```text
-criticality-walkthrough-ok toolchain=1.3.1 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
+criticality-walkthrough-ok toolchain=1.3.2 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
 ```
 
 Select another archived case with `--case`, for example:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0 \
   --criticality-walkthrough --case social-network-repl
 ```
 
@@ -91,12 +99,12 @@ docker compose run --rm failures
 The first supplies incomplete static evidence to Procrustes and requires exit code `2`, a `BLOCKED` goal, and explicit blocker rules. The second supplies an unsupported Bering model contract to Sheaft and requires exit code `1`, the precise compatibility rejection, and no generated analysis report. The wrapper returns success only when both expected failures are observed and ends with:
 
 ```text
-failure-walkthroughs-ok toolchain=1.3.1 scenarios=2
+failure-walkthroughs-ok toolchain=1.3.2 scenarios=2
 ```
 
 ## Extended evaluation
 
-Run the paper-facing evaluation suite:
+Run the retained controlled/archival evaluation suite (the primary observed-operation demonstration is `demo` or `operation`):
 
 ```bash
 docker compose run --rm evaluation
@@ -104,7 +112,7 @@ docker compose run --rm evaluation
 
 It contains three separate scenarios:
 
-1. `decision`: on the OpenTelemetry Demo recommendations endpoint, compare an accepted two-replica baseline with a one-replica regression, use the complete Birnbaum ranking to nominate the component to preserve, move the same replica reduction to an endpoint-irrelevant component, and independently re-evaluate the result. The certified failure-tolerance sequence is `0.20 → 0.04 → 0.20`, with gate decisions `pass → fail → pass`.
+1. `decision`: retain the original archived reachability-only predicate and recommendations/ad example. Its `0.20 → 0.04 → 0.20` sequence remains a conditional numerical regression fixture, not handler-semantic validation. It is superseded as the central demonstration by `operation`.
 2. `validation`: run 15 controlled checks covering Procrustes positive/negative diagnoses, exact Bering service/operation/edge discovery from constructed traces, analytical Sheaft availability and Birnbaum oracles, confidence-certified SLO `pass`, `fail`, and `indeterminate` outcomes, and an unsupported handoff contract.
 3. `cost`: report full-pipeline and saved-model-analysis wall time plus peak child-process RSS where the operating system exposes it. These are descriptive measurements for the stated machine, not a cross-system performance benchmark.
 
@@ -121,6 +129,8 @@ Checked-in deterministic summaries are in [`reference/evaluation/`](reference/ev
 ## What is verified
 
 - the exact component revisions in [`toolchain-lock.json`](toolchain-lock.json);
+- agreement between actual responses and the required-call predicate on six predeclared states, plus a reachability-only countercheck on the same discovered graph;
+- two separately evaluated, same-budget replica candidates affecting relevant components;
 - the Procrustes preflight report and Procrustes-to-Bering overlay;
 - the Bering model, discovery snapshot, and quality reports;
 - the Sheaft model, report, endpoint results, and sweeps;
@@ -139,6 +149,7 @@ The canonical source-build run is the [GitHub Actions workflow](https://github.c
 ## Documentation
 
 - [`docs/manual.md`](docs/manual.md): commands, output locations, and reviewer walkthrough;
+- [`docs/operation-walkthrough.md`](docs/operation-walkthrough.md): current central scenario, assumptions, evidence, and interpretation;
 - [`docs/architecture.md`](docs/architecture.md): component responsibilities and handoff contracts;
 - [`docs/data-provenance.md`](docs/data-provenance.md): origin and transformation of case inputs and published baselines;
 - [`docs/troubleshooting.md`](docs/troubleshooting.md): common Docker, platform, and verification failures;
@@ -150,6 +161,7 @@ A source run is optional and is not the reviewer path. It requires Go plus sibli
 
 ```bash
 make reproduce-paper
+make reproduce-paper-operation
 make reproduce-paper-criticality
 make reproduce-paper-failures
 make reproduce-paper-decision

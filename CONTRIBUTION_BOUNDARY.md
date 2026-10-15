@@ -9,6 +9,8 @@
 - tool-produced inventory, topology-quality, resilience-profile, sweep, endpoint-specific Birnbaum component-criticality, and cross-case analytics;
 - controlled implementation validation against constructed inputs and closed-form oracles;
 - a modelled SLO regression/remediation workflow in which criticality nominates a component and a separate calculation verifies the candidate change;
+- targeted live validation of one pinned HTTP operation's success predicate on six predeclared states, followed by two conditional replica what-ifs;
+- a backward-compatible, versioned optional required-call contract that prevents an alternative graph path from replacing an explicitly mandatory call;
 - descriptive runtime and peak-memory cost on a stated machine;
 - engineering limitations and operational conditions of the software complex.
 
@@ -17,7 +19,7 @@
 - derivation of the stochastic connectivity model;
 - theorem statements, proofs, or claims of mathematical novelty;
 - a new definition of failure or recovery semantics;
-- independent empirical validation of the model against new live or chaos measurements;
+- general empirical validation of the stochastic model or calibration of operational failure probabilities from the targeted operation checks;
 - claims that the two archived cases validate the model in general.
 - claims that criticality ranks prove causal production risk, optimal investment, or statistically distinct ordering when intervals overlap.
 - claims that controlled software oracles constitute new empirical validation of the formal model or of production behavior.

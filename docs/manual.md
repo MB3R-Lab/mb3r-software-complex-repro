@@ -11,10 +11,10 @@ Install Docker with Compose support and ensure the Docker daemon is running. The
 The published image is:
 
 ```text
-ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0
+ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0
 ```
 
-Artifact release `1.1.0` packages pinned software-complex release `1.3.1`. The separate versions prevent a documentation or evaluation update from overwriting an existing toolchain image tag.
+Artifact release `1.2.0` packages pinned software-complex release `1.3.2`. The separate versions prevent a documentation or evaluation update from overwriting an existing toolchain image tag.
 
 ## Reviewer walkthrough
 
@@ -25,35 +25,40 @@ docker compose pull demo
 docker compose run --rm demo
 ```
 
-The command performs these steps on the `social-network-repl` fixture:
+The command performs these steps on the observed recommendations operation:
 
-1. Procrustes checks whether the archived evidence satisfies the requested analysis goal and emits a Bering overlay.
-2. Bering combines the archived topology with that overlay and emits a versioned model plus discovery-quality reports.
-3. Sheaft consumes the Bering model and the archived analysis configuration and emits the resilience profile.
-4. Sheaft independently runs the opt-in schema 1.3 criticality configuration and ranks service liveness and edge connectivity for every published endpoint in the case family.
-5. The artifact runner derives comparison and top-component views from public tool outputs and verifies all semantic files against the checked-in reference manifest.
+1. Procrustes checks the pinned deployment evidence against the recommendations goal and emits a Bering overlay.
+2. Bering discovers the operation and three directed RPC edges from recorded healthy traces. The external predicate names mandatory calls without removing either catalog edge.
+3. Sheaft checks six observed fault states against that predicate and contrasts reachability-only semantics.
+4. Four separate model analyses compare the baseline, reduced configuration, and two one-replica additions under the same assumptions. Birnbaum inspection uses the reduced model and the same profile.
+5. The runner checks analytical availability and the stored reference summary. Responses, traces, model inputs, full Sheaft reports, and a readable summary remain inspectable.
 
 The final line must be:
 
 ```text
-reproduce-paper-ok toolchain=1.3.1 cases=1 repeats=1
+operation-walkthrough-ok states=6 variants=4 endpoint="frontend:GET /api/recommendations"
 ```
 
 ### 2. Inspect the generated evidence
 
-The container verifies generated files internally. Stable examples of every output are available under:
+Compose retains new files under `output/operation-walkthrough/` (the direct `docker run` command needs an explicit bind mount to retain them):
 
 ```text
-reference/social-network-repl/
+output/operation-walkthrough/
 ├── procrustes/
-├── bering/
-├── sheaft/
-├── criticality/
-├── analytics.json
+├── observed-model.json
+├── predicate.json
+├── baseline/
+├── current/
+├── add-recommendation/
+├── add-catalog/
+├── semantic-check/
+├── reachability-only-check/
+├── result.json
 └── summary.md
 ```
 
-The stage reports show the actual inter-tool handoffs. `criticality/report.json` is the full Sheaft ranking; `analytics.json` is derived after the tools finish and contains inventory, comparison, and compact top-service/top-edge views. Neither is an alternative simulator.
+Each configuration directory retains the Bering model/snapshot, replica overlay, analysis configuration, and `sheaft/report.json`. The current report also contains complete component importance. Inputs and actual HTTP/trace evidence are under `cases/operation-semantics/`. See [operation walkthrough](operation-walkthrough.md) for the success criterion and scope.
 
 ### 3. Run the complete verification
 
@@ -81,7 +86,7 @@ This reviewer-facing scenario runs the archived OpenTelemetry async case once, v
 The final line must be:
 
 ```text
-criticality-walkthrough-ok toolchain=1.3.1 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
+criticality-walkthrough-ok toolchain=1.3.2 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
 ```
 
 Use `--criticality-walkthrough --case <name>` to run the same scenario on any of the four archived variants.
@@ -97,10 +102,12 @@ This is a separate two-scenario walkthrough, not an additional scientific experi
 The final line must be:
 
 ```text
-failure-walkthroughs-ok toolchain=1.3.1 scenarios=2
+failure-walkthroughs-ok toolchain=1.3.2 scenarios=2
 ```
 
 ### 6. Exercise an SLO regression and remediation
+
+This is the retained original archival scenario, not the current central demonstration. Its reachability-only predicate omits catalog work. The new operation uses observed traces and mandatory calls, and therefore has different numerical results.
 
 ```bash
 docker compose run --rm decision
@@ -111,7 +118,7 @@ The selected OpenTelemetry Demo operation is `frontend:GET /api/recommendations`
 The final line must be:
 
 ```text
-decision-walkthrough-ok toolchain=1.3.1 endpoint="frontend:GET /api/recommendations" tolerance=0.20->0.04->0.20 decisions=pass,fail,pass
+decision-walkthrough-ok toolchain=1.3.2 endpoint="frontend:GET /api/recommendations" tolerance=0.20->0.04->0.20 decisions=pass,fail,pass
 ```
 
 ### 7. Run the controlled validation matrix
@@ -136,7 +143,7 @@ Run all three scenarios together with `docker compose run --rm evaluation --benc
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -144,7 +151,7 @@ List accepted names with:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0 \
   --list-cases
 ```
 
@@ -156,7 +163,7 @@ On Linux or macOS:
 mkdir -p output
 docker run --rm --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=$PWD/output,target=/output" \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0 \
   --repeat 2 --work-dir /output
 ```
 
@@ -167,7 +174,7 @@ New-Item -ItemType Directory -Force output
 $artifactOutput = (Resolve-Path output).Path
 docker run --rm `
   --mount "type=bind,source=$artifactOutput,target=/output" `
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.1.0 `
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0 `
   --repeat 2 --work-dir /output
 ```
 
@@ -179,6 +186,8 @@ The destination will contain one directory per case plus the two aggregate compa
 
 The published live/chaos values are comparison context only. The artifact never claims to regenerate them.
 
+Separately, the new operation's live collection validates its predicate on six specified states. It does not calibrate failure probabilities, measure replicated failover, or establish universal handler equivalence. Ordinary endpoint thresholds use point estimates; sweep certification uses pointwise Wilson intervals; `max_regression` compares discrete certified-grid metrics. Their difference is not a confidence bound for a change in a true continuous threshold, and the whole release decision has no claimed simultaneous 95% coverage.
+
 Criticality is an additional explanatory analysis, not a result transcribed from either prior article. It uses a 0.10 independent-replica failure baseline and 12,000 paired trials. Birnbaum values and Wilson intervals are conditional on the archived topology, predicates, and configured probabilities; overlapping intervals do not establish a reliable ordering, and importance is not used as a release gate.
 
 The controlled validation matrix tests implementation behavior against constructed or closed-form oracles. It is not empirical validation against a new production system and does not establish that the mathematical model is generally valid. In the decision walkthrough, only the re-analysis of the modified candidate establishes its modelled effect; the Birnbaum ranking merely nominates a component for inspection.
@@ -189,6 +198,7 @@ The source-build path verifies that the current checkouts match the locked commi
 
 ```bash
 make reproduce-paper
+make reproduce-paper-operation
 make reproduce-paper-criticality
 make reproduce-paper-failures
 make reproduce-paper-evaluation BENCHMARK_REPEATS=3

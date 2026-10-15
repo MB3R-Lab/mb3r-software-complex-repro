@@ -13,20 +13,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {path: reproduction}
+      - name: Read the authoritative component lock
+        id: lock
+        working-directory: reproduction
+        run: |
+          echo "procrustes=$(jq -r '.components.procrustes.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "bering=$(jq -r '.components.bering.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "sheaft=$(jq -r '.components.sheaft.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
         with:
           repository: MB3R-Lab/Procrustes
-          ref: 378f35f242f25fda7392646bfbba66312b669144
+          ref: ${{ steps.lock.outputs.procrustes }}
           path: toolchain/Procrustes
       - uses: actions/checkout@v4
         with:
           repository: MB3R-Lab/Bering
-          ref: 86db92066a5284d52b87a1000af0a0ea7e925a91
+          ref: ${{ steps.lock.outputs.bering }}
           path: toolchain/Bering
       - uses: actions/checkout@v4
         with:
           repository: MB3R-Lab/Sheaft
-          ref: a187e83f8f6853ace66e17a936ec414eb3f8f882
+          ref: ${{ steps.lock.outputs.sheaft }}
           path: toolchain/Sheaft
       - uses: actions/setup-go@v5
         with: {go-version: 1.26.2, cache: false}

@@ -1,0 +1,1356 @@
+{
+  "simulation": {
+    "trials": 1,
+    "seed": 1627086615157793641,
+    "failure_probability": 0.05
+  },
+  "endpoint_results": [
+    {
+      "profile": "healthy",
+      "endpoint_id": "frontend:GET /api/recommendations",
+      "availability": 1,
+      "threshold": 0.99,
+      "threshold_delta": 0.010000000000000009,
+      "status": "pass"
+    }
+  ],
+  "summary": {
+    "overall_availability": 1,
+    "weighted_overall_availability": 1,
+    "cross_profile_availability": 0.5,
+    "cross_profile_weighted_availability": 0.5,
+    "risk_score": 0,
+    "confidence": 0.89
+  },
+  "policy_evaluation": {
+    "mode": "report",
+    "decision": "report",
+    "failed_endpoints": [
+      "frontend:GET /api/recommendations"
+    ],
+    "failed_profiles": [
+      "healthy",
+      "recommendation-down",
+      "catalog-down",
+      "frontend-recommendation-down",
+      "recommendation-catalog-down",
+      "frontend-catalog-down"
+    ],
+    "evaluation_rule": "all_profiles",
+    "reasons": [
+      {
+        "id": "endpoint_below_threshold",
+        "scope": "endpoint",
+        "profile": "recommendation-down",
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "status": "warn",
+        "availability": 0,
+        "threshold": 0.99,
+        "delta": -0.99,
+        "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.0000 is below threshold 0.9900"
+      },
+      {
+        "id": "endpoint_below_threshold",
+        "scope": "endpoint",
+        "profile": "catalog-down",
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "status": "warn",
+        "availability": 0,
+        "threshold": 0.99,
+        "delta": -0.99,
+        "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.0000 is below threshold 0.9900"
+      },
+      {
+        "id": "endpoint_below_threshold",
+        "scope": "endpoint",
+        "profile": "frontend-recommendation-down",
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "status": "warn",
+        "availability": 0,
+        "threshold": 0.99,
+        "delta": -0.99,
+        "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.0000 is below threshold 0.9900"
+      }
+    ]
+  },
+  "input_artifact": {
+    "path": "/home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/reproduction/.tmp/paper-reproduction/work/operation-walkthrough/current/model.json",
+    "digest": "sha256:2d75872317ea36e3a4fcd999078cdba03ee3dd1aff9fbf31723d5fd5f1bd91a7",
+    "artifact_id": "bering://discover?input=%2Fhome%2Frunner%2Fwork%2Fmb3r-software-complex-repro%2Fmb3r-software-complex-repro%2Freproduction%2Fcases%2Foperation-semantics%2Fevidence%2Fbering-traces.json",
+    "kind": "model",
+    "contract_name": "io.mb3r.bering.model",
+    "contract_version": "1.3.0",
+    "source_type": "bering",
+    "source_ref": "bering://discover?input=%2Fhome%2Frunner%2Fwork%2Fmb3r-software-complex-repro%2Fmb3r-software-complex-repro%2Freproduction%2Fcases%2Foperation-semantics%2Fevidence%2Fbering-traces.json",
+    "produced_at": "2026-10-15T10:13:11.535874Z"
+  },
+  "contract_policy": {
+    "status": "current",
+    "action": "allow"
+  },
+  "provenance": {
+    "predicate_source": "external_overlay",
+    "weights_source": "default"
+  },
+  "parameters": {
+    "config_source": "override",
+    "profiles": [
+      {
+        "name": "healthy",
+        "trials": {
+          "value": 1,
+          "source": "override"
+        },
+        "seed": {
+          "value": 1627086615157793641,
+          "source": "override"
+        },
+        "sampling_mode": {
+          "value": "independent_replica",
+          "source": "override"
+        },
+        "failure_probability": {
+          "value": 0.05,
+          "source": "override"
+        },
+        "reliability": {
+          "active": true,
+          "source": "override",
+          "names": [
+            "edge_live_probability",
+            "services:3"
+          ]
+        },
+        "fixed_k_failures": {
+          "value": 0,
+          "source": "default"
+        },
+        "fault_profile": {
+          "value": "",
+          "source": "default"
+        },
+        "endpoint_weights": {
+          "active": false,
+          "source": "default",
+          "fallback": "no endpoint weights configured; weighted aggregate falls back to arithmetic mean"
+        }
+      },
+      {
+        "name": "recommendation-down",
+        "trials": {
+          "value": 1,
+          "source": "override"
+        },
+        "seed": {
+          "value": 1567690828447254745,
+          "source": "override"
+        },
+        "sampling_mode": {
+          "value": "independent_replica",
+          "source": "override"
+        },
+        "failure_probability": {
+          "value": 0.05,
+          "source": "override"
+        },
+        "reliability": {
+          "active": true,
+          "source": "override",
+          "names": [
+            "edge_live_probability",
+            "services:3"
+          ]
+        },
+        "fixed_k_failures": {
+          "value": 0,
+          "source": "default"
+        },
+        "fault_profile": {
+          "value": "",
+          "source": "default"
+        },
+        "endpoint_weights": {
+          "active": false,
+          "source": "default",
+          "fallback": "no endpoint weights configured; weighted aggregate falls back to arithmetic mean"
+        }
+      },
+      {
+        "name": "catalog-down",
+        "trials": {
+          "value": 1,
+          "source": "override"
+        },
+        "seed": {
+          "value": -7975939655634833300,
+          "source": "override"
+        },
+        "sampling_mode": {
+          "value": "independent_replica",
+          "source": "override"
+        },
+        "failure_probability": {
+          "value": 0.05,
+          "source": "override"
+        },
+        "reliability": {
+          "active": true,
+          "source": "override",
+          "names": [
+            "edge_live_probability",
+            "services:3"
+          ]
+        },
+        "fixed_k_failures": {
+          "value": 0,
+          "source": "default"
+        },
+        "fault_profile": {
+          "value": "",
+          "source": "default"
+        },
+        "endpoint_weights": {
+          "active": false,
+          "source": "default",
+          "fallback": "no endpoint weights configured; weighted aggregate falls back to arithmetic mean"
+        }
+      },
+      {
+        "name": "frontend-recommendation-down",
+        "trials": {
+          "value": 1,
+          "source": "override"
+        },
+        "seed": {
+          "value": 6958252938269696822,
+          "source": "override"
+        },
+        "sampling_mode": {
+          "value": "independent_replica",
+          "source": "override"
+        },
+        "failure_probability": {
+          "value": 0.05,
+          "source": "override"
+        },
+        "reliability": {
+          "active": true,
+          "source": "override",
+          "names": [
+            "edge_live_probability",
+            "services:3",
+            "edges:1"
+          ]
+        },
+        "fixed_k_failures": {
+          "value": 0,
+          "source": "default"
+        },
+        "fault_profile": {
+          "value": "",
+          "source": "default"
+        },
+        "endpoint_weights": {
+          "active": false,
+          "source": "default",
+          "fallback": "no endpoint weights configured; weighted aggregate falls back to arithmetic mean"
+        }
+      },
+      {
+        "name": "recommendation-catalog-down",
+        "trials": {
+          "value": 1,
+          "source": "override"
+        },
+        "seed": {
+          "value": 1454039135586378008,
+          "source": "override"
+        },
+        "sampling_mode": {
+          "value": "independent_replica",
+          "source": "override"
+        },
+        "failure_probability": {
+          "value": 0.05,
+          "source": "override"
+        },
+        "reliability": {
+          "active": true,
+          "source": "override",
+          "names": [
+            "edge_live_probability",
+            "services:3",
+            "edges:1"
+          ]
+        },
+        "fixed_k_failures": {
+          "value": 0,
+          "source": "default"
+        },
+        "fault_profile": {
+          "value": "",
+          "source": "default"
+        },
+        "endpoint_weights": {
+          "active": false,
+          "source": "default",
+          "fallback": "no endpoint weights configured; weighted aggregate falls back to arithmetic mean"
+        }
+      },
+      {
+        "name": "frontend-catalog-down",
+        "trials": {
+          "value": 1,
+          "source": "override"
+        },
+        "seed": {
+          "value": 2555432194365208858,
+          "source": "override"
+        },
+        "sampling_mode": {
+          "value": "independent_replica",
+          "source": "override"
+        },
+        "failure_probability": {
+          "value": 0.05,
+          "source": "override"
+        },
+        "reliability": {
+          "active": true,
+          "source": "override",
+          "names": [
+            "edge_live_probability",
+            "services:3",
+            "edges:1"
+          ]
+        },
+        "fixed_k_failures": {
+          "value": 0,
+          "source": "default"
+        },
+        "fault_profile": {
+          "value": "",
+          "source": "default"
+        },
+        "endpoint_weights": {
+          "active": false,
+          "source": "default",
+          "fallback": "no endpoint weights configured; weighted aggregate falls back to arithmetic mean"
+        }
+      }
+    ],
+    "calibration": {
+      "predicate_overlay": {
+        "active": true,
+        "source": "external",
+        "path": "/home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/reproduction/.tmp/paper-reproduction/work/operation-walkthrough/reachability-only-predicate.json"
+      },
+      "fault_contract": {
+        "active": false,
+        "source": "default",
+        "fallback": "no fault contract configured; advanced fault profiles are inactive"
+      },
+      "journey_overrides": {
+        "active": false,
+        "source": "default",
+        "fallback": "using richer predicates or discovered journeys without manual journey override"
+      },
+      "baselines": {
+        "active": false,
+        "source": "external",
+        "fallback": "no baseline reports configured"
+      },
+      "historical_signals": {
+        "active": false,
+        "source": "default",
+        "fallback": "historical calibration inputs are not implemented; static configuration is used"
+      }
+    }
+  },
+  "profiles": [
+    {
+      "name": "healthy",
+      "simulation": {
+        "name": "healthy",
+        "trials": 1,
+        "seed": 1627086615157793641,
+        "sampling_mode": "independent_replica",
+        "failure_probability": 0.05,
+        "endpoint_availability": {
+          "frontend:GET /api/recommendations": 1
+        },
+        "weighted_aggregate": 1,
+        "unweighted_aggregate": 1,
+        "advanced": {
+          "blast_radius": {
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable on at least one path",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "edges": [
+            {
+              "edge_id": "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ]
+        }
+      },
+      "endpoint_results": [
+        {
+          "profile": "healthy",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "availability": 1,
+          "threshold": 0.99,
+          "threshold_delta": 0.010000000000000009,
+          "status": "pass"
+        }
+      ],
+      "decision": "report",
+      "endpoints_below_threshold": 0
+    },
+    {
+      "name": "recommendation-down",
+      "simulation": {
+        "name": "recommendation-down",
+        "trials": 1,
+        "seed": 1567690828447254745,
+        "sampling_mode": "independent_replica",
+        "failure_probability": 0.05,
+        "endpoint_availability": {
+          "frontend:GET /api/recommendations": 0
+        },
+        "weighted_aggregate": 0,
+        "unweighted_aggregate": 0,
+        "advanced": {
+          "blast_radius": {
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable on at least one path",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "edges": [
+            {
+              "edge_id": "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ]
+        }
+      },
+      "endpoint_results": [
+        {
+          "profile": "recommendation-down",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "availability": 0,
+          "threshold": 0.99,
+          "threshold_delta": -0.99,
+          "status": "warn"
+        }
+      ],
+      "decision": "report",
+      "endpoints_below_threshold": 1,
+      "reasons": [
+        {
+          "id": "endpoint_below_threshold",
+          "scope": "endpoint",
+          "profile": "recommendation-down",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "status": "warn",
+          "availability": 0,
+          "threshold": 0.99,
+          "delta": -0.99,
+          "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.0000 is below threshold 0.9900"
+        }
+      ]
+    },
+    {
+      "name": "catalog-down",
+      "simulation": {
+        "name": "catalog-down",
+        "trials": 1,
+        "seed": -7975939655634833300,
+        "sampling_mode": "independent_replica",
+        "failure_probability": 0.05,
+        "endpoint_availability": {
+          "frontend:GET /api/recommendations": 0
+        },
+        "weighted_aggregate": 0,
+        "unweighted_aggregate": 0,
+        "advanced": {
+          "blast_radius": {
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable on at least one path",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "edges": [
+            {
+              "edge_id": "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ]
+        }
+      },
+      "endpoint_results": [
+        {
+          "profile": "catalog-down",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "availability": 0,
+          "threshold": 0.99,
+          "threshold_delta": -0.99,
+          "status": "warn"
+        }
+      ],
+      "decision": "report",
+      "endpoints_below_threshold": 1,
+      "reasons": [
+        {
+          "id": "endpoint_below_threshold",
+          "scope": "endpoint",
+          "profile": "catalog-down",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "status": "warn",
+          "availability": 0,
+          "threshold": 0.99,
+          "delta": -0.99,
+          "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.0000 is below threshold 0.9900"
+        }
+      ]
+    },
+    {
+      "name": "frontend-recommendation-down",
+      "simulation": {
+        "name": "frontend-recommendation-down",
+        "trials": 1,
+        "seed": 6958252938269696822,
+        "sampling_mode": "independent_replica",
+        "failure_probability": 0.05,
+        "endpoint_availability": {
+          "frontend:GET /api/recommendations": 0
+        },
+        "weighted_aggregate": 0,
+        "unweighted_aggregate": 0,
+        "advanced": {
+          "blast_radius": {
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable on at least one path",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "edges": [
+            {
+              "edge_id": "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ]
+        }
+      },
+      "endpoint_results": [
+        {
+          "profile": "frontend-recommendation-down",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "availability": 0,
+          "threshold": 0.99,
+          "threshold_delta": -0.99,
+          "status": "warn"
+        }
+      ],
+      "decision": "report",
+      "endpoints_below_threshold": 1,
+      "reasons": [
+        {
+          "id": "endpoint_below_threshold",
+          "scope": "endpoint",
+          "profile": "frontend-recommendation-down",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "status": "warn",
+          "availability": 0,
+          "threshold": 0.99,
+          "delta": -0.99,
+          "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.0000 is below threshold 0.9900"
+        }
+      ]
+    },
+    {
+      "name": "recommendation-catalog-down",
+      "simulation": {
+        "name": "recommendation-catalog-down",
+        "trials": 1,
+        "seed": 1454039135586378008,
+        "sampling_mode": "independent_replica",
+        "failure_probability": 0.05,
+        "endpoint_availability": {
+          "frontend:GET /api/recommendations": 1
+        },
+        "weighted_aggregate": 1,
+        "unweighted_aggregate": 1,
+        "advanced": {
+          "blast_radius": {
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable on at least one path",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "edges": [
+            {
+              "edge_id": "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ]
+        }
+      },
+      "endpoint_results": [
+        {
+          "profile": "recommendation-catalog-down",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "availability": 1,
+          "threshold": 0.99,
+          "threshold_delta": 0.010000000000000009,
+          "status": "pass"
+        }
+      ],
+      "decision": "report",
+      "endpoints_below_threshold": 0
+    },
+    {
+      "name": "frontend-catalog-down",
+      "simulation": {
+        "name": "frontend-catalog-down",
+        "trials": 1,
+        "seed": 2555432194365208858,
+        "sampling_mode": "independent_replica",
+        "failure_probability": 0.05,
+        "endpoint_availability": {
+          "frontend:GET /api/recommendations": 1
+        },
+        "weighted_aggregate": 1,
+        "unweighted_aggregate": 1,
+        "advanced": {
+          "blast_radius": {
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable on at least one path",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 1,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "edges": [
+            {
+              "edge_id": "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ]
+        }
+      },
+      "endpoint_results": [
+        {
+          "profile": "frontend-catalog-down",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "availability": 1,
+          "threshold": 0.99,
+          "threshold_delta": 0.010000000000000009,
+          "status": "pass"
+        }
+      ],
+      "decision": "report",
+      "endpoints_below_threshold": 0
+    }
+  ],
+  "diffs": {},
+  "generated_at": "2026-10-15T10:33:38.45798769Z"
+}

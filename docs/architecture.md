@@ -35,6 +35,10 @@ archived configuration and topology
 
 The artifact runner invokes pinned public CLI contracts. It does not import internal packages from the three tools and does not calculate the resilience model independently.
 
+The primary operation path differs from the archived replay only at its explicit inputs: it uses recorded healthy spans and a matching recommendations goal. Bering retains all three observed RPC edges. Sheaft consumes external predicate contract 1.1 with exact `required_edges`; model/snapshot schema 1.3.0 remains unchanged. This conjunctively requires the selected calls in addition to target reachability, including a live reachable caller. Legacy predicate contract 1.0 is unchanged and cannot silently accept the new field. Both availability and Birnbaum use the same predicate evaluation.
+
+Live collection is a separate GitHub Actions workflow. Its raw responses/traces are committed as evidence; the ordinary container performs offline replay and four conditional replica analyses. No reproduction scripts are installed in the product repositories.
+
 The separate fail-closed path stops at the boundary under test: incomplete evidence is retained as a Procrustes `BLOCKED` report, while an unsupported Bering contract is rejected by Sheaft before simulation. Canonical `result.json` records make both outcomes inspectable without treating an expected process failure as an artifact failure.
 
 The extended evaluation keeps three concerns separate. The decision walkthrough uses the normal Procrustes → Bering → Sheaft handoffs for three explicit replica maps. The validation matrix compares public CLI outputs with fixed diagnoses, exact trace-derived sets, and closed-form numeric oracles. The cost profile measures the same commands but does not participate in semantic reference hashing because timing and memory are machine-dependent.

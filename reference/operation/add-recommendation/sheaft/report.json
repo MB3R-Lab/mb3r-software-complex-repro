@@ -1,0 +1,1017 @@
+{
+  "simulation": {
+    "trials": 40000,
+    "seed": 4176027959170730962,
+    "failure_probability": 0.05
+  },
+  "endpoint_results": [
+    {
+      "profile": "scenario",
+      "endpoint_id": "frontend:GET /api/recommendations",
+      "availability": 0.934675,
+      "threshold": 0.95,
+      "threshold_delta": -0.015324999999999922,
+      "status": "fail"
+    }
+  ],
+  "summary": {
+    "overall_availability": 0.934675,
+    "weighted_overall_availability": 0.934675,
+    "cross_profile_availability": 0.934675,
+    "cross_profile_weighted_availability": 0.934675,
+    "risk_score": 0.06532499999999997,
+    "confidence": 0.89
+  },
+  "policy_evaluation": {
+    "mode": "fail",
+    "decision": "fail",
+    "failed_endpoints": [
+      "frontend:GET /api/recommendations"
+    ],
+    "failed_profiles": [
+      "scenario"
+    ],
+    "failed_boundaries": [
+      "operation-boundary:frontend:GET /api/recommendations",
+      "operation-boundary:frontend:GET /api/recommendations"
+    ],
+    "evaluation_rule": "all_profiles",
+    "boundary_results": [
+      {
+        "sweep": "operation-boundary",
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "status": "fail",
+        "reason": "certified tolerance is below the required minimum",
+        "certified_tolerance": 0.03,
+        "minimum_certified_tolerance": 0.1
+      },
+      {
+        "sweep": "operation-boundary",
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "status": "fail",
+        "reason": "certified tolerance regression exceeds the configured budget",
+        "certified_tolerance": 0.03,
+        "baseline": "accepted",
+        "reference_tolerance": 0.12,
+        "regression": -0.09,
+        "max_regression": 0.02
+      }
+    ],
+    "reasons": [
+      {
+        "id": "endpoint_below_threshold",
+        "scope": "endpoint",
+        "profile": "scenario",
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "status": "fail",
+        "availability": 0.934675,
+        "threshold": 0.95,
+        "delta": -0.015324999999999922,
+        "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.9347 is below threshold 0.9500"
+      },
+      {
+        "id": "boundary_below_minimum",
+        "scope": "boundary",
+        "sweep": "operation-boundary",
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "status": "fail",
+        "threshold": 0.1,
+        "message": "certified tolerance is below the required minimum"
+      },
+      {
+        "id": "boundary_regressed",
+        "scope": "boundary",
+        "sweep": "operation-boundary",
+        "baseline": "accepted",
+        "endpoint_id": "frontend:GET /api/recommendations",
+        "status": "fail",
+        "delta": -0.09,
+        "message": "certified tolerance regression exceeds the configured budget"
+      }
+    ]
+  },
+  "input_artifact": {
+    "path": "/home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/reproduction/.tmp/paper-reproduction/work/operation-walkthrough/add-recommendation/model.json",
+    "digest": "sha256:7d9cd5c6f8c875ffec9c0c6c2300ab9dfdde6df68b69771297dd66127621dde7",
+    "artifact_id": "bering://discover?input=%2Fhome%2Frunner%2Fwork%2Fmb3r-software-complex-repro%2Fmb3r-software-complex-repro%2Freproduction%2Fcases%2Foperation-semantics%2Fevidence%2Fbering-traces.json",
+    "kind": "model",
+    "contract_name": "io.mb3r.bering.model",
+    "contract_version": "1.3.0",
+    "source_type": "bering",
+    "source_ref": "bering://discover?input=%2Fhome%2Frunner%2Fwork%2Fmb3r-software-complex-repro%2Fmb3r-software-complex-repro%2Freproduction%2Fcases%2Foperation-semantics%2Fevidence%2Fbering-traces.json",
+    "produced_at": "2026-10-15T10:13:11.535874Z"
+  },
+  "contract_policy": {
+    "status": "current",
+    "action": "allow"
+  },
+  "provenance": {
+    "predicate_source": "external_overlay",
+    "weights_source": "default"
+  },
+  "parameters": {
+    "config_source": "override",
+    "profiles": [
+      {
+        "name": "scenario",
+        "trials": {
+          "value": 40000,
+          "source": "override"
+        },
+        "seed": {
+          "value": 4176027959170730962,
+          "source": "override"
+        },
+        "sampling_mode": {
+          "value": "independent_replica",
+          "source": "override"
+        },
+        "failure_probability": {
+          "value": 0.05,
+          "source": "override"
+        },
+        "reliability": {
+          "active": true,
+          "source": "override",
+          "names": [
+            "edge_live_probability"
+          ]
+        },
+        "fixed_k_failures": {
+          "value": 0,
+          "source": "default"
+        },
+        "fault_profile": {
+          "value": "",
+          "source": "default"
+        },
+        "endpoint_weights": {
+          "active": false,
+          "source": "default",
+          "fallback": "no endpoint weights configured; weighted aggregate falls back to arithmetic mean"
+        }
+      }
+    ],
+    "calibration": {
+      "predicate_overlay": {
+        "active": true,
+        "source": "external",
+        "path": "/home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/reproduction/.tmp/paper-reproduction/work/operation-walkthrough/predicate.json"
+      },
+      "fault_contract": {
+        "active": false,
+        "source": "default",
+        "fallback": "no fault contract configured; advanced fault profiles are inactive"
+      },
+      "journey_overrides": {
+        "active": false,
+        "source": "default",
+        "fallback": "using richer predicates or discovered journeys without manual journey override"
+      },
+      "baselines": {
+        "active": true,
+        "source": "external",
+        "names": [
+          "accepted"
+        ]
+      },
+      "historical_signals": {
+        "active": false,
+        "source": "default",
+        "fallback": "historical calibration inputs are not implemented; static configuration is used"
+      }
+    }
+  },
+  "profiles": [
+    {
+      "name": "scenario",
+      "simulation": {
+        "name": "scenario",
+        "trials": 40000,
+        "seed": 4176027959170730962,
+        "sampling_mode": "independent_replica",
+        "failure_probability": 0.05,
+        "endpoint_availability": {
+          "frontend:GET /api/recommendations": 0.934675
+        },
+        "weighted_aggregate": 0.934675,
+        "unweighted_aggregate": 0.934675,
+        "advanced": {
+          "blast_radius": {
+            "service_count": {
+              "available": true,
+              "provenance": "external_contract"
+            },
+            "endpoint_count": {
+              "available": true,
+              "provenance": "external_contract"
+            }
+          },
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "expected_success_rate": {
+                "available": true,
+                "value": 0.934675,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable on at least one path",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "paths": [
+            {
+              "path_id": "frontend-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 0.944025,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 0.994925,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "frontend-\u003erecommendation-\u003eproduct-catalog",
+              "services": [
+                "frontend",
+                "recommendation",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 0.93965,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "required-edge:frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+              "services": [
+                "frontend",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 0.944025,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "required-edge:frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+              "services": [
+                "frontend",
+                "recommendation"
+              ],
+              "edge_ids": [
+                "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 0.994925,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "path_id": "required-edge:recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+              "services": [
+                "recommendation",
+                "product-catalog"
+              ],
+              "edge_ids": [
+                "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              ],
+              "expected_success_rate": {
+                "available": true,
+                "value": 0.944225,
+                "provenance": "artifact"
+              },
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "provenance": "unavailable"
+              },
+              "timeout_mismatch_count": {
+                "available": false,
+                "reason": "timeout metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ],
+          "edges": [
+            {
+              "edge_id": "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "provenance": "unavailable"
+              }
+            },
+            {
+              "edge_id": "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+              "max_amplification_factor": {
+                "available": false,
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "provenance": "unavailable"
+              }
+            }
+          ]
+        }
+      },
+      "endpoint_results": [
+        {
+          "profile": "scenario",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "availability": 0.934675,
+          "threshold": 0.95,
+          "threshold_delta": -0.015324999999999922,
+          "status": "fail"
+        }
+      ],
+      "decision": "fail",
+      "endpoints_below_threshold": 1,
+      "reasons": [
+        {
+          "id": "endpoint_below_threshold",
+          "scope": "endpoint",
+          "profile": "scenario",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "status": "fail",
+          "availability": 0.934675,
+          "threshold": 0.95,
+          "delta": -0.015324999999999922,
+          "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.9347 is below threshold 0.9500"
+        }
+      ]
+    }
+  ],
+  "sweeps": [
+    {
+      "name": "operation-boundary",
+      "base_profile": "scenario",
+      "axis_type": "independent_replica_failure_probability",
+      "trials": 40000,
+      "seed": -3773076205438981140,
+      "confidence_level": 0.95,
+      "fingerprint": "sha256:58e59be689e1f360c0110980cc7f8b20375742498c3211a7b7f5fac54fca16df",
+      "total_replica_slots": 4,
+      "points": [
+        {
+          "axis_value": 0,
+          "failure_probability": 0,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.985025
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 39401,
+              "trials": 40000,
+              "estimate": 0.985025,
+              "confidence_level": 0.95,
+              "lower_bound": 0.9837873563075665,
+              "upper_bound": 0.9861694924601236
+            }
+          }
+        },
+        {
+          "axis_value": 0.01,
+          "failure_probability": 0.01,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.974925
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 38997,
+              "trials": 40000,
+              "estimate": 0.974925,
+              "confidence_level": 0.95,
+              "lower_bound": 0.973346558499869,
+              "upper_bound": 0.9764122300182391
+            }
+          }
+        },
+        {
+          "axis_value": 0.02,
+          "failure_probability": 0.02,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.965125
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 38605,
+              "trials": 40000,
+              "estimate": 0.965125,
+              "confidence_level": 0.95,
+              "lower_bound": 0.9632819608990761,
+              "upper_bound": 0.9668787097531004
+            }
+          }
+        },
+        {
+          "axis_value": 0.03,
+          "failure_probability": 0.03,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.9565
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 38260,
+              "trials": 40000,
+              "estimate": 0.9565,
+              "confidence_level": 0.95,
+              "lower_bound": 0.954456813822325,
+              "upper_bound": 0.9584555132998865
+            }
+          }
+        },
+        {
+          "axis_value": 0.04,
+          "failure_probability": 0.04,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.9473
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 37892,
+              "trials": 40000,
+              "estimate": 0.9473,
+              "confidence_level": 0.95,
+              "lower_bound": 0.9450671188318878,
+              "upper_bound": 0.9494469751916943
+            }
+          }
+        },
+        {
+          "axis_value": 0.05,
+          "failure_probability": 0.05,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.93755
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 37502,
+              "trials": 40000,
+              "estimate": 0.93755,
+              "confidence_level": 0.95,
+              "lower_bound": 0.9351364520087071,
+              "upper_bound": 0.9398795145462187
+            }
+          }
+        },
+        {
+          "axis_value": 0.06,
+          "failure_probability": 0.06,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.926625
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 37065,
+              "trials": 40000,
+              "estimate": 0.926625,
+              "confidence_level": 0.95,
+              "lower_bound": 0.9240285133485768,
+              "upper_bound": 0.9291395514017264
+            }
+          }
+        },
+        {
+          "axis_value": 0.08,
+          "failure_probability": 0.08,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.90615
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 36246,
+              "trials": 40000,
+              "estimate": 0.90615,
+              "confidence_level": 0.95,
+              "lower_bound": 0.9032530469208696,
+              "upper_bound": 0.9089689501452557
+            }
+          }
+        },
+        {
+          "axis_value": 0.1,
+          "failure_probability": 0.1,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.8865
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 35460,
+              "trials": 40000,
+              "estimate": 0.8865,
+              "confidence_level": 0.95,
+              "lower_bound": 0.8833542807716751,
+              "upper_bound": 0.8895714901653121
+            }
+          }
+        },
+        {
+          "axis_value": 0.12,
+          "failure_probability": 0.12,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.865925
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 34637,
+              "trials": 40000,
+              "estimate": 0.865925,
+              "confidence_level": 0.95,
+              "lower_bound": 0.8625507158141683,
+              "upper_bound": 0.8692290066440904
+            }
+          }
+        },
+        {
+          "axis_value": 0.14,
+          "failure_probability": 0.14,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.8448
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 33792,
+              "trials": 40000,
+              "estimate": 0.8448,
+              "confidence_level": 0.95,
+              "lower_bound": 0.8412184375980394,
+              "upper_bound": 0.8483153420114644
+            }
+          }
+        },
+        {
+          "axis_value": 0.16,
+          "failure_probability": 0.16,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.82375
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 32950,
+              "trials": 40000,
+              "estimate": 0.82375,
+              "confidence_level": 0.95,
+              "lower_bound": 0.8199849089556163,
+              "upper_bound": 0.8274529134010452
+            }
+          }
+        },
+        {
+          "axis_value": 0.18,
+          "failure_probability": 0.18,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.803225
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 32129,
+              "trials": 40000,
+              "estimate": 0.803225,
+              "confidence_level": 0.95,
+              "lower_bound": 0.7992999360234038,
+              "upper_bound": 0.8070918282518044
+            }
+          }
+        },
+        {
+          "axis_value": 0.2,
+          "failure_probability": 0.2,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.782025
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 31281,
+              "trials": 40000,
+              "estimate": 0.782025,
+              "confidence_level": 0.95,
+              "lower_bound": 0.7779519667794778,
+              "upper_bound": 0.7860438690510626
+            }
+          }
+        },
+        {
+          "axis_value": 0.25,
+          "failure_probability": 0.25,
+          "endpoint_availability": {
+            "frontend:GET /api/recommendations": 0.728225
+          },
+          "endpoint_confidence": {
+            "frontend:GET /api/recommendations": {
+              "successes": 29129,
+              "trials": 40000,
+              "estimate": 0.728225,
+              "confidence_level": 0.95,
+              "lower_bound": 0.7238435481204712,
+              "upper_bound": 0.7325626202419968
+            }
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "slo": 0.95,
+          "status": "crossed",
+          "observed_monotonic": true,
+          "confidence_level": 0.95,
+          "certification_status": "certified",
+          "certified_tolerance": {
+            "axis_value": 0.03,
+            "availability": 0.9565,
+            "confidence_lower_bound": 0.954456813822325,
+            "confidence_upper_bound": 0.9584555132998865
+          },
+          "last_meeting_slo": {
+            "axis_value": 0.03,
+            "availability": 0.9565,
+            "confidence_lower_bound": 0.954456813822325,
+            "confidence_upper_bound": 0.9584555132998865
+          },
+          "first_violating_slo": {
+            "axis_value": 0.04,
+            "availability": 0.9473,
+            "confidence_lower_bound": 0.9450671188318878,
+            "confidence_upper_bound": 0.9494469751916943
+          },
+          "crossing_bracket": {
+            "lower_axis_value": 0.03,
+            "upper_axis_value": 0.04
+          }
+        }
+      ]
+    }
+  ],
+  "diffs": {
+    "baselines": [
+      {
+        "name": "accepted",
+        "current_digest": "sha256:7d9cd5c6f8c875ffec9c0c6c2300ab9dfdde6df68b69771297dd66127621dde7",
+        "reference_digest": "sha256:8511f7e21d754759933af520251a76469396bcfda3a43d02441e589576b68b6b",
+        "cross_profile_weighted": {
+          "current": 0.934675,
+          "reference": 0.9799,
+          "signed": -0.04522499999999996,
+          "absolute": 0.04522499999999996
+        },
+        "cross_profile_unweighted": {
+          "current": 0.934675,
+          "reference": 0.9799,
+          "signed": -0.04522499999999996,
+          "absolute": 0.04522499999999996
+        },
+        "profiles": [
+          {
+            "profile": "scenario",
+            "weighted_aggregate": {
+              "current": 0.934675,
+              "reference": 0.9799,
+              "signed": -0.04522499999999996,
+              "absolute": 0.04522499999999996
+            },
+            "unweighted_aggregate": {
+              "current": 0.934675,
+              "reference": 0.9799,
+              "signed": -0.04522499999999996,
+              "absolute": 0.04522499999999996
+            },
+            "decision": {
+              "current": "fail",
+              "reference": "pass",
+              "changed": true
+            },
+            "endpoints": [
+              {
+                "profile": "scenario",
+                "endpoint_id": "frontend:GET /api/recommendations",
+                "availability": {
+                  "current": 0.934675,
+                  "reference": 0.9799,
+                  "signed": -0.04522499999999996,
+                  "absolute": 0.04522499999999996
+                },
+                "status": {
+                  "current": "fail",
+                  "reference": "pass",
+                  "changed": true
+                }
+              }
+            ],
+            "advanced_metrics": [
+              {
+                "metric": "blast_radius_endpoint_count",
+                "target_type": "profile",
+                "target": "profile",
+                "status": "comparable",
+                "delta": {
+                  "current": 0,
+                  "reference": 0,
+                  "signed": 0,
+                  "absolute": 0
+                }
+              },
+              {
+                "metric": "blast_radius_service_count",
+                "target_type": "profile",
+                "target": "profile",
+                "status": "comparable",
+                "delta": {
+                  "current": 0,
+                  "reference": 0,
+                  "signed": 0,
+                  "absolute": 0
+                }
+              },
+              {
+                "metric": "expected_success_rate",
+                "target_type": "path",
+                "target": "frontend-\u003eproduct-catalog",
+                "status": "comparable",
+                "delta": {
+                  "current": 0.944025,
+                  "reference": 0.992225,
+                  "signed": -0.04820000000000002,
+                  "absolute": 0.04820000000000002
+                }
+              },
+              {
+                "metric": "expected_success_rate",
+                "target_type": "path",
+                "target": "frontend-\u003erecommendation",
+                "status": "comparable",
+                "delta": {
+                  "current": 0.994925,
+                  "reference": 0.99255,
+                  "signed": 0.002374999999999905,
+                  "absolute": 0.002374999999999905
+                }
+              },
+              {
+                "metric": "expected_success_rate",
+                "target_type": "path",
+                "target": "frontend-\u003erecommendation-\u003eproduct-catalog",
+                "status": "comparable",
+                "delta": {
+                  "current": 0.93965,
+                  "reference": 0.985075,
+                  "signed": -0.04542500000000005,
+                  "absolute": 0.04542500000000005
+                }
+              },
+              {
+                "metric": "expected_success_rate",
+                "target_type": "path",
+                "target": "required-edge:frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "status": "comparable",
+                "delta": {
+                  "current": 0.944025,
+                  "reference": 0.992225,
+                  "signed": -0.04820000000000002,
+                  "absolute": 0.04820000000000002
+                }
+              },
+              {
+                "metric": "expected_success_rate",
+                "target_type": "path",
+                "target": "required-edge:frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "status": "comparable",
+                "delta": {
+                  "current": 0.994925,
+                  "reference": 0.99255,
+                  "signed": 0.002374999999999905,
+                  "absolute": 0.002374999999999905
+                }
+              },
+              {
+                "metric": "expected_success_rate",
+                "target_type": "path",
+                "target": "required-edge:recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "status": "comparable",
+                "delta": {
+                  "current": 0.944225,
+                  "reference": 0.98995,
+                  "signed": -0.045725000000000016,
+                  "absolute": 0.045725000000000016
+                }
+              },
+              {
+                "metric": "max_amplification_factor",
+                "target_type": "edge",
+                "target": "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "status": "non_comparable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              },
+              {
+                "metric": "max_amplification_factor",
+                "target_type": "edge",
+                "target": "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "status": "non_comparable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              },
+              {
+                "metric": "max_amplification_factor",
+                "target_type": "edge",
+                "target": "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "status": "non_comparable",
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              },
+              {
+                "metric": "max_amplification_factor",
+                "target_type": "path",
+                "target": "frontend-\u003eproduct-catalog",
+                "status": "non_comparable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              },
+              {
+                "metric": "max_amplification_factor",
+                "target_type": "path",
+                "target": "frontend-\u003erecommendation",
+                "status": "non_comparable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              },
+              {
+                "metric": "max_amplification_factor",
+                "target_type": "path",
+                "target": "frontend-\u003erecommendation-\u003eproduct-catalog",
+                "status": "non_comparable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              },
+              {
+                "metric": "max_amplification_factor",
+                "target_type": "path",
+                "target": "required-edge:frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "status": "non_comparable",
+                "reason": "retry metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              },
+              {
+                "metric": "max_amplification_factor",
+                "target_type": "path",
+                "target": "required-edge:frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "status": "non_comparable",
+                "reason": "retry metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              },
+              {
+                "metric": "max_amplification_factor",
+                "target_type": "path",
+                "target": "required-edge:recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "status": "non_comparable",
+                "reason": "retry metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              },
+              {
+                "metric": "timeout_mismatch_count",
+                "target_type": "path",
+                "target": "frontend-\u003eproduct-catalog",
+                "status": "non_comparable",
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              },
+              {
+                "metric": "timeout_mismatch_count",
+                "target_type": "path",
+                "target": "frontend-\u003erecommendation",
+                "status": "non_comparable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              },
+              {
+                "metric": "timeout_mismatch_count",
+                "target_type": "path",
+                "target": "frontend-\u003erecommendation-\u003eproduct-catalog",
+                "status": "non_comparable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              },
+              {
+                "metric": "timeout_mismatch_count",
+                "target_type": "path",
+                "target": "required-edge:frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                "status": "non_comparable",
+                "reason": "timeout metadata unavailable for edge frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server"
+              },
+              {
+                "metric": "timeout_mismatch_count",
+                "target_type": "path",
+                "target": "required-edge:frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                "status": "non_comparable",
+                "reason": "timeout metadata unavailable for edge frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server"
+              },
+              {
+                "metric": "timeout_mismatch_count",
+                "target_type": "path",
+                "target": "required-edge:recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                "status": "non_comparable",
+                "reason": "timeout metadata unavailable for edge recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+              }
+            ]
+          }
+        ],
+        "sweep_boundaries": [
+          {
+            "sweep": "operation-boundary",
+            "endpoint_id": "frontend:GET /api/recommendations",
+            "axis_type": "independent_replica_failure_probability",
+            "fingerprint": "sha256:58e59be689e1f360c0110980cc7f8b20375742498c3211a7b7f5fac54fca16df",
+            "status": "comparable",
+            "current_tolerance": 0.03,
+            "reference_tolerance": 0.12,
+            "tolerance": {
+              "current": 0.03,
+              "reference": 0.12,
+              "signed": -0.09,
+              "absolute": 0.09
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "generated_at": "2026-10-15T10:32:30.225915672Z",
+  "recompute_duration_ms": 68552
+}

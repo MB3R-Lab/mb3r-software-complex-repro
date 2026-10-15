@@ -86,4 +86,4 @@ ENV REPRODUCTION_ROOT=/artifact \
     SHEAFT_BIN=/usr/local/bin/sheaft
 
 ENTRYPOINT ["/usr/local/bin/reproduce", "--prebuilt", "--work-dir", "/work"]
-CMD ["--case", "social-network-repl", "--repeat", "1"]
+CMD ["--operation-walkthrough"]

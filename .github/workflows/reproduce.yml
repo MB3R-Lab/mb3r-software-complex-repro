@@ -67,6 +67,10 @@ jobs:
           SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
         run: make reproduce-paper
 
+      - name: Test the artifact runner and response-trace linkage
+        working-directory: reproduction
+        run: go test ./...
+
       - name: Verify expected-failure walkthroughs
         working-directory: reproduction
         env:
@@ -91,6 +95,14 @@ jobs:
           SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
         run: make reproduce-paper-evaluation BENCHMARK_REPEATS=1
 
+      - name: Replay the observed operation and compare both candidates
+        working-directory: reproduction
+        env:
+          PROCRUSTES_REPO: ${{ github.workspace }}/toolchain/Procrustes
+          BERING_REPO: ${{ github.workspace }}/toolchain/Bering
+          SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
+        run: make reproduce-paper-operation
+
       - name: Upload generated outputs
         if: failure()
         uses: actions/upload-artifact@v4
@@ -98,7 +110,7 @@ jobs:
           name: software-complex-reproduction-${{ github.sha }}
           path: reproduction/.tmp/paper-reproduction/work
           if-no-files-found: warn
-          retention-days: 7
+          retention-days: 3
 
   container-smoke:
     name: Verify reviewer container
@@ -162,6 +174,8 @@ jobs:
       contents: read
       packages: write
       id-token: write
+    outputs:
+      digest: ${{ steps.publish.outputs.digest }}
     steps:
       - name: Check out reproduction repository
         uses: actions/checkout@v4
@@ -214,3 +228,24 @@ jobs:
       - name: Record published digest
         shell: bash
         run: echo "Published digest \`${{ steps.publish.outputs.digest }}\`" >> "$GITHUB_STEP_SUMMARY"
+
+  public-pull-smoke:
+    name: Download and run the public released image without registry login
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: publish-container
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull the published immutable digest anonymously
+        run: docker pull ghcr.io/mb3r-lab/mb3r-software-complex-repro@${{ needs.publish-container.outputs.digest }}
+      - name: Replay the reviewer Compose command and verify persisted output
+        run: |
+          docker compose run --rm demo
+          test -s output/operation-walkthrough/result.json
+          test -s output/operation-walkthrough/summary.md
+          version=$(jq -r .artifact.version toolchain-lock.json)
+          image="ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-$version"
+          test "$(docker image inspect "$image" --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}')" = "$GITHUB_SHA"

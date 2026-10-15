@@ -1,0 +1,21 @@
+{
+  "predicates": {
+    "recommendations.required-calls": {
+      "edge_modes": [
+        "sync"
+      ],
+      "entry_service": "frontend",
+      "mandatory_targets": [
+        "recommendation",
+        "product-catalog"
+      ],
+      "required_edges": [
+        "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+        "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+        "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+      ],
+      "type": "edge_aware"
+    }
+  },
+  "schema_version": "1.1"
+}

@@ -7,6 +7,13 @@ BENCHMARK_REPEATS ?= 3
 demo:
 	$(DOCKER_COMPOSE) run --rm demo
 
+.PHONY: operation-walkthrough reproduce-paper-operation
+operation-walkthrough:
+	$(DOCKER_COMPOSE) run --rm operation
+
+reproduce-paper-operation:
+	$(GO) run . --operation-walkthrough
+
 criticality-walkthrough:
 	$(DOCKER_COMPOSE) run --rm criticality
 
