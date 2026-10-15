@@ -25,5 +25,5 @@
     "trials": 50000
   },
   "summary": {"failed": 0, "passed": 15, "total": 15},
-  "toolchain_release": "1.3.2"
+  "toolchain_release": "1.3.3"
 }

@@ -31,10 +31,10 @@ The equivalent command without Compose is:
 
 ```bash
 docker run --rm --pull=always \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3
 ```
 
-The immutable image tag identifies artifact release `1.2.0`; `toolchain-lock.json` independently pins software-complex release `1.3.2` and the exact three component commits.
+Release `v1.3.3` is the single version for this repository, its Docker image, and the packaged toolchain. `toolchain-lock.json` stores that version in `toolchain.version` and independently pins the three component versions and commits. There is no separate artifact version. Earlier published tags remain unchanged.
 
 ## Observed operation and two candidate changes
 
@@ -58,11 +58,11 @@ Available cases can be listed or selected directly:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
   --list-cases
 
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -77,14 +77,14 @@ docker compose run --rm criticality
 The walkthrough uses the archived OpenTelemetry async case by default, executes Procrustes and Bering, runs Sheaft's schema 1.3 Birnbaum analysis, verifies all 16 semantic case files, and prints the top service and edge with confidence intervals for each of the four endpoints. It ends with:
 
 ```text
-criticality-walkthrough-ok toolchain=1.3.2 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
+criticality-walkthrough-ok toolchain=1.3.3 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
 ```
 
 Select another archived case with `--case`, for example:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
   --criticality-walkthrough --case social-network-repl
 ```
 
@@ -99,7 +99,7 @@ docker compose run --rm failures
 The first supplies incomplete static evidence to Procrustes and requires exit code `2`, a `BLOCKED` goal, and explicit blocker rules. The second supplies an unsupported Bering model contract to Sheaft and requires exit code `1`, the precise compatibility rejection, and no generated analysis report. The wrapper returns success only when both expected failures are observed and ends with:
 
 ```text
-failure-walkthroughs-ok toolchain=1.3.2 scenarios=2
+failure-walkthroughs-ok toolchain=1.3.3 scenarios=2
 ```
 
 ## Extended evaluation

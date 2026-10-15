@@ -9,10 +9,9 @@
     "schema_version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
     "artifact": {
       "type": "object",
-      "required": ["name", "version"],
+      "required": ["name"],
       "properties": {
-        "name": {"const": "mb3r-software-complex-repro"},
-        "version": {"$ref": "#/$defs/version"}
+        "name": {"const": "mb3r-software-complex-repro"}
       },
       "additionalProperties": false
     },

@@ -65,5 +65,5 @@
     {"availability": 0.946, "certified_tolerance": 0.04, "decision": "fail", "name": "regressed", "reason_ids": ["boundary_regressed", "endpoint_below_threshold"]},
     {"availability": 0.99275, "certified_tolerance": 0.2, "decision": "pass", "name": "remediated", "reason_ids": ["gate_pass"]}
   ],
-  "toolchain_release": "1.3.2"
+  "toolchain_release": "1.3.3"
 }

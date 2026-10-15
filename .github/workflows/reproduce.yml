@@ -124,8 +124,7 @@ jobs:
         id: lock
         shell: bash
         run: |
-          echo "toolchain_version=$(jq -r '.toolchain.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
-          echo "artifact_version=$(jq -r '.artifact.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "release_version=$(jq -r '.toolchain.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "procrustes_commit=$(jq -r '.components.procrustes.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "bering_commit=$(jq -r '.components.bering.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "sheaft_commit=$(jq -r '.components.sheaft.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
@@ -140,8 +139,7 @@ jobs:
           load: true
           tags: mb3r-software-complex-repro:test
           build-args: |
-            TOOLCHAIN_VERSION=${{ steps.lock.outputs.toolchain_version }}
-            ARTIFACT_VERSION=${{ steps.lock.outputs.artifact_version }}
+            RELEASE_VERSION=${{ steps.lock.outputs.release_version }}
             IMAGE_REVISION=${{ github.sha }}
             PROCRUSTES_COMMIT=${{ steps.lock.outputs.procrustes_commit }}
             BERING_COMMIT=${{ steps.lock.outputs.bering_commit }}
@@ -184,8 +182,7 @@ jobs:
         id: lock
         shell: bash
         run: |
-          echo "toolchain_version=$(jq -r '.toolchain.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
-          echo "artifact_version=$(jq -r '.artifact.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
+          echo "release_version=$(jq -r '.toolchain.version' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "procrustes_commit=$(jq -r '.components.procrustes.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "bering_commit=$(jq -r '.components.bering.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "sheaft_commit=$(jq -r '.components.sheaft.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
@@ -211,11 +208,10 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-${{ steps.lock.outputs.artifact_version }}
+            ghcr.io/mb3r-lab/mb3r-software-complex-repro:v${{ steps.lock.outputs.release_version }}
             ghcr.io/mb3r-lab/mb3r-software-complex-repro:latest
           build-args: |
-            TOOLCHAIN_VERSION=${{ steps.lock.outputs.toolchain_version }}
-            ARTIFACT_VERSION=${{ steps.lock.outputs.artifact_version }}
+            RELEASE_VERSION=${{ steps.lock.outputs.release_version }}
             IMAGE_REVISION=${{ github.sha }}
             PROCRUSTES_COMMIT=${{ steps.lock.outputs.procrustes_commit }}
             BERING_COMMIT=${{ steps.lock.outputs.bering_commit }}
@@ -246,6 +242,9 @@ jobs:
           docker compose run --rm demo
           test -s output/operation-walkthrough/result.json
           test -s output/operation-walkthrough/summary.md
-          version=$(jq -r .artifact.version toolchain-lock.json)
-          image="ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-$version"
+          version=$(jq -r .toolchain.version toolchain-lock.json)
+          image="ghcr.io/mb3r-lab/mb3r-software-complex-repro:v$version"
           test "$(docker image inspect "$image" --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}')" = "$GITHUB_SHA"
+          test "$(docker image inspect "$image" --format '{{ index .Config.Labels "org.opencontainers.image.version" }}')" = "$version"
+          test "$(docker image inspect "$image" --format '{{ index .Config.Labels "io.mb3r.toolchain.version" }}')" = "$version"
+          test "$(docker image inspect "$image" --format '{{ index .RepoDigests 0 }}')" = "ghcr.io/mb3r-lab/mb3r-software-complex-repro@${{ needs.publish-container.outputs.digest }}"

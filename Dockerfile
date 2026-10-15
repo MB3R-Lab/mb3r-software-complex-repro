@@ -48,20 +48,18 @@ RUN cd /src/reproduction \
 
 FROM --platform=$TARGETPLATFORM alpine:3.22
 
-ARG TOOLCHAIN_VERSION
-ARG ARTIFACT_VERSION
+ARG RELEASE_VERSION
 ARG IMAGE_REVISION
 
 LABEL org.opencontainers.image.title="Procrustes-Bering-Sheaft demonstration artifact" \
       org.opencontainers.image.description="Executable ICSE tool-demonstration artifact for the MB3R resilience-analysis toolchain" \
       org.opencontainers.image.source="https://github.com/MB3R-Lab/mb3r-software-complex-repro" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.version="${ARTIFACT_VERSION}" \
+      org.opencontainers.image.version="${RELEASE_VERSION}" \
       org.opencontainers.image.revision="${IMAGE_REVISION}" \
-      io.mb3r.toolchain.version="${TOOLCHAIN_VERSION}"
+      io.mb3r.toolchain.version="${RELEASE_VERSION}"
 
-RUN test -n "${ARTIFACT_VERSION}" \
-    && test -n "${TOOLCHAIN_VERSION}" \
+RUN test -n "${RELEASE_VERSION}" \
     && test -n "${IMAGE_REVISION}"
 
 RUN addgroup -S artifact && adduser -S -G artifact artifact \
