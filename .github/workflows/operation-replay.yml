@@ -1,0 +1,45 @@
+name: Replay observed operation and compare candidates
+on:
+  push:
+    branches: [operation-semantics-validation]
+    paths: ['operation.go', 'cases/operation-semantics/**', '.github/workflows/operation-replay.yml', 'toolchain-lock.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {path: reproduction}
+      - uses: actions/checkout@v4
+        with:
+          repository: MB3R-Lab/Procrustes
+          ref: 378f35f242f25fda7392646bfbba66312b669144
+          path: toolchain/Procrustes
+      - uses: actions/checkout@v4
+        with:
+          repository: MB3R-Lab/Bering
+          ref: 86db92066a5284d52b87a1000af0a0ea7e925a91
+          path: toolchain/Bering
+      - uses: actions/checkout@v4
+        with:
+          repository: MB3R-Lab/Sheaft
+          ref: 2bb74aaa0618225de22286519f97562955370294
+          path: toolchain/Sheaft
+      - uses: actions/setup-go@v5
+        with: {go-version: 1.26.2, cache: false}
+      - name: Run the operation workflow from observed evidence
+        working-directory: reproduction
+        env:
+          PROCRUSTES_REPO: ${{ github.workspace }}/toolchain/Procrustes
+          BERING_REPO: ${{ github.workspace }}/toolchain/Bering
+          SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
+        run: go run . --operation-walkthrough
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: operation-replay-${{ github.run_id }}
+          path: reproduction/.tmp/paper-reproduction/work/operation-walkthrough
+          retention-days: 3

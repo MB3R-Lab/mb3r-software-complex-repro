@@ -1,0 +1,122 @@
+[
+  {
+    "condition": "healthy",
+    "attempt": 1,
+    "trace_id": "d047eaee223d00ab686e7df1b3682996",
+    "http_status": 200,
+    "body": "[{\"id\":\"6E92ZMYYFZ\",\"name\":\"Solar Filter\",\"description\":\"Enhance your viewing experience with EclipSmart Solar Filter for 8\\\" telescopes. With two Velcro straps and four self-adhesive Velcro pads for added safety, you can be assured that the solar filter cannot be accidentally knocked off and will provide Solar Safe, ISO compliant viewing.\",\"picture\":\"SolarFilter.jpg\",\"priceUsd\":{\"currencyCode\":\"USD\",\"units\":69,\"nanos\":950000000},\"categories\":[\"accessories\",\"telescopes\"]},{\"id\":\"LS4PSXUNUM\",\"name\":\"Red Flashlight\",\"description\":\"This 3-in-1 device features a 3-mode red flashlight, a hand warmer, and a portable power bank for recharging your personal electronics on the go. Whether you use it to light the way at an astronomy star party, a night walk, or wildlife research, ThermoTorch 3 Astro Red's rugged, IPX4-rated design will withstand your everyday activities.\",\"picture\":\"RedFlashlight.jpg\",\"priceUsd\":{\"currencyCode\":\"USD\",\"units\":57,\"nanos\":80000000},\"categories\":[\"accessories\",\"flashlights\"]},{\"id\":\"9SIQT8TOJO\",\"name\":\"Optical Tube Assembly\",\"description\":\"Capturing impressive deep-sky astroimages is easier than ever with Rowe-Ackermann Schmidt Astrograph (RASA) V2, the perfect companion to today's top DSLR or astronomical CCD cameras. This fast, wide-field f/2.2 system allows for shorter exposure times compared to traditional f/10 astroimaging, without sacrificing resolution. Because shorter sub-exposure times are possible, your equatorial mount won't need to accurately track over extended periods. The short focal length also lessens equatorial tracking demands. In many cases, autoguiding will not be required.\",\"picture\":\"OpticalTubeAssembly.jpg\",\"priceUsd\":{\"currencyCode\":\"USD\",\"units\":3599,\"nanos\":0},\"categories\":[\"accessories\",\"telescopes\",\"assembly\"]},{\"id\":\"L9ECAV7KIM\",\"name\":\"Lens Cleaning Kit\",\"description\":\"Wipe away dust, dirt, fingerprints and other particles on your lenses to see clearly with the Lens Cleaning Kit. This cleaning kit works on all glass and optical surfaces, including telescopes, binoculars, spotting scopes, monoculars, microscopes, and even your camera lenses, computer screens, and mobile devices.  The kit comes complete with a retractable lens brush to remove dust particles and dirt and two options to clean smudges and fingerprints off of your optics, pre-moistened lens wipes and a bottled lens cleaning fluid with soft cloth.\",\"picture\":\"LensCleaningKit.jpg\",\"priceUsd\":{\"currencyCode\":\"USD\",\"units\":21,\"nanos\":950000000},\"categories\":[\"accessories\"]}]",
+    "success": true,
+    "expected_success": true,
+    "duration_ms": 17
+  },
+  {
+    "condition": "healthy",
+    "attempt": 2,
+    "trace_id": "bff859492a8877c3d49912063257bf34",
+    "http_status": 200,
+    "body": "[{\"id\":\"66VCHSJNUP\",\"name\":\"Starsense Explorer Refractor Telescope\",\"description\":\"The first telescope that uses your smartphone to analyze the night sky and calculate its position in real time. StarSense Explorer is ideal for beginners thanks to the app's user-friendly interface and detailed tutorials. It's like having your own personal tour guide of the night sky\",\"picture\":\"StarsenseExplorer.jpg\",\"priceUsd\":{\"currencyCode\":\"USD\",\"units\":349,\"nanos\":950000000},\"categories\":[\"telescopes\"]},{\"id\":\"LS4PSXUNUM\",\"name\":\"Red Flashlight\",\"description\":\"This 3-in-1 device features a 3-mode red flashlight, a hand warmer, and a portable power bank for recharging your personal electronics on the go. Whether you use it to light the way at an astronomy star party, a night walk, or wildlife research, ThermoTorch 3 Astro Red's rugged, IPX4-rated design will withstand your everyday activities.\",\"picture\":\"RedFlashlight.jpg\",\"priceUsd\":{\"currencyCode\":\"USD\",\"units\":57,\"nanos\":80000000},\"categories\":[\"accessories\",\"flashlights\"]},{\"id\":\"9SIQT8TOJO\",\"name\":\"Optical Tube Assembly\",\"description\":\"Capturing impressive deep-sky astroimages is easier than ever with Rowe-Ackermann Schmidt Astrograph (RASA) V2, the perfect companion to today's top DSLR or astronomical CCD cameras. This fast, wide-field f/2.2 system allows for shorter exposure times compared to traditional f/10 astroimaging, without sacrificing resolution. Because shorter sub-exposure times are possible, your equatorial mount won't need to accurately track over extended periods. The short focal length also lessens equatorial tracking demands. In many cases, autoguiding will not be required.\",\"picture\":\"OpticalTubeAssembly.jpg\",\"priceUsd\":{\"currencyCode\":\"USD\",\"units\":3599,\"nanos\":0},\"categories\":[\"accessories\",\"telescopes\",\"assembly\"]},{\"id\":\"OLJCESPC7Z\",\"name\":\"National Park Foundation Explorascope\",\"description\":\"The National Park Foundation's (NPF) Explorascope 60AZ is a manual alt-azimuth, refractor telescope perfect for celestial viewing on the go. The NPF Explorascope 60 can view the planets, moon, star clusters and brighter deep sky objects like the Orion Nebula and Andromeda Galaxy.\",\"picture\":\"NationalParkFoundationExplorascope.jpg\",\"priceUsd\":{\"currencyCode\":\"USD\",\"units\":101,\"nanos\":960000000},\"categories\":[\"telescopes\"]}]",
+    "success": true,
+    "expected_success": true,
+    "duration_ms": 16
+  },
+  {
+    "condition": "recommendation-down",
+    "attempt": 1,
+    "trace_id": "c2383ac583d29eb6c6aa81e9d2cd9d3e",
+    "http_status": 500,
+    "body": "Internal Server Error",
+    "success": false,
+    "expected_success": false,
+    "duration_ms": 15
+  },
+  {
+    "condition": "recommendation-down",
+    "attempt": 2,
+    "trace_id": "e2e8b0200dbdbdb9ed6db312ffb46f87",
+    "http_status": 500,
+    "body": "Internal Server Error",
+    "success": false,
+    "expected_success": false,
+    "duration_ms": 3
+  },
+  {
+    "condition": "catalog-down",
+    "attempt": 1,
+    "trace_id": "d5ecff97c9d0dbd7c36fc44ba841369e",
+    "http_status": 500,
+    "body": "Internal Server Error",
+    "success": false,
+    "expected_success": false,
+    "duration_ms": 21
+  },
+  {
+    "condition": "catalog-down",
+    "attempt": 2,
+    "trace_id": "3124cfeb86039c02b15719781cfdb7a0",
+    "http_status": 500,
+    "body": "Internal Server Error",
+    "success": false,
+    "expected_success": false,
+    "duration_ms": 12
+  },
+  {
+    "condition": "frontend-recommendation-down",
+    "attempt": 1,
+    "trace_id": "87cc88d57ec3729ee71cbed8c8e5aa67",
+    "http_status": 500,
+    "body": "Internal Server Error",
+    "success": false,
+    "expected_success": false,
+    "duration_ms": 4
+  },
+  {
+    "condition": "frontend-recommendation-down",
+    "attempt": 2,
+    "trace_id": "faa13e45c8c4f668d8c5f018346c4abf",
+    "http_status": 500,
+    "body": "Internal Server Error",
+    "success": false,
+    "expected_success": false,
+    "duration_ms": 2
+  },
+  {
+    "condition": "recommendation-catalog-down",
+    "attempt": 1,
+    "trace_id": "a780c97caf23aeccecd00967af8a27d8",
+    "http_status": 500,
+    "body": "Internal Server Error",
+    "success": false,
+    "expected_success": false,
+    "duration_ms": 12
+  },
+  {
+    "condition": "recommendation-catalog-down",
+    "attempt": 2,
+    "trace_id": "8fa2ee398aaae5f576587a2b311ed201",
+    "http_status": 500,
+    "body": "Internal Server Error",
+    "success": false,
+    "expected_success": false,
+    "duration_ms": 11
+  },
+  {
+    "condition": "frontend-catalog-down",
+    "attempt": 1,
+    "trace_id": "9f13e3211e8a5660de43add88f7594ff",
+    "http_status": 500,
+    "body": "Internal Server Error",
+    "success": false,
+    "expected_success": false,
+    "duration_ms": 8
+  },
+  {
+    "condition": "frontend-catalog-down",
+    "attempt": 2,
+    "trace_id": "fb6b5048c75806557a973a16e45b805c",
+    "http_status": 500,
+    "body": "Internal Server Error",
+    "success": false,
+    "expected_success": false,
+    "duration_ms": 7
+  }
+]

@@ -1,0 +1,1355 @@
+{
+  "data": [
+    {
+      "traceID": "9f13e3211e8a5660de43add88f7594ff",
+      "spans": [
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "75c5accde0035cfe",
+          "operationName": "grpc.oteldemo.RecommendationService/ListRecommendations",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "f9dcadd1eaa5cdd6"
+            }
+          ],
+          "startTime": 1792059236961000,
+          "duration": 4287,
+          "tags": [
+            {
+              "key": "net.peer.name",
+              "type": "string",
+              "value": "fault-proxy"
+            },
+            {
+              "key": "net.peer.port",
+              "type": "int64",
+              "value": 19001
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "@opentelemetry/instrumentation-grpc"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.213.0"
+            },
+            {
+              "key": "rpc.grpc.status_code",
+              "type": "int64",
+              "value": 0
+            },
+            {
+              "key": "rpc.method",
+              "type": "string",
+              "value": "ListRecommendations"
+            },
+            {
+              "key": "rpc.service",
+              "type": "string",
+              "value": "oteldemo.RecommendationService"
+            },
+            {
+              "key": "rpc.system",
+              "type": "string",
+              "value": "grpc"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "b03a5c4b1746968e",
+          "operationName": "grpc.oteldemo.ProductCatalogService/GetProduct",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "f9dcadd1eaa5cdd6"
+            }
+          ],
+          "startTime": 1792059236965000,
+          "duration": 1726,
+          "tags": [
+            {
+              "key": "error",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "key": "grpc.error_message",
+              "type": "string",
+              "value": "14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:56.966Z). Resolution note: "
+            },
+            {
+              "key": "grpc.error_name",
+              "type": "string",
+              "value": "Error"
+            },
+            {
+              "key": "net.peer.name",
+              "type": "string",
+              "value": "fault-proxy"
+            },
+            {
+              "key": "net.peer.port",
+              "type": "int64",
+              "value": 23550
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "@opentelemetry/instrumentation-grpc"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.213.0"
+            },
+            {
+              "key": "otel.status_code",
+              "type": "string",
+              "value": "ERROR"
+            },
+            {
+              "key": "rpc.grpc.status_code",
+              "type": "int64",
+              "value": 14
+            },
+            {
+              "key": "rpc.method",
+              "type": "string",
+              "value": "GetProduct"
+            },
+            {
+              "key": "rpc.service",
+              "type": "string",
+              "value": "oteldemo.ProductCatalogService"
+            },
+            {
+              "key": "rpc.system",
+              "type": "string",
+              "value": "grpc"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "080bc61b344ec8d3",
+          "operationName": "/oteldemo.ProductCatalogService/ListProducts",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "0770b644975e27e7"
+            }
+          ],
+          "startTime": 1792059236962694,
+          "duration": 1782,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "opentelemetry.instrumentation.grpc"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.61b0"
+            },
+            {
+              "key": "rpc.grpc.status_code",
+              "type": "int64",
+              "value": 0
+            },
+            {
+              "key": "rpc.method",
+              "type": "string",
+              "value": "ListProducts"
+            },
+            {
+              "key": "rpc.service",
+              "type": "string",
+              "value": "oteldemo.ProductCatalogService"
+            },
+            {
+              "key": "rpc.system",
+              "type": "string",
+              "value": "grpc"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p2",
+          "warnings": null
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "6ab1b1101eeb10be",
+          "operationName": "oteldemo.ProductCatalogService/ListProducts",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "080bc61b344ec8d3"
+            }
+          ],
+          "startTime": 1792059236963104,
+          "duration": 562,
+          "tags": [
+            {
+              "key": "app.products.count",
+              "type": "int64",
+              "value": 10
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.67.0"
+            },
+            {
+              "key": "rpc.method",
+              "type": "string",
+              "value": "oteldemo.ProductCatalogService/ListProducts"
+            },
+            {
+              "key": "rpc.response.status_code",
+              "type": "string",
+              "value": "OK"
+            },
+            {
+              "key": "rpc.system.name",
+              "type": "string",
+              "value": "grpc"
+            },
+            {
+              "key": "server.address",
+              "type": "string",
+              "value": "172.18.0.5"
+            },
+            {
+              "key": "server.port",
+              "type": "int64",
+              "value": 53002
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "server"
+            }
+          ],
+          "logs": [],
+          "processID": "p3",
+          "warnings": null
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "f9dcadd1eaa5cdd6",
+          "operationName": "executing api route (pages) /api/recommendations",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "e90f591bf8350ff1"
+            }
+          ],
+          "startTime": 1792059236960000,
+          "duration": 7017,
+          "tags": [
+            {
+              "key": "error",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "key": "http.status_code",
+              "type": "int64",
+              "value": 500
+            },
+            {
+              "key": "next.span_name",
+              "type": "string",
+              "value": "executing api route (pages) /api/recommendations"
+            },
+            {
+              "key": "next.span_type",
+              "type": "string",
+              "value": "Node.runHandler"
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "next.js"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.0.1"
+            },
+            {
+              "key": "otel.status_code",
+              "type": "string",
+              "value": "ERROR"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "internal"
+            }
+          ],
+          "logs": [
+            {
+              "timestamp": 1792059236966265,
+              "fields": [
+                {
+                  "key": "event",
+                  "type": "string",
+                  "value": "exception"
+                },
+                {
+                  "key": "exception.message",
+                  "type": "string",
+                  "value": "14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:56.966Z). Resolution note: "
+                },
+                {
+                  "key": "exception.stacktrace",
+                  "type": "string",
+                  "value": "Error: 14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:56.966Z). Resolution note: \n    at callErrorFromStatus (/app/node_modules/@grpc/grpc-js/build/src/call.js:32:19)\n    at Object.onReceiveStatus (/app/node_modules/@grpc/grpc-js/build/src/client.js:193:76)\n    at Object.onReceiveStatus (/app/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:367:141)\n    at Object.onReceiveStatus (/app/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:327:181)\n    at /app/node_modules/@grpc/grpc-js/build/src/resolving-call.js:135:78\n    at processTicksAndRejections (node:internal/process/task_queues:85:11)\n    at runNextTicks (node:internal/process/task_queues:69:3)\n    at process.processImmediate (node:internal/timers:541:9)\nfor call at\n    at ServiceClientImpl.makeUnaryRequest (/app/node_modules/@grpc/grpc-js/build/src/client.js:161:32)\n    at ServiceClientImpl.\u003canonymous\u003e (/app/node_modules/@grpc/grpc-js/build/src/make-client.js:105:19)\n    at /app/node_modules/@opentelemetry/instrumentation-grpc/build/src/clientUtils.js:119:31\n    at /app/node_modules/@opentelemetry/instrumentation-grpc/build/src/instrumentation.js:204:209\n    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:65:14)\n    at AsyncLocalStorageContextManager.with (/app/node_modules/@opentelemetry/context-async-hooks/build/src/AsyncLocalStorageContextManager.js:22:40)\n    at ContextAPI.with (/app/node_modules/@opentelemetry/api/build/src/api/context.js:60:46)\n    at ServiceClientImpl.clientMethodTrace [as getProduct] (/app/node_modules/@opentelemetry/instrumentation-grpc/build/src/instrumentation.js:204:42)\n    at /app/.next/server/chunks/[root-of-the-server]__828d7226._.js:1:1058\n    at new Promise (\u003canonymous\u003e)"
+                },
+                {
+                  "key": "exception.type",
+                  "type": "string",
+                  "value": "14"
+                }
+              ]
+            }
+          ],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "e90f591bf8350ff1",
+          "operationName": "GET /api/recommendations",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "8d21fdc2e9c0a50e"
+            }
+          ],
+          "startTime": 1792059236960000,
+          "duration": 7835,
+          "tags": [
+            {
+              "key": "error",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "key": "error.type",
+              "type": "string",
+              "value": "500"
+            },
+            {
+              "key": "http.method",
+              "type": "string",
+              "value": "GET"
+            },
+            {
+              "key": "http.route",
+              "type": "string",
+              "value": "/api/recommendations"
+            },
+            {
+              "key": "http.status_code",
+              "type": "int64",
+              "value": 500
+            },
+            {
+              "key": "http.target",
+              "type": "string",
+              "value": "/api/recommendations?currencyCode=USD"
+            },
+            {
+              "key": "next.route",
+              "type": "string",
+              "value": "/api/recommendations"
+            },
+            {
+              "key": "next.rsc",
+              "type": "bool",
+              "value": false
+            },
+            {
+              "key": "next.span_name",
+              "type": "string",
+              "value": "GET /api/recommendations"
+            },
+            {
+              "key": "next.span_type",
+              "type": "string",
+              "value": "BaseServer.handleRequest"
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "next.js"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.0.1"
+            },
+            {
+              "key": "otel.status_code",
+              "type": "string",
+              "value": "ERROR"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "server"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": [
+            "clock skew adjustment disabled; not applying calculated delta of -800.567µs"
+          ]
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "0770b644975e27e7",
+          "operationName": "get_product_list",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "05286926914771fa"
+            }
+          ],
+          "startTime": 1792059236962468,
+          "duration": 2089,
+          "tags": [
+            {
+              "key": "app.filtered_products.count",
+              "type": "int64",
+              "value": 10
+            },
+            {
+              "key": "app.filtered_products.list",
+              "type": "string",
+              "value": "[\"LS4PSXUNUM\",\"HQTGWGPNH4\",\"9SIQT8TOJO\",\"OLJCESPC7Z\",\"0PUK6V6EV0\"]"
+            },
+            {
+              "key": "app.products.count",
+              "type": "int64",
+              "value": 10
+            },
+            {
+              "key": "app.recommendation.cache_enabled",
+              "type": "bool",
+              "value": false
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "recommendation"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "internal"
+            }
+          ],
+          "logs": [
+            {
+              "timestamp": 1792059236962601,
+              "fields": [
+                {
+                  "key": "event",
+                  "type": "string",
+                  "value": "feature_flag.evaluation"
+                },
+                {
+                  "key": "feature_flag.key",
+                  "type": "string",
+                  "value": "recommendationCacheFailure"
+                },
+                {
+                  "key": "feature_flag.provider.name",
+                  "type": "string",
+                  "value": "FlagdProvider"
+                },
+                {
+                  "key": "feature_flag.result.reason",
+                  "type": "string",
+                  "value": "cached"
+                },
+                {
+                  "key": "feature_flag.result.value",
+                  "type": "string",
+                  "value": "false"
+                },
+                {
+                  "key": "feature_flag.result.variant",
+                  "type": "string",
+                  "value": "off"
+                }
+              ]
+            }
+          ],
+          "processID": "p2",
+          "warnings": null
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "678159c3fed9a71b",
+          "operationName": "tcp.connect",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "b03a5c4b1746968e"
+            }
+          ],
+          "startTime": 1792059239693000,
+          "duration": 267,
+          "tags": [
+            {
+              "key": "net.host.ip",
+              "type": "string",
+              "value": "172.18.0.8"
+            },
+            {
+              "key": "net.host.port",
+              "type": "int64",
+              "value": 35886
+            },
+            {
+              "key": "net.peer.ip",
+              "type": "string",
+              "value": "172.18.0.5"
+            },
+            {
+              "key": "net.peer.name",
+              "type": "string",
+              "value": "172.18.0.5"
+            },
+            {
+              "key": "net.peer.port",
+              "type": "int64",
+              "value": 23550
+            },
+            {
+              "key": "net.transport",
+              "type": "string",
+              "value": "ip_tcp"
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "@opentelemetry/instrumentation-net"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.57.0"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "internal"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": [
+            "clock skew adjustment disabled; not applying calculated delta of -2.727270335s"
+          ]
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "7a323d357e4727e7",
+          "operationName": "grpc.oteldemo.ProductCatalogService/GetProduct",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "f9dcadd1eaa5cdd6"
+            }
+          ],
+          "startTime": 1792059236965000,
+          "duration": 2548,
+          "tags": [
+            {
+              "key": "error",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "key": "grpc.error_message",
+              "type": "string",
+              "value": "14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:56.966Z). Resolution note: "
+            },
+            {
+              "key": "grpc.error_name",
+              "type": "string",
+              "value": "Error"
+            },
+            {
+              "key": "net.peer.name",
+              "type": "string",
+              "value": "fault-proxy"
+            },
+            {
+              "key": "net.peer.port",
+              "type": "int64",
+              "value": 23550
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "@opentelemetry/instrumentation-grpc"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.213.0"
+            },
+            {
+              "key": "otel.status_code",
+              "type": "string",
+              "value": "ERROR"
+            },
+            {
+              "key": "rpc.grpc.status_code",
+              "type": "int64",
+              "value": 14
+            },
+            {
+              "key": "rpc.method",
+              "type": "string",
+              "value": "GetProduct"
+            },
+            {
+              "key": "rpc.service",
+              "type": "string",
+              "value": "oteldemo.ProductCatalogService"
+            },
+            {
+              "key": "rpc.system",
+              "type": "string",
+              "value": "grpc"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": [
+            "clock skew adjustment disabled; not applying calculated delta of -2.765411ms"
+          ]
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "1a43863c3c201ab0",
+          "operationName": "grpc.oteldemo.ProductCatalogService/GetProduct",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "f9dcadd1eaa5cdd6"
+            }
+          ],
+          "startTime": 1792059236965000,
+          "duration": 2591,
+          "tags": [
+            {
+              "key": "error",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "key": "grpc.error_message",
+              "type": "string",
+              "value": "14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:56.966Z). Resolution note: "
+            },
+            {
+              "key": "grpc.error_name",
+              "type": "string",
+              "value": "Error"
+            },
+            {
+              "key": "net.peer.name",
+              "type": "string",
+              "value": "fault-proxy"
+            },
+            {
+              "key": "net.peer.port",
+              "type": "int64",
+              "value": 23550
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "@opentelemetry/instrumentation-grpc"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.213.0"
+            },
+            {
+              "key": "otel.status_code",
+              "type": "string",
+              "value": "ERROR"
+            },
+            {
+              "key": "rpc.grpc.status_code",
+              "type": "int64",
+              "value": 14
+            },
+            {
+              "key": "rpc.method",
+              "type": "string",
+              "value": "GetProduct"
+            },
+            {
+              "key": "rpc.service",
+              "type": "string",
+              "value": "oteldemo.ProductCatalogService"
+            },
+            {
+              "key": "rpc.system",
+              "type": "string",
+              "value": "grpc"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": [
+            "clock skew adjustment disabled; not applying calculated delta of -2.786916ms"
+          ]
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "b85fb67192f7d350",
+          "operationName": "tcp.connect",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "b03a5c4b1746968e"
+            }
+          ],
+          "startTime": 1792059237966000,
+          "duration": 388,
+          "tags": [
+            {
+              "key": "net.host.ip",
+              "type": "string",
+              "value": "172.18.0.8"
+            },
+            {
+              "key": "net.host.port",
+              "type": "int64",
+              "value": 35880
+            },
+            {
+              "key": "net.peer.ip",
+              "type": "string",
+              "value": "172.18.0.5"
+            },
+            {
+              "key": "net.peer.name",
+              "type": "string",
+              "value": "172.18.0.5"
+            },
+            {
+              "key": "net.peer.port",
+              "type": "int64",
+              "value": 23550
+            },
+            {
+              "key": "net.transport",
+              "type": "string",
+              "value": "ip_tcp"
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "@opentelemetry/instrumentation-net"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.57.0"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "internal"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": [
+            "clock skew adjustment disabled; not applying calculated delta of -1.000331004s"
+          ]
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "cdd086c2868aee1f",
+          "operationName": "sql.conn.query",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "6ab1b1101eeb10be"
+            }
+          ],
+          "startTime": 1792059236963170,
+          "duration": 388,
+          "tags": [
+            {
+              "key": "db.statement",
+              "type": "string",
+              "value": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tORDER BY p.id\n\t"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "github.com/XSAM/otelsql"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.41.0"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p3",
+          "warnings": null
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "db55f7faaff06091",
+          "operationName": "grpc.oteldemo.ProductCatalogService/GetProduct",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "f9dcadd1eaa5cdd6"
+            }
+          ],
+          "startTime": 1792059236966000,
+          "duration": 2543,
+          "tags": [
+            {
+              "key": "error",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "key": "grpc.error_message",
+              "type": "string",
+              "value": "14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:56.966Z). Resolution note: "
+            },
+            {
+              "key": "grpc.error_name",
+              "type": "string",
+              "value": "Error"
+            },
+            {
+              "key": "net.peer.name",
+              "type": "string",
+              "value": "fault-proxy"
+            },
+            {
+              "key": "net.peer.port",
+              "type": "int64",
+              "value": 23550
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "@opentelemetry/instrumentation-grpc"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.213.0"
+            },
+            {
+              "key": "otel.status_code",
+              "type": "string",
+              "value": "ERROR"
+            },
+            {
+              "key": "rpc.grpc.status_code",
+              "type": "int64",
+              "value": 14
+            },
+            {
+              "key": "rpc.method",
+              "type": "string",
+              "value": "GetProduct"
+            },
+            {
+              "key": "rpc.service",
+              "type": "string",
+              "value": "oteldemo.ProductCatalogService"
+            },
+            {
+              "key": "rpc.system",
+              "type": "string",
+              "value": "grpc"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": [
+            "clock skew adjustment disabled; not applying calculated delta of -3.762816ms"
+          ]
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "8d21fdc2e9c0a50e",
+          "operationName": "GET",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "dc2dc95b9f1082eb"
+            }
+          ],
+          "startTime": 1792059236959000,
+          "duration": 8234,
+          "tags": [
+            {
+              "key": "error",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "key": "http.flavor",
+              "type": "string",
+              "value": "1.1"
+            },
+            {
+              "key": "http.host",
+              "type": "string",
+              "value": "127.0.0.1:8080"
+            },
+            {
+              "key": "http.method",
+              "type": "string",
+              "value": "GET"
+            },
+            {
+              "key": "http.scheme",
+              "type": "string",
+              "value": "http"
+            },
+            {
+              "key": "http.status_code",
+              "type": "int64",
+              "value": 500
+            },
+            {
+              "key": "http.status_text",
+              "type": "string",
+              "value": "INTERNAL SERVER ERROR"
+            },
+            {
+              "key": "http.target",
+              "type": "string",
+              "value": "/api/recommendations?currencyCode=USD"
+            },
+            {
+              "key": "http.url",
+              "type": "string",
+              "value": "http://127.0.0.1:8080/api/recommendations?currencyCode=USD"
+            },
+            {
+              "key": "http.user_agent",
+              "type": "string",
+              "value": "Go-http-client/1.1"
+            },
+            {
+              "key": "net.host.ip",
+              "type": "string",
+              "value": "172.18.0.8"
+            },
+            {
+              "key": "net.host.name",
+              "type": "string",
+              "value": "127.0.0.1"
+            },
+            {
+              "key": "net.host.port",
+              "type": "int64",
+              "value": 8080
+            },
+            {
+              "key": "net.peer.ip",
+              "type": "string",
+              "value": "172.18.0.1"
+            },
+            {
+              "key": "net.peer.port",
+              "type": "int64",
+              "value": 34410
+            },
+            {
+              "key": "net.transport",
+              "type": "string",
+              "value": "ip_tcp"
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "@opentelemetry/instrumentation-http"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.213.0"
+            },
+            {
+              "key": "otel.status_code",
+              "type": "string",
+              "value": "ERROR"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "server"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": [
+            "invalid parent span IDs=dc2dc95b9f1082eb; skipping clock skew adjustment"
+          ]
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "22bf2c7f16ba7b0d",
+          "operationName": "tcp.connect",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "b03a5c4b1746968e"
+            }
+          ],
+          "startTime": 1792059236966000,
+          "duration": 220,
+          "tags": [
+            {
+              "key": "net.host.ip",
+              "type": "string",
+              "value": "172.18.0.8"
+            },
+            {
+              "key": "net.host.port",
+              "type": "int64",
+              "value": 35868
+            },
+            {
+              "key": "net.peer.ip",
+              "type": "string",
+              "value": "172.18.0.5"
+            },
+            {
+              "key": "net.peer.name",
+              "type": "string",
+              "value": "172.18.0.5"
+            },
+            {
+              "key": "net.peer.port",
+              "type": "int64",
+              "value": 23550
+            },
+            {
+              "key": "net.transport",
+              "type": "string",
+              "value": "ip_tcp"
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "@opentelemetry/instrumentation-net"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.57.0"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "internal"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "9f13e3211e8a5660de43add88f7594ff",
+          "spanID": "05286926914771fa",
+          "operationName": "/oteldemo.RecommendationService/ListRecommendations",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "9f13e3211e8a5660de43add88f7594ff",
+              "spanID": "75c5accde0035cfe"
+            }
+          ],
+          "startTime": 1792059236962406,
+          "duration": 2216,
+          "tags": [
+            {
+              "key": "app.products_recommended.count",
+              "type": "int64",
+              "value": 5
+            },
+            {
+              "key": "net.peer.ip",
+              "type": "string",
+              "value": "172.18.0.5"
+            },
+            {
+              "key": "net.peer.port",
+              "type": "string",
+              "value": "55112"
+            },
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "opentelemetry.instrumentation.grpc"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "0.61b0"
+            },
+            {
+              "key": "rpc.grpc.status_code",
+              "type": "int64",
+              "value": 0
+            },
+            {
+              "key": "rpc.method",
+              "type": "string",
+              "value": "ListRecommendations"
+            },
+            {
+              "key": "rpc.service",
+              "type": "string",
+              "value": "oteldemo.RecommendationService"
+            },
+            {
+              "key": "rpc.system",
+              "type": "string",
+              "value": "grpc"
+            },
+            {
+              "key": "rpc.user_agent",
+              "type": "string",
+              "value": "grpc-node-js/1.14.3"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "server"
+            }
+          ],
+          "logs": [],
+          "processID": "p2",
+          "warnings": null
+        }
+      ],
+      "processes": {
+        "p1": {
+          "serviceName": "frontend",
+          "tags": [
+            {
+              "key": "container.id",
+              "type": "string",
+              "value": "360e6259d30229645adf7d196e55854ea3b066984b10bc262dcb0fb25bd4f98b"
+            },
+            {
+              "key": "host.arch",
+              "type": "string",
+              "value": "amd64"
+            },
+            {
+              "key": "host.name",
+              "type": "string",
+              "value": "360e6259d302"
+            },
+            {
+              "key": "os.type",
+              "type": "string",
+              "value": "linux"
+            },
+            {
+              "key": "os.version",
+              "type": "string",
+              "value": "6.17.0-1022-azure"
+            },
+            {
+              "key": "process.command",
+              "type": "string",
+              "value": "/app/server.js"
+            },
+            {
+              "key": "process.command_args",
+              "type": "string",
+              "value": "[\"/usr/local/bin/node\",\"--require=./Instrumentation.js\",\"/app/server.js\"]"
+            },
+            {
+              "key": "process.executable.name",
+              "type": "string",
+              "value": "node"
+            },
+            {
+              "key": "process.executable.path",
+              "type": "string",
+              "value": "/usr/local/bin/node"
+            },
+            {
+              "key": "process.owner",
+              "type": "string",
+              "value": "root"
+            },
+            {
+              "key": "process.pid",
+              "type": "int64",
+              "value": 1
+            },
+            {
+              "key": "process.runtime.description",
+              "type": "string",
+              "value": "Node.js"
+            },
+            {
+              "key": "process.runtime.name",
+              "type": "string",
+              "value": "nodejs"
+            },
+            {
+              "key": "process.runtime.version",
+              "type": "string",
+              "value": "24.22.0"
+            },
+            {
+              "key": "telemetry.sdk.language",
+              "type": "string",
+              "value": "nodejs"
+            },
+            {
+              "key": "telemetry.sdk.name",
+              "type": "string",
+              "value": "opentelemetry"
+            },
+            {
+              "key": "telemetry.sdk.version",
+              "type": "string",
+              "value": "2.6.0"
+            }
+          ]
+        },
+        "p2": {
+          "serviceName": "recommendation",
+          "tags": [
+            {
+              "key": "telemetry.auto.version",
+              "type": "string",
+              "value": "0.61b0"
+            },
+            {
+              "key": "telemetry.sdk.language",
+              "type": "string",
+              "value": "python"
+            },
+            {
+              "key": "telemetry.sdk.name",
+              "type": "string",
+              "value": "opentelemetry"
+            },
+            {
+              "key": "telemetry.sdk.version",
+              "type": "string",
+              "value": "1.40.0"
+            }
+          ]
+        },
+        "p3": {
+          "serviceName": "product-catalog",
+          "tags": []
+        }
+      },
+      "warnings": null
+    }
+  ],
+  "total": 0,
+  "limit": 0,
+  "offset": 0,
+  "errors": null
+}

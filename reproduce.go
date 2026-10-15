@@ -88,6 +88,7 @@ type runOptions struct {
 	ValidationMatrix       bool
 	CostProfile            bool
 	EvaluationSuite        bool
+	OperationWalkthrough   bool
 	BenchmarkRepeats       int
 	CaseName               string
 	Repeat                 int
@@ -108,6 +109,7 @@ func main() {
 	validationMatrix := flag.Bool("validation-matrix", false, "run controlled Procrustes/Bering checks and Sheaft analytical oracles")
 	costProfile := flag.Bool("cost-profile", false, "measure full-pipeline and saved-model analysis cost on this machine")
 	evaluationSuite := flag.Bool("evaluation-suite", false, "run the decision walkthrough, validation matrix, and cost profile")
+	operationWalkthrough := flag.Bool("operation-walkthrough", false, "replay observed recommendations fault states and compare two replica changes")
 	benchmarkRepeats := flag.Int("benchmark-repeats", 3, "number of repetitions for --cost-profile or --evaluation-suite")
 	flag.Parse()
 	if *listCases {
@@ -142,7 +144,7 @@ func main() {
 		os.Exit(1)
 	}
 	evaluationModes := 0
-	for _, enabled := range []bool{*decisionWalkthrough, *validationMatrix, *costProfile, *evaluationSuite} {
+	for _, enabled := range []bool{*decisionWalkthrough, *validationMatrix, *costProfile, *evaluationSuite, *operationWalkthrough} {
 		if enabled {
 			evaluationModes++
 		}
@@ -176,6 +178,7 @@ func main() {
 			ValidationMatrix:       *validationMatrix,
 			CostProfile:            *costProfile,
 			EvaluationSuite:        *evaluationSuite,
+			OperationWalkthrough:   *operationWalkthrough,
 			BenchmarkRepeats:       *benchmarkRepeats,
 			CaseName:               strings.TrimSpace(*caseName),
 			Repeat:                 *repeat,
@@ -274,6 +277,9 @@ func run(options runOptions) error {
 	}
 	if options.DecisionWalkthrough {
 		return runDecisionWalkthrough(root, filepath.Join(workRoot, "decision-walkthrough"), bins, manifest.Toolchain.Version)
+	}
+	if options.OperationWalkthrough {
+		return runOperationWalkthrough(root, filepath.Join(workRoot, "operation-walkthrough"), bins, manifest.Toolchain.Version)
 	}
 	if options.ValidationMatrix {
 		return runValidationMatrix(root, filepath.Join(workRoot, "validation-matrix"), bins, manifest.Toolchain.Version)

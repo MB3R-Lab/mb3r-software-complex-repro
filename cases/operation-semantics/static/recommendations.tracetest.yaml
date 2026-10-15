@@ -1,0 +1,9 @@
+type: Test
+spec:
+  id: recommendations-usd-nonempty
+  name: Nonempty recommendations with USD prices and cache disabled
+  trigger:
+    type: http
+    httpRequest:
+      url: http://frontend:8080/api/recommendations?currencyCode=USD
+      method: GET

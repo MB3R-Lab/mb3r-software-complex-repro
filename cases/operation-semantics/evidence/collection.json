@@ -1,0 +1,8 @@
+{
+  "application_commit": "be466eb395294e0b5c2f91f7e76bed475953eaa6",
+  "conditions": 6,
+  "requests": 12,
+  "status": "observed; model agreement not yet evaluated",
+  "success_criterion": "HTTP 200 and nonempty product array with nonempty IDs",
+  "workflow_run": "38718363369"
+}

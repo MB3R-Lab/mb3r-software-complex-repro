@@ -1,0 +1,278 @@
+flagd-1  | 
+flagd-1  | 		 ______   __       ________   _______    ______      
+flagd-1  | 		/_____/\ /_/\     /_______/\ /______/\  /_____/\     
+flagd-1  | 		\::::_\/_\:\ \    \::: _  \ \\::::__\/__\:::_ \ \    
+flagd-1  | 		 \:\/___/\\:\ \    \::(_)  \ \\:\ /____/\\:\ \ \ \   
+flagd-1  | 		  \:::._\/ \:\ \____\:: __  \ \\:\\_  _\/ \:\ \ \ \  
+flagd-1  | 		   \:\ \    \:\/___/\\:.\ \  \ \\:\_\ \ \  \:\/.:| | 
+flagd-1  | 		    \_\/     \_____\/ \__\/\__\/ \_____\/   \____/_/ 
+flagd-1  | 
+flagd-1  | 2026-10-15T10:13:02.775Z	info	cmd/start.go:143	flagd version: v0.13.3 (47f904b3a5a5a6e4389de6201bef3c15158dbc97), built at: 2026-02-09	{"component": "start"}
+flagd-1  | 2026-10-15T10:13:02.780Z	info	flag-sync/sync_service.go:96	starting flag sync service on port 8015	{"component": "FlagSyncService"}
+flagd-1  | 2026-10-15T10:13:02.780Z	info	file/filepath_sync.go:60	Starting filepath sync notifier	{"component": "sync", "sync": "fileinfo"}
+flagd-1  | 2026-10-15T10:13:02.781Z	info	file/filepath_sync.go:99	watching filepath: /flags.json	{"component": "sync", "sync": "fileinfo"}
+flagd-1  | 2026-10-15T10:13:02.781Z	info	flag-evaluation/connect_service.go:254	metrics and probes listening at 8014	{"component": "service"}
+flagd-1  | 2026-10-15T10:13:02.781Z	info	ofrep/ofrep_service.go:69	ofrep service listening at 8016	{"component": "OFREPService"}
+flagd-1  | 2026-10-15T10:13:02.782Z	info	flag-evaluation/connect_service.go:234	Flag IResolver listening at [::]:8013	{"component": "service"}
+jaeger-1  | 2026/10/15 10:13:02 maxprocs: Leaving GOMAXPROCS=4: CPU quota undefined
+jaeger-1  | 
+jaeger-1  | *******************************************************************************
+jaeger-1  | 
+jaeger-1  | 🛑  WARNING: End-of-life Notice for Jaeger v1
+jaeger-1  | 
+jaeger-1  | You are currently running a v1 version of Jaeger, which is deprecated and will
+jaeger-1  | reach end-of-life on December 31st, 2025. This means there will be no further
+jaeger-1  | development, bug fixes, or security patches for v1 after this date.
+jaeger-1  | 
+jaeger-1  | We strongly recommend migrating to Jaeger v2 for continued support and access
+jaeger-1  | to new features.
+jaeger-1  | 
+jaeger-1  | For detailed migration instructions, please refer to the official Jaeger
+jaeger-1    | documentation:  https://www.jaegertracing.io/docs/latest/migration/
+frontend-1  |     '\tdebug_error_string = "UNAVAILABLE:failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: recvmsg:Connection reset by peer (104)"\n' +
+jaeger-1    | 
+jaeger-1    | Tracking issue: https://github.com/jaegertracing/jaeger/issues/6321
+jaeger-1    | 
+jaeger-1    | 🛑  WARNING: End-of-life Notice for Jaeger v1
+jaeger-1    | 
+jaeger-1    | *******************************************************************************
+jaeger-1    | 
+jaeger-1    | 2026/10/15 10:13:02 application version: git-commit=bc2a64341e2c36fffc825fa208de6a8fa5ff69c3, git-version=v1.66.0, build-date=2025-02-06T18:08:09Z
+jaeger-1    | {"level":"info","ts":1792059182.7785304,"caller":"flags/service.go:123","msg":"Mounting metrics handler on admin server","route":"/metrics"}
+jaeger-1    | {"level":"info","ts":1792059182.778666,"caller":"flags/service.go:129","msg":"Mounting expvar handler on admin server","route":"/debug/vars"}
+jaeger-1    | {"level":"info","ts":1792059182.778899,"caller":"flags/admin.go:106","msg":"Mounting health check on admin server","route":"/"}
+jaeger-1    | {"level":"info","ts":1792059182.7791278,"caller":"flags/admin.go:123","msg":"Starting admin HTTP server"}
+jaeger-1    | {"level":"info","ts":1792059182.7793293,"caller":"flags/admin.go:137","msg":"Admin server started","http.host-port":"[::]:14269","health-status":"unavailable"}
+jaeger-1    | {"level":"info","ts":1792059182.779506,"caller":"grpc@v1.70.0/clientconn.go:162","msg":"[core] original dial target is: \"localhost:4317\""}
+jaeger-1    | {"level":"info","ts":1792059182.7796686,"caller":"grpc@v1.70.0/clientconn.go:440","msg":"[core] [Channel #1]Channel created"}
+jaeger-1    | {"level":"info","ts":1792059182.7797308,"caller":"grpc@v1.70.0/clientconn.go:193","msg":"[core] [Channel #1]parsed dial target is: resolver.Target{URL:url.URL{Scheme:\"dns\", Opaque:\"\", User:(*url.Userinfo)(nil), Host:\"\", Path:\"/localhost:4317\", RawPath:\"\", OmitHost:false, ForceQuery:false, RawQuery:\"\", Fragment:\"\", RawFragment:\"\"}}"}
+jaeger-1    | {"level":"info","ts":1792059182.779789,"caller":"grpc@v1.70.0/clientconn.go:194","msg":"[core] [Channel #1]Channel authority set to \"localhost:4317\""}
+jaeger-1    | {"level":"info","ts":1792059182.7801375,"caller":"memory/factory.go:76","msg":"Memory storage initialized","configuration":{"MaxTraces":0}}
+jaeger-1    | {"level":"info","ts":1792059182.7870634,"caller":"grpc@v1.70.0/server.go:685","msg":"[core] [Server #2]Server created"}
+jaeger-1    | {"level":"info","ts":1792059182.7871537,"caller":"server/grpc.go:75","msg":"Starting jaeger-collector gRPC server","grpc.host-port":"[::]:14250"}
+jaeger-1    | {"level":"info","ts":1792059182.7871823,"caller":"server/http.go:37","msg":"Starting jaeger-collector HTTP server","host-port":":14268"}
+jaeger-1    | {"level":"info","ts":1792059182.7873058,"caller":"grpc@v1.70.0/server.go:881","msg":"[core] [Server #2 ListenSocket #3]ListenSocket created"}
+jaeger-1    | {"level":"info","ts":1792059182.7874033,"caller":"app/collector.go:128","msg":"Not listening for Zipkin HTTP traffic, port not configured"}
+jaeger-1    | {"level":"info","ts":1792059182.787439,"caller":"handler/otlp_receiver.go:63","msg":"OTLP receiver status change","status":"StatusStarting"}
+jaeger-1    | {"level":"info","ts":1792059182.787469,"caller":"grpc@v1.70.0/server.go:685","msg":"[core] [Server #4]Server created"}
+jaeger-1    | {"level":"info","ts":1792059182.7874956,"caller":"otlpreceiver@v0.119.0/otlp.go:112","msg":"Starting GRPC server","endpoint":":4317"}
+jaeger-1    | {"level":"info","ts":1792059182.7875671,"caller":"otlpreceiver@v0.119.0/otlp.go:169","msg":"Starting HTTP server","endpoint":":4318"}
+jaeger-1    | {"level":"info","ts":1792059182.7876174,"caller":"app/flags.go:168","msg":"Archive storage not initialized"}
+jaeger-1    | {"level":"info","ts":1792059182.7876577,"caller":"grpc@v1.70.0/server.go:685","msg":"[core] [Server #5]Server created"}
+jaeger-1    | {"level":"info","ts":1792059182.7877035,"caller":"grpc@v1.70.0/server.go:881","msg":"[core] [Server #4 ListenSocket #6]ListenSocket created"}
+jaeger-1    | {"level":"info","ts":1792059182.7892807,"caller":"app/static_handler.go:92","msg":"Using UI configuration","path":""}
+jaeger-1    | {"level":"info","ts":1792059182.7894988,"caller":"app/server.go:263","msg":"Query server started","http_addr":"[::]:16686","grpc_addr":"[::]:16685"}
+jaeger-1    | {"level":"info","ts":1792059182.7895584,"caller":"healthcheck/handler.go:118","msg":"Health Check state change","status":"ready"}
+jaeger-1    | {"level":"info","ts":1792059182.789571,"caller":"app/server.go:329","msg":"Starting HTTP server","port":16686,"addr":":16686"}
+jaeger-1    | {"level":"info","ts":1792059182.7895925,"caller":"app/server.go:343","msg":"Starting GRPC server","port":16685,"addr":":16685"}
+jaeger-1    | {"level":"info","ts":1792059182.7897046,"caller":"grpc@v1.70.0/server.go:881","msg":"[core] [Server #5 ListenSocket #7]ListenSocket created"}
+jaeger-1    | {"level":"info","ts":1792059192.7813828,"caller":"grpc@v1.70.0/clientconn.go:345","msg":"[core] [Channel #1]Channel exiting idle mode"}
+jaeger-1    | {"level":"info","ts":1792059192.7866604,"caller":"grpc@v1.70.0/resolver_wrapper.go:200","msg":"[core] [Channel #1]Resolver state updated: {\n  \"Addresses\": [\n    {\n      \"Addr\": \"127.0.0.1:4317\",\n      \"ServerName\": \"\",\n      \"Attributes\": null,\n      \"BalancerAttributes\": null,\n      \"Metadata\": null\n    },\n    {\n      \"Addr\": \"[::1]:4317\",\n      \"ServerName\": \"\",\n      \"Attributes\": null,\n      \"BalancerAttributes\": null,\n      \"Metadata\": null\n    }\n  ],\n  \"Endpoints\": [\n    {\n      \"Addresses\": [\n        {\n          \"Addr\": \"127.0.0.1:4317\",\n          \"ServerName\": \"\",\n          \"Attributes\": null,\n          \"BalancerAttributes\": null,\n          \"Metadata\": null\n        }\n      ],\n      \"Attributes\": null\n    },\n    {\n      \"Addresses\": [\n        {\n          \"Addr\": \"[::1]:4317\",\n          \"ServerName\": \"\",\n          \"Attributes\": null,\n          \"BalancerAttributes\": null,\n          \"Metadata\": null\n        }\n      ],\n      \"Attributes\": null\n    }\n  ],\n  \"ServiceConfig\": null,\n  \"Attributes\": null\n} (resolver returned new addresses)"}
+jaeger-1    | {"level":"info","ts":1792059192.7867165,"caller":"grpc@v1.70.0/balancer_wrapper.go:117","msg":"[core] [Channel #1]Channel switches to new LB policy \"pick_first\""}
+jaeger-1    | {"level":"info","ts":1792059192.7867773,"caller":"gracefulswitch/gracefulswitch.go:193","msg":"[pick-first-lb] [pick-first-lb 0xc0003fb380] Received new config {\n  \"shuffleAddressList\": false\n}, resolver state {\n  \"Addresses\": [\n    {\n      \"Addr\": \"127.0.0.1:4317\",\n      \"ServerName\": \"\",\n      \"Attributes\": null,\n      \"BalancerAttributes\": null,\n      \"Metadata\": null\n    },\n    {\n      \"Addr\": \"[::1]:4317\",\n      \"ServerName\": \"\",\n      \"Attributes\": null,\n      \"BalancerAttributes\": null,\n      \"Metadata\": null\n    }\n  ],\n  \"Endpoints\": [\n    {\n      \"Addresses\": [\n        {\n          \"Addr\": \"127.0.0.1:4317\",\n          \"ServerName\": \"\",\n          \"Attributes\": null,\n          \"BalancerAttributes\": null,\n          \"Metadata\": null\n        }\n      ],\n      \"Attributes\": null\n    },\n    {\n      \"Addresses\": [\n        {\n          \"Addr\": \"[::1]:4317\",\n          \"ServerName\": \"\",\n          \"Attributes\": null,\n          \"BalancerAttributes\": null,\n          \"Metadata\": null\n        }\n      ],\n      \"Attributes\": null\n    }\n  ],\n  \"ServiceConfig\": null,\n  \"Attributes\": null\n}"}
+jaeger-1    | {"level":"info","ts":1792059192.7868307,"caller":"grpc@v1.70.0/balancer_wrapper.go:190","msg":"[core] [Channel #1 SubChannel #11]Subchannel created"}
+jaeger-1    | {"level":"info","ts":1792059192.7868466,"caller":"grpc@v1.70.0/clientconn.go:544","msg":"[core] [Channel #1]Channel Connectivity change to CONNECTING"}
+jaeger-1    | {"level":"info","ts":1792059192.7869263,"caller":"grpc@v1.70.0/clientconn.go:1199","msg":"[core] [Channel #1 SubChannel #11]Subchannel Connectivity change to CONNECTING"}
+jaeger-1    | {"level":"info","ts":1792059192.786959,"caller":"grpc@v1.70.0/clientconn.go:1319","msg":"[core] [Channel #1 SubChannel #11]Subchannel picks a new address \"127.0.0.1:4317\" to connect"}
+jaeger-1    | {"level":"info","ts":1792059192.7870893,"caller":"pickfirst/pickfirst.go:184","msg":"[pick-first-lb] [pick-first-lb 0xc0003fb380] Received SubConn state update: 0xc00050e2d0, {ConnectivityState:CONNECTING ConnectionError:<nil> connectedAddress:{Addr: ServerName: Attributes:<nil> BalancerAttributes:<nil> Metadata:<nil>}}"}
+jaeger-1    | {"level":"info","ts":1792059192.7872546,"caller":"grpc@v1.70.0/clientconn.go:1199","msg":"[core] [Channel #1 SubChannel #11]Subchannel Connectivity change to READY"}
+jaeger-1    | {"level":"info","ts":1792059192.7873707,"caller":"pickfirst/pickfirst.go:184","msg":"[pick-first-lb] [pick-first-lb 0xc0003fb380] Received SubConn state update: 0xc00050e2d0, {ConnectivityState:READY ConnectionError:<nil> connectedAddress:{Addr:127.0.0.1:4317 ServerName:localhost:4317 Attributes:<nil> BalancerAttributes:<nil> Metadata:<nil>}}"}
+jaeger-1    | {"level":"info","ts":1792059192.7873876,"caller":"grpc@v1.70.0/clientconn.go:544","msg":"[core] [Channel #1]Channel Connectivity change to READY"}
+jaeger-1    | {"level":"info","ts":1792059195.6563473,"caller":"transport/http2_server.go:662","msg":"[transport] [server-transport 0xc00015c000] Closing: EOF"}
+jaeger-1    | {"level":"info","ts":1792059195.6564448,"caller":"transport/controlbuf.go:577","msg":"[transport] [server-transport 0xc00015c000] loopyWriter exiting with error: transport closed by client"}
+jaeger-1    | {"level":"info","ts":1792059209.6716251,"caller":"transport/http2_server.go:662","msg":"[transport] [server-transport 0xc000612000] Closing: EOF"}
+jaeger-1    | {"level":"info","ts":1792059209.671764,"caller":"transport/controlbuf.go:577","msg":"[transport] [server-transport 0xc000612000] loopyWriter exiting with error: transport closed by client"}
+postgresql-1  | The files belonging to this database system will be owned by user "postgres".
+postgresql-1  | This user must also own the server process.
+postgresql-1  | 
+postgresql-1  | The database cluster will be initialized with locale "en_US.utf8".
+postgresql-1  | The default database encoding has accordingly been set to "UTF8".
+postgresql-1  | The default text search configuration will be set to "english".
+postgresql-1  | 
+postgresql-1  | Data page checksums are disabled.
+postgresql-1  | 
+postgresql-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgresql-1  | creating subdirectories ... ok
+postgresql-1  | selecting dynamic shared memory implementation ... posix
+postgresql-1  | selecting default "max_connections" ... 100
+postgresql-1  | selecting default "shared_buffers" ... 128MB
+postgresql-1  | selecting default time zone ... Etc/UTC
+postgresql-1  | creating configuration files ... ok
+postgresql-1  | running bootstrap script ... ok
+postgresql-1  | performing post-bootstrap initialization ... ok
+postgresql-1  | syncing data to disk ... ok
+postgresql-1  | 
+postgresql-1  | initdb: warning: enabling "trust" authentication for local connections
+postgresql-1  | 
+postgresql-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+postgresql-1  | Success. You can now start the database server using:
+postgresql-1  | 
+postgresql-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgresql-1  | 
+postgresql-1  | waiting for server to start....2026-10-15 10:13:03.332 UTC [47] LOG:  starting PostgreSQL 17.8 (Debian 17.8-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+postgresql-1  | 2026-10-15 10:13:03.333 UTC [47] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgresql-1  | 2026-10-15 10:13:03.335 UTC [50] LOG:  database system was shut down at 2026-10-15 10:13:03 UTC
+postgresql-1  | 2026-10-15 10:13:03.339 UTC [47] LOG:  database system is ready to accept connections
+postgresql-1  |  done
+postgresql-1  | server started
+postgresql-1  | CREATE DATABASE
+postgresql-1  | 
+postgresql-1  | 
+postgresql-1  | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
+postgresql-1  | CREATE ROLE
+postgresql-1  | CREATE SCHEMA
+postgresql-1  | GRANT
+postgresql-1  | CREATE TABLE
+postgresql-1  | CREATE TABLE
+frontend-1    |     '>',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 2 UNKNOWN: Exception calling application: <_InactiveRpcError of RPC that terminated with:
+frontend-1    | 	status = StatusCode.UNAVAILABLE
+frontend-1    | 	details = "failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: recvmsg:Connection reset by peer (104)"
+frontend-1    | 	debug_error_string = "UNAVAILABLE:failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: recvmsg:Connection reset by peer (104)"
+frontend-1    | >
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__b9429a7a._.js:1:1931)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 2,
+frontend-1    |   details: 'Exception calling application: <_InactiveRpcError of RPC that terminated with:\n' +
+frontend-1    |     '\tstatus = StatusCode.UNAVAILABLE\n' +
+frontend-1    |     '\tdetails = "failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: recvmsg:Connection reset by peer (104)"\n' +
+frontend-1    |     '\tdebug_error_string = "UNAVAILABLE:failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: recvmsg:Connection reset by peer (104)"\n' +
+frontend-1    |     '>',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:38.701Z). Resolution note: 
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__b9429a7a._.js:1:1931)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 14,
+frontend-1    |   details: 'No connection established. Last error: Failed to connect (2026-10-15T10:13:38.701Z). Resolution note: ',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:41.438Z). Resolution note: 
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__b9429a7a._.js:1:1931)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 14,
+frontend-1    |   details: 'No connection established. Last error: Failed to connect (2026-10-15T10:13:41.438Z). Resolution note: ',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:43.829Z). Resolution note: 
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__b9429a7a._.js:1:1931)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 14,
+frontend-1    |   details: 'No connection established. Last error: Failed to connect (2026-10-15T10:13:43.829Z). Resolution note: ',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:43.829Z). Resolution note: 
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__b9429a7a._.js:1:1931)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 14,
+frontend-1    |   details: 'No connection established. Last error: Failed to connect (2026-10-15T10:13:43.829Z). Resolution note: ',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 2 UNKNOWN: Exception calling application: <_InactiveRpcError of RPC that terminated with:
+frontend-1    | 	status = StatusCode.UNAVAILABLE
+frontend-1    | 	details = "failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"
+frontend-1    | 	debug_error_string = "UNAVAILABLE:failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"
+frontend-1    | >
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__b9429a7a._.js:1:1931)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 2,
+frontend-1    |   details: 'Exception calling application: <_InactiveRpcError of RPC that terminated with:\n' +
+frontend-1    |     '\tstatus = StatusCode.UNAVAILABLE\n' +
+postgresql-1  | CREATE TABLE
+postgresql-1  | GRANT
+postgresql-1  | CREATE SCHEMA
+postgresql-1  | GRANT
+postgresql-1  | CREATE TABLE
+postgresql-1  | CREATE INDEX
+postgresql-1  | GRANT
+postgresql-1  | INSERT 0 50
+postgresql-1  | CREATE SCHEMA
+postgresql-1  | GRANT
+postgresql-1  | CREATE TABLE
+postgresql-1  | GRANT
+frontend-1    |     '\tdetails = "failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"\n' +
+frontend-1    |     '\tdebug_error_string = "UNAVAILABLE:failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"\n' +
+frontend-1    |     '>',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 2 UNKNOWN: Exception calling application: <_InactiveRpcError of RPC that terminated with:
+frontend-1    | 	status = StatusCode.UNAVAILABLE
+frontend-1    | 	details = "failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"
+frontend-1    | 	debug_error_string = "UNAVAILABLE:failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"
+frontend-1    | >
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__b9429a7a._.js:1:1931)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 2,
+frontend-1    |   details: 'Exception calling application: <_InactiveRpcError of RPC that terminated with:\n' +
+frontend-1    |     '\tstatus = StatusCode.UNAVAILABLE\n' +
+frontend-1    |     '\tdetails = "failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"\n' +
+frontend-1    |     '\tdebug_error_string = "UNAVAILABLE:failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"\n' +
+frontend-1    |     '>',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 2 UNKNOWN: Exception calling application: <_InactiveRpcError of RPC that terminated with:
+frontend-1    | 	status = StatusCode.UNAVAILABLE
+frontend-1    | 	details = "failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"
+frontend-1    | 	debug_error_string = "UNAVAILABLE:failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"
+frontend-1    | >
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__b9429a7a._.js:1:1931)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 2,
+frontend-1    |   details: 'Exception calling application: <_InactiveRpcError of RPC that terminated with:\n' +
+frontend-1    |     '\tstatus = StatusCode.UNAVAILABLE\n' +
+frontend-1    |     '\tdetails = "failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"\n' +
+frontend-1    |     '\tdebug_error_string = "UNAVAILABLE:failed to connect to all addresses; last error: UNAVAILABLE: ipv4:172.18.0.5:13550: Socket closed"\n' +
+frontend-1    |     '>',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:56.966Z). Resolution note: 
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__828d7226._.js:1:1058)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 14,
+frontend-1    |   details: 'No connection established. Last error: Failed to connect (2026-10-15T10:13:56.966Z). Resolution note: ',
+postgresql-1  | INSERT 0 10
+postgresql-1  | 
+postgresql-1  | 
+postgresql-1  | waiting for server to shut down...2026-10-15 10:13:03.566 UTC [47] LOG:  received fast shutdown request
+postgresql-1  | .2026-10-15 10:13:03.567 UTC [47] LOG:  aborting any active transactions
+postgresql-1  | 2026-10-15 10:13:03.569 UTC [47] LOG:  background worker "logical replication launcher" (PID 53) exited with exit code 1
+postgresql-1  | 2026-10-15 10:13:03.570 UTC [48] LOG:  shutting down
+postgresql-1  | 2026-10-15 10:13:03.570 UTC [48] LOG:  checkpoint starting: shutdown immediate
+postgresql-1  | 2026-10-15 10:13:03.587 UTC [48] LOG:  checkpoint complete: wrote 955 buffers (5.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.012 s, sync=0.005 s, total=0.017 s; sync files=331, longest=0.001 s, average=0.001 s; distance=4382 kB, estimate=4382 kB; lsn=0/1935258, redo lsn=0/1935258
+postgresql-1  | 2026-10-15 10:13:03.594 UTC [47] LOG:  database system is shut down
+postgresql-1  |  done
+postgresql-1  | server stopped
+postgresql-1  | 
+postgresql-1  | PostgreSQL init process complete; ready for start up.
+postgresql-1  | 
+postgresql-1  | 2026-10-15 10:13:03.686 UTC [1] LOG:  starting PostgreSQL 17.8 (Debian 17.8-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+postgresql-1  | 2026-10-15 10:13:03.687 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgresql-1  | 2026-10-15 10:13:03.687 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgresql-1  | 2026-10-15 10:13:03.687 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgresql-1  | 2026-10-15 10:13:03.690 UTC [65] LOG:  database system was shut down at 2026-10-15 10:13:03 UTC
+postgresql-1  | 2026-10-15 10:13:03.693 UTC [1] LOG:  database system is ready to accept connections
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 14 UNAVAILABLE: No connection established. Last error: Failed to connect (2026-10-15T10:13:59.694Z). Resolution note: 
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__828d7226._.js:1:1058)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 14,
+frontend-1    |   details: 'No connection established. Last error: Failed to connect (2026-10-15T10:13:59.694Z). Resolution note: ',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 14 UNAVAILABLE: No connection established. Last error: read ECONNRESET (2026-10-15T10:14:02.468Z). Resolution note: 
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__828d7226._.js:1:1058)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 14,
+frontend-1    |   details: 'No connection established. Last error: read ECONNRESET (2026-10-15T10:14:02.468Z). Resolution note: ',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }
+frontend-1    | Error: 14 UNAVAILABLE: No connection established. Last error: read ECONNRESET (2026-10-15T10:14:02.468Z). Resolution note: 
+frontend-1    |     at <unknown> (.next/server/chunks/[root-of-the-server]__828d7226._.js:1:1058)
+frontend-1    |     at new Promise (<anonymous>) {
+frontend-1    |   code: 14,
+frontend-1    |   details: 'No connection established. Last error: read ECONNRESET (2026-10-15T10:14:02.468Z). Resolution note: ',
+frontend-1    |   metadata: [Metadata]
+frontend-1    | }

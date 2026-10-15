@@ -1,0 +1,864 @@
+{
+  "spans": [
+    {
+      "attributes": {
+        "db.statement": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tORDER BY p.id\n\t",
+        "db.system.name": "postgresql",
+        "otel.scope.name": "github.com/XSAM/otelsql",
+        "otel.scope.version": "0.41.0",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.50306Z",
+      "kind": "client",
+      "name": "sql.conn.query",
+      "parent_span_id": "a36e0d0e2d65a595",
+      "service": "product-catalog",
+      "span_id": "cc18587e1a6ed221",
+      "start_time": "2026-10-15T10:13:08.502712Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "db.statement": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tWHERE p.id = $1\n\t",
+        "db.system.name": "postgresql",
+        "otel.scope.name": "github.com/XSAM/otelsql",
+        "otel.scope.version": "0.41.0",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.506789Z",
+      "kind": "client",
+      "name": "sql.conn.query",
+      "parent_span_id": "1a201b93379601d3",
+      "service": "product-catalog",
+      "span_id": "f23d30a50f8e5c3e",
+      "start_time": "2026-10-15T10:13:08.506333Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "db.statement": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tWHERE p.id = $1\n\t",
+        "db.system.name": "postgresql",
+        "otel.scope.name": "github.com/XSAM/otelsql",
+        "otel.scope.version": "0.41.0",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.512809Z",
+      "kind": "client",
+      "name": "sql.conn.query",
+      "parent_span_id": "6c2dbb4308bcd6a2",
+      "service": "product-catalog",
+      "span_id": "35287d4b5d95abda",
+      "start_time": "2026-10-15T10:13:08.511881Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "app.product.id": "L9ECAV7KIM",
+        "app.product.name": "Lens Cleaning Kit",
+        "otel.scope.name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
+        "otel.scope.version": "0.67.0",
+        "rpc.method": "oteldemo.ProductCatalogService/GetProduct",
+        "rpc.response.status_code": "OK",
+        "rpc.system.name": "grpc",
+        "server.address": "172.18.0.5",
+        "server.port": 41374,
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:08.507038Z",
+      "kind": "server",
+      "name": "oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "eede006a55f30f19",
+      "service": "product-catalog",
+      "span_id": "eb54468e846e18af",
+      "start_time": "2026-10-15T10:13:08.506307Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "net.peer.name": "fault-proxy",
+        "net.peer.port": 23550,
+        "otel.scope.name": "@opentelemetry/instrumentation-grpc",
+        "otel.scope.version": "0.213.0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "GetProduct",
+        "rpc.service": "oteldemo.ProductCatalogService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.512556Z",
+      "kind": "client",
+      "name": "grpc.oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "681adb17053d992b",
+      "service": "frontend",
+      "span_id": "ec2e7b5c3797b11c",
+      "start_time": "2026-10-15T10:13:08.505Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "net.peer.name": "fault-proxy",
+        "net.peer.port": 23550,
+        "otel.scope.name": "@opentelemetry/instrumentation-grpc",
+        "otel.scope.version": "0.213.0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "GetProduct",
+        "rpc.service": "oteldemo.ProductCatalogService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.513554Z",
+      "kind": "client",
+      "name": "grpc.oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "681adb17053d992b",
+      "service": "frontend",
+      "span_id": "17fc797b55ec19d3",
+      "start_time": "2026-10-15T10:13:08.505Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "http.status_code": 200,
+        "next.span_name": "executing api route (pages) /api/recommendations",
+        "next.span_type": "Node.runHandler",
+        "otel.scope.name": "next.js",
+        "otel.scope.version": "0.0.1",
+        "span.kind": "internal"
+      },
+      "end_time": "2026-10-15T10:13:08.513215Z",
+      "kind": "internal",
+      "name": "executing api route (pages) /api/recommendations",
+      "parent_span_id": "16c8763af8f80a75",
+      "service": "frontend",
+      "span_id": "681adb17053d992b",
+      "start_time": "2026-10-15T10:13:08.499Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "app.filtered_products.count": 10,
+        "app.filtered_products.list": "[\"6E92ZMYYFZ\",\"LS4PSXUNUM\",\"9SIQT8TOJO\",\"L9ECAV7KIM\",\"2ZYFJ3GM2N\"]",
+        "app.products.count": 10,
+        "app.recommendation.cache_enabled": false,
+        "otel.scope.name": "recommendation",
+        "span.kind": "internal"
+      },
+      "end_time": "2026-10-15T10:13:08.50404Z",
+      "kind": "internal",
+      "name": "get_product_list",
+      "parent_span_id": "298a605dc15dc7b4",
+      "service": "recommendation",
+      "span_id": "9f3ece8dd168a3e5",
+      "start_time": "2026-10-15T10:13:08.501904Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "app.product.id": "LS4PSXUNUM",
+        "app.product.name": "Red Flashlight",
+        "otel.scope.name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
+        "otel.scope.version": "0.67.0",
+        "rpc.method": "oteldemo.ProductCatalogService/GetProduct",
+        "rpc.response.status_code": "OK",
+        "rpc.system.name": "grpc",
+        "server.address": "172.18.0.5",
+        "server.port": 41374,
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:08.51291Z",
+      "kind": "server",
+      "name": "oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "17fc797b55ec19d3",
+      "service": "product-catalog",
+      "span_id": "6c2dbb4308bcd6a2",
+      "start_time": "2026-10-15T10:13:08.506397Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "db.statement": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tWHERE p.id = $1\n\t",
+        "db.system.name": "postgresql",
+        "otel.scope.name": "github.com/XSAM/otelsql",
+        "otel.scope.version": "0.41.0",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.506975Z",
+      "kind": "client",
+      "name": "sql.conn.query",
+      "parent_span_id": "eb54468e846e18af",
+      "service": "product-catalog",
+      "span_id": "442b9fefd806f4e7",
+      "start_time": "2026-10-15T10:13:08.506333Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "db.statement": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tWHERE p.id = $1\n\t",
+        "db.system.name": "postgresql",
+        "otel.scope.name": "github.com/XSAM/otelsql",
+        "otel.scope.version": "0.41.0",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.511923Z",
+      "kind": "client",
+      "name": "sql.conn.query",
+      "parent_span_id": "74b6de923f9ad635",
+      "service": "product-catalog",
+      "span_id": "7421874b87357d2f",
+      "start_time": "2026-10-15T10:13:08.510929Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "app.product.id": "6E92ZMYYFZ",
+        "app.product.name": "Solar Filter",
+        "otel.scope.name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
+        "otel.scope.version": "0.67.0",
+        "rpc.method": "oteldemo.ProductCatalogService/GetProduct",
+        "rpc.response.status_code": "OK",
+        "rpc.system.name": "grpc",
+        "server.address": "172.18.0.5",
+        "server.port": 41374,
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:08.50702Z",
+      "kind": "server",
+      "name": "oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "01b08671abcad10a",
+      "service": "product-catalog",
+      "span_id": "1a201b93379601d3",
+      "start_time": "2026-10-15T10:13:08.50629Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "app.product.id": "9SIQT8TOJO",
+        "app.product.name": "Optical Tube Assembly",
+        "otel.scope.name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
+        "otel.scope.version": "0.67.0",
+        "rpc.method": "oteldemo.ProductCatalogService/GetProduct",
+        "rpc.response.status_code": "OK",
+        "rpc.system.name": "grpc",
+        "server.address": "172.18.0.5",
+        "server.port": 41374,
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:08.512043Z",
+      "kind": "server",
+      "name": "oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "ec2e7b5c3797b11c",
+      "service": "product-catalog",
+      "span_id": "74b6de923f9ad635",
+      "start_time": "2026-10-15T10:13:08.50641Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "net.peer.name": "fault-proxy",
+        "net.peer.port": 19001,
+        "otel.scope.name": "@opentelemetry/instrumentation-grpc",
+        "otel.scope.version": "0.213.0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "ListRecommendations",
+        "rpc.service": "oteldemo.RecommendationService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.504508Z",
+      "kind": "client",
+      "name": "grpc.oteldemo.RecommendationService/ListRecommendations",
+      "parent_span_id": "681adb17053d992b",
+      "service": "frontend",
+      "span_id": "160fa0f62f748078",
+      "start_time": "2026-10-15T10:13:08.5Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "net.peer.name": "fault-proxy",
+        "net.peer.port": 23550,
+        "otel.scope.name": "@opentelemetry/instrumentation-grpc",
+        "otel.scope.version": "0.213.0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "GetProduct",
+        "rpc.service": "oteldemo.ProductCatalogService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.507727Z",
+      "kind": "client",
+      "name": "grpc.oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "681adb17053d992b",
+      "service": "frontend",
+      "span_id": "eede006a55f30f19",
+      "start_time": "2026-10-15T10:13:08.505Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "app.products_recommended.count": 5,
+        "net.peer.ip": "172.18.0.5",
+        "net.peer.port": "41888",
+        "otel.scope.name": "opentelemetry.instrumentation.grpc",
+        "otel.scope.version": "0.61b0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "ListRecommendations",
+        "rpc.service": "oteldemo.RecommendationService",
+        "rpc.system": "grpc",
+        "rpc.user_agent": "grpc-node-js/1.14.3",
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:08.504106Z",
+      "kind": "server",
+      "name": "/oteldemo.RecommendationService/ListRecommendations",
+      "parent_span_id": "160fa0f62f748078",
+      "service": "recommendation",
+      "span_id": "298a605dc15dc7b4",
+      "start_time": "2026-10-15T10:13:08.501842Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "app.products.count": 10,
+        "otel.scope.name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
+        "otel.scope.version": "0.67.0",
+        "rpc.method": "oteldemo.ProductCatalogService/ListProducts",
+        "rpc.response.status_code": "OK",
+        "rpc.system.name": "grpc",
+        "server.address": "172.18.0.5",
+        "server.port": 41360,
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:08.503148Z",
+      "kind": "server",
+      "name": "oteldemo.ProductCatalogService/ListProducts",
+      "parent_span_id": "febf811ceb1392ce",
+      "service": "product-catalog",
+      "span_id": "a36e0d0e2d65a595",
+      "start_time": "2026-10-15T10:13:08.502654Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "net.peer.name": "fault-proxy",
+        "net.peer.port": 23550,
+        "otel.scope.name": "@opentelemetry/instrumentation-grpc",
+        "otel.scope.version": "0.213.0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "GetProduct",
+        "rpc.service": "oteldemo.ProductCatalogService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.506836Z",
+      "kind": "client",
+      "name": "grpc.oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "681adb17053d992b",
+      "service": "frontend",
+      "span_id": "01b08671abcad10a",
+      "start_time": "2026-10-15T10:13:08.504Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "http.method": "GET",
+        "http.route": "/api/recommendations",
+        "http.status_code": 200,
+        "http.target": "/api/recommendations?currencyCode=USD",
+        "next.route": "/api/recommendations",
+        "next.rsc": false,
+        "next.span_name": "GET /api/recommendations",
+        "next.span_type": "BaseServer.handleRequest",
+        "otel.scope.name": "next.js",
+        "otel.scope.version": "0.0.1",
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:08.51333Z",
+      "kind": "server",
+      "name": "GET /api/recommendations",
+      "parent_span_id": "254fc18b2ead91b5",
+      "service": "frontend",
+      "span_id": "16c8763af8f80a75",
+      "start_time": "2026-10-15T10:13:08.498Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "http.flavor": "1.1",
+        "http.host": "127.0.0.1:8080",
+        "http.method": "GET",
+        "http.scheme": "http",
+        "http.status_code": 200,
+        "http.status_text": "OK",
+        "http.target": "/api/recommendations?currencyCode=USD",
+        "http.url": "http://127.0.0.1:8080/api/recommendations?currencyCode=USD",
+        "http.user_agent": "Go-http-client/1.1",
+        "net.host.ip": "172.18.0.8",
+        "net.host.name": "127.0.0.1",
+        "net.host.port": 8080,
+        "net.peer.ip": "172.18.0.1",
+        "net.peer.port": 34410,
+        "net.transport": "ip_tcp",
+        "otel.scope.name": "@opentelemetry/instrumentation-http",
+        "otel.scope.version": "0.213.0",
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:08.514837Z",
+      "kind": "server",
+      "name": "GET",
+      "parent_span_id": "c6833655c8a8eacf",
+      "service": "frontend",
+      "span_id": "254fc18b2ead91b5",
+      "start_time": "2026-10-15T10:13:08.498Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "otel.scope.name": "opentelemetry.instrumentation.grpc",
+        "otel.scope.version": "0.61b0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "ListProducts",
+        "rpc.service": "oteldemo.ProductCatalogService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:08.503959Z",
+      "kind": "client",
+      "name": "/oteldemo.ProductCatalogService/ListProducts",
+      "parent_span_id": "9f3ece8dd168a3e5",
+      "service": "recommendation",
+      "span_id": "febf811ceb1392ce",
+      "start_time": "2026-10-15T10:13:08.502173Z",
+      "trace_id": "d047eaee223d00ab686e7df1b3682996"
+    },
+    {
+      "attributes": {
+        "net.peer.name": "fault-proxy",
+        "net.peer.port": 19001,
+        "otel.scope.name": "@opentelemetry/instrumentation-grpc",
+        "otel.scope.version": "0.213.0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "ListRecommendations",
+        "rpc.service": "oteldemo.RecommendationService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.526295Z",
+      "kind": "client",
+      "name": "grpc.oteldemo.RecommendationService/ListRecommendations",
+      "parent_span_id": "65e0ef251f1edbc1",
+      "service": "frontend",
+      "span_id": "d4581d5d95443abc",
+      "start_time": "2026-10-15T10:13:11.522Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "net.peer.name": "fault-proxy",
+        "net.peer.port": 23550,
+        "otel.scope.name": "@opentelemetry/instrumentation-grpc",
+        "otel.scope.version": "0.213.0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "GetProduct",
+        "rpc.service": "oteldemo.ProductCatalogService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.534519Z",
+      "kind": "client",
+      "name": "grpc.oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "65e0ef251f1edbc1",
+      "service": "frontend",
+      "span_id": "7170c7a591451fe9",
+      "start_time": "2026-10-15T10:13:11.527Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "http.method": "GET",
+        "http.route": "/api/recommendations",
+        "http.status_code": 200,
+        "http.target": "/api/recommendations?currencyCode=USD",
+        "next.route": "/api/recommendations",
+        "next.rsc": false,
+        "next.span_name": "GET /api/recommendations",
+        "next.span_type": "BaseServer.handleRequest",
+        "otel.scope.name": "next.js",
+        "otel.scope.version": "0.0.1",
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:11.535582Z",
+      "kind": "server",
+      "name": "GET /api/recommendations",
+      "parent_span_id": "a85db49d416778a9",
+      "service": "frontend",
+      "span_id": "6d72b7089a1c476c",
+      "start_time": "2026-10-15T10:13:11.521Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "otel.scope.name": "opentelemetry.instrumentation.grpc",
+        "otel.scope.version": "0.61b0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "ListProducts",
+        "rpc.service": "oteldemo.ProductCatalogService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.526022Z",
+      "kind": "client",
+      "name": "/oteldemo.ProductCatalogService/ListProducts",
+      "parent_span_id": "635b7b34d65e61b6",
+      "service": "recommendation",
+      "span_id": "b0b1ba86acfb5a08",
+      "start_time": "2026-10-15T10:13:11.52426Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "app.products_recommended.count": 5,
+        "net.peer.ip": "172.18.0.5",
+        "net.peer.port": "41888",
+        "otel.scope.name": "opentelemetry.instrumentation.grpc",
+        "otel.scope.version": "0.61b0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "ListRecommendations",
+        "rpc.service": "oteldemo.RecommendationService",
+        "rpc.system": "grpc",
+        "rpc.user_agent": "grpc-node-js/1.14.3",
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:11.526159Z",
+      "kind": "server",
+      "name": "/oteldemo.RecommendationService/ListRecommendations",
+      "parent_span_id": "d4581d5d95443abc",
+      "service": "recommendation",
+      "span_id": "d84a1bfa431da9a6",
+      "start_time": "2026-10-15T10:13:11.523951Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "db.statement": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tWHERE p.id = $1\n\t",
+        "db.system.name": "postgresql",
+        "otel.scope.name": "github.com/XSAM/otelsql",
+        "otel.scope.version": "0.41.0",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.528878Z",
+      "kind": "client",
+      "name": "sql.conn.query",
+      "parent_span_id": "5f3182035235ac3c",
+      "service": "product-catalog",
+      "span_id": "c07f704721e15200",
+      "start_time": "2026-10-15T10:13:11.528326Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "db.statement": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tWHERE p.id = $1\n\t",
+        "db.system.name": "postgresql",
+        "otel.scope.name": "github.com/XSAM/otelsql",
+        "otel.scope.version": "0.41.0",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.533885Z",
+      "kind": "client",
+      "name": "sql.conn.query",
+      "parent_span_id": "aa426ce0b57016e8",
+      "service": "product-catalog",
+      "span_id": "551b881f1e59c3a3",
+      "start_time": "2026-10-15T10:13:11.532968Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "app.product.id": "66VCHSJNUP",
+        "app.product.name": "Starsense Explorer Refractor Telescope",
+        "otel.scope.name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
+        "otel.scope.version": "0.67.0",
+        "rpc.method": "oteldemo.ProductCatalogService/GetProduct",
+        "rpc.response.status_code": "OK",
+        "rpc.system.name": "grpc",
+        "server.address": "172.18.0.5",
+        "server.port": 41374,
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:11.528989Z",
+      "kind": "server",
+      "name": "oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "b7691fec14c78c6d",
+      "service": "product-catalog",
+      "span_id": "0ec14f74b5df4e99",
+      "start_time": "2026-10-15T10:13:11.528284Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "net.peer.name": "fault-proxy",
+        "net.peer.port": 23550,
+        "otel.scope.name": "@opentelemetry/instrumentation-grpc",
+        "otel.scope.version": "0.213.0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "GetProduct",
+        "rpc.service": "oteldemo.ProductCatalogService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.535011Z",
+      "kind": "client",
+      "name": "grpc.oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "65e0ef251f1edbc1",
+      "service": "frontend",
+      "span_id": "ea7ea9bb7237e4b7",
+      "start_time": "2026-10-15T10:13:11.527Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "db.statement": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tWHERE p.id = $1\n\t",
+        "db.system.name": "postgresql",
+        "otel.scope.name": "github.com/XSAM/otelsql",
+        "otel.scope.version": "0.41.0",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.534861Z",
+      "kind": "client",
+      "name": "sql.conn.query",
+      "parent_span_id": "4a17b50cf37b1841",
+      "service": "product-catalog",
+      "span_id": "a0d484e192cbb40a",
+      "start_time": "2026-10-15T10:13:11.533941Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "app.products.count": 10,
+        "otel.scope.name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
+        "otel.scope.version": "0.67.0",
+        "rpc.method": "oteldemo.ProductCatalogService/ListProducts",
+        "rpc.response.status_code": "OK",
+        "rpc.system.name": "grpc",
+        "server.address": "172.18.0.5",
+        "server.port": 41360,
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:11.525165Z",
+      "kind": "server",
+      "name": "oteldemo.ProductCatalogService/ListProducts",
+      "parent_span_id": "b0b1ba86acfb5a08",
+      "service": "product-catalog",
+      "span_id": "b452a6d77fdb072e",
+      "start_time": "2026-10-15T10:13:11.524671Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "app.product.id": "9SIQT8TOJO",
+        "app.product.name": "Optical Tube Assembly",
+        "otel.scope.name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
+        "otel.scope.version": "0.67.0",
+        "rpc.method": "oteldemo.ProductCatalogService/GetProduct",
+        "rpc.response.status_code": "OK",
+        "rpc.system.name": "grpc",
+        "server.address": "172.18.0.5",
+        "server.port": 41374,
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:11.528928Z",
+      "kind": "server",
+      "name": "oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "f42d7428c3831f4d",
+      "service": "product-catalog",
+      "span_id": "5f3182035235ac3c",
+      "start_time": "2026-10-15T10:13:11.528307Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "app.product.id": "LS4PSXUNUM",
+        "app.product.name": "Red Flashlight",
+        "otel.scope.name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
+        "otel.scope.version": "0.67.0",
+        "rpc.method": "oteldemo.ProductCatalogService/GetProduct",
+        "rpc.response.status_code": "OK",
+        "rpc.system.name": "grpc",
+        "server.address": "172.18.0.5",
+        "server.port": 41374,
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:11.533994Z",
+      "kind": "server",
+      "name": "oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "7170c7a591451fe9",
+      "service": "product-catalog",
+      "span_id": "aa426ce0b57016e8",
+      "start_time": "2026-10-15T10:13:11.528377Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "net.peer.name": "fault-proxy",
+        "net.peer.port": 23550,
+        "otel.scope.name": "@opentelemetry/instrumentation-grpc",
+        "otel.scope.version": "0.213.0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "GetProduct",
+        "rpc.service": "oteldemo.ProductCatalogService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.528927Z",
+      "kind": "client",
+      "name": "grpc.oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "65e0ef251f1edbc1",
+      "service": "frontend",
+      "span_id": "b7691fec14c78c6d",
+      "start_time": "2026-10-15T10:13:11.526Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "db.statement": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tWHERE p.id = $1\n\t",
+        "db.system.name": "postgresql",
+        "otel.scope.name": "github.com/XSAM/otelsql",
+        "otel.scope.version": "0.41.0",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.528947Z",
+      "kind": "client",
+      "name": "sql.conn.query",
+      "parent_span_id": "0ec14f74b5df4e99",
+      "service": "product-catalog",
+      "span_id": "c8162a101b018937",
+      "start_time": "2026-10-15T10:13:11.528323Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "app.product.id": "OLJCESPC7Z",
+        "app.product.name": "National Park Foundation Explorascope",
+        "otel.scope.name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
+        "otel.scope.version": "0.67.0",
+        "rpc.method": "oteldemo.ProductCatalogService/GetProduct",
+        "rpc.response.status_code": "OK",
+        "rpc.system.name": "grpc",
+        "server.address": "172.18.0.5",
+        "server.port": 41374,
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:11.534963Z",
+      "kind": "server",
+      "name": "oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "ea7ea9bb7237e4b7",
+      "service": "product-catalog",
+      "span_id": "4a17b50cf37b1841",
+      "start_time": "2026-10-15T10:13:11.528314Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "http.flavor": "1.1",
+        "http.host": "127.0.0.1:8080",
+        "http.method": "GET",
+        "http.scheme": "http",
+        "http.status_code": 200,
+        "http.status_text": "OK",
+        "http.target": "/api/recommendations?currencyCode=USD",
+        "http.url": "http://127.0.0.1:8080/api/recommendations?currencyCode=USD",
+        "http.user_agent": "Go-http-client/1.1",
+        "net.host.ip": "172.18.0.8",
+        "net.host.name": "127.0.0.1",
+        "net.host.port": 8080,
+        "net.peer.ip": "172.18.0.1",
+        "net.peer.port": 34410,
+        "net.transport": "ip_tcp",
+        "otel.scope.name": "@opentelemetry/instrumentation-http",
+        "otel.scope.version": "0.213.0",
+        "span.kind": "server"
+      },
+      "end_time": "2026-10-15T10:13:11.535874Z",
+      "kind": "server",
+      "name": "GET",
+      "parent_span_id": "13ba23009548c3b2",
+      "service": "frontend",
+      "span_id": "a85db49d416778a9",
+      "start_time": "2026-10-15T10:13:11.52Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "app.filtered_products.count": 10,
+        "app.filtered_products.list": "[\"66VCHSJNUP\",\"LS4PSXUNUM\",\"9SIQT8TOJO\",\"OLJCESPC7Z\",\"0PUK6V6EV0\"]",
+        "app.products.count": 10,
+        "app.recommendation.cache_enabled": false,
+        "otel.scope.name": "recommendation",
+        "span.kind": "internal"
+      },
+      "end_time": "2026-10-15T10:13:11.526099Z",
+      "kind": "internal",
+      "name": "get_product_list",
+      "parent_span_id": "d84a1bfa431da9a6",
+      "service": "recommendation",
+      "span_id": "635b7b34d65e61b6",
+      "start_time": "2026-10-15T10:13:11.524011Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "db.statement": "\n\t\tSELECT p.id, p.name, p.description, p.picture, \n\t\t       p.price_currency_code, p.price_units, p.price_nanos, p.categories\n\t\tFROM catalog.products p\n\t\tORDER BY p.id\n\t",
+        "db.system.name": "postgresql",
+        "otel.scope.name": "github.com/XSAM/otelsql",
+        "otel.scope.version": "0.41.0",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.525066Z",
+      "kind": "client",
+      "name": "sql.conn.query",
+      "parent_span_id": "b452a6d77fdb072e",
+      "service": "product-catalog",
+      "span_id": "31c0f21d3b146d44",
+      "start_time": "2026-10-15T10:13:11.524736Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "net.peer.name": "fault-proxy",
+        "net.peer.port": 23550,
+        "otel.scope.name": "@opentelemetry/instrumentation-grpc",
+        "otel.scope.version": "0.213.0",
+        "rpc.grpc.status_code": 0,
+        "rpc.method": "GetProduct",
+        "rpc.service": "oteldemo.ProductCatalogService",
+        "rpc.system": "grpc",
+        "span.kind": "client"
+      },
+      "end_time": "2026-10-15T10:13:11.529203Z",
+      "kind": "client",
+      "name": "grpc.oteldemo.ProductCatalogService/GetProduct",
+      "parent_span_id": "65e0ef251f1edbc1",
+      "service": "frontend",
+      "span_id": "f42d7428c3831f4d",
+      "start_time": "2026-10-15T10:13:11.527Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    },
+    {
+      "attributes": {
+        "http.status_code": 200,
+        "next.span_name": "executing api route (pages) /api/recommendations",
+        "next.span_type": "Node.runHandler",
+        "otel.scope.name": "next.js",
+        "otel.scope.version": "0.0.1",
+        "span.kind": "internal"
+      },
+      "end_time": "2026-10-15T10:13:11.535542Z",
+      "kind": "internal",
+      "name": "executing api route (pages) /api/recommendations",
+      "parent_span_id": "6d72b7089a1c476c",
+      "service": "frontend",
+      "span_id": "65e0ef251f1edbc1",
+      "start_time": "2026-10-15T10:13:11.522Z",
+      "trace_id": "bff859492a8877c3d49912063257bf34"
+    }
+  ]
+}

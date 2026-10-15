@@ -1,0 +1,186 @@
+name: operation-semantics
+services:
+  fault-proxy:
+    build:
+      context: /home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro
+      dockerfile: experiments/operation-semantics/proxy.Dockerfile
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 8474
+        published: "8474"
+        protocol: tcp
+  flagd:
+    command:
+      - start
+      - --uri
+      - file:/flags.json
+    image: ghcr.io/open-feature/flagd:v0.13.3
+    networks:
+      default: null
+    volumes:
+      - type: bind
+        source: /home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/experiments/operation-semantics/flags.json
+        target: /flags.json
+        read_only: true
+        bind:
+          create_host_path: true
+  frontend:
+    build:
+      context: /home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/application
+      dockerfile: /home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/experiments/operation-semantics/frontend.Dockerfile
+    depends_on:
+      fault-proxy:
+        condition: service_started
+        required: true
+      jaeger:
+        condition: service_started
+        required: true
+      recommendation:
+        condition: service_started
+        required: true
+    environment:
+      AD_ADDR: unused:9555
+      CART_ADDR: unused:7070
+      CHECKOUT_ADDR: unused:5050
+      CURRENCY_ADDR: unused:7001
+      FLAGD_HOST: flagd
+      FLAGD_PORT: "8013"
+      HOSTNAME: 0.0.0.0
+      OTEL_BSP_SCHEDULE_DELAY: "200"
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+      OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+      OTEL_LOGS_EXPORTER: none
+      OTEL_METRICS_EXPORTER: none
+      OTEL_PROPAGATORS: tracecontext,baggage
+      OTEL_SERVICE_NAME: frontend
+      OTEL_TRACES_SAMPLER: always_on
+      PORT: "8080"
+      PRODUCT_CATALOG_ADDR: fault-proxy:23550
+      PRODUCT_REVIEWS_ADDR: unused:3551
+      RECOMMENDATION_ADDR: fault-proxy:19001
+      SHIPPING_ADDR: unused:50051
+    image: operation-frontend:be466eb395294e0b5c2f91f7e76bed475953eaa6
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 8080
+        published: "8080"
+        protocol: tcp
+  jaeger:
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    image: jaegertracing/all-in-one:1.66.0
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 16686
+        published: "16686"
+        protocol: tcp
+  postgresql:
+    environment:
+      POSTGRES_DB: otel
+      POSTGRES_PASSWORD: otel
+      POSTGRES_USER: root
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U root -d otel
+      timeout: 2s
+      interval: 2s
+      retries: 30
+    image: postgres:17.8
+    networks:
+      default: null
+    volumes:
+      - type: bind
+        source: /home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/application/src/postgresql/init.sql
+        target: /docker-entrypoint-initdb.d/init.sql
+        read_only: true
+        bind:
+          create_host_path: true
+  product-catalog:
+    build:
+      context: /home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/application
+      dockerfile: src/product-catalog/Dockerfile
+    depends_on:
+      flagd:
+        condition: service_started
+        required: true
+      postgresql:
+        condition: service_healthy
+        required: true
+    environment:
+      DB_CONNECTION_STRING: postgres://otelu:otelp@postgresql/otel?sslmode=disable
+      FLAGD_HOST: flagd
+      FLAGD_PORT: "8013"
+      OTEL_BSP_SCHEDULE_DELAY: "200"
+      OTEL_CONFIG_FILE: /otel-config.yml
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+      OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+      OTEL_LOGS_EXPORTER: none
+      OTEL_METRICS_EXPORTER: none
+      OTEL_PROPAGATORS: tracecontext,baggage
+      OTEL_SERVICE_NAME: product-catalog
+      OTEL_TRACES_SAMPLER: always_on
+      PRODUCT_CATALOG_PORT: "3550"
+    image: operation-catalog:be466eb395294e0b5c2f91f7e76bed475953eaa6
+    networks:
+      default: null
+    volumes:
+      - type: bind
+        source: /home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/experiments/operation-semantics/otel-config.yml
+        target: /otel-config.yml
+        read_only: true
+        bind:
+          create_host_path: true
+  recommendation:
+    build:
+      context: /home/runner/work/mb3r-software-complex-repro/mb3r-software-complex-repro/application
+      dockerfile: src/recommendation/Dockerfile
+    depends_on:
+      fault-proxy:
+        condition: service_started
+        required: true
+      flagd:
+        condition: service_started
+        required: true
+      product-catalog:
+        condition: service_started
+        required: true
+    environment:
+      FLAGD_HOST: flagd
+      FLAGD_PORT: "8013"
+      OTEL_BSP_SCHEDULE_DELAY: "200"
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+      OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+      OTEL_LOGS_EXPORTER: none
+      OTEL_METRICS_EXPORTER: none
+      OTEL_PROPAGATORS: tracecontext,baggage
+      OTEL_SERVICE_NAME: recommendation
+      OTEL_TRACES_SAMPLER: always_on
+      PRODUCT_CATALOG_ADDR: fault-proxy:13550
+      PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION: python
+      RECOMMENDATION_PORT: "9001"
+    image: operation-recommendation:be466eb395294e0b5c2f91f7e76bed475953eaa6
+    networks:
+      default: null
+networks:
+  default:
+    name: operation-semantics_default
+x-telemetry:
+  FLAGD_HOST: flagd
+  FLAGD_PORT: "8013"
+  OTEL_BSP_SCHEDULE_DELAY: "200"
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+  OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+  OTEL_LOGS_EXPORTER: none
+  OTEL_METRICS_EXPORTER: none
+  OTEL_PROPAGATORS: tracecontext,baggage
+  OTEL_TRACES_SAMPLER: always_on

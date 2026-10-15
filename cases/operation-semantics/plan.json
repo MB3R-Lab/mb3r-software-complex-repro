@@ -1,0 +1,28 @@
+{
+  "application_commit": "be466eb395294e0b5c2f91f7e76bed475953eaa6",
+  "endpoint": "frontend:GET /api/recommendations",
+  "predicate_ref": "recommendations.required-calls",
+  "slo": 0.95,
+  "failure_probability": 0.05,
+  "edge_live_probability": 0.995,
+  "edge_failure_unit": "one channel connectivity state per request shared by all RPCs",
+  "seed": 2719,
+  "trials": 40000,
+  "grid": [0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.10, 0.12, 0.14, 0.16, 0.18, 0.20, 0.25],
+  "minimum_certified_tolerance": 0.10,
+  "max_regression": 0.02,
+  "variants": [
+    {"name": "baseline", "recommendation": 2, "product-catalog": 2},
+    {"name": "current", "recommendation": 2, "product-catalog": 1},
+    {"name": "add-recommendation", "recommendation": 3, "product-catalog": 1},
+    {"name": "add-catalog", "recommendation": 2, "product-catalog": 2}
+  ],
+  "candidate_budget": "one added replica relative to current; no equal monetary-cost claim",
+  "required_call_pairs": [
+    ["frontend", "recommendation"],
+    ["recommendation", "product-catalog"],
+    ["frontend", "product-catalog"]
+  ],
+  "held_healthy": ["frontend", "postgresql", "flagd", "telemetry infrastructure"],
+  "scope": "conditional nonempty USD operation, fixed data and cache disabled; model-based replica what-ifs; no production probability calibration"
+}
