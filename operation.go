@@ -46,7 +46,11 @@ func runOperationWalkthrough(root, work string, bins map[string]string, version 
 	required := []string{}
 	byPair := map[string]string{}
 	for _, raw := range arrayAt(plan, "required_call_pairs") {
-		pair := stringsFromAny(raw)
+		items, ok := raw.([]any)
+		if !ok || len(items) != 2 {
+			return fmt.Errorf("invalid directed call pair")
+		}
+		pair := []string{fmt.Sprint(items[0]), fmt.Sprint(items[1])}
 		if len(pair) != 2 {
 			return fmt.Errorf("invalid call pair")
 		}
