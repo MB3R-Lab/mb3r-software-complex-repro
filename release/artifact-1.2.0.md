@@ -10,9 +10,9 @@ docker compose run --rm demo
 
 Outputs persist under `output/operation-walkthrough/`. The image is
 `ghcr.io/mb3r-lab/mb3r-software-complex-repro:artifact-1.2.0`; exact component
-commits are in `toolchain-lock.json`, including Sheaft v1.3.1. This artifact lock
-is authoritative; the separately linked mb3r-stack distribution is not an
-additional executable dependency or a claim that its release was changed.
+commits are in `toolchain-lock.json`, including Sheaft v1.3.1. The lock defines
+the executable component revisions. The separately linked mb3r-stack
+distribution is not an additional runtime dependency.
 
 ## Validated scope
 
@@ -34,4 +34,4 @@ This is selected execution-state validation plus conditional model what-ifs,
 not calibrated production probabilities, live replica-failover measurement,
 universal handler equivalence, or automatically deployed remediation. See
 `docs/operation-walkthrough.md` for assumptions and the three distinct statistical
-decision mechanisms. No manuscript changes are part of this release.
+decision mechanisms.

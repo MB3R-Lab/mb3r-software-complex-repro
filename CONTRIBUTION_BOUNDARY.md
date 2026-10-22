@@ -1,6 +1,6 @@
-# Publication contribution boundary
+# Scope and interpretation
 
-## In scope for the software-complex paper
+## Supported analyses
 
 - the architecture and versioned contracts of Procrustes, Bering, and Sheaft;
 - conservative preflight analysis and the Procrustes-to-Bering handoff;
@@ -14,14 +14,12 @@
 - descriptive runtime and peak-memory cost on a stated machine;
 - engineering limitations and operational conditions of the software complex.
 
-## Out of scope and reserved for the formal-model paper
+## Interpretation limits
 
-- derivation of the stochastic connectivity model;
-- theorem statements, proofs, or claims of mathematical novelty;
-- a new definition of failure or recovery semantics;
-- general empirical validation of the stochastic model or calibration of operational failure probabilities from the targeted operation checks;
-- claims that the two archived cases validate the model in general.
-- claims that criticality ranks prove causal production risk, optimal investment, or statistically distinct ordering when intervals overlap.
-- claims that controlled software oracles constitute new empirical validation of the formal model or of production behavior.
+- the implementation uses an existing stochastic-connectivity model; it does not introduce new mathematical derivations, proofs, or failure/recovery semantics;
+- the targeted operation checks do not establish general empirical validity or calibrate operational failure probabilities;
+- replay of the two archived cases checks numerical continuity, not general model validity;
+- criticality ranks do not establish causal production risk, optimal investment, or statistically distinct ordering when intervals overlap;
+- controlled software oracles check implementation behavior, not production behavior.
 
-The published ICSE-NIER 2026 and AINA 2026 conference papers are the empirical sources for the Social Network and OpenTelemetry Demo cases. The separate formal-model manuscript may be cited as the computational foundation used by Sheaft; this artifact does not republish its formal contribution. Results here support only software-complex, integration, provenance, and reproducibility claims.
+The published ICSE-NIER 2026 and AINA 2026 conference papers are the empirical sources for the Social Network and OpenTelemetry Demo cases. Their model results provide the reference values for numerical replay. The repository contains toolchain integration, retained evidence, controlled checks, and reproducibility materials.

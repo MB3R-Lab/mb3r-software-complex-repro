@@ -1,6 +1,6 @@
 # Frozen application CI example — run 38788504177
 
-This directory preserves the existing [manual application CI run](https://github.com/MB3R-Lab/opentelemetry-demo-mb3r-stack/actions/runs/38788504177), attempt 1. It was captured from the public report site on 22 October 2026. No new workflow, application deployment or analysis was run to create this snapshot.
+Static archive of the public report produced by [manual application CI run 38788504177](https://github.com/MB3R-Lab/opentelemetry-demo-mb3r-stack/actions/runs/38788504177), attempt 1. The HTML and JSON were captured from the public report site on 22 October 2026.
 
 ## Open the report
 
@@ -29,7 +29,7 @@ This manual workflow compares one baseline/candidate pair. It does not run all f
 - This consumer CI example deploys its own baseline and candidate revisions, collects fresh healthy evidence, and invokes the same public tools. It does not invoke the artifact's reproduction entrypoint.
 - Both paths use the same selected operation and explicit required-call semantics, but they have different evidence and provenance. Component-importance values need not be identical.
 - Availability remains model-based. This CI run does not inject chaos faults, measure replicated failover or calibrate failure probabilities.
-- This documentation supplement is not a new artifact reference baseline and is not part of the already published v1.3.3 release. The release, image and component pins remain unchanged.
+- This CI report is archived separately from the package's v1.3.3 operation references; it is not used as a replay baseline.
 
 See the [application CI guide](https://github.com/MB3R-Lab/opentelemetry-demo-mb3r-stack/blob/main/mb3r/ci/README.md), [manual-demo guide](https://github.com/MB3R-Lab/opentelemetry-demo-mb3r-stack/blob/main/mb3r/ci/DEMO.md), and [main artifact README](../../../README.md).
 
