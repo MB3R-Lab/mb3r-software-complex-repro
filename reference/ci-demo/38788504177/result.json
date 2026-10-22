@@ -1,0 +1,936 @@
+{
+  "mode": "manual-exploration-not-release-approval",
+  "run_url": "https://github.com/MB3R-Lab/opentelemetry-demo-mb3r-stack/actions/runs/38788504177",
+  "run_id": "38788504177",
+  "attempt": "1",
+  "workflow_commit": "607de3071ef594d4e0149a38887d6b8e9f8d87d9",
+  "endpoint": "frontend:GET /api/recommendations",
+  "configuration": {
+    "mode": "manual-exploration-not-release-approval",
+    "inputs": {
+      "baseline_ref": "607de3071ef594d4e0149a38887d6b8e9f8d87d9",
+      "baseline_replicas": "2/2",
+      "candidate_replicas": "2/1",
+      "slo": "0.95",
+      "failure_probability": "0.05",
+      "edge_live_probability": "0.995",
+      "minimum_certified_tolerance": "0.10",
+      "max_regression": "0.02",
+      "trials": "40000",
+      "seed": "2719"
+    },
+    "policy": {
+      "endpoint": "frontend:GET /api/recommendations",
+      "request_path": "/api/recommendations?currencyCode=USD",
+      "predicate_ref": "recommendations.required-calls",
+      "required_call_pairs": [
+        [
+          "frontend",
+          "recommendation"
+        ],
+        [
+          "recommendation",
+          "product-catalog"
+        ],
+        [
+          "frontend",
+          "product-catalog"
+        ]
+      ],
+      "seed": 2719,
+      "trials": 40000,
+      "failure_probability": 0.05,
+      "edge_live_probability": 0.995,
+      "slo": 0.95,
+      "grid": [
+        0,
+        0.01,
+        0.02,
+        0.03,
+        0.04,
+        0.05,
+        0.06,
+        0.08,
+        0.1,
+        0.12,
+        0.14,
+        0.16,
+        0.18,
+        0.2,
+        0.25
+      ],
+      "minimum_certified_tolerance": 0.1,
+      "max_regression": 0.02
+    },
+    "replicas": {
+      "baseline": {
+        "recommendation": 2,
+        "product-catalog": 2
+      },
+      "candidate": {
+        "recommendation": 2,
+        "product-catalog": 1
+      }
+    }
+  },
+  "rows": [
+    {
+      "phase": "baseline",
+      "application_commit": "607de3071ef594d4e0149a38887d6b8e9f8d87d9",
+      "workflow_run": "38788504177",
+      "workflow_attempt": "1",
+      "toolchain_image": "ghcr.io/mb3r-lab/mb3r-software-complex-repro@sha256:b6fb43c7988168cd2d80b2df37881bf6972d8018b824be69dadb5c4c41416e90",
+      "replicas": {
+        "recommendation": 2,
+        "product-catalog": 2
+      },
+      "deployment_sha256": "b42c5aec560f47821a4ffdfe107f701adb40ce52f5cea15ed167fe8fd39f8be7",
+      "policy_sha256": "093d2a4b56250c58ea5d4b31473da7e4e99de4847c59e0ce54138dea8a1885e5",
+      "effective_deployment_sha256": "dd1475c88fe488db7b91d29f5a433b194b771f68e1b5a081d3d4d066dfe79d66",
+      "effective_policy_sha256": "cb3bc1bc7d883bb2cbbd0bac9b88ca44e3aa43c3c2b57228a91e78a84eadb41d",
+      "manual_replica_override": true,
+      "resolved_compose_sha256": "207a5f0ab2d546b2ed5dbda234acef0b83b1fbaf323939e40c5d7107c40804f5",
+      "requests": 2,
+      "spans": 42,
+      "discovered_at": "2026-10-15T18:52:36.713906Z",
+      "code": 0,
+      "decision": "pass",
+      "availability": 0.9799,
+      "certified_tolerance": 0.12,
+      "boundary_results": [
+        {
+          "sweep": "operation-boundary",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "status": "pass",
+          "certified_tolerance": 0.12,
+          "minimum_certified_tolerance": 0.1
+        }
+      ],
+      "reasons": [
+        {
+          "id": "gate_pass",
+          "scope": "gate",
+          "status": "pass",
+          "message": "all evaluated endpoints, assertions, and aggregates satisfy the configured gate"
+        }
+      ],
+      "importance": [],
+      "sweep": {
+        "name": "operation-boundary",
+        "base_profile": "scenario",
+        "axis_type": "independent_replica_failure_probability",
+        "trials": 40000,
+        "seed": -3773076205438981140,
+        "confidence_level": 0.95,
+        "fingerprint": "sha256:58e59be689e1f360c0110980cc7f8b20375742498c3211a7b7f5fac54fca16df",
+        "total_replica_slots": 4,
+        "points": [
+          {
+            "axis_value": 0,
+            "failure_probability": 0,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.985025
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 39401,
+                "trials": 40000,
+                "estimate": 0.985025,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9837873563075665,
+                "upper_bound": 0.9861694924601236
+              }
+            }
+          },
+          {
+            "axis_value": 0.01,
+            "failure_probability": 0.01,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.984875
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 39395,
+                "trials": 40000,
+                "estimate": 0.984875,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9836315209356918,
+                "upper_bound": 0.9860253566401729
+              }
+            }
+          },
+          {
+            "axis_value": 0.02,
+            "failure_probability": 0.02,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.9843
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 39372,
+                "trials": 40000,
+                "estimate": 0.9843,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9830344284388692,
+                "upper_bound": 0.9854725595683311
+              }
+            }
+          },
+          {
+            "axis_value": 0.03,
+            "failure_probability": 0.03,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.983425
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 39337,
+                "trials": 40000,
+                "estimate": 0.983425,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9821266095710566,
+                "upper_bound": 0.9846305464838285
+              }
+            }
+          },
+          {
+            "axis_value": 0.04,
+            "failure_probability": 0.04,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.982025
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 39281,
+                "trials": 40000,
+                "estimate": 0.982025,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9806759439282648,
+                "upper_bound": 0.9832814810029158
+              }
+            }
+          },
+          {
+            "axis_value": 0.05,
+            "failure_probability": 0.05,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.9804
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 39216,
+                "trials": 40000,
+                "estimate": 0.9804,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9789946877436484,
+                "upper_bound": 0.9817130492760895
+              }
+            }
+          },
+          {
+            "axis_value": 0.06,
+            "failure_probability": 0.06,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.978275
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 39131,
+                "trials": 40000,
+                "estimate": 0.978275,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9767997444808979,
+                "upper_bound": 0.9796584006546457
+              }
+            }
+          },
+          {
+            "axis_value": 0.08,
+            "failure_probability": 0.08,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.9721
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 38884,
+                "trials": 40000,
+                "estimate": 0.9721,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9704402099393855,
+                "upper_bound": 0.9736691211326757
+              }
+            }
+          },
+          {
+            "axis_value": 0.1,
+            "failure_probability": 0.1,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.964075
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 38563,
+                "trials": 40000,
+                "estimate": 0.964075,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9622062016500048,
+                "upper_bound": 0.9658546706593933
+              }
+            }
+          },
+          {
+            "axis_value": 0.12,
+            "failure_probability": 0.12,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.955525
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 38221,
+                "trials": 40000,
+                "estimate": 0.955525,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9534606679300158,
+                "upper_bound": 0.9575018464453299
+              }
+            }
+          },
+          {
+            "axis_value": 0.14,
+            "failure_probability": 0.14,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.9453
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 37812,
+                "trials": 40000,
+                "estimate": 0.9453,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9430285181741093,
+                "upper_bound": 0.9474859599584663
+              }
+            }
+          },
+          {
+            "axis_value": 0.16,
+            "failure_probability": 0.16,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.933375
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 37335,
+                "trials": 40000,
+                "estimate": 0.933375,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9308893521031618,
+                "upper_bound": 0.935777416279288
+              }
+            }
+          },
+          {
+            "axis_value": 0.18,
+            "failure_probability": 0.18,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.919875
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 36795,
+                "trials": 40000,
+                "estimate": 0.919875,
+                "confidence_level": 0.95,
+                "lower_bound": 0.917173982812215,
+                "upper_bound": 0.9224953783059417
+              }
+            }
+          },
+          {
+            "axis_value": 0.2,
+            "failure_probability": 0.2,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.905775
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 36231,
+                "trials": 40000,
+                "estimate": 0.905775,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9028729728592785,
+                "upper_bound": 0.9085990962272831
+              }
+            }
+          },
+          {
+            "axis_value": 0.25,
+            "failure_probability": 0.25,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.86385
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 34554,
+                "trials": 40000,
+                "estimate": 0.86385,
+                "confidence_level": 0.95,
+                "lower_bound": 0.8604542137797802,
+                "upper_bound": 0.8671759071915597
+              }
+            }
+          }
+        ],
+        "boundaries": [
+          {
+            "endpoint_id": "frontend:GET /api/recommendations",
+            "slo": 0.95,
+            "status": "crossed",
+            "observed_monotonic": true,
+            "confidence_level": 0.95,
+            "certification_status": "certified",
+            "certified_tolerance": {
+              "axis_value": 0.12,
+              "availability": 0.955525,
+              "confidence_lower_bound": 0.9534606679300158,
+              "confidence_upper_bound": 0.9575018464453299
+            },
+            "last_meeting_slo": {
+              "axis_value": 0.12,
+              "availability": 0.955525,
+              "confidence_lower_bound": 0.9534606679300158,
+              "confidence_upper_bound": 0.9575018464453299
+            },
+            "first_violating_slo": {
+              "axis_value": 0.14,
+              "availability": 0.9453,
+              "confidence_lower_bound": 0.9430285181741093,
+              "confidence_upper_bound": 0.9474859599584663
+            },
+            "crossing_bracket": {
+              "lower_axis_value": 0.12,
+              "upper_axis_value": 0.14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "phase": "candidate",
+      "application_commit": "607de3071ef594d4e0149a38887d6b8e9f8d87d9",
+      "workflow_run": "38788504177",
+      "workflow_attempt": "1",
+      "toolchain_image": "ghcr.io/mb3r-lab/mb3r-software-complex-repro@sha256:b6fb43c7988168cd2d80b2df37881bf6972d8018b824be69dadb5c4c41416e90",
+      "replicas": {
+        "recommendation": 2,
+        "product-catalog": 1
+      },
+      "deployment_sha256": "b42c5aec560f47821a4ffdfe107f701adb40ce52f5cea15ed167fe8fd39f8be7",
+      "policy_sha256": "093d2a4b56250c58ea5d4b31473da7e4e99de4847c59e0ce54138dea8a1885e5",
+      "effective_deployment_sha256": "2e47e7d844b84d02cb559c881d5c5bd1486736d331702c323f66a5d9a61f685e",
+      "effective_policy_sha256": "cb3bc1bc7d883bb2cbbd0bac9b88ca44e3aa43c3c2b57228a91e78a84eadb41d",
+      "manual_replica_override": true,
+      "resolved_compose_sha256": "f99f22452c3e9cebf10182b4aecdf21578ea0d7d4ed3e47f3877ddeee7621d0e",
+      "requests": 2,
+      "spans": 42,
+      "discovered_at": "2026-10-15T18:53:51.932094Z",
+      "code": 2,
+      "decision": "fail",
+      "availability": 0.9312,
+      "certified_tolerance": 0.03,
+      "boundary_results": [
+        {
+          "sweep": "operation-boundary",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "status": "fail",
+          "reason": "certified tolerance is below the required minimum",
+          "certified_tolerance": 0.03,
+          "minimum_certified_tolerance": 0.1
+        },
+        {
+          "sweep": "operation-boundary",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "status": "fail",
+          "reason": "certified tolerance regression exceeds the configured budget",
+          "certified_tolerance": 0.03,
+          "baseline": "accepted",
+          "reference_tolerance": 0.12,
+          "regression": -0.09,
+          "max_regression": 0.02
+        }
+      ],
+      "reasons": [
+        {
+          "id": "endpoint_below_threshold",
+          "scope": "endpoint",
+          "profile": "scenario",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "status": "fail",
+          "availability": 0.9312,
+          "threshold": 0.95,
+          "delta": -0.018799999999999928,
+          "message": "endpoint \"frontend:GET /api/recommendations\" availability 0.9312 is below threshold 0.9500"
+        },
+        {
+          "id": "boundary_below_minimum",
+          "scope": "boundary",
+          "sweep": "operation-boundary",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "status": "fail",
+          "threshold": 0.1,
+          "message": "certified tolerance is below the required minimum"
+        },
+        {
+          "id": "boundary_regressed",
+          "scope": "boundary",
+          "sweep": "operation-boundary",
+          "baseline": "accepted",
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "status": "fail",
+          "delta": -0.09,
+          "message": "certified tolerance regression exceeds the configured budget"
+        }
+      ],
+      "importance": [
+        {
+          "name": "candidate-inspection",
+          "method": "birnbaum",
+          "base_profile": "scenario",
+          "sampling_mode": "independent_replica",
+          "trials": 40000,
+          "seed": -5852870431612793918,
+          "confidence_level": 0.95,
+          "evaluated_components": 6,
+          "endpoints": [
+            {
+              "endpoint_id": "frontend:GET /api/recommendations",
+              "baseline_availability": 0.935275,
+              "components": [
+                {
+                  "kind": "service",
+                  "id": "product-catalog",
+                  "state_semantics": "service_liveness",
+                  "rank": 1,
+                  "live_probability": 0.95,
+                  "availability_if_up": 0.9831,
+                  "availability_if_down": 0,
+                  "birnbaum_importance": 0.9831,
+                  "confidence": {
+                    "successes": 39324,
+                    "trials": 40000,
+                    "estimate": 0.9831,
+                    "confidence_level": 0.95,
+                    "lower_bound": 0.981789652647451,
+                    "upper_bound": 0.9843175658251455
+                  },
+                  "forced_down_impact": 0.9339449999999999,
+                  "perfect_component_gain": 0.04915500000000004
+                },
+                {
+                  "kind": "edge",
+                  "id": "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+                  "state_semantics": "edge_connectivity",
+                  "rank": 2,
+                  "live_probability": 0.995,
+                  "availability_if_up": 0.940075,
+                  "availability_if_down": 0,
+                  "birnbaum_importance": 0.940075,
+                  "confidence": {
+                    "successes": 37603,
+                    "trials": 40000,
+                    "estimate": 0.940075,
+                    "confidence_level": 0.95,
+                    "lower_bound": 0.9377065025770025,
+                    "upper_bound": 0.9423589790403187
+                  },
+                  "forced_down_impact": 0.935374625,
+                  "perfect_component_gain": 0.004700375000000004
+                },
+                {
+                  "kind": "edge",
+                  "id": "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server",
+                  "state_semantics": "edge_connectivity",
+                  "rank": 3,
+                  "live_probability": 0.995,
+                  "availability_if_up": 0.9398,
+                  "availability_if_down": 0,
+                  "birnbaum_importance": 0.9398,
+                  "confidence": {
+                    "successes": 37592,
+                    "trials": 40000,
+                    "estimate": 0.9398,
+                    "confidence_level": 0.95,
+                    "lower_bound": 0.9374265406350635,
+                    "upper_bound": 0.9420889937972443
+                  },
+                  "forced_down_impact": 0.935101,
+                  "perfect_component_gain": 0.004699000000000004
+                },
+                {
+                  "kind": "edge",
+                  "id": "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+                  "state_semantics": "edge_connectivity",
+                  "rank": 4,
+                  "live_probability": 0.995,
+                  "availability_if_up": 0.939775,
+                  "availability_if_down": 0,
+                  "birnbaum_importance": 0.939775,
+                  "confidence": {
+                    "successes": 37591,
+                    "trials": 40000,
+                    "estimate": 0.939775,
+                    "confidence_level": 0.95,
+                    "lower_bound": 0.9374010902330457,
+                    "upper_bound": 0.9420644490006246
+                  },
+                  "forced_down_impact": 0.935076125,
+                  "perfect_component_gain": 0.004698875000000004
+                },
+                {
+                  "kind": "service",
+                  "id": "recommendation",
+                  "state_semantics": "service_liveness",
+                  "rank": 5,
+                  "live_probability": 0.9974999999999999,
+                  "availability_if_up": 0.9373,
+                  "availability_if_down": 0,
+                  "birnbaum_importance": 0.9373,
+                  "confidence": {
+                    "successes": 37492,
+                    "trials": 40000,
+                    "estimate": 0.9373,
+                    "confidence_level": 0.95,
+                    "lower_bound": 0.9348820525495519,
+                    "upper_bound": 0.9396339620189981
+                  },
+                  "forced_down_impact": 0.93495675,
+                  "perfect_component_gain": 0.002343250000000054
+                },
+                {
+                  "kind": "service",
+                  "id": "frontend",
+                  "state_semantics": "service_liveness",
+                  "rank": 6,
+                  "live_probability": 1,
+                  "availability_if_up": 0.935275,
+                  "availability_if_down": 0,
+                  "birnbaum_importance": 0.935275,
+                  "confidence": {
+                    "successes": 37411,
+                    "trials": 40000,
+                    "estimate": 0.935275,
+                    "confidence_level": 0.95,
+                    "lower_bound": 0.9328218076748473,
+                    "upper_bound": 0.9376445958040585
+                  },
+                  "forced_down_impact": 0.935275,
+                  "perfect_component_gain": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sweep": {
+        "name": "operation-boundary",
+        "base_profile": "scenario",
+        "axis_type": "independent_replica_failure_probability",
+        "trials": 40000,
+        "seed": -3773076205438981140,
+        "confidence_level": 0.95,
+        "fingerprint": "sha256:58e59be689e1f360c0110980cc7f8b20375742498c3211a7b7f5fac54fca16df",
+        "total_replica_slots": 3,
+        "points": [
+          {
+            "axis_value": 0,
+            "failure_probability": 0,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.9849
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 39396,
+                "trials": 40000,
+                "estimate": 0.9849,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9836574913851902,
+                "upper_bound": 0.9860493813893122
+              }
+            }
+          },
+          {
+            "axis_value": 0.01,
+            "failure_probability": 0.01,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.97465
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 38986,
+                "trials": 40000,
+                "estimate": 0.97465,
+                "confidence_level": 0.95,
+                "lower_bound": 0.973063427820319,
+                "upper_bound": 0.9761454135127756
+              }
+            }
+          },
+          {
+            "axis_value": 0.02,
+            "failure_probability": 0.02,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.964575
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 38583,
+                "trials": 40000,
+                "estimate": 0.964575,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9627184146430201,
+                "upper_bound": 0.9663423616391296
+              }
+            }
+          },
+          {
+            "axis_value": 0.03,
+            "failure_probability": 0.03,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.955475
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 38219,
+                "trials": 40000,
+                "estimate": 0.955475,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9534095907572826,
+                "upper_bound": 0.957452933220788
+              }
+            }
+          },
+          {
+            "axis_value": 0.04,
+            "failure_probability": 0.04,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.94565
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 37826,
+                "trials": 40000,
+                "estimate": 0.94565,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9433852119208069,
+                "upper_bound": 0.9478291989926947
+              }
+            }
+          },
+          {
+            "axis_value": 0.05,
+            "failure_probability": 0.05,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.93535
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 37414,
+                "trials": 40000,
+                "estimate": 0.93535,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9328981008343146,
+                "upper_bound": 0.9377182882405041
+              }
+            }
+          },
+          {
+            "axis_value": 0.06,
+            "failure_probability": 0.06,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.923375
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 36935,
+                "trials": 40000,
+                "estimate": 0.923375,
+                "confidence_level": 0.95,
+                "lower_bound": 0.9207274445240805,
+                "upper_bound": 0.9259412444033372
+              }
+            }
+          },
+          {
+            "axis_value": 0.08,
+            "failure_probability": 0.08,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.9005
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 36020,
+                "trials": 40000,
+                "estimate": 0.9005,
+                "confidence_level": 0.95,
+                "lower_bound": 0.897528028425077,
+                "upper_bound": 0.9033950537489551
+              }
+            }
+          },
+          {
+            "axis_value": 0.1,
+            "failure_probability": 0.1,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.878875
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 35155,
+                "trials": 40000,
+                "estimate": 0.878875,
+                "confidence_level": 0.95,
+                "lower_bound": 0.8756411526072828,
+                "upper_bound": 0.8820360827452426
+              }
+            }
+          },
+          {
+            "axis_value": 0.12,
+            "failure_probability": 0.12,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.85475
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 34190,
+                "trials": 40000,
+                "estimate": 0.85475,
+                "confidence_level": 0.95,
+                "lower_bound": 0.8512629389057704,
+                "upper_bound": 0.8581689297614903
+              }
+            }
+          },
+          {
+            "axis_value": 0.14,
+            "failure_probability": 0.14,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.82985
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 33194,
+                "trials": 40000,
+                "estimate": 0.82985,
+                "confidence_level": 0.95,
+                "lower_bound": 0.8261359413249182,
+                "upper_bound": 0.8335007094993127
+              }
+            }
+          },
+          {
+            "axis_value": 0.16,
+            "failure_probability": 0.16,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.8053
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 32212,
+                "trials": 40000,
+                "estimate": 0.8053,
+                "confidence_level": 0.95,
+                "lower_bound": 0.8013903278480751,
+                "upper_bound": 0.8091510379140524
+              }
+            }
+          },
+          {
+            "axis_value": 0.18,
+            "failure_probability": 0.18,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.7812
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 31248,
+                "trials": 40000,
+                "estimate": 0.7812,
+                "confidence_level": 0.95,
+                "lower_bound": 0.7771215361185948,
+                "upper_bound": 0.7852244581569054
+              }
+            }
+          },
+          {
+            "axis_value": 0.2,
+            "failure_probability": 0.2,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.75565
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 30226,
+                "trials": 40000,
+                "estimate": 0.75565,
+                "confidence_level": 0.95,
+                "lower_bound": 0.7514145873804456,
+                "upper_bound": 0.7598363138874478
+              }
+            }
+          },
+          {
+            "axis_value": 0.25,
+            "failure_probability": 0.25,
+            "endpoint_availability": {
+              "frontend:GET /api/recommendations": 0.693525
+            },
+            "endpoint_confidence": {
+              "frontend:GET /api/recommendations": {
+                "successes": 27741,
+                "trials": 40000,
+                "estimate": 0.693525,
+                "confidence_level": 0.95,
+                "lower_bound": 0.6889885902911782,
+                "upper_bound": 0.6980242423623287
+              }
+            }
+          }
+        ],
+        "boundaries": [
+          {
+            "endpoint_id": "frontend:GET /api/recommendations",
+            "slo": 0.95,
+            "status": "crossed",
+            "observed_monotonic": true,
+            "confidence_level": 0.95,
+            "certification_status": "certified",
+            "certified_tolerance": {
+              "axis_value": 0.03,
+              "availability": 0.955475,
+              "confidence_lower_bound": 0.9534095907572826,
+              "confidence_upper_bound": 0.957452933220788
+            },
+            "last_meeting_slo": {
+              "axis_value": 0.03,
+              "availability": 0.955475,
+              "confidence_lower_bound": 0.9534095907572826,
+              "confidence_upper_bound": 0.957452933220788
+            },
+            "first_violating_slo": {
+              "axis_value": 0.04,
+              "availability": 0.94565,
+              "confidence_lower_bound": 0.9433852119208069,
+              "confidence_upper_bound": 0.9478291989926947
+            },
+            "crossing_bracket": {
+              "lower_axis_value": 0.03,
+              "upper_axis_value": 0.04
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "application-ci-report-snapshot",
+  "captured_on": "2026-10-22",
+  "description": "Existing public application CI report, preserved without executing a new workflow or analysis.",
+  "run": {
+    "repository": "MB3R-Lab/opentelemetry-demo-mb3r-stack",
+    "id": "38788504177",
+    "attempt": "1",
+    "url": "https://github.com/MB3R-Lab/opentelemetry-demo-mb3r-stack/actions/runs/38788504177",
+    "workflow_commit": "607de3071ef594d4e0149a38887d6b8e9f8d87d9",
+    "mode": "manual-exploration-not-release-approval"
+  },
+  "endpoint": "frontend:GET /api/recommendations",
+  "inputs": {
+    "baseline_ref": "607de3071ef594d4e0149a38887d6b8e9f8d87d9",
+    "baseline_replicas": "2/2",
+    "candidate_replicas": "2/1",
+    "slo": "0.95",
+    "failure_probability": "0.05",
+    "edge_live_probability": "0.995",
+    "minimum_certified_tolerance": "0.10",
+    "max_regression": "0.02",
+    "trials": "40000",
+    "seed": "2719"
+  },
+  "configurations": [
+    {
+      "phase": "baseline",
+      "application_commit": "607de3071ef594d4e0149a38887d6b8e9f8d87d9",
+      "replicas": {
+        "recommendation": 2,
+        "product-catalog": 2
+      },
+      "toolchain_image": "ghcr.io/mb3r-lab/mb3r-software-complex-repro@sha256:b6fb43c7988168cd2d80b2df37881bf6972d8018b824be69dadb5c4c41416e90",
+      "requests": 2,
+      "spans": 42,
+      "availability": 0.9799,
+      "certified_tolerance": 0.12,
+      "decision": "pass",
+      "exit_code": 0
+    },
+    {
+      "phase": "candidate",
+      "application_commit": "607de3071ef594d4e0149a38887d6b8e9f8d87d9",
+      "replicas": {
+        "recommendation": 2,
+        "product-catalog": 1
+      },
+      "toolchain_image": "ghcr.io/mb3r-lab/mb3r-software-complex-repro@sha256:b6fb43c7988168cd2d80b2df37881bf6972d8018b824be69dadb5c4c41416e90",
+      "requests": 2,
+      "spans": 42,
+      "availability": 0.9312,
+      "certified_tolerance": 0.03,
+      "decision": "fail",
+      "exit_code": 2
+    }
+  ],
+  "files": {
+    "index.html": {
+      "source_url": "https://mb3r-lab.github.io/opentelemetry-demo-mb3r-stack/",
+      "source_last_modified": "Thu, 15 Oct 2026 18:56:13 GMT",
+      "sha256": "7d3a2a68d4d9cb2ffccd8173150bf657350c8f0afb5653f20ae970c92c54ae85"
+    },
+    "result.json": {
+      "source_url": "https://mb3r-lab.github.io/opentelemetry-demo-mb3r-stack/result.json",
+      "source_last_modified": "Thu, 15 Oct 2026 18:56:13 GMT",
+      "sha256": "14906121b0803049750c5e25781e0b844a811a97eeaf21332e3f0fa34c896167"
+    }
+  },
+  "limitations": [
+    "Documentation snapshot of a previously completed manual exploration; not required PR approval.",
+    "Availability is model-based; fresh healthy observations do not measure failover or calibrate failure probabilities.",
+    "Separate from the artifact's pinned operation replay and its recorded application revision be466eb.",
+    "Only derived public report data are preserved; raw run artifacts may have expired.",
+    "Published release v1.3.3, container image and component pins are unchanged."
+  ]
+}

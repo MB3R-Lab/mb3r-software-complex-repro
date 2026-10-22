@@ -1,0 +1,3 @@
+# Preserve the original public report bytes and SHA-256 hashes on every platform.
+index.html -text
+result.json -text

@@ -36,6 +36,19 @@ docker run --rm --pull=always \
 
 Release `v1.3.3` is the single version for this repository, its Docker image, and the packaged toolchain. `toolchain-lock.json` stores that version in `toolchain.version` and independently pins the three component versions and commits. There is no separate artifact version. Earlier published tags remain unchanged.
 
+## CI/CD example: the same tools in an application pipeline
+
+Two complementary entry points use the same versioned Procrustes, Bering and Sheaft CLIs:
+
+- **This demonstration package:** `docker compose run --rm demo` replays recorded evidence and evaluates the fixed model variants. It needs no application deployment and is the main entry point linked from the paper.
+- **Application CI integration:** the [OpenTelemetry Demo example](https://github.com/MB3R-Lab/opentelemetry-demo-mb3r-stack/blob/main/mb3r/ci/README.md) deploys baseline and candidate configurations on a GitHub runner, collects fresh healthy HTTP/Jaeger evidence, and invokes the same tools. It does not run this package's reproduction entrypoint.
+
+Use [Actions → MB3R parameterized demo](https://github.com/MB3R-Lab/opentelemetry-demo-mb3r-stack/actions/workflows/mb3r-demo.yml) to select replica counts, the SLO, failure assumptions, trials and seed; see its [manual and parameter reference](https://github.com/MB3R-Lab/opentelemetry-demo-mb3r-stack/blob/main/mb3r/ci/DEMO.md). A separate required check, **MB3R / recommendations gate**, controls PR acceptance. Manual exploration does not replace that check.
+
+The [live HTML report](https://mb3r-lab.github.io/opentelemetry-demo-mb3r-stack/) shows the latest published manual run. For a permanent example, the [frozen report and JSON from run 38788504177](reference/ci-demo/38788504177/README.md) retain the original files, application revisions, parameters and checksums. Download the archived HTML and open it in a browser; compare run IDs before pairing a live report with a GitHub Summary.
+
+This archived CI example is a documentation supplement, separate from the pinned operation replay below. It does not change the published `v1.3.3` release, image, component pins or reference calculations. Both entry points estimate availability on a model; fresh healthy traces are not live failover measurements or calibrated failure probabilities.
+
 ## Observed operation and two candidate changes
 
 The operation is `GET /api/recommendations?currencyCode=USD` on application commit `be466eb395294e0b5c2f91f7e76bed475953eaa6`, with fixed catalog data and the recommendation cache disabled. Success requires HTTP 200 and a nonempty product array. Six conditions (healthy, two service outages, three directed-channel outages) have two recorded requests each. The model retains both catalog calls; an external predicate contract 1.1 declares all three RPC channels mandatory. Reachability alone is not treated as execution success.
