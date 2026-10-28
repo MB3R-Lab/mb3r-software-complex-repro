@@ -8,7 +8,7 @@ This artifact is intended for a reviewer, researcher, or tool user who wants to 
 
 Install Docker with Compose support and ensure the Docker daemon is running. The normal path does not require Go, Kubernetes, the OpenTelemetry Demo, DeathStarBench, a load generator, or a chaos framework.
 
-The published image is:
+The candidate image tag, available only after publication, is:
 
 ```text
 ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
