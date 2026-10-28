@@ -34,7 +34,7 @@ docker run --rm --pull=always \
   ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
 ```
 
-The candidate `v1.3.4` lock records its version, three exact component commits, and Bering's image digest. The package image tag shown above is pending publication. `toolchain.reference_release` keeps the archived reference outputs attributed to `v1.3.3`; the new toolchain must reproduce their semantic and numerical fields before release.
+The candidate `v1.3.4` lock records its version and three exact component commits. Bering's 1.1.1 image digest and the package image tag are pending publication. `toolchain.reference_release` keeps the archived reference outputs attributed to `v1.3.3`; the new toolchain must reproduce their semantic and numerical fields before release.
 
 ## CI/CD example: the same tools in an application pipeline
 

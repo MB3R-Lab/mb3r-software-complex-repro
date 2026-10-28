@@ -104,7 +104,7 @@ jobs:
           SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
         run: make reproduce-paper-operation
 
-      - name: Diagnose a newly observed database's effect on draw order
+      - name: Diagnose a newly observed database's effect on operation replay
         if: failure() && steps.operation_replay.outcome == 'failure'
         working-directory: reproduction
         env:

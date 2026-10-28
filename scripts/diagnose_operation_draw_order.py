@@ -105,8 +105,11 @@ def main():
     diag.mkdir(parents=True, exist_ok=True)
     summary = {
         "criterion": "single newly observed database node and its sole edge removed only in diagnostic copies",
+        "interpretation": "Restored values support an effect of the added database observation. A draw-order explanation also requires inspection of unchanged non-database simulation inputs and Sheaft sampling code.",
         "database_id": database_id,
         "edge_id": edge_id,
+        "sheaft_binary_sha256": digest(sheaft),
+        "predicate_sha256": digest(work / "predicate.json"),
         "full_observed_model_sha256": digest(new_model_path),
         "full_result_sha256": digest(new_result_path),
         "historical_result_sha256": digest(reference / "result.json"),
@@ -141,6 +144,8 @@ def main():
         summary["stages"][stage] = {
             "full_model_sha256": digest(model_path),
             "diagnostic_model_sha256": digest(filtered_path),
+            "full_analysis_sha256": digest(original_dir / "analysis.json"),
+            "diagnostic_analysis_sha256": digest(config_path),
             "historical_availability": historical["availability"],
             "full_availability": full["availability"],
             "diagnostic_availability": value,
@@ -159,11 +164,11 @@ def main():
             "exact_historical": all(item.get(key) == value for key, value in old.items()),
         }
     summary["elapsed_seconds"] = time.monotonic() - started
-    summary["draw_order_cause_supported"] = (
+    summary["added_database_effect_supported"] = (
         all(row["exact_historical_availability"] for row in summary["stages"].values())
         and all(row["exact_historical"] for row in summary["importance"].values()))
     write(diag / "summary.json", summary)
-    print(json.dumps({"draw_order_cause_supported": summary["draw_order_cause_supported"],
+    print(json.dumps({"added_database_effect_supported": summary["added_database_effect_supported"],
                       "stages": {name: row["exact_historical_availability"]
                                  for name, row in summary["stages"].items()},
                       "importance": {name: row["exact_historical"]
