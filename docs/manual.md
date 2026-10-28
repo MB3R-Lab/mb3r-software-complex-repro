@@ -86,7 +86,7 @@ This reviewer-facing scenario runs the archived OpenTelemetry async case once, v
 The final line must be:
 
 ```text
-criticality-walkthrough-ok toolchain=1.3.3 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
+criticality-walkthrough-ok toolchain=1.3.4 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
 ```
 
 Use `--criticality-walkthrough --case <name>` to run the same scenario on any of the four archived variants.
@@ -102,7 +102,7 @@ This is a separate two-scenario walkthrough, not an additional scientific experi
 The final line must be:
 
 ```text
-failure-walkthroughs-ok toolchain=1.3.3 scenarios=2
+failure-walkthroughs-ok toolchain=1.3.4 scenarios=2
 ```
 
 ### 6. Exercise an SLO regression and remediation
@@ -118,7 +118,7 @@ The selected OpenTelemetry Demo operation is `frontend:GET /api/recommendations`
 The final line must be:
 
 ```text
-decision-walkthrough-ok toolchain=1.3.3 endpoint="frontend:GET /api/recommendations" tolerance=0.20->0.04->0.20 decisions=pass,fail,pass
+decision-walkthrough-ok toolchain=1.3.4 endpoint="frontend:GET /api/recommendations" tolerance=0.20->0.04->0.20 decisions=pass,fail,pass
 ```
 
 ### 7. Run the controlled validation matrix

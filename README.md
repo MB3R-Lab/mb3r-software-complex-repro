@@ -34,7 +34,7 @@ docker run --rm --pull=always \
   ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
 ```
 
-The candidate `v1.3.4` lock records its version and three exact component commits. Bering's 1.1.1 image digest and the package image tag are pending publication. `toolchain.reference_release` keeps the archived reference outputs attributed to `v1.3.3`; the new toolchain must reproduce their semantic and numerical fields before release.
+The candidate `v1.3.4` lock records its version, three exact component commits, and Bering's published 1.1.1 image digest. The package image tag is pending publication. `toolchain.reference_release` keeps the archived reference outputs attributed to `v1.3.3`; the new toolchain must reproduce their semantic and numerical fields before release.
 
 ## CI/CD example: the same tools in an application pipeline
 
@@ -90,7 +90,7 @@ docker compose run --rm criticality
 The walkthrough uses the archived OpenTelemetry async case by default, executes Procrustes and Bering, runs Sheaft's schema 1.3 Birnbaum analysis, verifies all 16 semantic case files, and prints the top service and edge with confidence intervals for each of the four endpoints. It ends with:
 
 ```text
-criticality-walkthrough-ok toolchain=1.3.3 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
+criticality-walkthrough-ok toolchain=1.3.4 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
 ```
 
 Select another archived case with `--case`, for example:
@@ -112,7 +112,7 @@ docker compose run --rm failures
 The first supplies incomplete static evidence to Procrustes and requires exit code `2`, a `BLOCKED` goal, and explicit blocker rules. The second supplies an unsupported Bering model contract to Sheaft and requires exit code `1`, the precise compatibility rejection, and no generated analysis report. The wrapper returns success only when both expected failures are observed and ends with:
 
 ```text
-failure-walkthroughs-ok toolchain=1.3.3 scenarios=2
+failure-walkthroughs-ok toolchain=1.3.4 scenarios=2
 ```
 
 ## Extended evaluation
