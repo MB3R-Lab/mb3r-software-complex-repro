@@ -182,6 +182,9 @@ jobs:
     name: Publish versioned reviewer container
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [source-reproduction, container-smoke]
+    concurrency:
+      group: reviewer-versioned-image-publish
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 60
     permissions:
@@ -189,7 +192,8 @@ jobs:
       packages: write
       id-token: write
     outputs:
-      digest: ${{ steps.publish.outputs.digest }}
+      digest: ${{ steps.guard.outputs.digest || steps.publish.outputs.digest }}
+      published: ${{ steps.guard.outputs.exists == 'false' }}
     steps:
       - name: Check out reproduction repository
         uses: actions/checkout@v4
@@ -203,13 +207,59 @@ jobs:
           echo "bering_commit=$(jq -r '.components.bering.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
           echo "sheaft_commit=$(jq -r '.components.sheaft.source.commit' toolchain-lock.json)" >> "$GITHUB_OUTPUT"
 
+      - name: Preserve an existing versioned image
+        id: guard
+        env:
+          RELEASE_VERSION: ${{ steps.lock.outputs.release_version }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          from urllib.error import HTTPError
+          from urllib.parse import quote
+          from urllib.request import Request, urlopen
+
+          repository = 'mb3r-lab/mb3r-software-complex-repro'
+          version = os.environ['RELEASE_VERSION']
+          token_url = ('https://ghcr.io/token?service=ghcr.io&scope=' +
+                       quote(f'repository:{repository}:pull', safe=''))
+          with urlopen(token_url, timeout=20) as response:
+              token = json.load(response)['token']
+          request = Request(
+              f'https://ghcr.io/v2/{repository}/manifests/v{version}',
+              method='HEAD',
+              headers={
+                  'Authorization': f'Bearer {token}',
+                  'Accept': ('application/vnd.oci.image.index.v1+json, '
+                             'application/vnd.docker.distribution.manifest.list.v2+json'),
+              },
+          )
+          try:
+              with urlopen(request, timeout=20) as response:
+                  digest = response.headers.get('Docker-Content-Digest', '')
+                  if not re.fullmatch(r'sha256:[0-9a-f]{64}', digest):
+                      raise RuntimeError('existing image has no valid immutable digest')
+                  exists = True
+          except HTTPError as error:
+              if error.code != 404:
+                  raise  # Auth, rate-limit and registry failures cannot permit overwrite.
+              exists, digest = False, ''
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+              output.write(f"exists={str(exists).lower()}\ndigest={digest}\n")
+          print(f"Versioned image {'already exists; retaining' if exists else 'absent; publishing'}: v{version} {digest}")
+          PY
+
       - name: Set up QEMU
+        if: steps.guard.outputs.exists == 'false'
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
+        if: steps.guard.outputs.exists == 'false'
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to GitHub Container Registry
+        if: steps.guard.outputs.exists == 'false'
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -217,6 +267,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and publish multi-platform image
+        if: steps.guard.outputs.exists == 'false'
         id: publish
         uses: docker/build-push-action@v6
         with:
@@ -238,12 +289,18 @@ jobs:
           sbom: true
 
       - name: Record published digest
+        if: steps.guard.outputs.exists == 'false'
         shell: bash
         run: echo "Published digest \`${{ steps.publish.outputs.digest }}\`" >> "$GITHUB_STEP_SUMMARY"
 
+      - name: Record retained digest
+        if: steps.guard.outputs.exists == 'true'
+        shell: bash
+        run: echo "Retained existing versioned digest \`${{ steps.guard.outputs.digest }}\`" >> "$GITHUB_STEP_SUMMARY"
+
   public-pull-smoke:
     name: Download and run the public released image without registry login
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.publish-container.outputs.published == 'true'
     needs: publish-container
     runs-on: ubuntu-24.04
     timeout-minutes: 15
