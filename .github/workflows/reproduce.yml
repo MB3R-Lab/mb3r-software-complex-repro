@@ -96,12 +96,28 @@ jobs:
         run: make reproduce-paper-evaluation BENCHMARK_REPEATS=1
 
       - name: Replay the observed operation and compare both candidates
+        id: operation_replay
         working-directory: reproduction
         env:
           PROCRUSTES_REPO: ${{ github.workspace }}/toolchain/Procrustes
           BERING_REPO: ${{ github.workspace }}/toolchain/Bering
           SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
         run: make reproduce-paper-operation
+
+      - name: Diagnose a newly observed database's effect on operation replay
+        if: failure() && steps.operation_replay.outcome == 'failure'
+        working-directory: reproduction
+        env:
+          SHEAFT_REPO: ${{ github.workspace }}/toolchain/Sheaft
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s scripts -p 'test_*.py' -v
+          (cd "$SHEAFT_REPO" && go build -o "$RUNNER_TEMP/sheaft-diagnostic" ./cmd/sheaft)
+          python3 scripts/diagnose_operation_draw_order.py \
+            --work .tmp/paper-reproduction/work/operation-walkthrough \
+            --reference reference/operation \
+            --sheaft "$RUNNER_TEMP/sheaft-diagnostic"
 
       - name: Upload generated outputs
         if: failure()

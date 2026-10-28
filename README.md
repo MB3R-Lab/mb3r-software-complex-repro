@@ -31,10 +31,10 @@ The equivalent command without Compose is:
 
 ```bash
 docker run --rm --pull=always \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
 ```
 
-Release `v1.3.3` identifies this package, its Docker image, and the packaged toolchain. `toolchain-lock.json` stores the package version in `toolchain.version` and independently pins the three component versions and commits.
+The candidate `v1.3.4` lock records its version, three exact component commits, and Bering's published 1.1.1 image digest. The package image tag is pending publication. `toolchain.reference_release` keeps the archived reference outputs attributed to `v1.3.3`; the new toolchain must reproduce their semantic and numerical fields before release.
 
 ## CI/CD example: the same tools in an application pipeline
 
@@ -47,7 +47,7 @@ Use [Actions → MB3R parameterized demo](https://github.com/MB3R-Lab/openteleme
 
 The [live HTML report](https://mb3r-lab.github.io/opentelemetry-demo-mb3r-stack/) shows the latest published manual run. For a permanent example, the [frozen report and JSON from run 38788504177](reference/ci-demo/38788504177/README.md) retain the original files, application revisions, parameters and checksums. Download the archived HTML and open it in a browser; compare run IDs before pairing a live report with a GitHub Summary.
 
-The archived CI report documents a separate application run, with its own evidence and provenance. The `v1.3.3` operation replay below uses the pinned reference inputs. Both entry points estimate availability on a model; fresh healthy traces are not live failover measurements or calibrated failure probabilities.
+The archived CI report documents a separate application run, with its own evidence and provenance. The operation replay below uses pinned reference inputs retained from `v1.3.3`. Both entry points estimate availability on a model; fresh healthy traces are not live failover measurements or calibrated failure probabilities.
 
 ## Observed operation and two candidate changes
 
@@ -71,11 +71,11 @@ Available cases can be listed or selected directly:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
   --list-cases
 
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -90,14 +90,14 @@ docker compose run --rm criticality
 The walkthrough uses the archived OpenTelemetry async case by default, executes Procrustes and Bering, runs Sheaft's schema 1.3 Birnbaum analysis, verifies all 16 semantic case files, and prints the top service and edge with confidence intervals for each of the four endpoints. It ends with:
 
 ```text
-criticality-walkthrough-ok toolchain=1.3.3 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
+criticality-walkthrough-ok toolchain=1.3.4 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
 ```
 
 Select another archived case with `--case`, for example:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
   --criticality-walkthrough --case social-network-repl
 ```
 
@@ -112,7 +112,7 @@ docker compose run --rm failures
 The first supplies incomplete static evidence to Procrustes and requires exit code `2`, a `BLOCKED` goal, and explicit blocker rules. The second supplies an unsupported Bering model contract to Sheaft and requires exit code `1`, the precise compatibility rejection, and no generated analysis report. The wrapper returns success only when both expected failures are observed and ends with:
 
 ```text
-failure-walkthroughs-ok toolchain=1.3.3 scenarios=2
+failure-walkthroughs-ok toolchain=1.3.4 scenarios=2
 ```
 
 ## Extended evaluation

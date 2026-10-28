@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "toolchain_release": "1.3.4",
+  "reference_kind": "full_graph_operation_replay",
+  "source_run_id": "40639395787",
+  "source_run_url": "https://github.com/MB3R-Lab/mb3r-software-complex-repro/actions/runs/40639395787",
+  "source_head_commit": "e3c1daa11ebbefaf254685ad8919897b90562645",
+  "source_artifact": "software-complex-reproduction-aea7cbd906af335dfa1c21a13e799669cc5b790d",
+  "source_components": {
+    "procrustes": "39f76000f8a39c971155e08ebffde829b525911b",
+    "bering": "dccd1bca39b6ee85a79e5e245bdd2e727f0da1a3",
+    "sheaft": "686a602f4e7b71f3612f1810885e29dd66c8733a"
+  },
+  "full_observed_model_sha256": "sha256:d58b823b34b11adf7a86916d57745ce604fb32591f89edeced0f5d1efc0492cd",
+  "result_sha256": "sha256:da41b891044fd6455ca8e47bf518783bf32e36915a6b22ba95a6f662085b709b",
+  "historical_operation_reference_release": "1.3.3",
+  "historical_operation_reference_sha256_on_linux_runner": "sha256:0dc8ca588c2f6118bc4ac5f176c9ab893ca1d4324d530d66d39eea68589912d0",
+  "diagnostic_scope": "a separate copy removed only the newly observed database node and its sole edge; the reference result uses the unmodified full Bering graph",
+  "diagnostic_summary_path_in_source_artifact": "operation-walkthrough/draw-order-diagnostic/summary.json",
+  "independent_repeat": "the PR check on the final reference commit must rebuild the exact source pins, with the published Bering 1.1.1 image digest recorded in the lock, and compare the full-graph result exactly"
+}

@@ -52,9 +52,17 @@ type componentPin struct {
 
 type toolchainLock struct {
 	Toolchain struct {
-		Version string `json:"version"`
+		Version          string `json:"version"`
+		ReferenceRelease string `json:"reference_release"`
 	} `json:"toolchain"`
 	Components map[string]componentPin `json:"components"`
+}
+
+func referenceRelease(lock toolchainLock) string {
+	if lock.Toolchain.ReferenceRelease != "" {
+		return lock.Toolchain.ReferenceRelease
+	}
+	return lock.Toolchain.Version
 }
 
 type caseSpec struct {
@@ -200,6 +208,9 @@ func acceptReferenceWork(workRoot string) error {
 	if err != nil {
 		return err
 	}
+	if referenceRelease(lock) != lock.Toolchain.Version {
+		return fmt.Errorf("reference acceptance would overwrite historical release %s with toolchain %s", referenceRelease(lock), lock.Toolchain.Version)
+	}
 	workRoot, err = filepath.Abs(workRoot)
 	if err != nil {
 		return err
@@ -246,6 +257,9 @@ func run(options runOptions) error {
 	if err != nil {
 		return err
 	}
+	if options.Update && referenceRelease(manifest) != manifest.Toolchain.Version {
+		return fmt.Errorf("reference update would overwrite historical release %s with toolchain %s", referenceRelease(manifest), manifest.Toolchain.Version)
+	}
 	tmp := filepath.Join(root, ".tmp", "paper-reproduction")
 	bins, err := prepareBinaries(root, tmp, manifest, options.Prebuilt)
 	if err != nil {
@@ -273,7 +287,7 @@ func run(options runOptions) error {
 		if err != nil {
 			return err
 		}
-		return runCriticalityWalkthrough(root, filepath.Join(workRoot, "criticality-walkthrough", walkthroughCase.Name), bins, manifest.Toolchain.Version, walkthroughCase)
+		return runCriticalityWalkthrough(root, filepath.Join(workRoot, "criticality-walkthrough", walkthroughCase.Name), bins, manifest.Toolchain.Version, referenceRelease(manifest), walkthroughCase)
 	}
 	if options.DecisionWalkthrough {
 		return runDecisionWalkthrough(root, filepath.Join(workRoot, "decision-walkthrough"), bins, manifest.Toolchain.Version)
@@ -339,7 +353,7 @@ func run(options runOptions) error {
 	}
 
 	referenceRoot := filepath.Join(root, "reference")
-	wanted := newReferenceManifest(manifest.Toolchain.Version, allHashes, aggregateHashes)
+	wanted := newReferenceManifest(referenceRelease(manifest), allHashes, aggregateHashes)
 	if options.Update {
 		for _, c := range cases {
 			if err := writeReferenceCase(filepath.Join(workRoot, c.Name), filepath.Join(referenceRoot, c.Name)); err != nil {
@@ -388,7 +402,7 @@ func selectCriticalityWalkthroughCase(cases []caseSpec, name string) (caseSpec, 
 	return selected[0], nil
 }
 
-func runCriticalityWalkthrough(root, work string, bins map[string]string, toolchainVersion string, c caseSpec) error {
+func runCriticalityWalkthrough(root, work string, bins map[string]string, toolchainVersion, historicalRelease string, c caseSpec) error {
 	if err := runCase(c, work, bins); err != nil {
 		return err
 	}
@@ -400,7 +414,7 @@ func runCriticalityWalkthrough(root, work string, bins map[string]string, toolch
 	if err := readJSON(filepath.Join(root, "reference", "manifest.json"), &references); err != nil {
 		return fmt.Errorf("read reference manifest: %w", err)
 	}
-	if references.ToolchainRelease != toolchainVersion {
+	if references.ToolchainRelease != historicalRelease {
 		return errors.New("reference manifest belongs to a different toolchain release")
 	}
 	if err := compareHashes(c.Name+" criticality walkthrough reference", references.Cases[c.Name], hashes); err != nil {

@@ -21,6 +21,7 @@
       "properties": {
         "name": {"const": "mb3r-software-complex"},
         "version": {"$ref": "#/$defs/version"},
+        "reference_release": {"$ref": "#/$defs/version"},
         "status": {"enum": ["candidate", "verified", "deprecated"]},
         "mb3r_stack_manifest": {"type": "string", "minLength": 1}
       },

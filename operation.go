@@ -201,11 +201,18 @@ func runOperationWalkthrough(root, work string, bins map[string]string, version 
 	if err := os.WriteFile(filepath.Join(work, "summary.md"), []byte(summary.String()), 0644); err != nil {
 		return err
 	}
-	if err := compareEvaluationReference(filepath.Join(root, "reference", "operation", "result.json"), filepath.Join(work, "result.json")); err != nil {
+	if err := compareEvaluationReference(operationReferencePath(root, version), filepath.Join(work, "result.json"), version); err != nil {
 		return err
 	}
 	fmt.Printf("operation-walkthrough-ok states=%d variants=%d endpoint=%q\n", len(checks), len(stages), endpoint)
 	return nil
+}
+
+func operationReferencePath(root, version string) string {
+	if version == "1.3.3" {
+		return filepath.Join(root, "reference", "operation", "result.json")
+	}
+	return filepath.Join(root, "reference", "operation-v"+version, "result.json")
 }
 
 func operationAnalysis(plan map[string]any, predicate string) map[string]any {

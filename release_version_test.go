@@ -20,7 +20,8 @@ func TestSingleReleaseVersion(t *testing.T) {
 	var lock struct {
 		Artifact  map[string]any `json:"artifact"`
 		Toolchain struct {
-			Version string `json:"version"`
+			Version          string `json:"version"`
+			ReferenceRelease string `json:"reference_release"`
 		} `json:"toolchain"`
 	}
 	if err := json.Unmarshal([]byte(read("toolchain-lock.json")), &lock); err != nil {
@@ -52,6 +53,10 @@ func TestSingleReleaseVersion(t *testing.T) {
 			t.Errorf("%s still has an independent artifact version", path)
 		}
 	}
+	referenceRelease := lock.Toolchain.ReferenceRelease
+	if referenceRelease == "" {
+		referenceRelease = version
+	}
 	for _, path := range []string{"reference/manifest.json", "reference/evaluation/decision.json", "reference/evaluation/validation-matrix.json", "reference/operation/result.json"} {
 		var reference struct {
 			Version string `json:"toolchain_release"`
@@ -59,8 +64,8 @@ func TestSingleReleaseVersion(t *testing.T) {
 		if err := json.Unmarshal([]byte(read(path)), &reference); err != nil {
 			t.Fatal(err)
 		}
-		if reference.Version != version {
-			t.Errorf("%s: release %s, want %s", path, reference.Version, version)
+		if reference.Version != referenceRelease {
+			t.Errorf("%s: historical reference release %s, want %s", path, reference.Version, referenceRelease)
 		}
 	}
 	read("release/v" + version + ".md")
