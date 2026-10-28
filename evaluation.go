@@ -203,7 +203,7 @@ func runDecisionWalkthrough(root, work string, bins map[string]string, toolchain
 	if err := writeJSON(filepath.Join(work, "result.json"), result); err != nil {
 		return err
 	}
-	if err := compareEvaluationReference(filepath.Join(root, "reference", "evaluation", "decision.json"), filepath.Join(work, "result.json")); err != nil {
+	if err := compareEvaluationReference(filepath.Join(root, "reference", "evaluation", "decision.json"), filepath.Join(work, "result.json"), toolchainVersion); err != nil {
 		return err
 	}
 	if err := os.WriteFile(filepath.Join(work, "summary.md"), []byte(decisionMarkdown(result)), 0o644); err != nil {
@@ -268,7 +268,7 @@ func runValidationMatrix(root, work string, bins map[string]string, toolchainVer
 	if err := writeJSON(filepath.Join(work, "validation-matrix.json"), result); err != nil {
 		return err
 	}
-	if err := compareEvaluationReference(filepath.Join(root, "reference", "evaluation", "validation-matrix.json"), filepath.Join(work, "validation-matrix.json")); err != nil {
+	if err := compareEvaluationReference(filepath.Join(root, "reference", "evaluation", "validation-matrix.json"), filepath.Join(work, "validation-matrix.json"), toolchainVersion); err != nil {
 		return err
 	}
 	if err := os.WriteFile(filepath.Join(work, "validation-matrix.md"), []byte(validationMarkdown(checks)), 0o644); err != nil {
@@ -605,7 +605,7 @@ func renderTemplate(source, destination string, replacements map[string]string) 
 	return os.WriteFile(destination, []byte(text), 0o644)
 }
 
-func compareEvaluationReference(reference, generated string) error {
+func compareEvaluationReference(reference, generated, currentRelease string) error {
 	want, err := normalizedFile(reference)
 	if err != nil {
 		return fmt.Errorf("read evaluation reference %s: %w", reference, err)
@@ -613,6 +613,33 @@ func compareEvaluationReference(reference, generated string) error {
 	got, err := normalizedFile(generated)
 	if err != nil {
 		return fmt.Errorf("read generated evaluation result %s: %w", generated, err)
+	}
+	var historical, current map[string]any
+	historicalDecoder := json.NewDecoder(bytes.NewReader(want))
+	historicalDecoder.UseNumber()
+	if err := historicalDecoder.Decode(&historical); err != nil {
+		return fmt.Errorf("decode historical evaluation reference: %w", err)
+	}
+	currentDecoder := json.NewDecoder(bytes.NewReader(got))
+	currentDecoder.UseNumber()
+	if err := currentDecoder.Decode(&current); err != nil {
+		return fmt.Errorf("decode generated evaluation result: %w", err)
+	}
+	historicalRelease, _ := historical["toolchain_release"].(string)
+	generatedRelease, _ := current["toolchain_release"].(string)
+	if historicalRelease == "" || generatedRelease != currentRelease {
+		return fmt.Errorf("evaluation release provenance mismatch: historical=%q generated=%q current=%q", historicalRelease, generatedRelease, currentRelease)
+	}
+	// Only release provenance differs between a new toolchain run and an
+	// immutable historical reference. Compare every other normalized field.
+	current["toolchain_release"] = historicalRelease
+	got, err = json.MarshalIndent(current, "", "  ")
+	if err != nil {
+		return err
+	}
+	want, err = json.MarshalIndent(historical, "", "  ")
+	if err != nil {
+		return err
 	}
 	if !bytes.Equal(want, got) {
 		return fmt.Errorf("evaluation reference mismatch: generated %s differs from %s", generated, reference)

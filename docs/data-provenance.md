@@ -1,5 +1,13 @@
 # Data and fixture provenance
 
+The checked-in `reference/` files are historical outputs. Their
+`toolchain_release` and `reference/manifest.json` identify the toolchain that
+generated them. A later package release may use a new pinned toolchain while
+retaining these files as historical comparisons; the lock's optional
+`toolchain.reference_release` records that distinction. Replaying a newer
+toolchain must preserve its own release provenance and pass the semantic
+comparisons before any new result is claimed.
+
 ## Scope
 
 The repository contains archived study fixtures and a separate new operation-semantics experiment. Normal reviewer commands replay recorded inputs; they do not deploy either application. The new experiment has its own pinned application revision, live GitHub Actions collection, HTTP responses, and traces. It does not regenerate the prior papers' live measurements.
