@@ -182,6 +182,9 @@ jobs:
     name: Publish versioned reviewer container
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [source-reproduction, container-smoke]
+    concurrency:
+      group: reviewer-versioned-image-publish
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 60
     permissions:
