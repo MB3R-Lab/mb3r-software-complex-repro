@@ -11,10 +11,10 @@ Install Docker with Compose support and ensure the Docker daemon is running. The
 The published image is:
 
 ```text
-ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3
+ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
 ```
 
-Release `v1.3.3` uses one version across the GitHub release, Docker tag, documentation, and `toolchain.version` in the lock file. Component versions remain independent pins. Any later packaging or software change gets a new repository release; already published tags are not repointed.
+The candidate `v1.3.4` uses one version across the Docker tag, documentation, and `toolchain.version` in the lock file. Component versions remain independent pins. `toolchain.reference_release` stays at `1.3.3` because the archived reference outputs are historical. Publication requires the new toolchain to pass the full reproduction checks; already published tags are not repointed.
 
 ## Reviewer walkthrough
 
@@ -143,7 +143,7 @@ Run all three scenarios together with `docker compose run --rm evaluation --benc
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -151,7 +151,7 @@ List accepted names with:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
   --list-cases
 ```
 
@@ -163,7 +163,7 @@ On Linux or macOS:
 mkdir -p output
 docker run --rm --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=$PWD/output,target=/output" \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
   --repeat 2 --work-dir /output
 ```
 
@@ -174,7 +174,7 @@ New-Item -ItemType Directory -Force output
 $artifactOutput = (Resolve-Path output).Path
 docker run --rm `
   --mount "type=bind,source=$artifactOutput,target=/output" `
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 `
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 `
   --repeat 2 --work-dir /output
 ```
 

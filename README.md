@@ -31,10 +31,10 @@ The equivalent command without Compose is:
 
 ```bash
 docker run --rm --pull=always \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
 ```
 
-Release `v1.3.3` identifies this package, its Docker image, and the packaged toolchain. `toolchain-lock.json` stores the package version in `toolchain.version` and independently pins the three component versions and commits.
+The candidate `v1.3.4` package pins its image and three component commits in `toolchain-lock.json`. Its `toolchain.reference_release` keeps the archived reference outputs attributed to `v1.3.3`; the new toolchain must reproduce their semantic and numerical fields before release.
 
 ## CI/CD example: the same tools in an application pipeline
 
@@ -47,7 +47,7 @@ Use [Actions → MB3R parameterized demo](https://github.com/MB3R-Lab/openteleme
 
 The [live HTML report](https://mb3r-lab.github.io/opentelemetry-demo-mb3r-stack/) shows the latest published manual run. For a permanent example, the [frozen report and JSON from run 38788504177](reference/ci-demo/38788504177/README.md) retain the original files, application revisions, parameters and checksums. Download the archived HTML and open it in a browser; compare run IDs before pairing a live report with a GitHub Summary.
 
-The archived CI report documents a separate application run, with its own evidence and provenance. The `v1.3.3` operation replay below uses the pinned reference inputs. Both entry points estimate availability on a model; fresh healthy traces are not live failover measurements or calibrated failure probabilities.
+The archived CI report documents a separate application run, with its own evidence and provenance. The operation replay below uses pinned reference inputs retained from `v1.3.3`. Both entry points estimate availability on a model; fresh healthy traces are not live failover measurements or calibrated failure probabilities.
 
 ## Observed operation and two candidate changes
 
@@ -71,11 +71,11 @@ Available cases can be listed or selected directly:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
   --list-cases
 
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -97,7 +97,7 @@ Select another archived case with `--case`, for example:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.3 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
   --criticality-walkthrough --case social-network-repl
 ```
 
