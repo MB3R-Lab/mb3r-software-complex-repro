@@ -14,7 +14,7 @@ The candidate image tag, available only after publication, is:
 ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5
 ```
 
-The candidate `v1.3.5` uses one version across the Docker tag, documentation, and `toolchain.version` in the lock file. Component versions remain independent pins. `toolchain.reference_release` stays at `1.3.3` because the archived reference outputs are historical. Publication requires the new toolchain to pass the full reproduction checks; already published tags are not repointed.
+The published `v1.3.5` image uses one version across the Docker tag, documentation, and `toolchain.version` in the lock file. Component versions remain independent pins. `toolchain.reference_release` stays at `1.3.3` because the archived reference outputs are historical. Full source and packaged replay checks passed before image publication; already published tags are not repointed.
 
 ## Reviewer walkthrough
 
