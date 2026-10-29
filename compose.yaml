@@ -1,6 +1,6 @@
 services:
   demo:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5
     pull_policy: always
     user: '0:0'
     volumes: ['./output:/output']
@@ -8,30 +8,30 @@ services:
   operation:
     extends: demo
   criticality:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5
     pull_policy: always
     command: ["--criticality-walkthrough"]
   failures:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5
     pull_policy: always
     command: ["--failure-walkthroughs"]
   decision:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5
     pull_policy: always
     command: ["--decision-walkthrough"]
   validation:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5
     pull_policy: always
     command: ["--validation-matrix"]
   cost:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5
     pull_policy: always
     command: ["--cost-profile"]
   evaluation:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5
     pull_policy: always
     command: ["--evaluation-suite"]
   reproduce:
-    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
+    image: ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5
     pull_policy: always
     command: ["--repeat", "2"]

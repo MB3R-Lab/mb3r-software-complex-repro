@@ -11,10 +11,10 @@ Install Docker with Compose support and ensure the Docker daemon is running. The
 The candidate image tag, available only after publication, is:
 
 ```text
-ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4
+ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5
 ```
 
-The candidate `v1.3.4` uses one version across the Docker tag, documentation, and `toolchain.version` in the lock file. Component versions remain independent pins. `toolchain.reference_release` stays at `1.3.3` because the archived reference outputs are historical. Publication requires the new toolchain to pass the full reproduction checks; already published tags are not repointed.
+The candidate `v1.3.5` uses one version across the Docker tag, documentation, and `toolchain.version` in the lock file. Component versions remain independent pins. `toolchain.reference_release` stays at `1.3.3` because the archived reference outputs are historical. Publication requires the new toolchain to pass the full reproduction checks; already published tags are not repointed.
 
 ## Reviewer walkthrough
 
@@ -86,7 +86,7 @@ This reviewer-facing scenario runs the archived OpenTelemetry async case once, v
 The final line must be:
 
 ```text
-criticality-walkthrough-ok toolchain=1.3.4 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
+criticality-walkthrough-ok toolchain=1.3.5 case=otel-demo-async endpoints=4 components=39 trials=12000 files=16
 ```
 
 Use `--criticality-walkthrough --case <name>` to run the same scenario on any of the four archived variants.
@@ -102,7 +102,7 @@ This is a separate two-scenario walkthrough, not an additional scientific experi
 The final line must be:
 
 ```text
-failure-walkthroughs-ok toolchain=1.3.4 scenarios=2
+failure-walkthroughs-ok toolchain=1.3.5 scenarios=2
 ```
 
 ### 6. Exercise an SLO regression and remediation
@@ -118,7 +118,7 @@ The selected OpenTelemetry Demo operation is `frontend:GET /api/recommendations`
 The final line must be:
 
 ```text
-decision-walkthrough-ok toolchain=1.3.4 endpoint="frontend:GET /api/recommendations" tolerance=0.20->0.04->0.20 decisions=pass,fail,pass
+decision-walkthrough-ok toolchain=1.3.5 endpoint="frontend:GET /api/recommendations" tolerance=0.20->0.04->0.20 decisions=pass,fail,pass
 ```
 
 ### 7. Run the controlled validation matrix
@@ -143,7 +143,7 @@ Run all three scenarios together with `docker compose run --rm evaluation --benc
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5 \
   --case otel-demo-async --repeat 1
 ```
 
@@ -151,7 +151,7 @@ List accepted names with:
 
 ```bash
 docker run --rm \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5 \
   --list-cases
 ```
 
@@ -163,7 +163,7 @@ On Linux or macOS:
 mkdir -p output
 docker run --rm --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=$PWD/output,target=/output" \
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 \
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5 \
   --repeat 2 --work-dir /output
 ```
 
@@ -174,7 +174,7 @@ New-Item -ItemType Directory -Force output
 $artifactOutput = (Resolve-Path output).Path
 docker run --rm `
   --mount "type=bind,source=$artifactOutput,target=/output" `
-  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.4 `
+  ghcr.io/mb3r-lab/mb3r-software-complex-repro:v1.3.5 `
   --repeat 2 --work-dir /output
 ```
 
