@@ -1,0 +1,335 @@
+{
+  "application_commit": "be466eb395294e0b5c2f91f7e76bed475953eaa6",
+  "current_importance": {
+    "product-catalog": {
+      "availability_if_down": 0,
+      "availability_if_up": 0.983425,
+      "birnbaum_importance": 0.983425,
+      "confidence": {
+        "confidence_level": 0.95,
+        "estimate": 0.983425,
+        "lower_bound": 0.9821266095710566,
+        "successes": 39337,
+        "trials": 40000,
+        "upper_bound": 0.9846305464838285
+      },
+      "forced_down_impact": 0.93425375,
+      "id": "product-catalog",
+      "kind": "service",
+      "live_probability": 0.95,
+      "perfect_component_gain": 0.04917125000000004,
+      "rank": 1,
+      "state_semantics": "service_liveness"
+    },
+    "recommendation": {
+      "availability_if_down": 0,
+      "availability_if_up": 0.9353,
+      "birnbaum_importance": 0.9353,
+      "confidence": {
+        "confidence_level": 0.95,
+        "estimate": 0.9353,
+        "lower_bound": 0.9328472386251838,
+        "successes": 37412,
+        "trials": 40000,
+        "upper_bound": 0.9376691600523597
+      },
+      "forced_down_impact": 0.9329617499999999,
+      "id": "recommendation",
+      "kind": "service",
+      "live_probability": 0.9974999999999999,
+      "perfect_component_gain": 0.0023382500000000543,
+      "rank": 5,
+      "state_semantics": "service_liveness"
+    }
+  },
+  "endpoint": "frontend:GET /api/recommendations",
+  "evidence_workflow_run": "38718363369",
+  "plan": {
+    "application_commit": "be466eb395294e0b5c2f91f7e76bed475953eaa6",
+    "candidate_budget": "one added replica relative to current; no equal monetary-cost claim",
+    "edge_failure_unit": "one channel connectivity state per request shared by all RPCs",
+    "edge_live_probability": 0.995,
+    "endpoint": "frontend:GET /api/recommendations",
+    "failure_probability": 0.05,
+    "grid": [
+      0.00,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06,
+      0.08,
+      0.10,
+      0.12,
+      0.14,
+      0.16,
+      0.18,
+      0.20,
+      0.25
+    ],
+    "held_healthy": [
+      "frontend",
+      "postgresql",
+      "flagd",
+      "telemetry infrastructure"
+    ],
+    "max_regression": 0.02,
+    "minimum_certified_tolerance": 0.10,
+    "predicate_ref": "recommendations.required-calls",
+    "required_call_pairs": [
+      [
+        "frontend",
+        "recommendation"
+      ],
+      [
+        "recommendation",
+        "product-catalog"
+      ],
+      [
+        "frontend",
+        "product-catalog"
+      ]
+    ],
+    "scope": "conditional nonempty USD operation, fixed data and cache disabled; model-based replica what-ifs; no production probability calibration",
+    "seed": 2719,
+    "slo": 0.95,
+    "trials": 40000,
+    "variants": [
+      {
+        "name": "baseline",
+        "product-catalog": 2,
+        "recommendation": 2
+      },
+      {
+        "name": "current",
+        "product-catalog": 1,
+        "recommendation": 2
+      },
+      {
+        "name": "add-recommendation",
+        "product-catalog": 1,
+        "recommendation": 3
+      },
+      {
+        "name": "add-catalog",
+        "product-catalog": 2,
+        "recommendation": 2
+      }
+    ]
+  },
+  "required_edges": [
+    "frontend|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FGetProduct|span_kind=server",
+    "frontend|recommendation|sync|true|protocol=grpc|operation=ListRecommendations|span_kind=server",
+    "recommendation|product-catalog|sync|true|operation=oteldemo.ProductCatalogService%2FListProducts|span_kind=server"
+  ],
+  "schema_version": "1.0.0",
+  "scope": "conditional nonempty USD operation, fixed data and cache disabled; model-based replica what-ifs; no production probability calibration",
+  "semantic_checks": [
+    {
+      "agreement": true,
+      "condition": "healthy",
+      "observed_requests": 2,
+      "predicate": true,
+      "reachability_only_agreement": true,
+      "reachability_only_predicate": true
+    },
+    {
+      "agreement": true,
+      "condition": "recommendation-down",
+      "observed_requests": 2,
+      "predicate": false,
+      "reachability_only_agreement": true,
+      "reachability_only_predicate": false
+    },
+    {
+      "agreement": true,
+      "condition": "catalog-down",
+      "observed_requests": 2,
+      "predicate": false,
+      "reachability_only_agreement": true,
+      "reachability_only_predicate": false
+    },
+    {
+      "agreement": true,
+      "condition": "frontend-recommendation-down",
+      "observed_requests": 2,
+      "predicate": false,
+      "reachability_only_agreement": true,
+      "reachability_only_predicate": false
+    },
+    {
+      "agreement": true,
+      "condition": "recommendation-catalog-down",
+      "observed_requests": 2,
+      "predicate": false,
+      "reachability_only_agreement": false,
+      "reachability_only_predicate": true
+    },
+    {
+      "agreement": true,
+      "condition": "frontend-catalog-down",
+      "observed_requests": 2,
+      "predicate": false,
+      "reachability_only_agreement": false,
+      "reachability_only_predicate": true
+    }
+  ],
+  "stages": [
+    {
+      "absolute_error": 0.00030565734296883473,
+      "analytical_availability": 0.9801556573429688,
+      "availability": 0.97985,
+      "availability_wilson_95": {
+        "lower_bound": 0.978426211966505,
+        "upper_bound": 0.9811816306832062
+      },
+      "boundary_rules": [
+        {
+          "certified_tolerance": 0.12,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "minimum_certified_tolerance": 0.1,
+          "status": "pass",
+          "sweep": "operation-boundary"
+        }
+      ],
+      "certified_tolerance": 0.12,
+      "decision": "pass",
+      "name": "baseline",
+      "reason_ids": [
+        "gate_pass"
+      ],
+      "replicas": {
+        "name": "baseline",
+        "product-catalog": 2,
+        "recommendation": 2
+      }
+    },
+    {
+      "absolute_error": 0.001206578421874993,
+      "analytical_availability": 0.933481578421875,
+      "availability": 0.932275,
+      "availability_wilson_95": {
+        "lower_bound": 0.9297708240596259,
+        "upper_bound": 0.9346961555827704
+      },
+      "boundary_rules": [
+        {
+          "certified_tolerance": 0.03,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "minimum_certified_tolerance": 0.1,
+          "reason": "certified tolerance is below the required minimum",
+          "status": "fail",
+          "sweep": "operation-boundary"
+        },
+        {
+          "baseline": "accepted",
+          "certified_tolerance": 0.03,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "max_regression": 0.02,
+          "reason": "certified tolerance regression exceeds the configured budget",
+          "reference_tolerance": 0.12,
+          "regression": -0.09,
+          "status": "fail",
+          "sweep": "operation-boundary"
+        }
+      ],
+      "certified_tolerance": 0.03,
+      "decision": "fail",
+      "name": "current",
+      "reason_ids": [
+        "boundary_below_minimum",
+        "boundary_regressed",
+        "endpoint_below_threshold"
+      ],
+      "replicas": {
+        "name": "current",
+        "product-catalog": 1,
+        "recommendation": 2
+      }
+    },
+    {
+      "absolute_error": 0.0014041536085936945,
+      "analytical_availability": 0.9357041536085937,
+      "availability": 0.9343,
+      "availability_wilson_95": {
+        "lower_bound": 0.9318300802110373,
+        "upper_bound": 0.9366865105210032
+      },
+      "boundary_rules": [
+        {
+          "certified_tolerance": 0.03,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "minimum_certified_tolerance": 0.1,
+          "reason": "certified tolerance is below the required minimum",
+          "status": "fail",
+          "sweep": "operation-boundary"
+        },
+        {
+          "baseline": "accepted",
+          "certified_tolerance": 0.03,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "max_regression": 0.02,
+          "reason": "certified tolerance regression exceeds the configured budget",
+          "reference_tolerance": 0.12,
+          "regression": -0.09,
+          "status": "fail",
+          "sweep": "operation-boundary"
+        }
+      ],
+      "certified_tolerance": 0.03,
+      "decision": "fail",
+      "name": "add-recommendation",
+      "reason_ids": [
+        "boundary_below_minimum",
+        "boundary_regressed",
+        "endpoint_below_threshold"
+      ],
+      "replicas": {
+        "name": "add-recommendation",
+        "product-catalog": 1,
+        "recommendation": 3
+      }
+    },
+    {
+      "absolute_error": 0.00030565734296883473,
+      "analytical_availability": 0.9801556573429688,
+      "availability": 0.97985,
+      "availability_wilson_95": {
+        "lower_bound": 0.978426211966505,
+        "upper_bound": 0.9811816306832062
+      },
+      "boundary_rules": [
+        {
+          "certified_tolerance": 0.12,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "minimum_certified_tolerance": 0.1,
+          "status": "pass",
+          "sweep": "operation-boundary"
+        },
+        {
+          "baseline": "accepted",
+          "certified_tolerance": 0.12,
+          "endpoint_id": "frontend:GET /api/recommendations",
+          "max_regression": 0.02,
+          "reference_tolerance": 0.12,
+          "regression": 0,
+          "status": "pass",
+          "sweep": "operation-boundary"
+        }
+      ],
+      "certified_tolerance": 0.12,
+      "decision": "pass",
+      "name": "add-catalog",
+      "reason_ids": [
+        "gate_pass"
+      ],
+      "replicas": {
+        "name": "add-catalog",
+        "product-catalog": 2,
+        "recommendation": 2
+      }
+    }
+  ],
+  "toolchain_release": "1.3.5"
+}
